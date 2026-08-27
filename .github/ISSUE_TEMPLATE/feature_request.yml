@@ -1,0 +1,43 @@
+name: Feature request
+description: Suggest an idea or improvement for ParkTwin AI
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What problem would this feature solve? What is the motivation?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the feature and how it should work.
+    validations:
+      required: true
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Ownership / module
+      description: |
+        Which module should own this? ParkTwin AI has exactly one owner per
+        responsibility (see PROJECT_MEMORY.md §6). If this overlaps an existing
+        owner, propose extending it rather than duplicating.
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative approaches or workarounds?
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I read PROJECT_MEMORY.md and confirmed there is no existing owner / duplicate for this.
+          required: true

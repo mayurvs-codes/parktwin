@@ -1,0 +1,44 @@
+- generic [ref=f1e3]:
+  - complementary [ref=f1e4]:
+    - generic [ref=f1e9]:
+      - generic [ref=f1e10]: ParkTwin AI
+      - generic [ref=f1e11]: Smart Parking
+    - navigation [ref=f1e12]:
+      - generic [ref=f1e13]:
+        - generic [ref=f1e14]: Overview
+        - link "Dashboard" [ref=f1e15] [cursor=pointer]:
+          - /url: /
+        - link "Live Parking" [ref=f1e18] [cursor=pointer]:
+          - /url: /live
+      - generic [ref=f1e21]:
+        - generic [ref=f1e22]: Operations
+        - link "Vehicles" [ref=f1e23] [cursor=pointer]:
+          - /url: /vehicles
+        - link "History" [ref=f1e26] [cursor=pointer]:
+          - /url: /history
+        - link "Analytics" [ref=f1e29] [cursor=pointer]:
+          - /url: /analytics
+      - generic [ref=f1e32]:
+        - generic [ref=f1e33]: Reports
+        - link "Reports" [ref=f1e34] [cursor=pointer]:
+          - /url: /reports
+    - generic [ref=f1e37]: Module 6 · Frontend · v1.0
+  - generic [ref=f1e38]:
+    - banner [ref=f1e39]:
+      - heading "Vehicles" [level=1] [ref=f1e41]
+    - main [ref=f1e42]:
+      - generic [ref=f1e43]:
+        - generic [ref=f1e44]:
+          - generic [ref=f1e45]:
+            - heading "Vehicles" [level=1] [ref=f1e46]
+            - paragraph [ref=f1e47]: All vehicles detected by the recognition engine. Search by license plate.
+          - generic [ref=f1e49]:
+            - textbox "Search license plate…" [ref=f1e50]
+            - button "Search" [ref=f1e51] [cursor=pointer]
+        - generic [ref=f1e54]:
+          - generic [ref=f1e56]:
+            - generic [ref=f1e57]: All Vehicles
+            - generic [ref=f1e58]: 0 vehicles
+          - generic [ref=f1e60]:
+            - generic [ref=f1e64]: No vehicles found
+            - generic [ref=f1e67]: Vehicles will appear here as they are detected.

@@ -1,0 +1,87 @@
+# ===========================================================================
+# ParkTwin AI — Development Docker Compose (Module 1)
+# ---------------------------------------------------------------------------
+# Runs ONLY the backend container. No Redis, no PostgreSQL, no Frontend.
+#
+# Future services (redis, postgres, parking_intelligence, integration_layer,
+# analytics, reporting, frontend, digital_twin) are intentionally NOT defined
+# here yet — they are added as the platform grows. The service is named
+# `backend` so additional services can be composed alongside it later.
+#
+# Run with:
+#   docker compose -f docker/compose/docker-compose.dev.yml up --build
+# ===========================================================================
+
+services:
+  backend:
+    build:
+      context: ../..
+      dockerfile: docker/backend/Dockerfile
+      # Build the runtime user with the host UID/GID so the non-root container
+      # can still write to the bind-mounted volumes (logs, outputs, datasets…).
+      args:
+        APP_UID: "${APP_UID:-1000}"
+        APP_GID: "${APP_GID:-1000}"
+    image: parktwin-ai/backend:dev
+    container_name: parktwin-backend-dev
+    env_file:
+      - ../../.env.docker
+    environment:
+      ENVIRONMENT: development
+    ports:
+      - "${API_PORT:-8000}:8000"
+    # Run as the host user so writes to the bind-mounted volumes keep the
+    # host owner (avoids "permission denied" on Linux/WSL). Matches APP_UID
+    # passed to the build above.
+    user: "${APP_UID:-1000}:${APP_GID:-1000}"
+    volumes:
+      # Development mounts: edit locally, reflect in container; persist outputs.
+      - ../../datasets:/app/datasets
+      - ../../models:/app/models
+      - ../../backend:/app/backend
+      - ../../engine:/app/engine
+      - ../../modules:/app/modules
+      - ../../shared:/app/shared
+      - ../../configs:/app/configs
+      - ../../tests:/app/tests
+      - ../../backend/logs:/app/backend/logs
+      - ../../backend/outputs:/app/backend/outputs
+      - ../../backend/uploads:/app/backend/uploads
+      - ../../backend/snapshots:/app/backend/snapshots
+      - ../../videos:/app/videos:ro
+      - ../../videos/car_detection_sample.mp4:/app/parking_lot.mp4:ro
+      - ../../scripts:/app/scripts:ro
+      # Persist PaddleOCR model cache so models survive container restarts
+      - ../../.paddleocr:/home/appuser/.paddleocr
+    working_dir: /app
+    command: >
+      uvicorn backend.app.app:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
+      --reload-dir backend
+      --timeout-keep-alive 300
+      --h11-max-incomplete-event-size 209715200
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ../../apps/web
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE: "http://localhost:8000"
+    image: parktwin-ai/web:dev
+    container_name: parktwin-web-dev
+    ports:
+      - "3005:3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_BASE: "http://localhost:8000"
+    volumes:
+      - ../../apps/web/public:/app/public
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+volumes:
+  paddleocr_cache:

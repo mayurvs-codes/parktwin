@@ -1,0 +1,57 @@
+# syntax=docker/dockerfile:1.7
+
+# ===========================================================================
+# ParkTwin AI — Caddy proxy override
+# ---------------------------------------------------------------------------
+# Use INSTEAD OF the built-in nginx proxy. Caddy obtains + renews TLS
+# automatically (no certificate files to manage).
+#
+#   DOMAIN=parktwin.example.com EMAIL=admin@parktwin.example.com \
+#     docker compose -f docker/compose/docker-compose.prod.yml \
+#                    -f docker/compose/docker-compose.prod.caddy.yml up -d --build
+#
+# Local / internal testing without a public domain:
+#   DOMAIN=localhost EMAIL= \
+#     … and set `tls internal` in docker/reverse-proxy/caddy/Caddyfile.
+# ===========================================================================
+
+services:
+  proxy:
+    # Replace the nginx image with the Caddy image.
+    image: parktwin-ai/proxy-caddy:prod
+    build:
+      context: ../reverse-proxy/caddy
+      dockerfile: Dockerfile
+    container_name: parktwin-proxy-caddy
+    environment:
+      DOMAIN: "${DOMAIN:-parktwin.example.com}"
+      EMAIL: "${EMAIL:-}"
+    ports:
+      # Host 80 is held by Windows HTTP.SYS (PID 4) on this deployment host, so
+      # publish on 8080/8443. Container-internal 80/443 are unchanged, so
+      # Caddy's HTTP->HTTPS redirect logic is identical. On a clean Linux
+      # server use "80:80" / "443:443".
+      - "8080:80"
+      - "8443:443"
+    # Caddy manages its own certificates (stored in its data volume).
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - parktwin-edge
+      - parktwin-internal
+    healthcheck:
+      test: ["CMD", "caddy", "version"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_healthy
+
+volumes:
+  caddy-data:
+  caddy-config:

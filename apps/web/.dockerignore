@@ -1,0 +1,29 @@
+# ===========================================================================
+# ParkTwin AI — apps/web Docker ignore
+# Keeps the frontend build context (sent to the Docker daemon) clean.
+# ===========================================================================
+
+# Dependencies / build output (re-installed / rebuilt inside the image)
+node_modules/
+.next/
+out/
+build/
+
+# Local environment overrides (never ship local env into the image)
+.env
+.env.*
+!.env.example
+
+# Tests / dev tooling (not needed to build or run the production server)
+tests/
+.coverage/
+
+# Editor / OS junk
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log

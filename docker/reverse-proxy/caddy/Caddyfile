@@ -1,0 +1,71 @@
+# ===========================================================================
+# ParkTwin AI — Caddy reverse proxy (LOCAL live deployment)
+# ---------------------------------------------------------------------------
+# Local deployment notes:
+#   * This Windows host cannot bind :80 (held by HTTP.SYS / PID 4), so the
+#     proxy is published on host 8080/8443, mapping to container :80/:443
+#     below. The site addresses here are the CONTAINER ports.
+#   * `tls internal` makes Caddy issue a locally-trusted certificate for
+#     localhost — no cert files, no Let's Encrypt, no public DNS. Browsers
+#     show a "not secure" warning for the self-signed cert; use `curl -k`.
+#   * HTTP (:80) redirects to HTTPS on the host's 8443 port.
+#
+# PRODUCTION swap (real domain + trusted cert):
+#   * Set site address to `{$DOMAIN:your.domain}` (e.g. `parktwin.example.com`)
+#   * Remove `tls internal` (Caddy then uses Let's Encrypt via ACME)
+#   * Uncomment `email {$EMAIL}` in the global block
+#   * Publish on host 80/443 instead of 8080/8443
+#
+# Same-origin /api topology (unchanged from the design):
+#   /api/*   -> backend:8000   (Caddy handle_path strips the /api prefix)
+#   /*       -> frontend:3000  (Next.js SPA)
+# ===========================================================================
+
+{
+    # Production: set `email you@example.com` and remove `tls internal` from
+    # the site block to obtain a trusted Let's Encrypt certificate.
+    # email {$EMAIL}
+}
+
+# HTTP -> HTTPS redirect (container :80 == host :8080).
+:80 {
+    redir https://localhost:8443{uri} permanent
+}
+
+# HTTPS application site (container :443 == host :8443).
+# Site hostname `localhost` matches the Host header regardless of the :8443
+# port the browser uses, so Caddy serves the correct site.
+https://localhost {
+    tls internal
+
+    encode gzip
+
+    # Security headers (applied to every response).
+    header {
+        Strict-Transport-Security "max-age=63072000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    # Immutable cache for hashed Next.js static assets.
+    @nextstatic path /_next/static/*
+    header @nextstatic Cache-Control "public, max-age=31536000, immutable"
+
+    # Block external access to Prometheus metrics endpoint.
+    handle_path /api/metrics {
+        respond "Forbidden" 403
+    }
+
+    # API: strip /api prefix, forward to backend (REST + WebSocket).
+    # Caddy upgrades WebSocket connections transparently.
+    handle_path /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # Frontend SPA.
+    handle {
+        reverse_proxy frontend:3000
+    }
+}

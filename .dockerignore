@@ -1,0 +1,77 @@
+# ===========================================================================
+# ParkTwin AI — .dockerignore
+# Keeps the build context (and therefore the image) clean.
+# ===========================================================================
+
+# --- Version control ---
+.git
+.gitignore
+
+# --- Python caches / build artifacts ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+
+# --- Runtime outputs / generated files (produced at runtime, not shipped) ---
+logs/
+outputs/
+snapshots/
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/outputs/*
+!backend/outputs/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.mp4
+*.avi
+*.mov
+test_video_*
+
+# --- Datasets: keep the directory, ignore downloaded/generated contents ---
+datasets/*
+!datasets/.gitkeep
+
+# --- Model weights: downloaded at runtime, never baked into the image ---
+models/*
+!models/**/.gitkeep
+
+# --- Local environment files (keep the documented examples) ---
+.env
+.env.*
+!.env.example
+!.env.docker
+
+# --- Editor / OS junk ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Temporary files ---
+*.tmp
+*.temp
+~*
+
+# --- Agent / editor workspace metadata (not needed in the image) ---
+.claude/
+
+# --- Stray temp directories from the local environment ---
+models;C/
+datasets;C/
+
+# --- Local migration / report notes (not runtime) ---
+MIGRATION_REPORT.md

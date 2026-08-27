@@ -1,0 +1,194 @@
+# ===========================================================================
+# ParkTwin AI — HOT-RELOAD Dev Compose (USE THIS FOR DAILY DEVELOPMENT)
+# ---------------------------------------------------------------------------
+# KEY DIFFERENCE from docker-compose.dev.yml:
+#   - Does NOT rebuild the image on every `up`. Uses the pre-built image.
+#   - ALL source code is bind-mounted → edits reflect INSTANTLY (uvicorn --reload)
+#   - ML weights (models/), PaddleOCR cache (.paddleocr/), datasets/ all persist
+#     in NAMED VOLUMES → never re-downloaded between sessions.
+#   - The SQLite database is a NAMED VOLUME → data survives container restarts.
+#
+# FIRST-TIME SETUP (one-time only, ~15-40 min for ML download):
+#   docker compose -f docker/compose/docker-compose.hotdev.yml build
+#
+# EVERY DAY AFTER THAT (seconds to start):
+#   docker compose -f docker/compose/docker-compose.hotdev.yml up
+#
+# Stop (keeps all data):
+#   docker compose -f docker/compose/docker-compose.hotdev.yml stop
+#
+# Full wipe (only if you need a clean slate):
+#   docker compose -f docker/compose/docker-compose.hotdev.yml down -v
+# ===========================================================================
+
+services:
+  backend:
+    # -----------------------------------------------------------------------
+    # REUSES the already-built parktwin-ai/backend:dev image (13.9 GB).
+    # No rebuild needed — just `docker compose up`. The image already has all
+    # ML weights baked in as a fallback; named volumes override them at runtime.
+    # Only rebuild if you change pyproject.toml or Dockerfile:
+    #   .\dev.ps1 rebuild
+    # -----------------------------------------------------------------------
+    image: parktwin-ai/backend:dev
+    container_name: parktwin-dev
+    env_file:
+      - ../../.env.docker
+    environment:
+      ENVIRONMENT: development
+      LOG_LEVEL: DEBUG
+      # Tell ML libraries to write caches to writable locations
+      MPLCONFIGDIR: /tmp/matplotlib
+      YOLO_CONFIG_DIR: /tmp/ultralytics
+    ports:
+      - "8000:8000"
+    # No `user:` override — use the image's built-in appuser (uid 10001)
+    # which owns /app and /home/appuser. Overriding to 1000:1000 breaks
+    # permission on all the home-dir ML caches.
+    volumes:
+      # -----------------------------------------------------------------------
+      # SOURCE CODE — bind mounts (edits on host reflect instantly in container)
+      # -----------------------------------------------------------------------
+      - ../../backend:/app/backend
+      - ../../engine:/app/engine
+      - ../../modules:/app/modules
+      - ../../shared:/app/shared
+      - ../../configs:/app/configs
+      - ../../tests:/app/tests
+
+      # -----------------------------------------------------------------------
+      # PERSISTENT DATA — named volumes (survive container restarts/stops)
+      # -----------------------------------------------------------------------
+      # ML model weights — downloaded ONCE, never again
+      - parktwin_models:/app/models
+      # PaddleOCR model cache — downloaded ONCE
+      - parktwin_paddleocr:/home/appuser/.paddleocr
+      # EasyOCR cache (if used)
+      - parktwin_easyocr:/home/appuser/.EasyOCR
+      # Ultralytics model cache (yolov8 etc.)
+      - parktwin_ultralytics:/home/appuser/.config/Ultralytics
+      # SQLite database — your data survives restarts
+      - parktwin_db:/app/data
+      # App logs
+      - parktwin_logs:/app/backend/logs
+      # Report output files
+      - parktwin_reports:/app/reports_output
+      # Upload temp files
+      - parktwin_uploads:/app/backend/uploads
+      # Detection snapshots
+      - parktwin_snapshots:/app/backend/snapshots
+
+      # -----------------------------------------------------------------------
+      # TEST VIDEOS — read-only bind mount (edit on host, available in container)
+      # -----------------------------------------------------------------------
+      - ../../datasets:/app/datasets:ro
+
+    working_dir: /app
+    command: >
+      uvicorn backend.app.app:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
+      --reload-dir /app/backend
+      --reload-dir /app/engine
+      --reload-dir /app/modules
+      --reload-dir /app/shared
+      --reload-dir /app/configs
+      --reload-include "*.py"
+      --reload-include "*.yaml"
+      --reload-include "*.yml"
+      --reload-exclude "*/uploads/*"
+      --reload-exclude "*/outputs/*"
+      --reload-exclude "*/snapshots/*"
+      --reload-exclude "*.mp4"
+      --reload-exclude "*.avi"
+      --reload-exclude "*.mov"
+      --reload-exclude "*.csv"
+      --reload-exclude "*.json"
+      --reload-exclude "*.jpg"
+      --reload-exclude "*.png"
+      --reload-exclude "*.db"
+      --reload-exclude "*.sqlite3"
+      --timeout-keep-alive 300
+      --h11-max-incomplete-event-size 209715200
+    restart: unless-stopped
+    # ── Resource limits — prevent ML models from OOM/swapping the whole OS ──
+    # YOLOv8m + PaddleOCR + EasyOCR can use 3-5 GB of RAM total.
+    # Capping at 7g gives headroom while preventing host swap thrash.
+    deploy:
+      resources:
+        limits:
+          memory: 7g
+        reservations:
+          memory: 1g
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5).status == 200 else 1)"]
+      interval: 30s
+      timeout: 10s
+      start_period: 90s
+      retries: 3
+
+  frontend:
+    # -----------------------------------------------------------------------
+    # Next.js frontend — optional, start only when you need the UI.
+    # Start backend-only:  docker compose ... up backend
+    # Start everything:    docker compose ... up
+    # -----------------------------------------------------------------------
+    image: parktwin-ai/web:hotdev
+    build:
+      context: ../../apps/web
+      dockerfile: Dockerfile.dev
+    container_name: parktwin-web-dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_BASE: "http://localhost:8000"
+    volumes:
+      # Source code bind-mounts for hot reload (Next.js dev server)
+      - ../../apps/web/app:/app/app
+      - ../../apps/web/components:/app/components
+      - ../../apps/web/hooks:/app/hooks
+      - ../../apps/web/lib:/app/lib
+      - ../../apps/web/services:/app/services
+      - ../../apps/web/store:/app/store
+      - ../../apps/web/types:/app/types
+      - ../../apps/web/utils:/app/utils
+      - ../../apps/web/styles:/app/styles
+      # node_modules stays INSIDE the container (named volume) — never bind-mount this
+      - web_node_modules:/app/node_modules
+      - web_next_cache:/app/.next
+    working_dir: /app
+    command: npm run dev
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+# ===========================================================================
+# Named volumes — all data persists between `docker compose stop/up` cycles.
+# Only destroyed by `docker compose down -v` (intentional wipe).
+# ===========================================================================
+volumes:
+  parktwin_models:
+    name: parktwin_models
+  parktwin_paddleocr:
+    name: parktwin_paddleocr
+  parktwin_easyocr:
+    name: parktwin_easyocr
+  parktwin_ultralytics:
+    name: parktwin_ultralytics
+  parktwin_db:
+    name: parktwin_db
+  parktwin_logs:
+    name: parktwin_logs
+  parktwin_reports:
+    name: parktwin_reports
+  parktwin_uploads:
+    name: parktwin_uploads
+  parktwin_snapshots:
+    name: parktwin_snapshots
+  web_node_modules:
+    name: parktwin_web_node_modules
+  web_next_cache:
+    name: parktwin_web_next_cache

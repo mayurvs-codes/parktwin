@@ -1,0 +1,29 @@
+# syntax=docker/dockerfile:1
+
+# ===========================================================================
+# ParkTwin AI — Frontend DEV image (apps/web, Next.js 15)
+# ---------------------------------------------------------------------------
+# This is the DEVELOPMENT image. It:
+#   - Installs node_modules once and caches them in a named volume
+#   - Runs `npm run dev` (Next.js dev server with hot reload)
+#   - Does NOT build a production bundle
+#
+# The PRODUCTION image (Dockerfile) does a multi-stage build.
+# Use this dev image with docker-compose.hotdev.yml only.
+# ===========================================================================
+
+FROM node:20-alpine
+WORKDIR /app
+
+# Install dependencies first (cached as a layer unless package.json changes)
+COPY package.json package-lock.json ./
+RUN npm install --no-audit --no-fund
+
+# Copy the rest of the source (will be overridden by bind mounts in dev)
+COPY . .
+
+# Expose Next.js dev server port
+EXPOSE 3000
+
+# next dev with hot reload, listening on all interfaces
+CMD ["npm", "run", "dev", "--", "-H", "0.0.0.0", "-p", "3000"]

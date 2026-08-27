@@ -1,0 +1,92 @@
+# ─── Python ─────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# ─── IDE & Tooling ───────────────────────────────────────────
+.claude/
+.paddleocr/
+.playwright-mcp/
+.vscode/
+.idea/
+
+# ─── Model weights (auto-downloaded at runtime) ──────────────
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.engine
+models/*.bin
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# ─── Media & Video Files ─────────────────────────────────────
+*.mp4
+*.avi
+*.mov
+*.mkv
+videos/*.mp4
+videos/*.avi
+videos/*.mov
+
+# ─── Generated outputs / cache ─────────────────────────────
+logs/
+snapshots/
+datasets/
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite
+*.sqlite3
+output.mp4
+parking.json
+parking_*.json
+reports_output/
+*.log
+
+# ─── Frontend (Node) build artifacts ───────────────────────
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+
+# ─── Next.js (apps/web) build artifacts ──────────────────────
+apps/*/.next/
+.next/
+next-env.d.ts
+
+# ─── Env & secrets ─────────────────────────────────────────
+.env
+.env.production
+.env.local
+.env*.local
+
+# ─── Deployment env templates (examples only, no secrets) ─────
+!.env.example
+!.env.backend.example
+!.env.frontend.example
+!.env.production.example
+!.env.test.example
+!.env.docker
+
+# ─── Backend runtime dirs ───────────────────────────────────
+backend/logs/
+backend/outputs/
+backend/snapshots/
+backend/uploads/
+
+# ─── Benchmark artifacts ───────────────────────────────────
+benchmark_report_*.json
+benchmark_report_*.html
+
+# ─── Keep architecture placeholder directories ────────────
+!**/.gitkeep

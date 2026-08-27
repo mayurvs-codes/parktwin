@@ -1,0 +1,220 @@
+# ============================================================
+# ParkTwin AI — Module 1 (Vehicle Recognition & ANPR)
+# Master Configuration
+# ============================================================
+# Override any value via environment variables
+# (DATABASE_URL, REDIS_URL, SECRET_KEY, LOG_LEVEL, ENVIRONMENT, ...).
+
+app:
+  name: "ParkTwin AI"
+  version: "1.0.0"
+  environment: "development"   # development | production
+  debug: true
+  secret_key: "CHANGE_ME_IN_PRODUCTION"
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 1
+  reload: false
+  cors_origins:
+    - "*"
+  docs_url: "/docs"
+  redoc_url: "/redoc"
+
+database:
+  # Default SQLite backend. Override via environment variable:
+  # DATABASE_URL=postgresql+asyncpg://user:pass@host:5432/dbname
+  url: "sqlite+aiosqlite:///./data/parktwin.db"
+  echo: false
+
+
+redis:
+  url: "redis://localhost:6379/0"
+  max_connections: 50
+
+# ── AI Models ──────────────────────────────────────────────
+# Weights are kept OUTSIDE the code tree under models/ (gitignored).
+models:
+  detector:
+    name: "yolov8m"                   # yolov8n | yolov8s | yolov8m | yolov8l | yolov8x | yolo11*
+    weights_path: "models/vehicle_detection/yolov8m.pt"
+    device: "auto"                    # auto | cuda | cpu | mps
+    confidence_threshold: 0.45
+    iou_threshold: 0.45
+    input_size: 640
+    half_precision: true              # FP16 – enabled for 2x speed on CUDA/MPS
+ 
+  plate_detector:
+    weights_path: "models/plate_detection/plate_detector.pt"
+    confidence_threshold: 0.35        # Sensitive detection for CCTV/moving vehicles
+    iou_threshold: 0.45
+    input_size: 640
+    device: "auto"
+
+  classifier:
+    weights_path: "models/vehicle_classification/vehicle_classifier.pt"
+    device: "auto"
+    confidence_threshold: 0.60
+    num_classes: 30
+
+# ── Tracking ───────────────────────────────────────────────
+tracking:
+  algorithm: "bytetrack"             # bytetrack (custom IoU tracker; swap-in point)
+  track_high_thresh: 0.5
+  track_low_thresh: 0.1
+  new_track_thresh: 0.6
+  track_buffer: 60                   # Extended track buffer for occlusions & temporal voting
+  match_thresh: 0.8
+  min_box_area: 100
+
+# ── OCR ────────────────────────────────────────────────────
+ocr:
+  engine: "paddleocr"                # paddleocr | easyocr
+  language: "en"
+  use_gpu: false
+  use_angle_cls: false
+  det_db_thresh: 0.2                 # Finer detection threshold for small plate characters
+  rec_char_dict_path: null           # null = default
+  confidence_threshold: 0.45
+  fallback_engine: "easyocr"
+
+  enhancement:
+    super_resolution: false
+    clahe: true
+    clahe_clip_limit: 2.0
+    clahe_tile_grid: 8
+    sharpening: true
+    denoising: true
+    perspective_correction: true
+
+# ── Vehicle Classes ─────────────────────────────────────────
+vehicle_classes:
+  yolo_vehicle_ids: [2, 3, 5, 7]     # car, motorcycle, bus, truck
+  custom_classes:
+    - "car"
+    - "suv"
+    - "hatchback"
+    - "sedan"
+    - "mpv"
+    - "muv"
+    - "pickup_truck"
+    - "van"
+    - "mini_truck"
+    - "bus"
+    - "school_bus"
+    - "electric_car"
+    - "motorcycle"
+    - "scooter"
+    - "auto_rickshaw"
+    - "delivery_vehicle"
+    - "emergency_vehicle"
+    - "truck"
+
+# ── Vehicle Brands ──────────────────────────────────────────
+vehicle_brands:
+  - "Toyota"
+  - "Honda"
+  - "Hyundai"
+  - "Maruti Suzuki"
+  - "Mahindra"
+  - "Tata"
+  - "Kia"
+  - "MG"
+  - "Volkswagen"
+  - "Skoda"
+  - "BMW"
+  - "Mercedes"
+  - "Audi"
+  - "Volvo"
+  - "Ford"
+  - "Nissan"
+  - "Renault"
+  - "Jeep"
+  - "Lexus"
+  - "Land Rover"
+  - "Porsche"
+  - "Tesla"
+  - "Unknown"
+
+# ── Color Detection ─────────────────────────────────────────
+color_detection:
+  colors:
+    - name: "White"
+      hsv_lower: [0, 0, 200]
+      hsv_upper: [180, 30, 255]
+    - name: "Black"
+      hsv_lower: [0, 0, 0]
+      hsv_upper: [180, 255, 50]
+    - name: "Silver"
+      hsv_lower: [0, 0, 150]
+      hsv_upper: [180, 30, 200]
+    - name: "Grey"
+      hsv_lower: [0, 0, 80]
+      hsv_upper: [180, 30, 150]
+    - name: "Red"
+      hsv_lower: [0, 100, 100]
+      hsv_upper: [10, 255, 255]
+    - name: "Blue"
+      hsv_lower: [100, 100, 100]
+      hsv_upper: [130, 255, 255]
+    - name: "Green"
+      hsv_lower: [40, 100, 100]
+      hsv_upper: [80, 255, 255]
+    - name: "Yellow"
+      hsv_lower: [20, 100, 100]
+      hsv_upper: [35, 255, 255]
+    - name: "Orange"
+      hsv_lower: [10, 100, 100]
+      hsv_upper: [20, 255, 255]
+    - name: "Brown"
+      hsv_lower: [10, 60, 60]
+      hsv_upper: [20, 180, 150]
+
+# ── Cameras ────────────────────────────────────────────────
+cameras:
+  max_concurrent: 8
+  frame_skip: 2                      # process every Nth frame
+  reconnect_delay: 5                 # seconds before reconnect on failure
+  sources:
+    - id: "camera_01"
+      name: "Entrance Gate A"
+      url: "/app/parking_lot.mp4"    # demo video (was: 0 = webcam)
+      enabled: true
+      fps_target: 25
+      zone: "entrance"
+      parking_slots: ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"]
+    # - id: "camera_02"
+    #   name: "Exit Gate B"
+    #   url: "rtsp://192.168.1.100:554/stream"
+    #   enabled: false
+    #   fps_target: 25
+    #   zone: "exit"
+
+# ── Parking (Module 1 keeps slot-assignment logic in memory) ─
+parking:
+  total_slots: 100
+  slot_prefix: "P"
+  auto_assign: true
+  max_duration_hours: 24
+
+# ── Storage ────────────────────────────────────────────────
+storage:
+  snapshots_dir: "snapshots"
+  logs_dir: "logs"
+  weights_dir: "models"
+  datasets_dir: "datasets"
+  max_snapshot_age_days: 30
+
+# ── Logging ────────────────────────────────────────────────
+logging:
+  level: "DEBUG"
+  format: "json"
+  file: "logs/parktwin.log"
+  max_size_mb: 100
+  backup_count: 5
+  log_detections: true
+  log_ocr: true
+  log_tracking: true
+  log_api: true
+  log_gpu: true

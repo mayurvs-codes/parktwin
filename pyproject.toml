@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parktwin-ai"
+version = "1.0.0"
+description = "ParkTwin AI — modular, inference-only parking-intelligence platform"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.111.0",
+    "uvicorn[standard]==0.30.1",
+    "pydantic==2.7.2",
+    "pydantic-settings==2.3.3",
+    "sqlalchemy==2.0.30",
+    "aiosqlite==0.20.0",
+    "python-multipart==0.0.9",
+    "opencv-python-headless==4.9.0.80",
+    "Pillow==10.4.0",
+    "numpy==1.26.4",
+    "ultralytics==8.2.27",
+    # Pinned to the last torch release before the 2.6 `weights_only=True` default
+    # flip. ultralytics 8.2.27 calls torch.load(..., map_location="cpu") without
+    # weights_only=False, so any torch>=2.6 unpickles DetectionModel with
+    # weights_only=True and raises UnpicklingError (see v1.0.1 fix). torch 2.5.x
+    # keeps the old default and is the tested upper bound for ultralytics 8.2.27.
+    "torch==2.5.1",
+    "torchvision==0.20.1",
+    # paddlepaddle (CPU build) is the runtime dep of paddleocr; it was missing
+    # from this manifest, so OCR import failed entirely. Added in v1.0.1.
+    # NOTE: paddlepaddle==2.6.1 is NOT published on PyPI; 2.6.2 is the nearest
+    # 2.x CPU build and is what paddleocr 2.7.3 targets.
+    "paddlepaddle==2.6.2",
+    "paddleocr==2.7.3",
+    "easyocr==1.7.1",
+    # Reporting PDF exporter (modules/reporting/exporters/pdf_exporter.py).
+    # Was previously only patched into the running image; declared here so a
+    # from-source rebuild is self-sufficient (v1.0.1, see PROJECT_MEMORY.md).
+    "reportlab==5.0.0",
+    "scikit-learn==1.5.0",
+    "loguru==0.7.2",
+    "pyyaml==6.0.1",
+    "python-dotenv==1.0.1",
+    "python-jose[cryptography]==3.5.0",
+    "passlib[bcrypt]==1.7.4",
+    "bcrypt==4.3.0",
+    "slowapi==0.1.9",
+    "alembic>=1.13.0",
+    "prometheus-client>=0.20.0",
+    "prometheus-fastapi-instrumentator>=7.0.0",
+]
+
+[project.optional-dependencies]
+# Install with: pip install -e ".[postgres]"
+postgres = [
+    "asyncpg>=0.29",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["backend*", "engine*", "modules*", "shared*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning:thop.*:",
+    "ignore::DeprecationWarning:astor.*:",
+    "ignore::DeprecationWarning:paddleocr.*:",
+    "ignore::DeprecationWarning:paddle.*:",
+]

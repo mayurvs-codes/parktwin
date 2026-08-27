@@ -1,0 +1,8 @@
+# syntax=docker/dockerfile:1
+# Patch layer: adds runtime deps missing from pyproject for the
+# reporting module (reportlab). Built FROM the prod image so all ML
+# layers are reused — no re-download.
+FROM parktwin-ai/backend:prod
+USER root
+RUN pip install --no-cache-dir reportlab
+USER appuser

@@ -1,0 +1,264 @@
+# syntax=docker/dockerfile:1.7
+
+# ===========================================================================
+# ParkTwin AI — Production deployment
+# ---------------------------------------------------------------------------
+# Full stack behind a single reverse proxy:
+#
+#   [ Clients ] ──HTTPS(:443)──▶ [ proxy (nginx) ]
+#                                       ├── /api/*  ──▶ backend:8000   (FastAPI)
+#                                       └── /*      ──▶ frontend:3000  (Next.js)
+#   [ postgres / redis ]  (optional, behind --profile)
+#
+# Highlights:
+#   * Restart policies (unless-stopped) on every service.
+#   * Named volumes for DB / models / datasets / logs / reports (persistence).
+#   * Network isolation: backend + frontend + infra live on an INTERNAL network
+#     with no published ports; only the proxy publishes 80/443 on the EDGE net.
+#   * Health checks + dependency ordering (depends_on … condition: service_healthy).
+#   * Container log rotation via the json-file driver.
+#
+# Quick start (SQLite, default):
+#   cp .env.production.example .env.production   # set a real SECRET_KEY + DOMAIN
+#   DOMAIN=parktwin.example.com docker compose -f docker/compose/docker-compose.prod.yml up -d --build
+#
+# Profiles:
+#   --profile postgres   add a PostgreSQL service (use a postgres DATABASE_URL)
+#   --profile redis      add a Redis service (set INTEGRATION_EVENT_BUS=redis)
+#   (combine: --profile postgres --profile redis)
+#
+# Switch the proxy to Caddy:  add  -f docker/compose/docker-compose.prod.caddy.yml
+# ===========================================================================
+
+x-restart: &restart unless-stopped
+x-logging: &logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  # ─── Backend (FastAPI) ──────────────────────────────────────────────────
+  backend:
+    build:
+      context: ../..
+      dockerfile: docker/backend/Dockerfile
+      args:
+        # Production build uses the dedicated non-root UID/GID baked into the image.
+        APP_UID: "10001"
+        APP_GID: "10001"
+    image: parktwin-ai/backend:prod
+    container_name: parktwin-backend
+    restart: *restart
+    env_file:
+      - ../../.env.production
+    environment:
+      # Explicit production overrides (the env_file above already sets these;
+      # kept here for visibility).
+      ENVIRONMENT: production
+      LOG_LEVEL: INFO
+      DATABASE_URL: ${DATABASE_URL:-sqlite+aiosqlite:///./data/parktwin.db}
+      LOG_DIR: /app/backend/logs
+
+    # No host port — reachable only on the internal network via the proxy.
+    expose:
+      - "8000"
+    volumes:
+      - backend-data:/app/data
+      - backend-models:/app/models
+      - backend-datasets:/app/datasets
+      - backend-logs:/app/backend/logs
+      - backend-reports:/app/reports_output
+      - backend-uploads:/app/backend/uploads
+      - backend-outputs:/app/backend/outputs
+    networks:
+      - parktwin-internal
+    healthcheck:
+      # NOTE: the full `/health` endpoint depends on the optional AI pipeline
+      # (runtime-downloaded model). That model load can fail independently of
+      # service liveness (e.g. a torch/ultralytics weights_only incompatibility),
+      # so the container liveness probe uses `/health/db` (DB connectivity +
+      # listening) — it reports healthy as long as the service is up and the
+      # database is reachable, without being gated on the optional model.
+      test:
+        - "CMD"
+        - "python"
+        - "-c"
+        - "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health/db', timeout=5).status == 200 else 1)"
+      interval: 30s
+      timeout: 5s
+      start_period: 600s
+      retries: 5
+    logging: *logging
+    depends_on:
+      db:
+        condition: service_healthy
+        required: false
+
+  # ─── Frontend (Next.js) ─────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ../../apps/web
+      dockerfile: Dockerfile
+      args:
+        # Built into the client bundle (same-origin /api prefix). Override:
+        #   --build-arg NEXT_PUBLIC_API_BASE=https://your.domain/api
+        NEXT_PUBLIC_API_BASE: "https://${DOMAIN:-parktwin.example.com}/api"
+    image: parktwin-ai/web:prod
+    container_name: parktwin-frontend
+    restart: *restart
+    # Stateless: no volumes needed (the SPA is baked into the image).
+    expose:
+      - "3000"
+    networks:
+      - parktwin-internal
+    healthcheck:
+      test:
+        - "CMD"
+        - "node"
+        - "-e"
+        - "fetch('http://127.0.0.1:3000/dashboard').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+    logging: *logging
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  # ─── Reverse proxy (Nginx) ──────────────────────────────────────────────
+  proxy:
+    build:
+      context: ../reverse-proxy/nginx
+      dockerfile: Dockerfile
+    image: parktwin-ai/proxy:prod
+    container_name: parktwin-proxy
+    restart: *restart
+    environment:
+      DOMAIN: "${DOMAIN:-parktwin.example.com}"
+    ports:
+      # Host 80 is held by Windows HTTP.SYS (PID 4) on this machine, so we
+      # publish on 8080/8443. Container-internal 80/443 are unchanged, so
+      # Caddy's HTTP->HTTPS redirect logic is identical. On a clean Linux
+      # server use "80:80" / "443:443".
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      # Mount your TLS certificates here (fullchain.pem + privkey.pem).
+      - certs:/etc/nginx/certs:ro
+    networks:
+      - parktwin-edge
+      - parktwin-internal
+    healthcheck:
+      test: ["CMD", "service", "nginx", "status"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+    logging: *logging
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_healthy
+
+  # ─── Optional infrastructure (profiles) ─────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: parktwin-db
+    restart: *restart
+    profiles: ["postgres"]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-parktwin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-parktwin_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-parktwin_db}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - parktwin-internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-parktwin} -d $${POSTGRES_DB:-parktwin_db}"]
+
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+    logging: *logging
+
+  cache:
+    image: redis:7-alpine
+    container_name: parktwin-cache
+    restart: *restart
+    profiles: ["redis"]
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+    networks:
+      - parktwin-internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      start_period: 5s
+      retries: 5
+    logging: *logging
+
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: parktwin-prometheus
+    restart: *restart
+    profiles: ["monitoring"]
+    volumes:
+      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheusdata:/prometheus
+    networks:
+      - parktwin-internal
+    logging: *logging
+
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: parktwin-grafana
+    restart: *restart
+    profiles: ["monitoring"]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin_secret}
+    ports:
+      - "3001:3000"
+    volumes:
+      - ../monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+      - grafanadata:/var/lib/grafana
+    networks:
+      - parktwin-internal
+    logging: *logging
+
+
+# ─── Networks ──────────────────────────────────────────────────────────────
+networks:
+  # Edge: the only network with published ports (proxy ↔ host).
+  parktwin-edge:
+    driver: bridge
+  # Internal: backend/frontend/infra; no published ports (only the proxy
+  # publishes 8080/8443 on the edge). `internal: true` is intentionally NOT set
+  # here: the backend must reach the internet at runtime to download ML weights
+  # (PROJECT_MEMORY.md §20 — "Models downloaded at runtime, never baked into the
+  # image"). Containers on this network still expose no host ports, so they
+  # remain unreachable from outside; only the proxy is on the edge network.
+  parktwin-internal:
+    driver: bridge
+
+# ─── Named volumes (persistence) ───────────────────────────────────────────
+volumes:
+  backend-data:      # SQLite DB + any runtime data
+  backend-models:    # downloaded ML weights (persist across rebuilds)
+  backend-datasets:  # reference datasets
+  backend-logs:      # rotated application logs
+  backend-reports:   # generated report files
+  backend-uploads:   # user-uploaded videos
+  backend-outputs:   # annotated videos, CSV, JSON results
+  certs:             # TLS certificates for the proxy
+  pgdata:            # PostgreSQL data (postgres profile)
+  redisdata:         # Redis data (redis profile)
+  prometheusdata:    # Prometheus data (monitoring profile)
+  grafanadata:       # Grafana data (monitoring profile)
+
