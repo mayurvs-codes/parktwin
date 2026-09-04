@@ -36,6 +36,8 @@ models/*.bin
 videos/*.mp4
 videos/*.avi
 videos/*.mov
+27-Aug-2026/
+
 
 # ─── Generated outputs / cache ─────────────────────────────
 logs/

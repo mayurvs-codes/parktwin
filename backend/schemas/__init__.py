@@ -48,10 +48,12 @@ class VehicleBase(BaseModel):
 
 class VehicleResponse(VehicleBase):
     id: UUID
+    prototype_id: Optional[str] = None
     tracking_id: Optional[int] = None
     plate_confidence: float
     detection_confidence: float
     color_confidence: float
+    status: Optional[str] = "parked"
     is_registered: bool
     last_seen: Optional[datetime] = None
     created_at: datetime

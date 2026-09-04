@@ -122,6 +122,7 @@ class OCREngine:
                     use_textline_orientation=self._cfg.use_angle_cls,
                     text_det_thresh=self._cfg.det_db_thresh,
                     drop_score=0.1,
+                    enable_mkldnn=False,
                 )
             else:
                 self._paddle = PaddleOCR(
@@ -130,10 +131,11 @@ class OCREngine:
                     use_gpu=self._cfg.use_gpu,
                     det_db_thresh=self._cfg.det_db_thresh,
                     drop_score=0.1,
+                    enable_mkldnn=False,
                     show_log=False,
                 )
             self._active_engine = "paddleocr"
-            logger.info("✅ PaddleOCR loaded")
+            logger.info("✅ PaddleOCR loaded (mkldnn=False)")
             return True
         except Exception as e:
             logger.warning(f"PaddleOCR load failed: {e}")
@@ -399,19 +401,23 @@ class OCREngine:
         import cv2 as _cv2
 
         try:
-            # Scale up image to high resolution (640x128) so character strokes are crystal clear
+            # Scale up image to high resolution with 32-pixel stride alignment for DBNet FPN
             h, w = image.shape[:2]
             if w < 640 or h < 128:
-                scale_x = 640.0 / w
-                scale_y = 128.0 / h
-                scale = max(scale_x, scale_y)
+                scale = max(640.0 / w, 128.0 / h)
+                target_w = max(640, int(round(w * scale)))
+                target_h = max(128, int(round(h * scale)))
+                # DBNet FPN strides require multiples of 32
+                target_w = ((target_w + 31) // 32) * 32
+                target_h = ((target_h + 31) // 32) * 32
                 image = _cv2.resize(
                     image,
-                    (max(640, int(w * scale)), max(128, int(h * scale))),
+                    (target_w, target_h),
                     interpolation=_cv2.INTER_LANCZOS4,
                 )
 
-            results = self._paddle.ocr(image)
+            image = np.ascontiguousarray(image)
+            results = self._paddle.ocr(image, cls=False)
             if not results or not results[0]:
                 return None
 

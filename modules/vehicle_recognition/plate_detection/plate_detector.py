@@ -196,15 +196,17 @@ class PlateDetector:
 
             candidate_boxes = []
             for sc in scales:
-                scaled_img = image if sc == 1.0 else cv2.resize(image, (int(w * sc), int(h * sc)), interpolation=cv2.INTER_LANCZOS4)
+                sw = max(32, ((int(round(w * sc)) + 31) // 32) * 32)
+                sh = max(32, ((int(round(h * sc)) + 31) // 32) * 32)
+                scaled_img = np.ascontiguousarray(cv2.resize(image, (sw, sh), interpolation=cv2.INTER_LANCZOS4))
                 boxes, _ = self._paddle_det.text_detector(scaled_img)
                 if boxes is None or len(boxes) == 0:
                     continue
                 for bbox_pts in boxes:
                     if bbox_pts is None or len(bbox_pts) < 4:
                         continue
-                    xs = [float(p[0]) / sc for p in bbox_pts]
-                    ys = [float(p[1]) / sc for p in bbox_pts]
+                    xs = [float(p[0]) * (w / sw) for p in bbox_pts]
+                    ys = [float(p[1]) * (h / sh) for p in bbox_pts]
                     x1, y1 = max(0.0, min(xs)), max(0.0, min(ys))
                     x2, y2 = min(float(w), max(xs)), min(float(h), max(ys))
                     bw = x2 - x1

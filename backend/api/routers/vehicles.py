@@ -55,17 +55,37 @@ async def list_vehicles(
 
 @router.get("/{vehicle_id}", response_model=VehicleResponse)
 async def get_vehicle(
-    vehicle_id: UUID,
+    vehicle_id: str,
     db: AsyncSession = Depends(get_db),
     _user=Depends(require_viewer),
 ):
-    """Retrieve a single vehicle by its primary key."""
-    from sqlalchemy import select
+    """Retrieve a single vehicle by UUID, prototype ID (e.g. VH-001), or license plate."""
+    from sqlalchemy import select, or_
     from backend.database.models import Vehicle
 
-    vehicle = (
-        await db.execute(select(Vehicle).where(Vehicle.id == vehicle_id))
-    ).scalar_one_or_none()
+    # Try UUID lookup first if format matches
+    vehicle = None
+    try:
+        parsed_uuid = UUID(vehicle_id)
+        vehicle = (
+            await db.execute(select(Vehicle).where(Vehicle.id == parsed_uuid))
+        ).scalar_one_or_none()
+    except (ValueError, AttributeError):
+        pass
+
+    # If not found by UUID, try prototype_id or license_plate
+    if not vehicle:
+        vehicle = (
+            await db.execute(
+                select(Vehicle).where(
+                    or_(
+                        Vehicle.prototype_id == vehicle_id.upper(),
+                        Vehicle.license_plate == vehicle_id.upper(),
+                    )
+                )
+            )
+        ).scalar_one_or_none()
+
     if not vehicle:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

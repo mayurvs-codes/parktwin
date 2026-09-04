@@ -34,6 +34,7 @@ from modules.reporting.api.router import router as reporting_router
 from backend.api.routers.settings import router as settings_router
 from backend.api.routers.streams import router as streams_router
 from backend.api.routers.journey import router as journey_router
+from backend.api.routers.prototype import router as prototype_router
 
 
 
@@ -244,6 +245,8 @@ def create_app() -> FastAPI:
     app.include_router(streams_router)
     # Vehicle Journeys — multi-camera journey lifecycle (entry, parking, exit).
     app.include_router(journey_router)
+    # Prototype contract APIs — /slots, /sessions, /events, /navigation/route.
+    app.include_router(prototype_router)
 
     # Prometheus Instrumentator (/metrics endpoint)
     from prometheus_fastapi_instrumentator import Instrumentator

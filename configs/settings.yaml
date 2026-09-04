@@ -64,7 +64,8 @@ tracking:
   track_high_thresh: 0.5
   track_low_thresh: 0.1
   new_track_thresh: 0.6
-  track_buffer: 60                   # Extended track buffer for occlusions & temporal voting
+  track_buffer: 300                  # Large buffer: accounts for frame_skip gaps. At skip=15 on 60fps,
+                                     # 1 sampled frame = 0.25s. Buffer=300 keeps tracks alive for ~75s of occlusion.
   match_thresh: 0.8
   min_box_area: 100
 
@@ -177,19 +178,27 @@ cameras:
   frame_skip: 2                      # process every Nth frame
   reconnect_delay: 5                 # seconds before reconnect on failure
   sources:
-    - id: "camera_01"
-      name: "Entrance Gate A"
-      url: "/app/parking_lot.mp4"    # demo video (was: 0 = webcam)
+    - id: "CAM-01"
+      name: "B2 Entrance Gate"
+      url: "/app/videos/cam1_entry_gate.mp4"
       enabled: true
       fps_target: 25
       zone: "entrance"
-      parking_slots: ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"]
-    # - id: "camera_02"
-    #   name: "Exit Gate B"
-    #   url: "rtsp://192.168.1.100:554/stream"
-    #   enabled: false
-    #   fps_target: 25
-    #   zone: "exit"
+      parking_slots: []
+    - id: "CAM-02"
+      name: "B2 Parking Bays"
+      url: "/app/videos/cam2_parking_bay.mp4"
+      enabled: true
+      fps_target: 25
+      zone: "parking"
+      parking_slots: ["P01","P02","P03","P04","P05"]
+    - id: "CAM-03"
+      name: "B2 Exit Ramp"
+      url: "/app/videos/cam3_exit_ramp.mp4"
+      enabled: true
+      fps_target: 25
+      zone: "exit"
+      parking_slots: ["P06","P07","P08","P09","P10"]
 
 # ── Parking (Module 1 keeps slot-assignment logic in memory) ─
 parking:

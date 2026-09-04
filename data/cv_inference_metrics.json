@@ -1,0 +1,589 @@
+{
+  "device": "cpu",
+  "model": "yolov8m",
+  "ocr_engine": "paddleocr / easyocr",
+  "video_tested": "cam2_parking_bay.mp4",
+  "resolution": "1280x720",
+  "frames_tested": 5,
+  "avg_inference_time_ms": 17369.79,
+  "equivalent_fps": 0.06,
+  "total_detections": 60,
+  "pipeline_init_time_s": 9.08,
+  "frame_details": [
+    {
+      "frame_id": 62,
+      "inference_time_ms": 20135.67,
+      "vehicles_detected": 12,
+      "records": [
+        {
+          "class": "car",
+          "confidence": 0.9111,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.9104,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8353,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8304,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Volkswagen",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8172,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8023,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Unknown",
+          "plate": "KA05NO1565",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "truck",
+          "confidence": 0.7631,
+          "type": "Coupe",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": "SK40ENY0035",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "car",
+          "confidence": 0.7547,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.6464,
+          "type": "Coupe",
+          "color": "Silver",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.5664,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "motorcycle",
+          "confidence": 0.4922,
+          "type": "Scooter",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "truck",
+          "confidence": 0.4552,
+          "type": "Truck",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        }
+      ]
+    },
+    {
+      "frame_id": 124,
+      "inference_time_ms": 16269.97,
+      "vehicles_detected": 12,
+      "records": [
+        {
+          "class": "car",
+          "confidence": 0.9108,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.9114,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8282,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8599,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Volkswagen",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8242,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8193,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Unknown",
+          "plate": "KA05NO1565",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "truck",
+          "confidence": 0.7655,
+          "type": "Coupe",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": "SK40ENY0035",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "car",
+          "confidence": 0.7506,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.694,
+          "type": "Coupe",
+          "color": "Silver",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.6462,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "motorcycle",
+          "confidence": 0.4684,
+          "type": "Scooter",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "truck",
+          "confidence": 0.4552,
+          "type": "Truck",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        }
+      ]
+    },
+    {
+      "frame_id": 186,
+      "inference_time_ms": 15671.81,
+      "vehicles_detected": 12,
+      "records": [
+        {
+          "class": "car",
+          "confidence": 0.9116,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8998,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8315,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8454,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Volkswagen",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8108,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8323,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Unknown",
+          "plate": "KA05NO1565",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "truck",
+          "confidence": 0.7824,
+          "type": "Coupe",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": "SK40ENY0035",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "car",
+          "confidence": 0.7863,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.6411,
+          "type": "Coupe",
+          "color": "Silver",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.6462,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "motorcycle",
+          "confidence": 0.4684,
+          "type": "Scooter",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "truck",
+          "confidence": 0.4501,
+          "type": "Van",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        }
+      ]
+    },
+    {
+      "frame_id": 248,
+      "inference_time_ms": 17279.36,
+      "vehicles_detected": 12,
+      "records": [
+        {
+          "class": "car",
+          "confidence": 0.9106,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.9056,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8263,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8713,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Volkswagen",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.803,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8187,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Unknown",
+          "plate": "KA05NO1565",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "truck",
+          "confidence": 0.7768,
+          "type": "Coupe",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": "SK40ENY0035",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "car",
+          "confidence": 0.7693,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.6658,
+          "type": "Coupe",
+          "color": "Silver",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.5559,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "motorcycle",
+          "confidence": 0.4934,
+          "type": "Scooter",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "truck",
+          "confidence": 0.4501,
+          "type": "Van",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        }
+      ]
+    },
+    {
+      "frame_id": 310,
+      "inference_time_ms": 17492.14,
+      "vehicles_detected": 12,
+      "records": [
+        {
+          "class": "car",
+          "confidence": 0.905,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.9121,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8255,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8411,
+          "type": "Van",
+          "color": "Unknown",
+          "brand": "Volkswagen",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8218,
+          "type": "Coupe",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.8128,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Unknown",
+          "plate": "KA05NO1565",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "truck",
+          "confidence": 0.744,
+          "type": "Coupe",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": "SK40ENY0035",
+          "plate_confidence": 0.97
+        },
+        {
+          "class": "car",
+          "confidence": 0.7634,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.7316,
+          "type": "Coupe",
+          "color": "Silver",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "car",
+          "confidence": 0.6642,
+          "type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "motorcycle",
+          "confidence": 0.4934,
+          "type": "Scooter",
+          "color": "Unknown",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        },
+        {
+          "class": "truck",
+          "confidence": 0.4501,
+          "type": "Truck",
+          "color": "Grey",
+          "brand": "Maruti Suzuki",
+          "plate": null,
+          "plate_confidence": null
+        }
+      ]
+    }
+  ]
+}

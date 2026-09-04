@@ -179,19 +179,17 @@ def process_video_file(
         is_4k = width >= 3000 or height >= 2000
 
         # ── Adaptive frame skip tuned for CPU-only inference ──────────────────
-        # YOLOv8 on CPU takes ~50-200ms per frame. Processing every frame on a
-        # 30fps video = 1800 YOLO+OCR calls for a 60s clip → minutes of wait.
-        # Track-level caching means once a plate is read for a tracked vehicle,
-        # subsequent frames for that track bypass OCR and are near-instant.
-        # So: skip aggressively early, the tracker fills gaps automatically.
-        # Heuristic: sample at ~5-8 fps equivalent regardless of source fps.
+        # On CPU (no GPU): each frame takes ~5s (YOLO + PaddleOCR + EasyOCR).
+        # Target ~4 sampled frames/sec — enough for ByteTracker to keep vehicle
+        # IDs stable across occlusions without creating ghost duplicate tracks.
+        # track_buffer in settings.yaml is set to 300 to tolerate skip gaps.
         if is_4k:
-            frame_skip = max(int(fps / 2), 15)   # 4K: ~2fps sample
+            frame_skip = max(int(fps / 1), 30)   # 4K on CPU: ~1fps sample
         elif fps > 0:
-            # Target ~6 sampled frames/sec regardless of source fps
-            frame_skip = max(2, int(fps / 6))    # 30fps→5, 25fps→4, 15fps→2
+            # CPU target: ~4 sampled frames/sec (balance: speed vs track stability)
+            frame_skip = max(2, int(fps / 4))    # 60fps→15, 30fps→7, 25fps→6
         else:
-            frame_skip = 3  # fallback if fps unknown
+            frame_skip = 10  # fallback if fps unknown
 
 
 

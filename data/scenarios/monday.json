@@ -1,0 +1,505 @@
+﻿{
+  "scenario_name": "monday",
+  "description": "ParkTwin Monday 3-Day Prototype replay scenario with 7 real verified CCTV vehicles",
+  "facility": "Carparking-01 B2",
+  "cameras": [
+    {"camera_id": "CAM-01", "name": "B2 Entrance Gate", "zone": "entrance"},
+    {"camera_id": "CAM-02", "name": "B2 Parking Bays", "zone": "parking"},
+    {"camera_id": "CAM-03", "name": "B2 Exit Ramp", "zone": "exit"}
+  ],
+  "vehicles": [
+    {
+      "prototype_id": "VH-001",
+      "license_plate": "KA03MY0035",
+      "vehicle_type": "SUV",
+      "brand": "Hyundai",
+      "model": "Venue",
+      "color": "White",
+      "plate_confidence": 0.95,
+      "slot_id": "P01",
+      "final_status": "parked",
+      "source_evidence": "10A-IP Camera16 (2026-08-27 15:45:18)"
+    },
+    {
+      "prototype_id": "VH-002",
+      "license_plate": "KA05ND1565",
+      "vehicle_type": "Compact SUV",
+      "brand": "Tata",
+      "model": "Punch",
+      "color": "Grey",
+      "plate_confidence": 0.99,
+      "slot_id": "P02",
+      "final_status": "parked",
+      "source_evidence": "10A-IP Camera16 & 1A-IP Camera3 (2026-08-27 15:45:18)"
+    },
+    {
+      "prototype_id": "VH-003",
+      "license_plate": "KA41MG7586",
+      "vehicle_type": "Hatchback",
+      "brand": "Suzuki",
+      "model": "Baleno",
+      "color": "Black",
+      "plate_confidence": 0.96,
+      "slot_id": "P03",
+      "final_status": "parked",
+      "source_evidence": "10A-IP Camera16 (2026-08-27 15:45:18)"
+    },
+    {
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "vehicle_type": "Sedan",
+      "brand": "Maruti Suzuki",
+      "model": "Ciaz",
+      "color": "Black",
+      "plate_confidence": 0.99,
+      "slot_id": "P04",
+      "final_status": "exited",
+      "source_evidence": "2A-IP Camera6 & 16A-IP Camera5 (2026-08-27 15:45:18)"
+    },
+    {
+      "prototype_id": "VH-005",
+      "license_plate": "KA05MS3036",
+      "vehicle_type": "Hatchback",
+      "brand": "Suzuki",
+      "model": "Swift",
+      "color": "Black",
+      "plate_confidence": 0.98,
+      "slot_id": "P05",
+      "final_status": "parked",
+      "source_evidence": "2A-IP Camera6 (2026-08-27 15:45:18)"
+    },
+    {
+      "prototype_id": "VH-006",
+      "license_plate": "KA37M4687",
+      "vehicle_type": "Mini-SUV",
+      "brand": "Suzuki",
+      "model": "S-Presso",
+      "color": "White",
+      "plate_confidence": 0.95,
+      "slot_id": "P06",
+      "final_status": "parked",
+      "source_evidence": "11A-IP Camera19 (2026-08-27 15:45:19)"
+    },
+    {
+      "prototype_id": "VH-007",
+      "license_plate": "KA41Z7597",
+      "vehicle_type": "Sedan",
+      "brand": "Suzuki",
+      "model": "Dzire",
+      "color": "Silver",
+      "plate_confidence": 0.92,
+      "slot_id": "P07",
+      "final_status": "parked",
+      "source_evidence": "11A-IP Camera19 (2026-08-27 15:45:19)"
+    }
+  ],
+  "timeline_events": [
+    {
+      "time_offset_s": 0,
+      "timestamp": "2026-08-27T15:20:00Z",
+      "event_type": "VehicleEntered",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 15,
+      "timestamp": "2026-08-27T15:20:15Z",
+      "event_type": "PlateRecognized",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 45,
+      "timestamp": "2026-08-27T15:20:45Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-02",
+      "slot_id": null,
+      "source_type": "reconstructed"
+    },
+    {
+      "time_offset_s": 65,
+      "timestamp": "2026-08-27T15:21:05Z",
+      "event_type": "SlotOccupied",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-02",
+      "slot_id": "P04",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 70,
+      "timestamp": "2026-08-27T15:21:10Z",
+      "event_type": "ParkingSessionStarted",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-02",
+      "slot_id": "P04",
+      "source_type": "observed"
+    },
+
+    {
+      "time_offset_s": 80,
+      "timestamp": "2026-08-27T15:30:00Z",
+      "event_type": "VehicleEntered",
+      "prototype_id": "VH-001",
+      "license_plate": "KA03MY0035",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 95,
+      "timestamp": "2026-08-27T15:30:15Z",
+      "event_type": "PlateRecognized",
+      "prototype_id": "VH-001",
+      "license_plate": "KA03MY0035",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 120,
+      "timestamp": "2026-08-27T15:30:45Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-001",
+      "license_plate": "KA03MY0035",
+      "camera_id": "CAM-02",
+      "slot_id": null,
+      "source_type": "reconstructed"
+    },
+    {
+      "time_offset_s": 140,
+      "timestamp": "2026-08-27T15:31:10Z",
+      "event_type": "SlotOccupied",
+      "prototype_id": "VH-001",
+      "license_plate": "KA03MY0035",
+      "camera_id": "CAM-02",
+      "slot_id": "P01",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 145,
+      "timestamp": "2026-08-27T15:31:15Z",
+      "event_type": "ParkingSessionStarted",
+      "prototype_id": "VH-001",
+      "license_plate": "KA03MY0035",
+      "camera_id": "CAM-02",
+      "slot_id": "P01",
+      "source_type": "observed"
+    },
+
+    {
+      "time_offset_s": 160,
+      "timestamp": "2026-08-27T15:32:00Z",
+      "event_type": "VehicleEntered",
+      "prototype_id": "VH-002",
+      "license_plate": "KA05ND1565",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 172,
+      "timestamp": "2026-08-27T15:32:12Z",
+      "event_type": "PlateRecognized",
+      "prototype_id": "VH-002",
+      "license_plate": "KA05ND1565",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 190,
+      "timestamp": "2026-08-27T15:32:30Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-002",
+      "license_plate": "KA05ND1565",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 215,
+      "timestamp": "2026-08-27T15:32:55Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-002",
+      "license_plate": "KA05ND1565",
+      "camera_id": "CAM-02",
+      "slot_id": null,
+      "source_type": "reconstructed"
+    },
+    {
+      "time_offset_s": 240,
+      "timestamp": "2026-08-27T15:33:20Z",
+      "event_type": "SlotOccupied",
+      "prototype_id": "VH-002",
+      "license_plate": "KA05ND1565",
+      "camera_id": "CAM-02",
+      "slot_id": "P02",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 245,
+      "timestamp": "2026-08-27T15:33:25Z",
+      "event_type": "ParkingSessionStarted",
+      "prototype_id": "VH-002",
+      "license_plate": "KA05ND1565",
+      "camera_id": "CAM-02",
+      "slot_id": "P02",
+      "source_type": "observed"
+    },
+
+    {
+      "time_offset_s": 260,
+      "timestamp": "2026-08-27T15:34:00Z",
+      "event_type": "VehicleEntered",
+      "prototype_id": "VH-003",
+      "license_plate": "KA41MG7586",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 270,
+      "timestamp": "2026-08-27T15:34:10Z",
+      "event_type": "PlateRecognized",
+      "prototype_id": "VH-003",
+      "license_plate": "KA41MG7586",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 295,
+      "timestamp": "2026-08-27T15:34:35Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-003",
+      "license_plate": "KA41MG7586",
+      "camera_id": "CAM-02",
+      "slot_id": null,
+      "source_type": "reconstructed"
+    },
+    {
+      "time_offset_s": 320,
+      "timestamp": "2026-08-27T15:35:00Z",
+      "event_type": "SlotOccupied",
+      "prototype_id": "VH-003",
+      "license_plate": "KA41MG7586",
+      "camera_id": "CAM-02",
+      "slot_id": "P03",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 325,
+      "timestamp": "2026-08-27T15:35:05Z",
+      "event_type": "ParkingSessionStarted",
+      "prototype_id": "VH-003",
+      "license_plate": "KA41MG7586",
+      "camera_id": "CAM-02",
+      "slot_id": "P03",
+      "source_type": "observed"
+    },
+
+    {
+      "time_offset_s": 340,
+      "timestamp": "2026-08-27T15:36:00Z",
+      "event_type": "VehicleEntered",
+      "prototype_id": "VH-005",
+      "license_plate": "KA05MS3036",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 354,
+      "timestamp": "2026-08-27T15:36:14Z",
+      "event_type": "PlateRecognized",
+      "prototype_id": "VH-005",
+      "license_plate": "KA05MS3036",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 380,
+      "timestamp": "2026-08-27T15:36:40Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-005",
+      "license_plate": "KA05MS3036",
+      "camera_id": "CAM-02",
+      "slot_id": null,
+      "source_type": "reconstructed"
+    },
+    {
+      "time_offset_s": 405,
+      "timestamp": "2026-08-27T15:37:05Z",
+      "event_type": "SlotOccupied",
+      "prototype_id": "VH-005",
+      "license_plate": "KA05MS3036",
+      "camera_id": "CAM-02",
+      "slot_id": "P05",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 410,
+      "timestamp": "2026-08-27T15:37:10Z",
+      "event_type": "ParkingSessionStarted",
+      "prototype_id": "VH-005",
+      "license_plate": "KA05MS3036",
+      "camera_id": "CAM-02",
+      "slot_id": "P05",
+      "source_type": "observed"
+    },
+
+    {
+      "time_offset_s": 425,
+      "timestamp": "2026-08-27T15:38:00Z",
+      "event_type": "VehicleEntered",
+      "prototype_id": "VH-006",
+      "license_plate": "KA37M4687",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 437,
+      "timestamp": "2026-08-27T15:38:12Z",
+      "event_type": "PlateRecognized",
+      "prototype_id": "VH-006",
+      "license_plate": "KA37M4687",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 465,
+      "timestamp": "2026-08-27T15:38:40Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-006",
+      "license_plate": "KA37M4687",
+      "camera_id": "CAM-03",
+      "slot_id": null,
+      "source_type": "reconstructed"
+    },
+    {
+      "time_offset_s": 490,
+      "timestamp": "2026-08-27T15:39:05Z",
+      "event_type": "SlotOccupied",
+      "prototype_id": "VH-006",
+      "license_plate": "KA37M4687",
+      "camera_id": "CAM-03",
+      "slot_id": "P06",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 495,
+      "timestamp": "2026-08-27T15:39:10Z",
+      "event_type": "ParkingSessionStarted",
+      "prototype_id": "VH-006",
+      "license_plate": "KA37M4687",
+      "camera_id": "CAM-03",
+      "slot_id": "P06",
+      "source_type": "observed"
+    },
+
+    {
+      "time_offset_s": 510,
+      "timestamp": "2026-08-27T15:40:00Z",
+      "event_type": "SlotFreed",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-02",
+      "slot_id": "P04",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 515,
+      "timestamp": "2026-08-27T15:40:05Z",
+      "event_type": "ParkingSessionEnded",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-02",
+      "slot_id": "P04",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 540,
+      "timestamp": "2026-08-27T15:40:30Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-03",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 555,
+      "timestamp": "2026-08-27T15:40:45Z",
+      "event_type": "VehicleExited",
+      "prototype_id": "VH-004",
+      "license_plate": "WB02AK8965",
+      "camera_id": "CAM-03",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+
+    {
+      "time_offset_s": 570,
+      "timestamp": "2026-08-27T15:41:00Z",
+      "event_type": "VehicleEntered",
+      "prototype_id": "VH-007",
+      "license_plate": "KA41Z7597",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 585,
+      "timestamp": "2026-08-27T15:41:15Z",
+      "event_type": "PlateRecognized",
+      "prototype_id": "VH-007",
+      "license_plate": "KA41Z7597",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 610,
+      "timestamp": "2026-08-27T15:41:40Z",
+      "event_type": "VehicleObserved",
+      "prototype_id": "VH-007",
+      "license_plate": "KA41Z7597",
+      "camera_id": "CAM-03",
+      "slot_id": null,
+      "source_type": "reconstructed"
+    },
+    {
+      "time_offset_s": 635,
+      "timestamp": "2026-08-27T15:42:05Z",
+      "event_type": "SlotOccupied",
+      "prototype_id": "VH-007",
+      "license_plate": "KA41Z7597",
+      "camera_id": "CAM-03",
+      "slot_id": "P07",
+      "source_type": "observed"
+    },
+    {
+      "time_offset_s": 640,
+      "timestamp": "2026-08-27T15:42:10Z",
+      "event_type": "ParkingSessionStarted",
+      "prototype_id": "VH-007",
+      "license_plate": "KA41Z7597",
+      "camera_id": "CAM-03",
+      "slot_id": "P07",
+      "source_type": "observed"
+    }
+  ]
+}

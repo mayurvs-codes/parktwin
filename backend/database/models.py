@@ -80,6 +80,7 @@ class Vehicle(Base):
     __tablename__ = "vehicles"
 
     id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    prototype_id = Column(String(32), nullable=True, index=True)
     license_plate = Column(String(32), nullable=True, index=True)
     plate_confidence = Column(Float, default=0.0)
     vehicle_type = Column(String(64), nullable=True)     # suv | sedan | hatchback …
@@ -87,6 +88,7 @@ class Vehicle(Base):
     model = Column(String(64), nullable=True)
     color = Column(String(32), nullable=True)
     color_confidence = Column(Float, default=0.0)
+    status = Column(String(32), default="parked")
     tracking_id = Column(Integer, nullable=True, index=True)  # ByteTrack ID
     bounding_box = Column(JSON, nullable=True)          # {x1,y1,x2,y2}
     detection_confidence = Column(Float, default=0.0)
