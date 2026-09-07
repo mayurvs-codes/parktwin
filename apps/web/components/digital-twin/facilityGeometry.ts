@@ -282,7 +282,7 @@ export const TECH_PARK_OBSTACLE_PATH_LEGACY = TECH_PARK_OBSTACLE_PATH;
 export const FACILITY_CAMERAS_LEGACY = {
   "CAM-01": { name: "B2 Entrance Gate", defaultRole: "ENTRY" as const, zone: "entrance", x: 310, y: 750, angle: 35, fov: 65, coverage_slots: [], url: "/videos/cam1_entry_gate.mp4" },
   "CAM-02": { name: "B2 Parking Bays", defaultRole: "PARKING_LOT" as const, zone: "parking", x: 480, y: 860, angle: -35, fov: 75, coverage_slots: ["P01","P02","P03","P04","P05"], url: "/videos/cam2_parking_bay.mp4" },
-  "CAM-03": { name: "B2 Exit Ramp", defaultRole: "EXIT" as const, zone: "exit", x: 1100, y: 900, angle: 195, fov: 70, coverage_slots: ["P06","P07","P08","P09","P10"], url: "/videos/cam3_exit_ramp.mp4" },
+  "CAM-03": { name: "B2 South Corridor", defaultRole: "PATH_PARKING" as const, zone: "parking", x: 1162, y: 1291, angle: 195, fov: 70, coverage_slots: ["P06","P07","P08","P09","P10"], url: "/videos/cam3_exit_ramp.mp4" },
 };
 
 export function getSlotGeometryLegacy(slotId: string) {

@@ -69,7 +69,8 @@ async def reset_scenario(db: AsyncSession) -> Dict[str, Any]:
     standard_cameras = [
         {"camera_id": "CAM-01", "name": "B2 Entrance Gate", "zone": "entrance", "url": "/videos/cam1_entry_gate.mp4", "role": CameraRole.ENTRY},
         {"camera_id": "CAM-02", "name": "B2 Parking Bays", "zone": "parking", "url": "/videos/cam2_parking_bay.mp4", "role": CameraRole.PATH_PARKING},
-        {"camera_id": "CAM-03", "name": "B2 Exit Ramp", "zone": "parking", "url": "/videos/cam3_exit_ramp.mp4", "role": CameraRole.PATH_PARKING},
+        {"camera_id": "CAM-03", "name": "B2 South Corridor", "zone": "parking", "url": "/videos/cam3_exit_ramp.mp4", "role": CameraRole.PATH_PARKING},
+        {"camera_id": "CAM-16", "name": "B2 Exit Gate", "zone": "exit", "url": None, "role": CameraRole.EXIT},
     ]
     for cam_info in standard_cameras:
         cam = (await db.execute(select(Camera).where(Camera.camera_id == cam_info["camera_id"]))).scalar_one_or_none()

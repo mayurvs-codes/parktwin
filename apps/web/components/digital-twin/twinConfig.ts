@@ -451,7 +451,7 @@ export const RUNTIME_TO_PHYSICAL_MAP: Record<string, string> = {
 export const CANONICAL_CAMERAS = [
   { id: "CAM-01", name: "B2 Entrance Gate", role: "ENTRY" as CameraRole, status: "CONFIGURED" as const, source: "/videos/cam1_entry_gate.mp4", verifiedPosition: { x: 310, y: 750 } },
   { id: "CAM-02", name: "B2 Parking Bays", role: "PATH_PARKING" as CameraRole, status: "CONFIGURED" as const, source: "/videos/cam2_parking_bay.mp4", verifiedPosition: { x: 480, y: 860 } },
-  { id: "CAM-03", name: "B2-Baricade Exit Cam 2", role: "PATH_PARKING" as CameraRole, status: "CONFIGURED" as const, source: "/videos/cam3_exit_ramp.mp4", verifiedPosition: { x: 740, y: 1400 } },
+  { id: "CAM-03", name: "B2 South Corridor", role: "PATH_PARKING" as CameraRole, status: "CONFIGURED" as const, source: "/videos/cam3_exit_ramp.mp4", verifiedPosition: { x: 1162, y: 1291 } },
   { id: "CAM-04", name: "B2 Zone C West", role: "PATH_PARKING" as CameraRole, status: "NOT_CONFIGURED" as const, source: null, verifiedPosition: null },
   { id: "CAM-05", name: "B2 Zone C East", role: "PATH_PARKING" as CameraRole, status: "NOT_CONFIGURED" as const, source: null, verifiedPosition: null },
   { id: "CAM-06", name: "B2 Zone D North", role: "PATH_PARKING" as CameraRole, status: "NOT_CONFIGURED" as const, source: null, verifiedPosition: null },
@@ -628,13 +628,13 @@ export const DEFAULT_CAMERA_CONFIGS: Record<string, {
 }> = {
   "CAM-01": { name: "B2 Entrance Gate", defaultRole: "ENTRY", zone: "entrance", x: 310, y: 750, angle: 35, fov: 65, coverage_slots: [], url: "/videos/cam1_entry_gate.mp4" },
   "CAM-02": { name: "B2 Parking Bays", defaultRole: "PATH_PARKING", zone: "parking", x: 480, y: 860, angle: -35, fov: 75, coverage_slots: ["P01", "P02", "P03", "P04", "P05"], url: "/videos/cam2_parking_bay.mp4" },
-  "CAM-03": { name: "B2-Baricade Exit Cam 2", defaultRole: "PATH_PARKING", zone: "parking", x: 740, y: 1400, angle: 195, fov: 70, coverage_slots: ["P06", "P07", "P08", "P09", "P10"], url: "/videos/cam3_exit_ramp.mp4" },
+  "CAM-03": { name: "B2 South Corridor", defaultRole: "PATH_PARKING", zone: "parking", x: 1162, y: 1291, angle: 195, fov: 70, coverage_slots: ["P06", "P07", "P08", "P09", "P10"], url: "/videos/cam3_exit_ramp.mp4" },
 };
 
-// Legacy status colors
+// Canonical locked status colors: GREEN = Occupied, RED = Available
 export const STATUS_COLORS: Record<TwinSlotStatus, { fill: string; stroke: string; text: string; bg: string }> = {
-  free: { fill: "rgba(16, 185, 129, 0.18)", stroke: "#10b981", text: "#34d399", bg: "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" },
-  occupied: { fill: "rgba(239, 68, 68, 0.22)", stroke: "#ef4444", text: "#f87171", bg: "bg-rose-500/10 border-rose-500/30 text-rose-400" },
+  free: { fill: "rgba(239, 68, 68, 0.18)", stroke: "#ef4444", text: "#f87171", bg: "bg-rose-500/10 border-rose-500/30 text-rose-400" },
+  occupied: { fill: "rgba(16, 185, 129, 0.22)", stroke: "#10b981", text: "#34d399", bg: "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" },
   reserved: { fill: "rgba(245, 158, 11, 0.20)", stroke: "#f59e0b", text: "#fbbf24", bg: "bg-amber-500/10 border-amber-500/30 text-amber-400" },
   violation: { fill: "rgba(234, 179, 8, 0.25)", stroke: "#eab308", text: "#fde047", bg: "bg-yellow-500/10 border-yellow-500/30 text-yellow-400" },
   unknown: { fill: "rgba(100, 116, 139, 0.15)", stroke: "#64748b", text: "#94a3b8", bg: "bg-slate-500/10 border-slate-500/30 text-slate-400" },

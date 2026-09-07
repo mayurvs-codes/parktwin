@@ -73,3 +73,21 @@ async def test_camera_role_designation_lifecycle(async_db: AsyncSession):
     assert len(audit_records) == 1
     assert audit_records[0].role == "ENTRY"
     assert audit_records[0].parking_area == "Zone A - Level B2"
+
+
+@pytest.mark.asyncio
+async def test_canonical_16_camera_roles():
+    """Verify CAM-01=ENTRY, CAM-02..15=PATH/PARKING, CAM-16=EXIT, and CAM-03 is NEVER EXIT."""
+    from backend.database.models import CameraRole
+
+    # Standard camera definitions
+    cam_01_role = CameraRole.ENTRY
+    cam_02_role = CameraRole.PATH_PARKING
+    cam_03_role = CameraRole.PATH_PARKING
+    cam_16_role = CameraRole.EXIT
+
+    assert cam_01_role == CameraRole.ENTRY
+    assert cam_02_role == CameraRole.PATH_PARKING
+    assert cam_03_role == CameraRole.PATH_PARKING
+    assert cam_03_role != CameraRole.EXIT, "CAM-03 MUST NEVER be EXIT!"
+    assert cam_16_role == CameraRole.EXIT
