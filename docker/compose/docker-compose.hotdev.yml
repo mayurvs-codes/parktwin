@@ -148,6 +148,9 @@ services:
     environment:
       NODE_ENV: development
       NEXT_PUBLIC_API_BASE: "http://localhost:8000"
+      # Server-side internal URL — used by next.config.ts rewrites() to proxy /videos/*
+      # to the backend container. Not exposed to the browser.
+      NEXT_INTERNAL_API_BASE: "http://backend:8000"
     volumes:
       # Source code bind-mounts for hot reload (Next.js dev server)
       - ../../apps/web/app:/app/app
@@ -159,6 +162,8 @@ services:
       - ../../apps/web/types:/app/types
       - ../../apps/web/utils:/app/utils
       - ../../apps/web/styles:/app/styles
+      # next.config.ts — bind-mount so config changes (e.g. rewrites) apply without rebuild
+      - ../../apps/web/next.config.ts:/app/next.config.ts
       # node_modules stays INSIDE the container (named volume) — never bind-mount this
       - web_node_modules:/app/node_modules
       - web_next_cache:/app/.next
