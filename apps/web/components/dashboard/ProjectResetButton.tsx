@@ -9,6 +9,7 @@ import { resetDigitalTwinState } from "@/services/parking";
 import { useDigitalTwinStore } from "@/store/useDigitalTwinStore";
 import { useJourneyStationStore } from "@/store/useJourneyStationStore";
 import { useGlobalProcessingStore } from "@/store/useGlobalProcessingStore";
+import { useDemoMovieStore } from "@/store/useDemoMovieStore";
 
 interface ProjectResetButtonProps {
   variant?: "destructive" | "outline";
@@ -44,12 +45,16 @@ export function ProjectResetButton({
       // 1. Authoritative Backend System Reset via POST /api/v1/parking/reset
       await resetDigitalTwinState();
 
-      // 2. Clear client-side stores
+      // 2. Authoritative Shared Demo Movie Global Reset
+      useDemoMovieStore.getState().resetMovie();
+
+      // 3. Clear client-side stores
       resetDigitalTwin();
       clearStationFeeds();
       clearAllJobs();
 
-      // 3. Invalidate all TanStack Query caches
+      // 4. Invalidate and clear all TanStack Query caches
+      queryClient.clear();
       await queryClient.invalidateQueries({ queryKey: ["parking"] });
       await queryClient.invalidateQueries({ queryKey: ["dashboard"] });
       await queryClient.invalidateQueries({ queryKey: ["analytics"] });

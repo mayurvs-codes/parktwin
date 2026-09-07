@@ -269,6 +269,7 @@ export const useDemoMovieStore = create<DemoMovieStoreState>((set, get) => ({
       events: [],
       selectedVehicleId: null,
       selectedSlotId: null,
+      selectedCameraId: null,
     });
   },
 

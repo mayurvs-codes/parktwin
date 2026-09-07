@@ -16,8 +16,8 @@ interface UtilizationChartProps {
 /** Slot-state donut + most/least used slots (backend-computed). */
 export function UtilizationChart({ occupancy, utilization, isLoading }: UtilizationChartProps) {
   const donutData = [
-    { name: "Occupied", value: occupancy?.current_occupancy ?? 0, color: "#ef4444" },
-    { name: "Available", value: occupancy?.free_slots ?? 0, color: "#22c55e" },
+    { name: "Occupied", value: occupancy?.current_occupancy ?? 0, color: "#22c55e" },
+    { name: "Available", value: occupancy?.free_slots ?? 0, color: "#ef4444" },
     { name: "Reserved", value: occupancy?.reserved_slots ?? 0, color: "#f59e0b" },
     { name: "Unknown", value: occupancy?.unknown_slots ?? 0, color: "#94a3b8" },
   ].filter((d) => d.value > 0);
