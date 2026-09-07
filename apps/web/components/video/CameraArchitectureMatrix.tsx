@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Video, Play, MapPin, X } from "lucide-react";
+import Link from "next/link";
+import { Video, Play, MapPin, X, FolderOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SourceBadge } from "@/components/ui/SourceBadge";
 import { StatusDot } from "@/components/ui/StatusDot";
 import { CANONICAL_16_CAMERAS, type DemoCamera } from "@/components/digital-twin/demoScenarioData";
+import { ROUTES } from "@/utils/routes";
 
 export function CameraArchitectureMatrix() {
   const [activeVideoCam, setActiveVideoCam] = useState<DemoCamera | null>(null);
@@ -113,9 +115,12 @@ export function CameraArchitectureMatrix() {
                       <span>Open Video</span>
                     </Button>
                   ) : (
-                    <span className="text-[10px] font-mono text-muted-foreground">
-                      NO VIDEO SOURCE
-                    </span>
+                    <Link href={ROUTES.videoLibrary}>
+                      <span className="text-[9px] font-mono text-amber-400/90 hover:text-amber-300 underline underline-offset-2 flex items-center gap-1 cursor-pointer" title="Physical footage available in 27-Aug Archive; ParkTwin logical mapping unverified">
+                        <FolderOpen className="h-2.5 w-2.5" />
+                        <span>MAPPING UNVERIFIED</span>
+                      </span>
+                    </Link>
                   )}
                 </div>
               </div>
