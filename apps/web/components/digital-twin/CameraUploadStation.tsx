@@ -10,7 +10,6 @@ import {
   X,
   Car,
   LogIn,
-  LogOut,
   ParkingSquare,
   type LucideIcon,
 } from "lucide-react";
@@ -58,11 +57,11 @@ const ROLE_CONFIG: Record<
     accentBg: "bg-amber-500/10 text-amber-500",
   },
   exit: {
-    icon: LogOut,
-    badgeLabel: "EXIT STATION",
-    badgeClass: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
-    borderClass: "hover:border-rose-500/50",
-    accentBg: "bg-rose-500/10 text-rose-500",
+    icon: ParkingSquare,
+    badgeLabel: "PATH/PARKING (CAM-03)",
+    badgeClass: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
+    borderClass: "hover:border-indigo-500/50",
+    accentBg: "bg-indigo-500/10 text-indigo-500",
   },
 };
 

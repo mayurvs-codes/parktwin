@@ -27,4 +27,4 @@ def test_device_passthrough():
 def test_cameras_configured():
     s = get_settings()
     # At least the entrance camera is defined in settings.yaml.
-    assert any(c.id == "camera_01" for c in s.cameras.sources)
+    assert any(c.id.upper() in ("CAMERA_01", "CAM-01") for c in s.cameras.sources)

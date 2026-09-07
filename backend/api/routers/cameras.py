@@ -8,6 +8,7 @@ endpoints for the camera registry; real-time preview/streaming endpoints
 
 from __future__ import annotations
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
@@ -16,8 +17,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from backend.api.dependencies import get_db, get_frame_processor, require_admin, require_viewer
 from backend.core.config import CameraSource
 from modules.vehicle_recognition.storage import crud
-from backend.schemas import CameraCreate, CameraResponse
+from backend.schemas import CameraCreate, CameraResponse, CameraDesignationUpdate
 from shared.logging import get_logger
+
 
 logger = get_logger("cameras_router")
 
@@ -103,3 +105,76 @@ async def delete_camera(
     await db.delete(cam)
     await db.commit()
     return {"detail": f"Camera '{camera_id}' deleted successfully."}
+
+
+@router.post("/{camera_id}/designation", summary="Save camera role designation")
+async def save_camera_designation(
+    camera_id: str,
+    designation: CameraDesignationUpdate,
+    db: AsyncSession = Depends(get_db),
+    _user=Depends(require_viewer),
+):
+    """
+    Designate camera role (ENTRY, PARKING_LOT, EXIT, UNKNOWN) and associated coverage.
+    Persisted in database and broadcasts CAMERA_DESIGNATED event to Digital Twin.
+    """
+    from backend.database.models import Camera, CameraDesignation
+    from backend.services.video_processing_service import emit_digital_twin_event
+
+    cam = (await db.execute(select(Camera).where(Camera.camera_id == camera_id.upper()))).scalars().first()
+    if not cam:
+        # Create camera entry if newly introduced
+        cam = Camera(
+            camera_id=camera_id.upper(),
+            name=f"Camera {camera_id.upper()}",
+            url=f"/videos/{camera_id.lower()}.mp4",
+            role=designation.role.upper(),
+            parking_area=designation.parking_area,
+            slot_group=designation.slot_group,
+            meta=designation.coverage_meta or {},
+        )
+        db.add(cam)
+    else:
+        cam.role = designation.role.upper()
+        if designation.parking_area:
+            cam.parking_area = designation.parking_area
+        if designation.slot_group:
+            cam.slot_group = designation.slot_group
+        if designation.coverage_meta:
+            cam.meta = {**(cam.meta or {}), **designation.coverage_meta}
+
+    # Record audit log
+    audit = CameraDesignation(
+        camera_id=cam.camera_id,
+        role=cam.role,
+        parking_area=cam.parking_area,
+        slot_group=cam.slot_group,
+        coverage_meta=designation.coverage_meta or {},
+    )
+    db.add(audit)
+    await db.commit()
+    await db.refresh(cam)
+
+    # Broadcast event
+    await emit_digital_twin_event(
+        event_type="CAMERA_DESIGNATED",
+        camera_id=cam.camera_id,
+        status=cam.role,
+        payload={
+            "role": cam.role,
+            "parking_area": cam.parking_area,
+            "slot_group": cam.slot_group,
+        },
+        db=db,
+    )
+    await db.commit()
+
+    return {
+        "status": "success",
+        "camera_id": cam.camera_id,
+        "role": cam.role,
+        "parking_area": cam.parking_area,
+        "slot_group": cam.slot_group,
+        "updated_at": cam.updated_at.isoformat() if cam.updated_at else None,
+    }
+

@@ -37,7 +37,7 @@ def _fake_pipeline():
         _ocr = _OCR()
         _formatter = PlateFormatter()
 
-        def process_frame(self, frame, camera_id="camera_01"):
+        def process_frame(self, frame, camera_id="CAM-01"):
             r = VehicleRecord(
                 tracking_id=1, camera_id=camera_id,
                 license_plate="KA01AB1234", plate_raw="KA01AB1234",
@@ -98,12 +98,12 @@ def test_health_stats_endpoint(client):
 def test_cameras_seeded(client):
     r = client.get("/cameras")
     assert r.status_code == 200
-    assert any(c["camera_id"] == "camera_01" for c in r.json())
+    assert any(c["camera_id"] == "CAM-01" for c in r.json())
 
 
 def test_process_frame_endpoint(client):
     r = client.post("/vehicles/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     assert r.status_code == 200
     body = r.json()

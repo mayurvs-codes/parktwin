@@ -67,9 +67,9 @@ async def reset_scenario(db: AsyncSession) -> Dict[str, Any]:
 
     # 2. Reset / ensure cameras exist
     standard_cameras = [
-        {"camera_id": "CAM-01", "name": "B2 Entrance Gate", "zone": "entrance", "url": "/videos/cam1_entry_gate.mp4"},
-        {"camera_id": "CAM-02", "name": "B2 Parking Bays", "zone": "parking", "url": "/videos/cam2_parking_bay.mp4"},
-        {"camera_id": "CAM-03", "name": "B2 Exit Ramp", "zone": "exit", "url": "/videos/cam3_exit_ramp.mp4"},
+        {"camera_id": "CAM-01", "name": "B2 Entrance Gate", "zone": "entrance", "url": "/videos/cam1_entry_gate.mp4", "role": CameraRole.ENTRY},
+        {"camera_id": "CAM-02", "name": "B2 Parking Bays", "zone": "parking", "url": "/videos/cam2_parking_bay.mp4", "role": CameraRole.PATH_PARKING},
+        {"camera_id": "CAM-03", "name": "B2 Exit Ramp", "zone": "parking", "url": "/videos/cam3_exit_ramp.mp4", "role": CameraRole.PATH_PARKING},
     ]
     for cam_info in standard_cameras:
         cam = (await db.execute(select(Camera).where(Camera.camera_id == cam_info["camera_id"]))).scalar_one_or_none()
@@ -79,6 +79,7 @@ async def reset_scenario(db: AsyncSession) -> Dict[str, Any]:
                 name=cam_info["name"],
                 zone=cam_info["zone"],
                 url=cam_info["url"],
+                role=cam_info["role"],
                 status=CameraStatus.ONLINE,
                 fps_target=25,
                 is_enabled=True,
@@ -88,20 +89,21 @@ async def reset_scenario(db: AsyncSession) -> Dict[str, Any]:
             cam.name = cam_info["name"]
             cam.zone = cam_info["zone"]
             cam.url = cam_info["url"]
+            cam.role = cam_info["role"]
             cam.status = CameraStatus.ONLINE
 
     # 3. Create fresh standard slots P01-P10 (all FREE)
     standard_slots = [
-        {"slot_id": "P01", "camera_id": "CAM-02", "zone": "Zone A", "position": [100, 100, 160, 220]},
-        {"slot_id": "P02", "camera_id": "CAM-02", "zone": "Zone A", "position": [180, 100, 240, 220]},
-        {"slot_id": "P03", "camera_id": "CAM-02", "zone": "Zone A", "position": [260, 100, 320, 220]},
-        {"slot_id": "P04", "camera_id": "CAM-02", "zone": "Zone A", "position": [340, 100, 400, 220]},
-        {"slot_id": "P05", "camera_id": "CAM-02", "zone": "Zone A", "position": [420, 100, 480, 220]},
-        {"slot_id": "P06", "camera_id": "CAM-03", "zone": "Zone B", "position": [100, 300, 160, 420]},
-        {"slot_id": "P07", "camera_id": "CAM-03", "zone": "Zone B", "position": [180, 300, 240, 420]},
-        {"slot_id": "P08", "camera_id": "CAM-03", "zone": "Zone B", "position": [260, 300, 320, 420]},
-        {"slot_id": "P09", "camera_id": "CAM-03", "zone": "Zone B", "position": [340, 300, 400, 420]},
-        {"slot_id": "P10", "camera_id": "CAM-03", "zone": "Zone B", "position": [420, 300, 480, 420]},
+        {"slot_id": "P01", "camera_id": "CAM-02", "zone": "Zone A", "position": [0.10, 0.20, 0.35, 0.62]},
+        {"slot_id": "P02", "camera_id": "CAM-02", "zone": "Zone A", "position": [0.32, 0.15, 0.58, 0.48]},
+        {"slot_id": "P03", "camera_id": "CAM-02", "zone": "Zone A", "position": [0.45, 0.12, 0.68, 0.38]},
+        {"slot_id": "P04", "camera_id": "CAM-02", "zone": "Zone A", "position": [0.68, 0.10, 0.86, 0.30]},
+        {"slot_id": "P05", "camera_id": "CAM-02", "zone": "Zone A", "position": [0.78, 0.08, 0.92, 0.25]},
+        {"slot_id": "P06", "camera_id": "CAM-03", "zone": "Zone B", "position": [0.10, 0.25, 0.25, 0.55]},
+        {"slot_id": "P07", "camera_id": "CAM-03", "zone": "Zone B", "position": [0.26, 0.25, 0.40, 0.55]},
+        {"slot_id": "P08", "camera_id": "CAM-03", "zone": "Zone B", "position": [0.41, 0.25, 0.55, 0.55]},
+        {"slot_id": "P09", "camera_id": "CAM-03", "zone": "Zone B", "position": [0.56, 0.25, 0.70, 0.55]},
+        {"slot_id": "P10", "camera_id": "CAM-03", "zone": "Zone B", "position": [0.71, 0.25, 0.85, 0.55]},
     ]
 
     for s_info in standard_slots:
@@ -267,6 +269,39 @@ async def replay_scenario(
         )
         db.add(parking_evt)
         events_count += 1
+
+        # Broadcast slot state changes for replay
+        if broadcast and slot_id:
+            try:
+                slot_res = await db.execute(select(ParkingSlot).where(ParkingSlot.slot_id == slot_id))
+                slot = slot_res.scalar_one_or_none()
+                if slot:
+                    new_state = slot.state.value if hasattr(slot.state, "value") else str(slot.state)
+                    active_sess = None
+                    if new_state == SlotState.OCCUPIED.value:
+                        sess_res = await db.execute(
+                            select(ParkingSession).where(
+                                ParkingSession.slot_id == slot_id,
+                                ParkingSession.is_active == True,
+                            )
+                        )
+                        active_sess = sess_res.scalar_one_or_none()
+                    
+                    session_id = getattr(active_sess, "session_uid", None) if active_sess else None
+                    license_plate = getattr(active_sess, "license_plate", None) if active_sess else None
+                    now_iso = datetime.now(timezone.utc).isoformat()
+                    
+                    payload = {
+                        "slot_id": slot_id,
+                        "camera_id": cam_id or camera_id,
+                        "state": new_state,
+                        "session_id": session_id,
+                        "license_plate": license_plate,
+                        "timestamp": now_iso,
+                    }
+                    await ws_manager.broadcast("slots", payload)
+            except Exception:
+                pass
 
         # Optionally broadcast over WebSocket
         if broadcast:

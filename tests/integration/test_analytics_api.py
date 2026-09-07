@@ -66,7 +66,7 @@ def _fake_pipeline():
     class FakePipeline:
         is_ready = True
 
-        def process_frame(self, frame, camera_id="camera_01"):
+        def process_frame(self, frame, camera_id="CAM-01"):
             return list(_fake_pipeline._records)
 
         def get_stats(self):
@@ -165,7 +165,7 @@ def _records_for(*records):
 def _rec(tid, plate=None, bbox=(0.1, 0.1, 0.3, 0.3)):
     return VehicleRecord(
         tracking_id=tid,
-        camera_id="camera_01",
+        camera_id="CAM-01",
         license_plate=plate,
         plate_confidence=0.95 if plate else 0.0,
         vehicle_type="Sedan",
@@ -232,7 +232,7 @@ def test_analytics_empty(client):
 def test_analytics_with_session(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     resp = client.post("/integration/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     assert resp.status_code == 200
 
@@ -270,7 +270,7 @@ def test_analytics_consumes_integration_only(client):
     # Drive one frame so there is data to analyze.
     _records_for(_rec(9, plate="KA09ZZ0009"))
     client.post("/integration/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
 
     for path in ("/analytics/occupancy", "/analytics/traffic",

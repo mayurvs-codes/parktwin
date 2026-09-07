@@ -1,0 +1,75 @@
+{
+  "facility_id": "Carparking-01",
+  "name": "Carparking-01 Basement B2",
+  "geometry_type": "L-shaped_multi_bay",
+  "canvas": {
+    "width": 800,
+    "height": 450
+  },
+  "cameras": {
+    "CAM-01": {
+      "role": "ENTRY",
+      "zone": "entrance",
+      "name": "B2 Entrance Gate",
+      "position": {"x": 60, "y": 190},
+      "coverage": "Entry Gate & check-in lane",
+      "observed_slots": []
+    },
+    "CAM-02": {
+      "role": "PARKING_LOT",
+      "zone": "parking",
+      "name": "B2 Parking Bays (Zone A)",
+      "position": {"x": 380, "y": 120},
+      "coverage": "Parking Area A (Row A)",
+      "observed_slots": ["P01", "P02", "P03", "P04", "P05"]
+    },
+    "CAM-03": {
+      "role": "PATH_PARKING",
+      "zone": "parking",
+      "name": "B2 Parking Bays (Zone B)",
+      "position": {"x": 620, "y": 190},
+      "coverage": "Parking Area B (Row B) & Path",
+      "observed_slots": ["P06", "P07", "P08", "P09", "P10"]
+    }
+  },
+  "slots": {
+    "P01": {"camera_id": "CAM-02", "zone": "Zone A", "area": "Parking Area A", "x": 290, "y": 80, "width": 55, "height": 70},
+    "P02": {"camera_id": "CAM-02", "zone": "Zone A", "area": "Parking Area A", "x": 350, "y": 80, "width": 55, "height": 70},
+    "P03": {"camera_id": "CAM-02", "zone": "Zone A", "area": "Parking Area A", "x": 410, "y": 80, "width": 55, "height": 70},
+    "P04": {"camera_id": "CAM-02", "zone": "Zone A", "area": "Parking Area A", "x": 470, "y": 80, "width": 55, "height": 70},
+    "P05": {"camera_id": "CAM-02", "zone": "Zone A", "area": "Parking Area A", "x": 530, "y": 80, "width": 55, "height": 70},
+    "P06": {"camera_id": "CAM-03", "zone": "Zone B", "area": "Parking Area B", "x": 290, "y": 300, "width": 55, "height": 70},
+    "P07": {"camera_id": "CAM-03", "zone": "Zone B", "area": "Parking Area B", "x": 350, "y": 300, "width": 55, "height": 70},
+    "P08": {"camera_id": "CAM-03", "zone": "Zone B", "area": "Parking Area B", "x": 410, "y": 300, "width": 55, "height": 70},
+    "P09": {"camera_id": "CAM-03", "zone": "Zone B", "area": "Parking Area B", "x": 470, "y": 300, "width": 55, "height": 70},
+    "P10": {"camera_id": "CAM-03", "zone": "Zone B", "area": "Parking Area B", "x": 530, "y": 300, "width": 55, "height": 70}
+  },
+  "navigation_nodes": {
+    "ENTRY_GATE": {"name": "Entry Gate (CAM-01)", "x": 60, "y": 190, "type": "entry"},
+    "MAIN_LANE": {"name": "Main Driving Lane", "x": 180, "y": 190, "type": "lane"},
+    "JUNCTION_A": {"name": "Junction Row A (L-turn)", "x": 220, "y": 120, "type": "junction"},
+    "JUNCTION_B": {"name": "Junction Row B (L-turn)", "x": 220, "y": 260, "type": "junction"},
+    "AISLE_A": {"name": "Aisle Row A (CAM-02)", "x": 380, "y": 120, "type": "aisle"},
+    "AISLE_B": {"name": "Aisle Row B (CAM-03)", "x": 380, "y": 260, "type": "aisle"},
+    "EXIT_RAMP": {"name": "Exit Ramp (CAM-03)", "x": 620, "y": 190, "type": "exit"}
+  },
+  "edges": [
+    ["ENTRY_GATE", "MAIN_LANE", 12.0],
+    ["MAIN_LANE", "JUNCTION_A", 8.0],
+    ["MAIN_LANE", "JUNCTION_B", 8.0],
+    ["JUNCTION_A", "AISLE_A", 15.0],
+    ["JUNCTION_B", "AISLE_B", 15.0],
+    ["AISLE_A", "EXIT_RAMP", 25.0],
+    ["AISLE_B", "EXIT_RAMP", 25.0],
+    ["AISLE_A", "P01", 5.0],
+    ["AISLE_A", "P02", 7.0],
+    ["AISLE_A", "P03", 9.0],
+    ["AISLE_A", "P04", 11.0],
+    ["AISLE_A", "P05", 13.0],
+    ["AISLE_B", "P06", 5.0],
+    ["AISLE_B", "P07", 7.0],
+    ["AISLE_B", "P08", 9.0],
+    ["AISLE_B", "P09", 11.0],
+    ["AISLE_B", "P10", 13.0]
+  ]
+}

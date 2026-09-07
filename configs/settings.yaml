@@ -184,21 +184,21 @@ cameras:
       enabled: true
       fps_target: 25
       zone: "entrance"
-      parking_slots: []
+      parking_slots: ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10"]
     - id: "CAM-02"
       name: "B2 Parking Bays"
       url: "/app/videos/cam2_parking_bay.mp4"
       enabled: true
       fps_target: 25
       zone: "parking"
-      parking_slots: ["P01","P02","P03","P04","P05"]
+      parking_slots: []
     - id: "CAM-03"
-      name: "B2 Exit Ramp"
+      name: "B2-Baricade Exit Cam 2"
       url: "/app/videos/cam3_exit_ramp.mp4"
       enabled: true
       fps_target: 25
-      zone: "exit"
-      parking_slots: ["P06","P07","P08","P09","P10"]
+      zone: "parking"
+      parking_slots: []
 
 # ── Parking (Module 1 keeps slot-assignment logic in memory) ─
 parking:
@@ -206,6 +206,25 @@ parking:
   slot_prefix: "P"
   auto_assign: true
   max_duration_hours: 24
+  layout:
+    CAM-01:
+      P01: [0.10, 0.20, 0.35, 0.62]
+      P02: [0.32, 0.15, 0.58, 0.48]
+      P03: [0.45, 0.12, 0.68, 0.38]
+      P04: [0.68, 0.10, 0.86, 0.30]
+      P05: [0.78, 0.08, 0.92, 0.25]
+      P06: [0.10, 0.20, 0.35, 0.62]
+      P07: [0.32, 0.15, 0.58, 0.48]
+      P08: [0.45, 0.12, 0.68, 0.38]
+      P09: [0.68, 0.10, 0.86, 0.30]
+      P10: [0.78, 0.08, 0.92, 0.25]
+
+    CAM-02:
+      P01: [0.10, 0.20, 0.35, 0.62]
+      P02: [0.32, 0.15, 0.58, 0.48]
+      P03: [0.45, 0.12, 0.68, 0.38]
+      P04: [0.68, 0.10, 0.86, 0.30]
+      P05: [0.78, 0.08, 0.92, 0.25]
 
 # ── Storage ────────────────────────────────────────────────
 storage:

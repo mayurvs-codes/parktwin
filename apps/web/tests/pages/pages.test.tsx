@@ -37,9 +37,8 @@ describe("Page Smoke Tests", () => {
     );
 
     expect(screen.getByRole("heading", { name: "Dashboard", level: 1 })).toBeInTheDocument();
-    await waitFor(() => {
-      expect(screen.getByText("Operational overview of the Smart Parking System")).toBeInTheDocument();
-    });
+    expect(screen.getByText(/Industrial Smart Parking Operating System/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Project Reset/i })).toBeInTheDocument();
     expect(spyError).not.toHaveBeenCalled();
     spyError.mockRestore();
   });

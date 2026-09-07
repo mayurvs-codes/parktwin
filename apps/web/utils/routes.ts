@@ -1,13 +1,14 @@
 import {
   BarChart3,
   Car,
+  Cctv,
   FileText,
+  Film,
   Layers3,
   LayoutDashboard,
   ParkingSquare,
   ScanLine,
   Settings,
-  Video,
   type LucideIcon,
 } from "lucide-react";
 
@@ -21,32 +22,38 @@ export const ROUTES = {
   parking: "/parking",
   digitalTwin: "/digital-twin",
   vehicles: "/vehicles",
+  videoLibrary: "/video-library",
+  videoProcessing: "/video-processing",
+  anpr: "/anpr",
   analytics: "/analytics",
   reports: "/reports",
   settings: "/settings",
-  videoProcessing: "/video-processing",
-  anpr: "/anpr",
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
+
+export type NavGroup = "overview" | "operations" | "intelligence" | "system";
 
 export interface NavItem {
   title: string;
   href: string;
   icon: LucideIcon;
+  group: NavGroup;
+  liveIndicator?: boolean;
 }
 
 /** Primary navigation, surfaced in the sidebar and (via drawer) top navigation. */
 export const NAV_ITEMS: NavItem[] = [
-  { title: "Dashboard", href: ROUTES.dashboard, icon: LayoutDashboard },
-  { title: "Live Parking", href: ROUTES.parking, icon: ParkingSquare },
-  { title: "Digital Twin", href: ROUTES.digitalTwin, icon: Layers3 },
-  { title: "Vehicles", href: ROUTES.vehicles, icon: Car },
-  { title: "CCTV Control Center", href: ROUTES.videoProcessing, icon: Video },
-  { title: "ANPR Upload", href: ROUTES.anpr, icon: ScanLine },
-  { title: "Analytics", href: ROUTES.analytics, icon: BarChart3 },
-  { title: "Reports", href: ROUTES.reports, icon: FileText },
-  { title: "Settings", href: ROUTES.settings, icon: Settings },
+  { title: "Dashboard", href: ROUTES.dashboard, icon: LayoutDashboard, group: "overview" },
+  { title: "Live Parking", href: ROUTES.parking, icon: ParkingSquare, group: "operations", liveIndicator: true },
+  { title: "Digital Twin", href: ROUTES.digitalTwin, icon: Layers3, group: "operations" },
+  { title: "Vehicles", href: ROUTES.vehicles, icon: Car, group: "operations" },
+  { title: "Video", href: ROUTES.videoLibrary, icon: Film, group: "operations" },
+  { title: "CCTV", href: ROUTES.videoProcessing, icon: Cctv, group: "operations", liveIndicator: true },
+  { title: "ANPR", href: ROUTES.anpr, icon: ScanLine, group: "intelligence" },
+  { title: "Analytics", href: ROUTES.analytics, icon: BarChart3, group: "intelligence" },
+  { title: "Reports", href: ROUTES.reports, icon: FileText, group: "intelligence" },
+  { title: "Settings", href: ROUTES.settings, icon: Settings, group: "system" },
 ];
 
 /** Human-readable label for a URL segment (used by breadcrumbs). */
@@ -55,8 +62,9 @@ const SEGMENT_LABELS: Record<string, string> = {
   parking: "Live Parking",
   "digital-twin": "Digital Twin",
   vehicles: "Vehicles",
-  "video-processing": "CCTV Control Center",
-  anpr: "ANPR Upload",
+  "video-library": "Video",
+  "video-processing": "CCTV",
+  anpr: "ANPR",
   analytics: "Analytics",
   reports: "Reports",
   settings: "Settings",

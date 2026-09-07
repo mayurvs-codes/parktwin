@@ -1,30 +1,38 @@
-﻿import pytest
+import pytest
 from backend.services.navigation_service import compute_route, NAV_NODES
 
 def test_navigation_nodes_exist():
-    assert "ENTRY_GATE" in NAV_NODES
-    assert "EXIT_RAMP" in NAV_NODES
+    # Canonical Digital Twin navigation nodes
+    assert "ACCESS_POINT_B2" in NAV_NODES
+    assert "NORTH_JUNCTION" in NAV_NODES
     assert "P01" in NAV_NODES
     assert "P07" in NAV_NODES
+    # Canonical floor plan coordinates (PDF points)
+    assert NAV_NODES["ACCESS_POINT_B2"]["x"] == 706
+    assert NAV_NODES["ACCESS_POINT_B2"]["y"] == 138
+    assert NAV_NODES["P01"]["x"] == 648
+    assert NAV_NODES["P01"]["y"] == 720
+    assert NAV_NODES["P06"]["x"] == 476
+    assert NAV_NODES["P06"]["y"] == 1480
 
-def test_route_entry_to_p02():
-    route = compute_route("ENTRY_GATE", "P02")
+def test_route_access_point_to_p01():
+    route = compute_route("ACCESS_POINT_B2", "P01")
     assert route is not None
-    assert route["source"] == "ENTRY_GATE"
-    assert route["destination"] == "P02"
-    assert route["path"] == ["ENTRY_GATE", "MAIN_LANE", "JUNCTION_A", "AISLE_A", "P02"]
-    assert route["distance_meters"] == 42.0
-    assert len(route["waypoints"]) == 5
-    assert len(route["directions"]) == 5
+    assert route["source"] == "ACCESS_POINT_B2"
+    assert route["destination"] == "P01"
+    assert route["path"] == ["ACCESS_POINT_B2", "NORTH_JUNCTION", "UPPER_WEST_JUNCTION", "P01"]
+    assert route["distance_meters"] == 431.0
+    assert len(route["waypoints"]) == 4
+    assert len(route["directions"]) == 4
 
-def test_route_entry_to_p07():
-    route = compute_route("ENTRY_GATE", "P07")
+def test_route_access_point_to_p06():
+    route = compute_route("ACCESS_POINT_B2", "P06")
     assert route is not None
-    assert route["source"] == "ENTRY_GATE"
-    assert route["destination"] == "P07"
-    assert route["path"] == ["ENTRY_GATE", "MAIN_LANE", "JUNCTION_B", "AISLE_B", "P07"]
-    assert route["distance_meters"] == 42.0
+    assert route["source"] == "ACCESS_POINT_B2"
+    assert route["destination"] == "P06"
+    assert route["path"] == ["ACCESS_POINT_B2", "NORTH_JUNCTION", "UPPER_WEST_JUNCTION", "MID_WEST_JUNCTION", "P06"]
+    assert route["distance_meters"] == 992.0
 
 def test_invalid_nodes():
-    assert compute_route("NON_EXISTENT", "P02") is None
-    assert compute_route("ENTRY_GATE", "INVALID_SLOT") is None
+    assert compute_route("NON_EXISTENT", "P01") is None
+    assert compute_route("ACCESS_POINT_B2", "INVALID_SLOT") is None

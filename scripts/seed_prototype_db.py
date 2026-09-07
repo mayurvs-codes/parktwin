@@ -1,4 +1,4 @@
-﻿import sqlite3
+import sqlite3
 import uuid
 from datetime import datetime
 
@@ -39,16 +39,16 @@ print("Seeded CAM-01, CAM-02, CAM-03")
 
 # 3. Seed slots: P01 to P10
 slots_data = [
-    ("P01", "CAM-02", "Zone A", "FREE", [100, 100, 160, 220]),
-    ("P02", "CAM-02", "Zone A", "FREE", [170, 100, 230, 220]),
-    ("P03", "CAM-02", "Zone A", "FREE", [240, 100, 300, 220]),
-    ("P04", "CAM-02", "Zone A", "FREE", [310, 100, 370, 220]),
-    ("P05", "CAM-02", "Zone A", "FREE", [380, 100, 440, 220]),
-    ("P06", "CAM-03", "Zone B", "FREE", [100, 240, 160, 360]),
-    ("P07", "CAM-03", "Zone B", "FREE", [170, 240, 230, 360]),
-    ("P08", "CAM-03", "Zone B", "FREE", [240, 240, 300, 360]),
-    ("P09", "CAM-03", "Zone B", "FREE", [310, 240, 370, 360]),
-    ("P10", "CAM-03", "Zone B", "FREE", [380, 240, 440, 360]),
+    ("P01", "CAM-02", "Zone A", "FREE", [0.10, 0.20, 0.35, 0.62]),
+    ("P02", "CAM-02", "Zone A", "FREE", [0.32, 0.15, 0.58, 0.48]),
+    ("P03", "CAM-02", "Zone A", "FREE", [0.45, 0.12, 0.68, 0.38]),
+    ("P04", "CAM-02", "Zone A", "FREE", [0.68, 0.10, 0.86, 0.30]),
+    ("P05", "CAM-02", "Zone A", "FREE", [0.78, 0.08, 0.92, 0.25]),
+    ("P06", "CAM-03", "Zone B", "FREE", [0.10, 0.25, 0.25, 0.55]),
+    ("P07", "CAM-03", "Zone B", "FREE", [0.26, 0.25, 0.40, 0.55]),
+    ("P08", "CAM-03", "Zone B", "FREE", [0.41, 0.25, 0.55, 0.55]),
+    ("P09", "CAM-03", "Zone B", "FREE", [0.56, 0.25, 0.70, 0.55]),
+    ("P10", "CAM-03", "Zone B", "FREE", [0.71, 0.25, 0.85, 0.55]),
 ]
 
 import json

@@ -48,7 +48,7 @@ export function MultiCameraControlCenter() {
               </Badge>
             </div>
             <CardDescription className="text-xs">
-              Upload CCTV videos for Entry, Parking, and Exit to correlate vehicles via license plate and update the Digital Twin live.
+              Upload CCTV videos for Entry (CAM-01), Parking (CAM-02), and Path/Parking (CAM-03) to correlate vehicles via license plate and update the Digital Twin live.
             </CardDescription>
           </div>
         </div>
@@ -106,8 +106,8 @@ export function MultiCameraControlCenter() {
             />
             <CameraUploadStation
               role="exit"
-              title="Camera 3 · Exit Gate"
-              description="Logs departure, calculates stay duration & frees slot"
+              title="Camera 3 · Path / Parking"
+              description="Logs path transit & secondary parking coverage (CAM-03)"
               onSuccess={handleStationSuccess}
             />
           </div>

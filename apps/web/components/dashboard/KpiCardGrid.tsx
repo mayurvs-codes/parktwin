@@ -1,133 +1,82 @@
 "use client";
 
+import React from "react";
 import { KpiCard } from "@/components/dashboard/KpiCard";
-import { ErrorState } from "@/components/ui/error-state";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useOccupancy, useStatistics, useVehicles } from "@/hooks/useDashboard";
-import { formatNumber, formatPercent, isToday } from "@/lib/format";
+import { useDemoMovieStore } from "@/store/useDemoMovieStore";
 import type { KpiItem } from "@/types/dashboard";
 
-/** Occupancy-rate thresholds that flip the KPI's semantic tone. */
-function occupancyTone(rate: number): NonNullable<KpiItem["tone"]> {
-  if (rate >= 90) return "destructive";
-  if (rate >= 75) return "warning";
-  return "success";
-}
-
-function KpiSkeletonGrid() {
-  return (
-    <div
-      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-      aria-hidden
-      data-testid="kpi-skeleton"
-    >
-      {Array.from({ length: 6 }).map((_, i) => (
-        <Skeleton key={i} className="h-[104px] w-full rounded-lg" />
-      ))}
-    </div>
-  );
-}
-
-/**
- * KPI card grid — the top row of the dashboard.
- *
- * Pulls occupancy + statistics from the gateway and derives the six required
- * tiles. "Today's Vehicles" is a presentation count over the vehicle list
- * (vehicles first seen / last seen today) — the heavy aggregates (occupancy
- * rate, session counts) are computed backend-side.
- */
 export function KpiCardGrid() {
-  const occupancy = useOccupancy();
-  const statistics = useStatistics();
-  const vehicles = useVehicles();
+  const spaces = useDemoMovieStore((s) => s.spaces);
+  const vehicles = useDemoMovieStore((s) => s.vehicles);
 
-  const isLoading = occupancy.isLoading || statistics.isLoading || vehicles.isLoading;
-  const isError = occupancy.isError || statistics.isError || vehicles.isError;
+  const totalSlots = spaces.length; // 60
+  const occupiedSlots = spaces.filter((s) => s.isOccupied).length;
+  const availableSlots = totalSlots - occupiedSlots;
+  const occupancyRate = totalSlots > 0 ? (occupiedSlots / totalSlots) * 100 : 0;
 
-  if (isLoading) return <KpiSkeletonGrid />;
-
-  if (isError) {
-    return (
-      <ErrorState
-        title="Couldn't load KPIs"
-        description="The parking intelligence service may be unavailable."
-        onRetry={() => {
-          void occupancy.refetch();
-          void statistics.refetch();
-          void vehicles.refetch();
-        }}
-      />
-    );
-  }
-
-  const occ = occupancy.data;
-  const stats = statistics.data;
-  const rate = occ?.occupancy_rate ?? 0;
-  const todaysVehicles = (vehicles.data ?? []).filter(
-    (v) => isToday(v.created_at) || isToday(v.last_seen)
+  // Active sessions: currently entering, parked, staying, or exiting
+  const activeSessions = vehicles.filter(
+    (v) => v.state !== "UPCOMING" && v.state !== "EXITED"
   ).length;
+
+  // Vehicles entered today: all vehicles that have arrived at or passed through the facility
+  const vehiclesToday = vehicles.filter((v) => v.state !== "UPCOMING").length;
 
   const items: KpiItem[] = [
     {
-      key: "total",
+      key: "total-slots",
       label: "Total Parking Slots",
-      value: formatNumber(occ?.total_slots ?? 0),
-      hint: "across all cameras",
+      value: String(totalSlots),
+      hint: "across 6 facility zones",
       icon: "slots",
       tone: "default",
     },
     {
-      key: "occupied",
+      key: "occupied-slots",
       label: "Occupied Slots",
-      value: formatNumber(occ?.occupied ?? 0),
-      hint: `${formatNumber(occ?.free ?? 0)} available`,
+      value: String(occupiedSlots),
+      hint: `${availableSlots} available (GREEN)`,
       icon: "occupied",
       tone: "warning",
     },
     {
-      key: "available",
+      key: "available-slots",
       label: "Available Slots",
-      value: formatNumber(occ?.free ?? 0),
-      hint: `${formatNumber(occ?.reserved ?? 0)} reserved`,
+      value: String(availableSlots),
+      hint: `${occupiedSlots} occupied (RED)`,
       icon: "available",
       tone: "success",
     },
     {
-      key: "sessions",
+      key: "active-sessions",
       label: "Active Parking Sessions",
-      value: formatNumber(stats?.active_sessions ?? 0),
-      hint: `${formatNumber(stats?.total_sessions ?? 0)} total`,
+      value: String(activeSessions),
+      hint: "live dwell tracking",
       icon: "sessions",
       tone: "default",
     },
     {
-      key: "today",
+      key: "vehicles-today",
       label: "Today's Vehicles",
-      value: formatNumber(todaysVehicles),
-      hint: "detected today",
+      value: String(vehiclesToday),
+      hint: "verified vehicle arrivals",
       icon: "vehicles",
       tone: "default",
     },
     {
-      key: "occupancy",
+      key: "occupancy-rate",
       label: "Occupancy Percentage",
-      value: formatPercent(rate),
-      hint: `${formatNumber(occ?.occupied ?? 0)} of ${formatNumber(occ?.total_slots ?? 0)}`,
+      value: `${occupancyRate.toFixed(1)}%`,
+      hint: `${occupiedSlots} of ${totalSlots}`,
       icon: "percent",
-      tone: occupancyTone(rate),
+      tone: occupancyRate >= 80 ? "destructive" : occupancyRate >= 50 ? "warning" : "success",
     },
   ];
 
   return (
-    <div
-      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-      role="list"
-      aria-label="Key parking metrics"
-    >
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item) => (
-        <div role="listitem" key={item.key}>
-          <KpiCard item={item} />
-        </div>
+        <KpiCard key={item.key} item={item} />
       ))}
     </div>
   );

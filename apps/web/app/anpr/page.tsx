@@ -11,7 +11,9 @@ import {
   Upload,
   UploadCloud,
   X,
+  ScanText,
 } from "lucide-react";
+import { PageHeader } from "@/components/ui/PageHeader";
 import {
   Card,
   CardContent,
@@ -241,19 +243,16 @@ export default function AnprPage() {
 
   return (
     <div className="space-y-6">
-      {/* Page header */}
-      <header className="space-y-1">
-        <div className="flex items-center gap-2">
-          <Film className="h-6 w-6 text-primary" aria-hidden />
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-            ANPR Video Upload
-          </h1>
-        </div>
-        <p className="text-sm text-muted-foreground">
-          Upload a parking-lot video and run it through the Vehicle Recognition
-          &amp; ANPR pipeline.
-        </p>
-      </header>
+      <PageHeader
+        icon={ScanText}
+        title="ANPR"
+        subtitle="Automated number-plate recognition, vehicle OCR pipeline, and confidence telemetry"
+        badge={
+          <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
+            OCR Engine
+          </span>
+        }
+      />
 
       {/* Upload card */}
       <Card>

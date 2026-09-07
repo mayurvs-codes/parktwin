@@ -49,6 +49,14 @@ class CameraStatus(str, enum.Enum):
     RECONNECTING = "reconnecting"
 
 
+class CameraRole(str, enum.Enum):
+    ENTRY = "ENTRY"
+    PARKING_LOT = "PARKING_LOT"
+    PATH_PARKING = "PATH_PARKING"
+    EXIT = "EXIT"
+    UNKNOWN = "UNKNOWN"
+
+
 # ─── Camera ───────────────────────────────────────────────────────────────────
 
 class Camera(Base):
@@ -61,6 +69,9 @@ class Camera(Base):
     name = Column(String(128), nullable=False)
     url = Column(Text, nullable=False)              # RTSP / USB index / file path
     zone = Column(String(64), default="general")
+    role = Column(String(32), default=CameraRole.UNKNOWN.value, index=True)
+    parking_area = Column(String(64), nullable=True)
+    slot_group = Column(String(64), nullable=True)
     status = Column(SAEnum(CameraStatus), default=CameraStatus.OFFLINE)
     fps_target = Column(Integer, default=25)
     is_enabled = Column(Boolean, default=True)
@@ -169,4 +180,44 @@ class VehicleJourney(Base):
     meta = Column(JSON, default={})
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+
+# ─── Video File Registry ──────────────────────────────────────────────────────
+
+class Video(Base):
+    """CCTV Video file registry and processing state."""
+
+    __tablename__ = "videos"
+
+    id = Column(String(64), primary_key=True)               # unique file hash or slug
+    filename = Column(String(256), nullable=False, index=True)
+    file_path = Column(String(512), nullable=False)
+    date = Column(String(32), index=True)                    # e.g., "27-Aug-2026"
+    camera_id = Column(String(64), nullable=True, index=True)# associated camera ID
+    duration_seconds = Column(Float, default=0.0)
+    fps = Column(Float, default=25.0)
+    resolution = Column(String(32), default="1280x720")
+    file_size_bytes = Column(Integer, default=0)
+    processing_status = Column(String(32), default="IDLE", index=True) # IDLE, PROCESSING, COMPLETED, STOPPED, ERROR
+    processed_at = Column(DateTime(timezone=True), nullable=True)
+    meta = Column(JSON, default={})
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+
+# ─── Camera Designation Audit ─────────────────────────────────────────────────
+
+class CameraDesignation(Base):
+    """Audit log of camera role designations."""
+
+    __tablename__ = "camera_designations"
+
+    id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    camera_id = Column(String(64), nullable=False, index=True)
+    role = Column(String(32), nullable=False)               # ENTRY, PARKING_LOT, EXIT, UNKNOWN
+    parking_area = Column(String(64), nullable=True)
+    slot_group = Column(String(64), nullable=True)
+    coverage_meta = Column(JSON, default={})
+    assigned_at = Column(DateTime(timezone=True), server_default=func.now())
+
 

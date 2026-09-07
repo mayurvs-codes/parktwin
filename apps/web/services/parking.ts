@@ -41,3 +41,13 @@ export function fetchOccupancy(cameraId?: string): Promise<OccupancyDTO> {
 export function resetDigitalTwinState(): Promise<{ success: boolean; message: string }> {
   return apiPost<{ success: boolean; message: string }>("/parking/reset");
 }
+
+/** List registered cameras with roles and coordinates. */
+export function fetchCameras(): Promise<any[]> {
+  return apiGet<any[]>("/cameras");
+}
+
+/** List registered/detected vehicles. */
+export function fetchVehicles(): Promise<any[]> {
+  return apiGet<any[]>("/vehicles");
+}

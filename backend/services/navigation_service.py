@@ -1,61 +1,78 @@
-﻿"""
-ParkTwin — Graph Navigation Service
-===================================
-Lightweight, deterministic shortest-path routing for parking facility navigation.
-Connects camera zones, driving lanes, junctions, and parking slots P01–P10.
+"""
+ParkTwin — Graph Navigation Service (Canonical Digital Twin)
+=============================================================
+Uses the canonical Digital Twin navigation graph from twinConfig.ts
+Connects access point, driving lanes, junctions, and parking slots.
 """
 
 from typing import Dict, List, Any, Optional
 import heapq
 
-# Canonical Map Graph Nodes & Normalized Coordinates (for 2D spatial view)
+# Import canonical navigation graph from Digital Twin config
+# This mirrors the TypeScript NAV_NODES and NAV_EDGES from apps/web/components/digital-twin/twinConfig.ts
 NAV_NODES = {
-    "ENTRY_GATE": {"name": "Entry Gate (CAM-01)", "x": 60, "y": 190, "type": "entry"},
-    "MAIN_LANE": {"name": "Main Driving Lane", "x": 180, "y": 190, "type": "lane"},
-    "JUNCTION_A": {"name": "Junction Row A", "x": 220, "y": 120, "type": "junction"},
-    "JUNCTION_B": {"name": "Junction Row B", "x": 220, "y": 260, "type": "junction"},
-    "AISLE_A": {"name": "Aisle Row A (CAM-02)", "x": 380, "y": 120, "type": "aisle"},
-    "AISLE_B": {"name": "Aisle Row B (CAM-02)", "x": 380, "y": 260, "type": "aisle"},
-    "EXIT_RAMP": {"name": "Exit Ramp (CAM-03)", "x": 620, "y": 190, "type": "exit"},
-    
-    # Bay A Slots (P01 - P05)
-    "P01": {"name": "Slot P01", "x": 290, "y": 80, "type": "slot"},
-    "P02": {"name": "Slot P02", "x": 350, "y": 80, "type": "slot"},
-    "P03": {"name": "Slot P03", "x": 410, "y": 80, "type": "slot"},
-    "P04": {"name": "Slot P04", "x": 470, "y": 80, "type": "slot"},
-    "P05": {"name": "Slot P05", "x": 530, "y": 80, "type": "slot"},
-    
-    # Bay B Slots (P06 - P10)
-    "P06": {"name": "Slot P06", "x": 290, "y": 300, "type": "slot"},
-    "P07": {"name": "Slot P07", "x": 350, "y": 300, "type": "slot"},
-    "P08": {"name": "Slot P08", "x": 410, "y": 300, "type": "slot"},
-    "P09": {"name": "Slot P09", "x": 470, "y": 300, "type": "slot"},
-    "P10": {"name": "Slot P10", "x": 530, "y": 300, "type": "slot"},
+    "ACCESS_POINT_B2": {"name": "B2 Access Point", "x": 706, "y": 138, "type": "access_point"},
+    "NORTH_JUNCTION": {"name": "North Junction", "x": 706, "y": 180, "type": "junction"},
+    "UPPER_WEST_JUNCTION": {"name": "Upper West Junction", "x": 706, "y": 800, "type": "junction"},
+    "MID_WEST_JUNCTION": {"name": "Mid West Junction", "x": 706, "y": 1361, "type": "junction"},
+    "LOWER_MID_JUNCTION": {"name": "Lower Mid Junction", "x": 706, "y": 1420, "type": "junction"},
+    "SOUTH_JUNCTION": {"name": "South Junction", "x": 792, "y": 1567, "type": "junction"},
+    "WEST_TRUNK_NORTH": {"name": "West Trunk North", "x": 438, "y": 180, "type": "aisle"},
+    "WEST_TRUNK_SOUTH": {"name": "West Trunk South", "x": 438, "y": 1585, "type": "aisle"},
+    "EAST_UPPER_JUNCTION": {"name": "East Upper Junction", "x": 815, "y": 180, "type": "junction"},
+    "EAST_MID_JUNCTION": {"name": "East Mid Junction", "x": 815, "y": 857, "type": "junction"},
+    "EAST_LOWER_JUNCTION": {"name": "East Lower Junction", "x": 815, "y": 1417, "type": "junction"},
+    "EAST_SOUTH_JUNCTION": {"name": "East South Junction", "x": 815, "y": 1585, "type": "junction"},
+    # Runtime parking slots (P01-P10) - mapped to physical spaces
+    "P01": {"name": "Slot P01", "x": 648, "y": 720, "type": "slot"},
+    "P02": {"name": "Slot P02", "x": 706, "y": 720, "type": "slot"},
+    "P03": {"name": "Slot P03", "x": 763, "y": 720, "type": "slot"},
+    "P04": {"name": "Slot P04", "x": 821, "y": 720, "type": "slot"},
+    "P05": {"name": "Slot P05", "x": 830, "y": 720, "type": "slot"},
+    "P06": {"name": "Slot P06", "x": 476, "y": 1480, "type": "slot"},
+    "P07": {"name": "Slot P07", "x": 591, "y": 1480, "type": "slot"},
+    "P08": {"name": "Slot P08", "x": 648, "y": 1480, "type": "slot"},
+    "P09": {"name": "Slot P09", "x": 706, "y": 1480, "type": "slot"},
+    "P10": {"name": "Slot P10", "x": 830, "y": 1480, "type": "slot"},
 }
 
-# Bidirectional edges with distances in meters
+# Bidirectional edges with distances in meters (approximate from PDF coordinates)
+# 1 canonical unit ≈ 1 PDF point ≈ ~0.5m (rough approximation)
+# Edges reference the DRIVE_AISLES from twinConfig.ts
 NAV_EDGES = [
-    ("ENTRY_GATE", "MAIN_LANE", 12.0),
-    ("MAIN_LANE", "JUNCTION_A", 8.0),
-    ("MAIN_LANE", "JUNCTION_B", 8.0),
-    ("JUNCTION_A", "AISLE_A", 15.0),
-    ("JUNCTION_B", "AISLE_B", 15.0),
-    ("AISLE_A", "EXIT_RAMP", 25.0),
-    ("AISLE_B", "EXIT_RAMP", 25.0),
-    
-    # Aisle A to Slots P01-P05
-    ("AISLE_A", "P01", 5.0),
-    ("AISLE_A", "P02", 7.0),
-    ("AISLE_A", "P03", 9.0),
-    ("AISLE_A", "P04", 11.0),
-    ("AISLE_A", "P05", 13.0),
-    
-    # Aisle B to Slots P06-P10
-    ("AISLE_B", "P06", 5.0),
-    ("AISLE_B", "P07", 7.0),
-    ("AISLE_B", "P08", 9.0),
-    ("AISLE_B", "P09", 11.0),
-    ("AISLE_B", "P10", 13.0),
+    # North entry trunk (aisle_north_entry)
+    ("ACCESS_POINT_B2", "NORTH_JUNCTION", 21.0),
+    # West vertical trunk (aisle_vertical_west) - main artery
+    ("NORTH_JUNCTION", "UPPER_WEST_JUNCTION", 310.0),
+    ("UPPER_WEST_JUNCTION", "MID_WEST_JUNCTION", 561.0),
+    ("MID_WEST_JUNCTION", "LOWER_MID_JUNCTION", 59.0),
+    ("LOWER_MID_JUNCTION", "WEST_TRUNK_SOUTH", 165.0),
+    # West trunk horizontal connections
+    ("NORTH_JUNCTION", "WEST_TRUNK_NORTH", 268.0),  # upper_west_aisle
+    ("WEST_TRUNK_NORTH", "UPPER_WEST_JUNCTION", 310.0),  # mid_west_aisle
+    ("UPPER_WEST_JUNCTION", "LOWER_MID_JUNCTION", 561.0),  # mid_west_aisle
+    ("LOWER_MID_JUNCTION", "WEST_TRUNK_SOUTH", 165.0),  # lower_mid_aisle
+    # East vertical trunk (avoiding ramp_core_east)
+    ("NORTH_JUNCTION", "EAST_UPPER_JUNCTION", 109.0),  # aisle_vertical_east_north
+    ("EAST_UPPER_JUNCTION", "EAST_MID_JUNCTION", 677.0),  # aisle_vertical_east_mid
+    ("EAST_MID_JUNCTION", "EAST_LOWER_JUNCTION", 560.0),  # aisle_vertical_east_mid
+    ("EAST_LOWER_JUNCTION", "EAST_SOUTH_JUNCTION", 168.0),  # aisle_vertical_east_south
+    # South exit connectors
+    ("WEST_TRUNK_SOUTH", "SOUTH_JUNCTION", 354.0),  # aisle_horizontal_lower
+    ("EAST_SOUTH_JUNCTION", "SOUTH_JUNCTION", 23.0),  # south_exit_aisle
+    # Slot connections from junctions/aisles
+    # Zone A/B slots from upper west junction
+    ("UPPER_WEST_JUNCTION", "P01", 100.0),
+    ("UPPER_WEST_JUNCTION", "P02", 100.0),
+    ("UPPER_WEST_JUNCTION", "P03", 100.0),
+    ("UPPER_WEST_JUNCTION", "P04", 100.0),
+    ("UPPER_WEST_JUNCTION", "P05", 100.0),
+    # Zone C/D slots from mid west junction
+    ("MID_WEST_JUNCTION", "P06", 100.0),
+    ("MID_WEST_JUNCTION", "P07", 100.0),
+    ("MID_WEST_JUNCTION", "P08", 100.0),
+    ("MID_WEST_JUNCTION", "P09", 100.0),
+    ("MID_WEST_JUNCTION", "P10", 100.0),
 ]
 
 
@@ -69,6 +86,10 @@ class NavigationGraph:
     def shortest_path(self, start: str, end: str) -> Optional[Dict[str, Any]]:
         start = start.upper()
         end = end.upper()
+        if start in ("ENTRY_GATE", "ENTRY", "ACCESS_POINT"):
+            start = "ACCESS_POINT_B2"
+        if end in ("ENTRY_GATE", "ENTRY", "ACCESS_POINT"):
+            end = "ACCESS_POINT_B2"
         if start not in NAV_NODES or end not in NAV_NODES:
             return None
 
@@ -116,3 +137,85 @@ _nav_graph = NavigationGraph()
 
 def compute_route(source: str = "ENTRY_GATE", destination: str = "P02") -> Optional[Dict[str, Any]]:
     return _nav_graph.shortest_path(source, destination)
+
+
+async def compute_vehicle_route(
+    db,  # AsyncSession
+    vehicle_id_or_plate: str,
+    source: str = "ENTRY_GATE",
+) -> Optional[Dict[str, Any]]:
+    """Resolve vehicle's assigned slot and calculate Dijkstra shortest path."""
+    from sqlalchemy import select, or_
+    from backend.database.models import Vehicle
+    from modules.parking_intelligence.storage.models import ParkingSession
+
+    import uuid as _uuid
+    parsed_uuid = None
+    try:
+        parsed_uuid = _uuid.UUID(vehicle_id_or_plate)
+    except (ValueError, AttributeError):
+        pass
+
+    conds = [
+        Vehicle.prototype_id == vehicle_id_or_plate.upper(),
+        Vehicle.license_plate == vehicle_id_or_plate.upper(),
+    ]
+    if parsed_uuid:
+        conds.append(Vehicle.id == parsed_uuid)
+
+    v_res = await db.execute(select(Vehicle).where(or_(*conds)))
+    veh = v_res.scalars().first()
+
+    dest_slot = None
+    if veh:
+        # 2. Check active parking session
+        sess_conds = [
+            ParkingSession.vehicle_id == veh.id,
+            ParkingSession.license_plate == veh.license_plate,
+        ]
+        if veh.tracking_id is not None:
+            sess_conds.append(ParkingSession.tracking_id == veh.tracking_id)
+
+        sess_res = await db.execute(
+            select(ParkingSession).where(
+                or_(*sess_conds),
+                ParkingSession.is_active == True,
+            )
+        )
+        sess = sess_res.scalars().first()
+        if sess and sess.slot_id:
+            dest_slot = sess.slot_id
+        elif hasattr(veh, "parking_slot") and veh.parking_slot:
+            dest_slot = veh.parking_slot
+
+    if not dest_slot:
+        # Fallback to checking session directly by plate if vehicle not found
+        sess_res = await db.execute(
+            select(ParkingSession).where(
+                or_(
+                    ParkingSession.license_plate == vehicle_id_or_plate.upper(),
+                    ParkingSession.session_uid.ilike(f"%{vehicle_id_or_plate}%"),
+                ),
+                ParkingSession.is_active == True,
+            )
+        )
+        sess = sess_res.scalars().first()
+        if sess and sess.slot_id:
+            dest_slot = sess.slot_id
+
+    if not dest_slot:
+        return None
+
+    route = compute_route(source=source, destination=dest_slot)
+    if not route:
+        return None
+
+    route["vehicle_id"] = (
+        veh.prototype_id
+        if (veh and veh.prototype_id)
+        else (str(veh.id) if veh else vehicle_id_or_plate)
+    )
+    route["license_plate"] = veh.license_plate if veh else vehicle_id_or_plate
+    route["destination_slot"] = dest_slot
+    return route
+

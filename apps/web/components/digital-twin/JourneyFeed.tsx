@@ -85,7 +85,7 @@ export function JourneyFeed() {
           description={
             searchPlate
               ? `No vehicle journey matching "${searchPlate}".`
-              : "Upload CCTV footage at the Entry, Parking, or Exit stations above to begin tracking."
+              : "Process CCTV footage at CAM-01, CAM-02, or CAM-03 to begin tracking journeys."
           }
         />
       ) : (

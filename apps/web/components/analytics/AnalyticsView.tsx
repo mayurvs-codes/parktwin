@@ -4,6 +4,7 @@ import { useState } from "react";
 import { BarChart3, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ErrorState } from "@/components/ui/error-state";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { useAnalyticsDashboard } from "@/hooks/useAnalytics";
 import { TimeRangeSelector, getDatesForRangeKey, type TimeRangeSelection } from "./TimeRangeSelector";
 import { OverviewMetrics } from "./OverviewMetrics";
@@ -38,31 +39,30 @@ export function AnalyticsView() {
 
   return (
     <div className="mx-auto max-w-7xl space-y-6">
-      <header className="flex flex-col gap-4">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <BarChart3 className="h-5 w-5" aria-hidden />
-            </span>
-            <div>
-              <h1 className="text-xl font-semibold tracking-tight text-foreground">Analytics</h1>
-              <p className="text-sm text-muted-foreground">
-                Historical insights and operational metrics
-              </p>
-            </div>
-          </div>
+      <PageHeader
+        icon={BarChart3}
+        title="Analytics"
+        subtitle="Canonical facility analytics, occupancy trends, flow rates, and dwell duration"
+        badge={
+          <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
+            Telemetry Engine
+          </span>
+        }
+        rightSlot={
           <Button
             variant="outline"
             size="sm"
             onClick={() => refetch()}
             aria-label="Refresh analytics"
+            className="gap-1.5 text-xs font-mono"
           >
-            <RefreshCw className="h-4 w-4" aria-hidden />
-            Refresh
+            <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`} aria-hidden />
+            <span>Refresh</span>
           </Button>
-        </div>
-        <TimeRangeSelector value={range} onChange={setRange} />
-      </header>
+        }
+      />
+
+      <TimeRangeSelector value={range} onChange={setRange} />
 
       {isError ? (
         <ErrorState

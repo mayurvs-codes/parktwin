@@ -86,12 +86,22 @@ class PlateDetector:
         # Try loading pre-existing local weights first
         if weights.exists():
             try:
-                from ultralytics import YOLO
-                self._model = YOLO(str(weights))
-                dummy = np.zeros((640, 640, 3), dtype=np.uint8)
-                self._model(dummy, device=self._device, verbose=False)
-                logger.info(f"✅ Plate detector loaded: {weights}")
-                return
+                import torch
+                orig_load = torch.load
+                def _safe_load(*args, **kwargs):
+                    if "weights_only" not in kwargs:
+                        kwargs["weights_only"] = False
+                    return orig_load(*args, **kwargs)
+                torch.load = _safe_load
+                try:
+                    from ultralytics import YOLO
+                    self._model = YOLO(str(weights))
+                    dummy = np.zeros((640, 640, 3), dtype=np.uint8)
+                    self._model(dummy, device=self._device, verbose=False)
+                    logger.info(f"✅ Plate detector loaded: {weights}")
+                    return
+                finally:
+                    torch.load = orig_load
             except Exception as e:
                 logger.warning(f"YOLO plate model failed ({e}). Trying hub download...")
 

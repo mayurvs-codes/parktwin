@@ -43,11 +43,27 @@ function SidebarBody({ collapsed, onNavigate }: { collapsed: boolean; onNavigate
       <div className={cn("flex-1 overflow-y-auto p-4", collapsed && "px-2")}>
         <NavLinks orientation="vertical" collapsed={collapsed} onNavigate={onNavigate} />
       </div>
-      {!collapsed && (
-        <div className="border-t border-border p-4 text-xs text-muted-foreground">
-          {APP_NAME} · Module 6
-        </div>
-      )}
+      <div className={cn("border-t border-border p-3", collapsed ? "flex justify-center" : "px-4")}>
+        {collapsed ? (
+          <span className="relative flex h-2.5 w-2.5" title="System Online">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+          </span>
+        ) : (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              <span className="text-[11px] font-mono font-medium text-emerald-500 tracking-wider uppercase">
+                SYSTEM ONLINE
+              </span>
+            </div>
+            <span className="text-[10px] font-mono text-muted-foreground">v1.0.0</span>
+          </div>
+        )}
+      </div>
     </>
   );
 }

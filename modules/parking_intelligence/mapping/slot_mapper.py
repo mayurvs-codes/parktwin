@@ -44,6 +44,8 @@ class VehicleTrack:
         """
         track_id = getattr(record, "tracking_id", None)
         if track_id is None:
+            track_id = getattr(record, "track_id", None)
+        if track_id is None:
             return None
         bbox = getattr(record, "bbox", None) or []
         if len(bbox) != 4:

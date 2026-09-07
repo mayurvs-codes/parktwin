@@ -16,9 +16,10 @@ from sqlalchemy import select, desc
 from backend.api.dependencies import get_db, require_viewer
 from modules.parking_intelligence.storage import crud as parking_crud
 from modules.parking_intelligence.storage.models import ParkingSlot, ParkingSession, ParkingEvent, SlotState
-from backend.services.navigation_service import compute_route, NAV_NODES
+from backend.services.navigation_service import compute_route, compute_vehicle_route, NAV_NODES
 
 router = APIRouter(tags=["Prototype Contract APIs"])
+
 
 
 # ─── Top-level /slots ─────────────────────────────────────────────────────────
@@ -200,6 +201,27 @@ async def get_navigation_route(
             detail=f"No route found between '{from_node}' and '{to_slot}'. Available slots: P01-P10.",
         )
     return route
+
+
+@router.get("/navigation/vehicle/{vehicle_id}", summary="Calculate individual navigation route for a vehicle")
+async def get_vehicle_navigation(
+    vehicle_id: str,
+    from_node: str = Query("ENTRY_GATE", description="Origin node (default ENTRY_GATE)"),
+    db: AsyncSession = Depends(get_db),
+    _user=Depends(require_viewer),
+) -> Dict[str, Any]:
+    """
+    Resolve individual vehicle's destination parking slot and compute optimal Dijkstra route.
+    Works for any vehicle by UUID, prototype ID (e.g. VH-001), or license plate.
+    """
+    route = await compute_vehicle_route(db, vehicle_id_or_plate=vehicle_id, source=from_node)
+    if not route:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"No active parking destination found for vehicle '{vehicle_id}'.",
+        )
+    return route
+
 
 
 # ─── Scenario Replay Controls ────────────────────────────────────────────────

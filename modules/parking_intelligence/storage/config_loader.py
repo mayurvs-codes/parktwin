@@ -41,23 +41,34 @@ def load_slot_definitions(settings: Settings, camera_id: str) -> List[Dict]:
         (c for c in settings.cameras.sources if c.id == camera_id),
         None,
     )
-    explicit = list(getattr(camera, "parking_slots", []) or []) if camera else []
-
-    parking = settings.parking
-    if explicit:
-        slot_ids = explicit
+    
+    if camera is not None:
+        slot_ids = list(getattr(camera, "parking_slots", []) or [])
+        # If camera explicitly has empty parking_slots, use that (0 slots).
+        # Only fall back to global parking config if parking_slots attribute doesn't exist.
+        if not slot_ids and not hasattr(camera, "parking_slots"):
+            parking = getattr(settings, "parking", None)
+            if parking is not None:
+                prefix = getattr(parking, "slot_prefix", "P")
+                total = getattr(parking, "total_slots", 100)
+                slot_ids = [f"{prefix}{i:02d}" for i in range(1, total + 1)]
     else:
-        prefix = parking.slot_prefix
-        total = parking.total_slots
-        slot_ids = [f"{prefix}{i:02d}" for i in range(1, total + 1)]
+        parking = getattr(settings, "parking", None)
+        if parking is not None:
+            prefix = getattr(parking, "slot_prefix", "P")
+            total = getattr(parking, "total_slots", 100)
+            slot_ids = [f"{prefix}{i:02d}" for i in range(1, total + 1)]
+        else:
+            slot_ids = [f"P{i:02d}" for i in range(1, 101)]
 
     defs: List[Dict] = []
     for sid in slot_ids:
         geom = layout.get(sid)
+        zone = getattr(camera, "zone", "general") or "general" if camera else "general"
         defs.append({
             "slot_id": sid,
             "camera_id": camera_id,
-            "zone": getattr(camera, "zone", "general") or "general",
+            "zone": zone,
             "is_reserved": False,
             "reserved_for": None,
             "position": list(geom) if geom else None,

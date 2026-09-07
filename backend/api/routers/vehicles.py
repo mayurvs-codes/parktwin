@@ -94,6 +94,126 @@ async def get_vehicle(
     return vehicle
 
 
+@router.get("/{vehicle_id}/timeline", summary="Get multi-camera vehicle lifecycle timeline")
+async def get_vehicle_timeline(
+    vehicle_id: str,
+    db: AsyncSession = Depends(get_db),
+    _user=Depends(require_viewer),
+):
+    """
+    Retrieve chronological multi-camera timeline for a vehicle across CAM-01, CAM-02, and CAM-03.
+    Includes entry detection, parking area traversal, slot occupation, session events, and exit.
+    """
+    from sqlalchemy import select, or_, desc
+    from backend.database.models import Vehicle, DetectionLog
+    from modules.parking_intelligence.storage.models import ParkingEvent, ParkingSession
+
+    # 1. Lookup vehicle
+    veh = None
+    try:
+        parsed_uuid = UUID(vehicle_id)
+        veh = (await db.execute(select(Vehicle).where(Vehicle.id == parsed_uuid))).scalar_one_or_none()
+    except (ValueError, AttributeError):
+        pass
+
+    if not veh:
+        veh = (
+            await db.execute(
+                select(Vehicle).where(
+                    or_(
+                        Vehicle.prototype_id == vehicle_id.upper(),
+                        Vehicle.license_plate == vehicle_id.upper(),
+                    )
+                )
+            )
+        ).scalar_one_or_none()
+
+    if not veh:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Vehicle '{vehicle_id}' not found.",
+        )
+
+    # 2. Fetch parking events
+    ev_res = await db.execute(
+        select(ParkingEvent).where(
+            or_(
+                ParkingEvent.vehicle_id == veh.id,
+                ParkingEvent.license_plate == veh.license_plate,
+            )
+        ).order_by(ParkingEvent.timestamp.asc())
+    )
+    events = ev_res.scalars().all()
+
+    # 3. Fetch parking sessions
+    sess_res = await db.execute(
+        select(ParkingSession).where(
+            or_(
+                ParkingSession.vehicle_id == veh.id,
+                ParkingSession.license_plate == veh.license_plate,
+            )
+        ).order_by(ParkingSession.entry_time.asc())
+    )
+    sessions = sess_res.scalars().all()
+
+    # Evidence mapping based on prototype ID
+    proto_slug = (veh.prototype_id or "vh001").lower().replace("-", "")
+    evidence_crop = f"/evidence/{proto_slug}_plate.jpg"
+    car_crop = f"/evidence/{proto_slug}_car.jpg"
+
+    timeline = []
+
+    # Assemble timeline entries
+    for ev in events:
+        t_str = ev.timestamp.isoformat() if ev.timestamp else None
+        meta = ev.meta or {}
+        timeline.append({
+            "timestamp": t_str,
+            "camera_id": ev.camera_id or meta.get("camera_id", "CAM-01"),
+            "event_type": ev.event_type,
+            "slot_id": ev.slot_id,
+            "description": f"{ev.event_type.replace('_', ' ').title()} at {ev.camera_id or 'facility'}",
+            "source_video": meta.get("source_video_id"),
+            "confidence": meta.get("confidence", 0.95),
+            "evidence_crop": evidence_crop,
+        })
+
+    # If no explicit events yet, construct from session & vehicle state
+    if not timeline:
+        for s in sessions:
+            timeline.append({
+                "timestamp": s.entry_time.isoformat() if s.entry_time else None,
+                "camera_id": s.camera_id or "CAM-02",
+                "event_type": "SLOT_OCCUPIED",
+                "slot_id": s.slot_id,
+                "description": f"Parked in slot {s.slot_id} (Session {s.session_uid})",
+                "evidence_crop": evidence_crop,
+            })
+            if s.exit_time:
+                timeline.append({
+                    "timestamp": s.exit_time.isoformat(),
+                    "camera_id": "CAM-03",
+                    "event_type": "VEHICLE_EXITED",
+                    "slot_id": s.slot_id,
+                    "description": f"Exited parking facility via Exit Ramp (Duration: {int(s.duration_seconds)}s)",
+                    "evidence_crop": evidence_crop,
+                })
+
+    return {
+        "vehicle_id": veh.prototype_id or str(veh.id),
+        "license_plate": veh.license_plate,
+        "vehicle_type": veh.vehicle_type,
+        "brand": veh.brand,
+        "model": veh.model,
+        "color": veh.color,
+        "status": veh.status,
+        "evidence_car_crop": car_crop,
+        "evidence_plate_crop": evidence_crop,
+        "timeline": timeline,
+    }
+
+
+
 @router.post("/recognize", response_model=RecognizeResponse)
 async def recognize_crop(
     req: RecognizeRequest,

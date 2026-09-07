@@ -27,6 +27,7 @@ export const mockStatistics = {
 export const mockVehicles = [
   {
     id: "v1",
+    prototype_id: "VH-001",
     license_plate: "ABC-1234",
     vehicle_type: "sedan",
     brand: "Toyota",
@@ -42,6 +43,7 @@ export const mockVehicles = [
   },
   {
     id: "v2",
+    prototype_id: "VH-002",
     license_plate: "XYZ-9876",
     vehicle_type: "suv",
     brand: "Honda",
@@ -222,4 +224,28 @@ export const handlers = [
   http.get("*/analytics/trends", () => HttpResponse.json(mockAnalyticsDashboard.trends)),
   http.get("*/reports/history", () => HttpResponse.json(mockReports)),
   http.get("*/reports", () => HttpResponse.json(mockReports)),
+
+  // Non-integration endpoints used by PrototypeMondayView
+  http.get("*/vehicles", () => HttpResponse.json(mockVehicles)),
+  http.get("*/slots", () => HttpResponse.json(mockSlots)),
+  http.get("*/sessions", () => HttpResponse.json(mockSessions)),
+  http.get("*/events", () => HttpResponse.json([])),
+  http.get("*/navigation/route", () => HttpResponse.json({
+    source: "ENTRY_GATE",
+    destination: "P02",
+    distance_meters: 42.0,
+    path: ["ENTRY_GATE", "MAIN_LANE", "JUNCTION_A", "AISLE_A", "P02"],
+    waypoints: [
+      { id: "ENTRY_GATE", name: "Entry Gate (CAM-01)", x: 360, y: 780 },
+      { id: "MAIN_LANE", name: "Main Driving Lane", x: 360, y: 820 },
+      { id: "JUNCTION_A", name: "Junction Row A", x: 520, y: 820 },
+      { id: "AISLE_A", name: "Aisle Row A (CAM-02)", x: 760, y: 820 },
+      { id: "P02", name: "Slot P02", x: 650, y: 720 }
+    ],
+    directions: [
+      "Proceed straight past the Entry Boom Barrier",
+      "Continue East along North Main Drive Aisle (30m)",
+      "Turn left into Parking Stall P02 (Zone A)"
+    ]
+  })),
 ];

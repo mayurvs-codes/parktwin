@@ -111,6 +111,7 @@ async def init_db() -> None:
 
     import modules.analytics.storage.models  # noqa: F401
     import modules.reporting.storage.models  # noqa: F401
+    import modules.parking_intelligence.storage.models  # noqa: F401
 
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)

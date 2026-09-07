@@ -204,7 +204,7 @@ class ParkTwinPipeline:
             # re-processing vehicles that already have a plate OR have exceeded max attempts.
             # If a high-confidence plate (>= 0.75) is already recognized, reuse cached results
             t_cache = self._track_cache.get(track.track_id)
-            if t_cache and t_cache.get("plate") and t_cache.get("plate_conf", 0.0) >= 0.75:
+            if t_cache and ((t_cache.get("plate") and t_cache.get("plate_conf", 0.0) >= 0.75) or t_cache.get("attempts", 0) >= 2):
                 rec.vehicle_type = t_cache.get("vtype", rec.vehicle_type)
                 rec.type_confidence = t_cache.get("type_conf", 0.90)
                 rec.brand = t_cache.get("brand", "Unknown")

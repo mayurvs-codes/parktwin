@@ -1,252 +1,317 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Car, RefreshCw } from "lucide-react";
+import Link from "next/link";
+import { Car, Search, ExternalLink, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { EmptyState } from "@/components/ui/empty-state";
-import { ErrorState } from "@/components/ui/error-state";
-import { useVehicles } from "@/hooks/useVehicles";
-import type {
-  SortDirection,
-  VehicleRowView,
-  VehicleSortColumn,
-  VehicleStatus,
-} from "@/types/vehicles";
-import { VehicleDetailDialog } from "./VehicleDetailDialog";
-import { VehicleFilters } from "./VehicleFilters";
-import { VehicleSearch } from "./VehicleSearch";
-import { VehicleTable } from "./VehicleTable";
-import { VehicleTableSkeleton } from "./VehicleSkeleton";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { useDemoMovieStore } from "@/store/useDemoMovieStore";
 
-const PAGE_SIZE = 10;
-
-/** Compare two vehicle views by the given sort column (ascending baseline). */
-function compareViews(a: VehicleRowView, b: VehicleRowView, column: VehicleSortColumn): number {
-  switch (column) {
-    case "plate":
-      return (a.vehicle.license_plate ?? "").localeCompare(b.vehicle.license_plate ?? "");
-    case "type":
-      return (a.vehicle.vehicle_type ?? "").localeCompare(b.vehicle.vehicle_type ?? "");
-    case "status":
-      return a.status.localeCompare(b.status);
-    case "slot":
-      return (a.slotId ?? "").localeCompare(b.slotId ?? "");
-    case "entry":
-      return (a.entryTime ?? "").localeCompare(b.entryTime ?? "");
-    case "exit":
-      return (a.exitTime ?? "").localeCompare(b.exitTime ?? "");
-    case "duration":
-      return a.durationSeconds - b.durationSeconds;
-    case "confidence":
-      return (a.confidence ?? 0) - (b.confidence ?? 0);
-    default:
-      return 0;
-  }
-}
-
-/**
- * Vehicle Management (Module 6 – Phase E) — orchestrates the vehicle list.
- *
- * Presentation layer only: all data arrives from the existing backend
- * `/integration` gateway via `useVehicles`. Plate search is delegated to the
- * backend; status/type/slot filters and sorting/pagination are applied
- * client-side over the returned window. No occupancy, ownership, or duration
- * math runs here.
- */
 export function VehiclesView() {
-  const [plate, setPlate] = useState("");
-  const [slot, setSlot] = useState("");
-  const [status, setStatus] = useState<VehicleStatus | "all">("all");
-  const [vehicleType, setVehicleType] = useState<string | "all">("all");
-  const [sort, setSort] = useState<{ column: VehicleSortColumn; direction: SortDirection }>({
-    column: "plate",
-    direction: "asc",
-  });
-  const [page, setPage] = useState(1);
-  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const vehicles = useDemoMovieStore((s) => s.vehicles);
+  const selectVehicle = useDemoMovieStore((s) => s.selectVehicle);
+  const selectSlot = useDemoMovieStore((s) => s.selectSlot);
 
-  const { views, isLoading, isError, refetch } = useVehicles(plate.trim() || undefined);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [selectedVehicleId, setSelectedVehicleId] = useState<string | null>(null);
 
-  const vehicleTypes = useMemo(() => {
-    const set = new Set<string>();
-    for (const v of views) {
-      const t = v.vehicle.vehicle_type;
-      if (t) set.add(t);
-    }
-    return Array.from(set).sort();
-  }, [views]);
-
-  const filtered = useMemo(
-    () =>
-      views.filter((v) => {
-        if (status !== "all" && v.status !== status) return false;
-        if (vehicleType !== "all" && (v.vehicle.vehicle_type ?? "") !== vehicleType) return false;
-        if (slot.trim() && !(v.slotId ?? "").toLowerCase().includes(slot.trim().toLowerCase()))
-          return false;
-        return true;
-      }),
-    [views, status, vehicleType, slot]
-  );
-
-  const sorted = useMemo(() => {
-    const copy = [...filtered];
-    copy.sort((a, b) => {
-      const cmp = compareViews(a, b, sort.column);
-      return sort.direction === "asc" ? cmp : -cmp;
+  const filteredVehicles = useMemo(() => {
+    return vehicles.filter((v) => {
+      if (statusFilter !== "all" && v.state !== statusFilter) {
+        return false;
+      }
+      if (
+        searchTerm.trim() &&
+        !v.plate.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        !v.assignedSlot.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        !v.model.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return false;
+      }
+      return true;
     });
-    return copy;
-  }, [filtered, sort]);
+  }, [vehicles, statusFilter, searchTerm]);
 
-  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
-  const currentPage = Math.min(page, totalPages);
-  const pageRows = useMemo(
-    () => sorted.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
-    [sorted, currentPage]
-  );
+  const parkedCount = vehicles.filter((v) => v.state === "PARKED" || v.state === "STAYING").length;
+  const movingCount = vehicles.filter((v) => v.state === "ENTERING" || v.state === "EXITING").length;
+  const exitedCount = vehicles.filter((v) => v.state === "EXITED").length;
 
-  const selectedView = useMemo(
-    () =>
-      views.find(
-        (v) => (v.vehicle.id ?? v.vehicle.license_plate ?? null) === selectedKey
-      ) ?? null,
-    [views, selectedKey]
-  );
-
-  const handleSort = (column: VehicleSortColumn) => {
-    setSort((prev) =>
-      prev.column === column
-        ? { column, direction: prev.direction === "asc" ? "desc" : "asc" }
-        : { column, direction: "asc" }
-    );
-    setPage(1);
-  };
-
-  const hasFilters = slot.trim() !== "" || status !== "all" || vehicleType !== "all";
+  const activeDialogVehicle = vehicles.find((v) => v.id === selectedVehicleId) || null;
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6">
-      <header className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <Car className="h-5 w-5" aria-hidden />
+    <div className="mx-auto max-w-7xl space-y-6 pb-12">
+      {/* ── Page Header ── */}
+      <PageHeader
+        icon={Car}
+        title="Vehicles"
+        subtitle="Complete vehicle registry, dwell tracking, and real-time spatial positioning"
+        badge={
+          <span className="rounded-full border border-sky-500/30 bg-sky-500/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-sky-400">
+            30 Deterministic Vehicles
           </span>
-          <div>
-            <h1 className="text-xl font-semibold tracking-tight text-foreground">Vehicles</h1>
-            <p className="text-sm text-muted-foreground">Operational vehicle management</p>
-          </div>
-        </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => refetch()}
-          aria-label="Refresh vehicles"
-        >
-          <RefreshCw className="h-4 w-4" aria-hidden />
-          Refresh
-        </Button>
-      </header>
+        }
+        rightSlot={
+          <Link href="/digital-twin">
+            <Button variant="outline" size="sm" className="gap-1.5 text-xs font-mono">
+              <ExternalLink className="h-3.5 w-3.5" />
+              <span>Spatial Digital Twin</span>
+            </Button>
+          </Link>
+        }
+      />
 
-      <Card>
-        <CardHeader className="space-y-3">
-          <CardTitle>Vehicle list</CardTitle>
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-            <VehicleSearch
-              plate={plate}
-              onPlateChange={(v) => {
-                setPlate(v);
-                setPage(1);
-              }}
-              slot={slot}
-              onSlotChange={(v) => {
-                setSlot(v);
-                setPage(1);
-              }}
-            />
-            <VehicleFilters
-              status={status}
-              onStatusChange={(v) => {
-                setStatus(v);
-                setPage(1);
-              }}
-              vehicleType={vehicleType}
-              onVehicleTypeChange={(v) => {
-                setVehicleType(v);
-                setPage(1);
-              }}
-              vehicleTypes={vehicleTypes}
-            />
+      {/* ── KPI Strip ── */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <Card className="border-border/80 bg-card/60 backdrop-blur-sm shadow-sm">
+          <CardContent className="p-4">
+            <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground">TOTAL REGISTRY</p>
+            <p className="text-2xl font-bold font-mono text-foreground mt-0.5">{vehicles.length}</p>
+            <p className="text-[10px] text-muted-foreground mt-1">10 Tracked · 20 Static</p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-emerald-500/30 bg-emerald-500/5 backdrop-blur-sm shadow-sm">
+          <CardContent className="p-4">
+            <p className="text-xs font-mono uppercase tracking-wider text-emerald-400">CURRENTLY PARKED</p>
+            <p className="text-2xl font-bold font-mono text-emerald-400 mt-0.5">{parkedCount}</p>
+            <p className="text-[10px] text-emerald-400/80 mt-1">Active bay occupancy</p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-sky-500/30 bg-sky-500/5 backdrop-blur-sm shadow-sm">
+          <CardContent className="p-4">
+            <p className="text-xs font-mono uppercase tracking-wider text-sky-400">IN TRANSIT</p>
+            <p className="text-2xl font-bold font-mono text-sky-400 mt-0.5">{movingCount}</p>
+            <p className="text-[10px] text-sky-400/80 mt-1">Driving along aisles</p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-amber-500/30 bg-amber-500/5 backdrop-blur-sm shadow-sm">
+          <CardContent className="p-4">
+            <p className="text-xs font-mono uppercase tracking-wider text-amber-400">EXITED FACILITY</p>
+            <p className="text-2xl font-bold font-mono text-amber-400 mt-0.5">{exitedCount}</p>
+            <p className="text-[10px] text-amber-400/80 mt-1">Cleared CAM-16 gate</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* ── Search & Filter Controls ── */}
+      <Card className="border-border/80 bg-card/60 backdrop-blur-sm shadow-sm">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-border/40">
+          <div className="flex items-center gap-2">
+            <div className="relative w-72">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+              <Input
+                placeholder="Search plate, bay (SP-xx), or model..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-9 h-9 text-xs font-mono"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {["all", "PARKED", "ENTERING", "EXITING", "EXITED", "UPCOMING"].map((st) => (
+              <Button
+                key={st}
+                variant={statusFilter === st ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => setStatusFilter(st)}
+                className="h-8 text-xs font-mono uppercase"
+              >
+                {st}
+              </Button>
+            ))}
           </div>
         </CardHeader>
-        <CardContent>
-          {isLoading ? (
-            <VehicleTableSkeleton />
-          ) : isError ? (
-            <ErrorState
-              title="Couldn't load vehicles"
-              description="The vehicle data is unavailable."
-              onRetry={() => refetch()}
-            />
-          ) : sorted.length === 0 ? (
-            <EmptyState
-              icon={Car}
-              title="No vehicles found"
-              description={
-                plate.trim() || hasFilters
-                  ? "Try adjusting your search or filters."
-                  : "There are no vehicles reported by the backend yet."
-              }
-            />
-          ) : (
-            <>
-              <VehicleTable
-                rows={pageRows}
-                sort={sort}
-                onSort={handleSort}
-                onSelect={setSelectedKey}
-                selectedKey={selectedKey}
-              />
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
-                <span>
-                  {sorted.length} vehicle{sorted.length === 1 ? "" : "s"}
-                  {hasFilters ? " (filtered)" : ""}
-                </span>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setPage((p) => Math.max(1, p - 1))}
-                    disabled={currentPage <= 1}
-                    aria-label="Previous page"
-                  >
-                    Previous
-                  </Button>
-                  <span aria-live="polite">
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                    disabled={currentPage >= totalPages}
-                    aria-label="Next page"
-                  >
-                    Next
-                  </Button>
-                </div>
-              </div>
-            </>
-          )}
+
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-muted/40 text-[11px] font-mono uppercase tracking-wider text-muted-foreground border-b border-border/40">
+                <tr>
+                  <th className="px-4 py-3">Plate Number</th>
+                  <th className="px-4 py-3">Category</th>
+                  <th className="px-4 py-3">Model / Type</th>
+                  <th className="px-4 py-3">Assigned Space</th>
+                  <th className="px-4 py-3">Current Status</th>
+                  <th className="px-4 py-3">Schedule</th>
+                  <th className="px-4 py-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/30 font-mono text-[11px]">
+                {filteredVehicles.map((veh) => (
+                  <tr key={veh.id} className="hover:bg-accent/40 transition-colors">
+                    {/* Plate */}
+                    <td className="px-4 py-3 font-semibold text-foreground flex items-center gap-2">
+                      <div className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: veh.color }} />
+                      <span className="font-bold text-xs">{veh.plate}</span>
+                      <span className="text-[9px] text-muted-foreground px-1 py-0.2 bg-muted/60 rounded">
+                        DEMO DATA
+                      </span>
+                    </td>
+
+                    {/* Category */}
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
+                          veh.isTypeA
+                            ? "bg-blue-500/10 text-blue-400 border border-blue-500/30"
+                            : "bg-slate-700/40 text-slate-300 border border-slate-700"
+                        }`}
+                      >
+                        {veh.isTypeA ? "Type A (Tracked)" : "Type B (Static)"}
+                      </span>
+                    </td>
+
+                    {/* Model */}
+                    <td className="px-4 py-3 text-muted-foreground">{veh.model}</td>
+
+                    {/* Assigned Space */}
+                    <td className="px-4 py-3 font-bold text-primary">{veh.assignedSlot}</td>
+
+                    {/* Status */}
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                          veh.state === "PARKED" || veh.state === "STAYING"
+                            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"
+                            : veh.state === "ENTERING" || veh.state === "EXITING"
+                            ? "bg-sky-500/10 text-sky-400 border border-sky-500/30 animate-pulse"
+                            : veh.state === "EXITED"
+                            ? "bg-amber-500/10 text-amber-400 border border-amber-500/30"
+                            : "bg-muted text-muted-foreground"
+                        }`}
+                      >
+                        {veh.state}
+                      </span>
+                    </td>
+
+                    {/* Schedule */}
+                    <td className="px-4 py-3 text-muted-foreground text-[10px]">
+                      {veh.isTypeA ? (
+                        <span>
+                          Arr: {veh.entryTime}s · Dep: {veh.exitStartTime < 999 ? `${veh.exitStartTime}s` : "End"}
+                        </span>
+                      ) : (
+                        <span>Parked from start (t=0)</span>
+                      )}
+                    </td>
+
+                    {/* Actions */}
+                    <td className="px-4 py-3 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-7 px-2 text-[11px] gap-1"
+                          onClick={() => setSelectedVehicleId(veh.id)}
+                        >
+                          <Eye className="h-3 w-3" />
+                          <span>Inspect</span>
+                        </Button>
+                        <Link
+                          href="/digital-twin"
+                          onClick={() => {
+                            selectVehicle(veh.id);
+                            selectSlot(veh.assignedSlot);
+                          }}
+                        >
+                          <Button variant="outline" size="sm" className="h-7 px-2 text-[11px] gap-1">
+                            <ExternalLink className="h-3 w-3" />
+                            <span>In Twin</span>
+                          </Button>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </CardContent>
       </Card>
 
-      <VehicleDetailDialog
-        view={selectedView}
-        open={selectedKey !== null}
-        onOpenChange={(o) => {
-          if (!o) setSelectedKey(null);
-        }}
-      />
+      {/* ── Vehicle Inspector Dialog ── */}
+      {activeDialogVehicle && (
+        <div
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in-50"
+          onClick={() => setSelectedVehicleId(null)}
+        >
+          <Card
+            className="w-full max-w-md border-border bg-card/95 shadow-2xl p-6 space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-3 border-b border-border/40">
+              <div className="flex items-center gap-2">
+                <div
+                  className="h-3.5 w-3.5 rounded-full"
+                  style={{ backgroundColor: activeDialogVehicle.color }}
+                />
+                <h2 className="text-base font-bold font-mono text-foreground">
+                  {activeDialogVehicle.plate}
+                </h2>
+              </div>
+              <Badge variant="outline" className="font-mono text-xs">
+                {activeDialogVehicle.isTypeA ? "Tracked Movie Vehicle" : "Static Background Vehicle"}
+              </Badge>
+            </div>
+
+            <div className="space-y-2.5 text-xs">
+              <div className="flex justify-between py-1 border-b border-border/30">
+                <span className="text-muted-foreground">Assigned Parking Bay</span>
+                <span className="font-mono font-bold text-primary">{activeDialogVehicle.assignedSlot}</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-border/30">
+                <span className="text-muted-foreground">Current State</span>
+                <span className="font-mono font-bold text-emerald-400">{activeDialogVehicle.state}</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-border/30">
+                <span className="text-muted-foreground">Vehicle Model</span>
+                <span className="font-mono text-foreground">{activeDialogVehicle.model}</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-border/30">
+                <span className="text-muted-foreground">License Plate Provenance</span>
+                <span className="font-mono text-muted-foreground">Synthetic DEMO DATA</span>
+              </div>
+              {activeDialogVehicle.isTypeA && (
+                <div className="flex justify-between py-1 border-b border-border/30">
+                  <span className="text-muted-foreground">Entry / Exit Schedule</span>
+                  <span className="font-mono text-foreground">
+                    {activeDialogVehicle.entryTime}s entry · {activeDialogVehicle.exitStartTime}s exit
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <div className="pt-2 flex justify-end gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setSelectedVehicleId(null)}
+              >
+                Close
+              </Button>
+              <Link
+                href="/digital-twin"
+                onClick={() => {
+                  selectVehicle(activeDialogVehicle.id);
+                  selectSlot(activeDialogVehicle.assignedSlot);
+                }}
+              >
+                <Button size="sm" className="gap-1.5">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  <span>View in Digital Twin</span>
+                </Button>
+              </Link>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

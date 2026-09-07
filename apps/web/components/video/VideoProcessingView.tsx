@@ -8,6 +8,8 @@ import { CameraPanel, type CameraPanelHandle } from "@/components/video/CameraPa
 import { FutureRoadmap } from "@/components/video/FutureRoadmap";
 import { ParallelProcessingBar, type ParallelStatus } from "@/components/video/ParallelProcessingBar";
 import { TwinQuickLink } from "@/components/video/TwinQuickLink";
+import { CameraArchitectureMatrix } from "@/components/video/CameraArchitectureMatrix";
+import { PageHeader } from "@/components/ui/PageHeader";
 import type { VideoUploadSnapshot } from "@/components/processing/VideoUpload";
 import { DEFAULT_SNAPSHOT } from "@/components/video/cameraTypes";
 import { fetchSessions, fetchSlots } from "@/services/parking";
@@ -98,18 +100,19 @@ export function VideoProcessingView() {
 
   return (
     <div className="space-y-6">
-      <header className="space-y-1">
-        <div className="flex items-center gap-2">
-          <Cctv className="h-6 w-6 text-primary" aria-hidden />
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-            CCTV Control Center
-          </h1>
-        </div>
-        <p className="text-sm text-muted-foreground">
-          Manage and process multiple parking camera videos and live feeds from a single control
-          center.
-        </p>
-      </header>
+      <PageHeader
+        icon={Cctv}
+        title="CCTV"
+        subtitle="Multi-camera control center representing the 16-camera facility surveillance architecture"
+        badge={
+          <span className="rounded-full border border-sky-500/30 bg-sky-500/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-sky-400">
+            16-Camera Architecture
+          </span>
+        }
+      />
+
+      {/* 16-Camera Facility Surveillance Topology */}
+      <CameraArchitectureMatrix />
 
       <ControlPanel
         cameras={cameras}

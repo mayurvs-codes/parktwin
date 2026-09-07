@@ -113,6 +113,22 @@ class OCREngine:
 
     def _load_paddle(self) -> bool:
         try:
+            import sys
+            import types
+            if "imghdr" not in sys.modules:
+                _imghdr = types.ModuleType("imghdr")
+                _imghdr.what = lambda file, h=None: None
+                sys.modules["imghdr"] = _imghdr
+
+            if not hasattr(np, "sctypes"):
+                np.sctypes = {
+                    "int": [np.int8, np.int16, np.int32, np.int64],
+                    "uint": [np.uint8, np.uint16, np.uint32, np.uint64],
+                    "float": [np.float16, np.float32, np.float64],
+                    "complex": [np.complex64, np.complex128],
+                    "others": [bool, object, bytes, str, np.void],
+                }
+
             from paddleocr import PaddleOCR
 
             # Initialize PaddleOCR with lower drop_score to capture low-contrast characters

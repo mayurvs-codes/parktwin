@@ -1,0 +1,475 @@
+{
+  "timestamp": "2026-09-04T14:18:50Z",
+  "video_processed": {
+    "video_id": "vid_cam2_parking_bay_21856a523d79",
+    "filename": "cam2_parking_bay.mp4",
+    "camera_id": "CAM-02",
+    "elapsed_seconds": 55.12
+  },
+  "target_vehicle": {
+    "prototype_id": "VH-61FF",
+    "raw_ocr": "KA05NO1565",
+    "ocr_confidence": 0.97,
+    "normalized_plate": "SK40SNO1565",
+    "physical_plate": "KA05ND1565",
+    "normalization_provenance": "Character ambiguity between 'O' and 'D' in series segment of Karnataka RTO plate KA05ND1565, verified visually from CCTV front-bumper crop.",
+    "vehicle_type": "Coupe",
+    "vehicle_brand": "Audi",
+    "vehicle_color": "Unknown",
+    "assigned_slot": "P02",
+    "slot_hypothesis_verified": true,
+    "geometric_calibrated_position": [
+      0.337,
+      0.163,
+      0.57,
+      0.466
+    ],
+    "calibrated_slot_position": [
+      0.32,
+      0.15,
+      0.58,
+      0.48
+    ]
+  },
+  "summary": {
+    "vehicles_detected_count": 12,
+    "slots_total": 10,
+    "occupied_slots_count": 5,
+    "occupied_slots": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05"
+    ],
+    "free_slots_count": 5,
+    "sessions_count": 5,
+    "websocket_events_collected_count": 237,
+    "stored_events_count": 200
+  },
+  "navigation": {
+    "source": "ENTRY_GATE",
+    "destination": "P02",
+    "distance_meters": 42.0,
+    "path": [
+      "ENTRY_GATE",
+      "MAIN_LANE",
+      "JUNCTION_A",
+      "AISLE_A",
+      "P02"
+    ],
+    "waypoints": [
+      {
+        "id": "ENTRY_GATE",
+        "name": "Entry Gate (CAM-01)",
+        "x": 360,
+        "y": 780
+      },
+      {
+        "id": "MAIN_LANE",
+        "name": "Main Driving Lane",
+        "x": 360,
+        "y": 820
+      },
+      {
+        "id": "JUNCTION_A",
+        "name": "Junction Row A",
+        "x": 520,
+        "y": 820
+      },
+      {
+        "id": "AISLE_A",
+        "name": "Aisle Row A (CAM-02)",
+        "x": 760,
+        "y": 820
+      },
+      {
+        "id": "P02",
+        "name": "Slot P02",
+        "x": 650,
+        "y": 720
+      }
+    ],
+    "directions": [
+      "Start at Entry Gate (CAM-01)",
+      "Proceed through Main Driving Lane",
+      "Proceed through Junction Row A",
+      "Proceed through Aisle Row A (CAM-02)",
+      "Arrive at destination Slot P02"
+    ],
+    "vehicle_id": "VH-29D4",
+    "license_plate": "TRK-CAM-02-4",
+    "destination_slot": "P02"
+  },
+  "websocket_sample_events": [
+    {
+      "event_id": "EVT-465C2570",
+      "timestamp": "2026-09-04T14:17:53.295127+00:00",
+      "event_type": "VIDEO_STARTED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": null,
+      "plate": null,
+      "slot_id": null,
+      "status": null,
+      "confidence": 1.0,
+      "source_frame": 0,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "total_frames": 374,
+        "fps": 25.0,
+        "role": "PARKING_LOT"
+      }
+    },
+    {
+      "event_id": "EVT-8A48ADE1",
+      "timestamp": "2026-09-04T14:18:16.024931+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-E07E",
+      "plate": "TRK-CAM-02-1",
+      "slot_id": "P04",
+      "status": "parked",
+      "confidence": 0.909,
+      "source_frame": 1,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-1",
+        "track_id": 1,
+        "vehicle_type": "Coupe",
+        "color": "Unknown",
+        "brand": "Audi",
+        "slot_id": "P04",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-1, conf=0.909"
+      }
+    },
+    {
+      "event_id": "EVT-88A47BDA",
+      "timestamp": "2026-09-04T14:18:16.033306+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-D9C8",
+      "plate": "TRK-CAM-02-2",
+      "slot_id": "P03",
+      "status": "parked",
+      "confidence": 0.908,
+      "source_frame": 1,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-2",
+        "track_id": 2,
+        "vehicle_type": "Coupe",
+        "color": "Unknown",
+        "brand": "Audi",
+        "slot_id": "P03",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-2, conf=0.908"
+      }
+    },
+    {
+      "event_id": "EVT-5A83D33E",
+      "timestamp": "2026-09-04T14:18:16.040962+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-D45F",
+      "plate": "TRK-CAM-02-3",
+      "slot_id": "P05",
+      "status": "parked",
+      "confidence": 0.832,
+      "source_frame": 1,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-3",
+        "track_id": 3,
+        "vehicle_type": "Van",
+        "color": "Unknown",
+        "brand": "Volkswagen",
+        "slot_id": "P05",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-3, conf=0.832"
+      }
+    },
+    {
+      "event_id": "EVT-F4E43111",
+      "timestamp": "2026-09-04T14:18:16.048593+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-29D4",
+      "plate": "TRK-CAM-02-4",
+      "slot_id": "P02",
+      "status": "parked",
+      "confidence": 0.831,
+      "source_frame": 1,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-4",
+        "track_id": 4,
+        "vehicle_type": "Van",
+        "color": "Unknown",
+        "brand": "Maruti Suzuki",
+        "slot_id": "P02",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-4, conf=0.831"
+      }
+    },
+    {
+      "event_id": "EVT-5E802F4C",
+      "timestamp": "2026-09-04T14:18:16.062594+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-27D6",
+      "plate": "SK40ENY0035",
+      "slot_id": "P01",
+      "status": "parked",
+      "confidence": 0.97,
+      "source_frame": 1,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": "SK40ENY0035",
+        "raw_plate": "SK40ENY0035",
+        "normalized_plate": "SK40ENY0035",
+        "track_id": 6,
+        "vehicle_type": "Coupe",
+        "color": "Grey",
+        "brand": "Maruti Suzuki",
+        "slot_id": "P01",
+        "ocr_provenance": "raw=SK40ENY0035, normalized=SK40ENY0035, conf=0.97"
+      }
+    },
+    {
+      "event_id": "EVT-536D3BD2",
+      "timestamp": "2026-09-04T14:18:34.811519+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-E07E",
+      "plate": "TRK-CAM-02-1",
+      "slot_id": "P04",
+      "status": "parked",
+      "confidence": 0.908,
+      "source_frame": 2,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-1",
+        "track_id": 1,
+        "vehicle_type": "Coupe",
+        "color": "Unknown",
+        "brand": "Audi",
+        "slot_id": "P04",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-1, conf=0.908"
+      }
+    },
+    {
+      "event_id": "EVT-FCDBB90A",
+      "timestamp": "2026-09-04T14:18:34.817811+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-D9C8",
+      "plate": "TRK-CAM-02-2",
+      "slot_id": "P03",
+      "status": "parked",
+      "confidence": 0.912,
+      "source_frame": 2,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-2",
+        "track_id": 2,
+        "vehicle_type": "Coupe",
+        "color": "Unknown",
+        "brand": "Audi",
+        "slot_id": "P03",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-2, conf=0.912"
+      }
+    },
+    {
+      "event_id": "EVT-D0810DB0",
+      "timestamp": "2026-09-04T14:18:34.824632+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-D45F",
+      "plate": "TRK-CAM-02-3",
+      "slot_id": "P05",
+      "status": "parked",
+      "confidence": 0.83,
+      "source_frame": 2,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-3",
+        "track_id": 3,
+        "vehicle_type": "Van",
+        "color": "Unknown",
+        "brand": "Volkswagen",
+        "slot_id": "P05",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-3, conf=0.83"
+      }
+    },
+    {
+      "event_id": "EVT-87EBDD73",
+      "timestamp": "2026-09-04T14:18:34.830414+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-29D4",
+      "plate": "TRK-CAM-02-4",
+      "slot_id": "P02",
+      "status": "parked",
+      "confidence": 0.826,
+      "source_frame": 2,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-4",
+        "track_id": 4,
+        "vehicle_type": "Van",
+        "color": "Unknown",
+        "brand": "Maruti Suzuki",
+        "slot_id": "P02",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-4, conf=0.826"
+      }
+    },
+    {
+      "event_id": "EVT-7B890B41",
+      "timestamp": "2026-09-04T14:18:34.839539+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-27D6",
+      "plate": "SK40ENY0035",
+      "slot_id": "P01",
+      "status": "parked",
+      "confidence": 0.97,
+      "source_frame": 2,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": "SK40ENY0035",
+        "raw_plate": "SK40ENY0035",
+        "normalized_plate": "SK40ENY0035",
+        "track_id": 6,
+        "vehicle_type": "Coupe",
+        "color": "Grey",
+        "brand": "Maruti Suzuki",
+        "slot_id": "P01",
+        "ocr_provenance": "raw=SK40ENY0035, normalized=SK40ENY0035, conf=0.97"
+      }
+    },
+    {
+      "event_id": "EVT-449F14DF",
+      "timestamp": "2026-09-04T14:18:35.139693+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-E07E",
+      "plate": "TRK-CAM-02-1",
+      "slot_id": "P04",
+      "status": "parked",
+      "confidence": 0.909,
+      "source_frame": 3,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-1",
+        "track_id": 1,
+        "vehicle_type": "Coupe",
+        "color": "Unknown",
+        "brand": "Audi",
+        "slot_id": "P04",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-1, conf=0.909"
+      }
+    },
+    {
+      "event_id": "EVT-17609055",
+      "timestamp": "2026-09-04T14:18:35.146987+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-D9C8",
+      "plate": "TRK-CAM-02-2",
+      "slot_id": "P03",
+      "status": "parked",
+      "confidence": 0.91,
+      "source_frame": 3,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-2",
+        "track_id": 2,
+        "vehicle_type": "Coupe",
+        "color": "Unknown",
+        "brand": "Audi",
+        "slot_id": "P03",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-2, conf=0.91"
+      }
+    },
+    {
+      "event_id": "EVT-2197AAD7",
+      "timestamp": "2026-09-04T14:18:35.153901+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-D45F",
+      "plate": "TRK-CAM-02-3",
+      "slot_id": "P05",
+      "status": "parked",
+      "confidence": 0.837,
+      "source_frame": 3,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-3",
+        "track_id": 3,
+        "vehicle_type": "Van",
+        "color": "Unknown",
+        "brand": "Volkswagen",
+        "slot_id": "P05",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-3, conf=0.837"
+      }
+    },
+    {
+      "event_id": "EVT-F14DFCE8",
+      "timestamp": "2026-09-04T14:18:35.164284+00:00",
+      "event_type": "SLOT_OCCUPIED",
+      "camera_id": "CAM-02",
+      "video_id": "vid_cam2_parking_bay_21856a523d79",
+      "vehicle_id": "VH-29D4",
+      "plate": "TRK-CAM-02-4",
+      "slot_id": "P02",
+      "status": "parked",
+      "confidence": 0.828,
+      "source_frame": 3,
+      "source_video_id": "vid_cam2_parking_bay_21856a523d79",
+      "payload": {
+        "raw_ocr": null,
+        "raw_plate": null,
+        "normalized_plate": "TRK-CAM-02-4",
+        "track_id": 4,
+        "vehicle_type": "Van",
+        "color": "Unknown",
+        "brand": "Maruti Suzuki",
+        "slot_id": "P02",
+        "ocr_provenance": "raw=None, normalized=TRK-CAM-02-4, conf=0.828"
+      }
+    }
+  ]
+}

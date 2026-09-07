@@ -22,6 +22,8 @@ import { ErrorState } from "@/components/ui/error-state";
 import { Input } from "@/components/ui/input";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Select } from "@/components/ui/select";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { ProjectResetButton } from "@/components/dashboard/ProjectResetButton";
 import { useSystemSettings } from "@/hooks/useSettings";
 import {
   type PollingIntervalPreference,
@@ -29,6 +31,7 @@ import {
   type UserPreferences,
   usePreferences,
 } from "@/store/preferences";
+import { useDemoMovieStore } from "@/store/useDemoMovieStore";
 
 export function SettingsView() {
   const { data: systemSettings, isLoading, isError, refetch } = useSystemSettings();
@@ -65,17 +68,17 @@ export function SettingsView() {
   return (
     <div className="space-y-8 p-6 max-w-7xl mx-auto">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
-            <SettingsIcon className="h-6 w-6 text-primary" aria-hidden />
-            Settings
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            View backend system configuration and customize your local user interface preferences.
-          </p>
-        </div>
-      </div>
+      <PageHeader
+        icon={SettingsIcon}
+        title="Settings"
+        subtitle="View platform system configuration, customize local user preferences, and execute authoritative facility resets"
+        badge={
+          <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
+            System Config
+          </span>
+        }
+        rightSlot={<ProjectResetButton variant="destructive" />}
+      />
 
       {/* Section A — System Configuration (Read-Only) */}
       <section aria-labelledby="system-config-heading" className="space-y-4">
@@ -426,6 +429,90 @@ export function SettingsView() {
                 Save Preferences
               </Button>
             </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Section B.5 — Demo Simulation Engine & Shared Timeline */}
+      <section aria-labelledby="demo-engine-heading" className="space-y-4">
+        <div>
+          <h2 id="demo-engine-heading" className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <Sliders className="h-5 w-5 text-primary" aria-hidden />
+            Section B.5 — Demo Simulation Engine &amp; Shared Timeline
+          </h2>
+          <p className="text-xs text-muted-foreground">
+            Configure the deterministic project movie simulation driving all 10 website pages.
+          </p>
+        </div>
+
+        <Card className="border border-border/80 bg-card/60">
+          <CardContent className="p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold text-foreground">Project Simulation Controller</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Start, pause, or resume the 30-vehicle deterministic simulation across the canonical B2 facility.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    if (useDemoMovieStore.getState().status === "RUNNING") {
+                      useDemoMovieStore.getState().pauseMovie();
+                    } else {
+                      useDemoMovieStore.getState().startMovie();
+                    }
+                  }}
+                  className="gap-2 font-mono text-xs font-bold"
+                >
+                  Toggle Movie Playback
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => useDemoMovieStore.getState().resetMovie()}
+                  className="gap-1.5 text-xs text-muted-foreground"
+                >
+                  <RotateCcw className="h-3.5 w-3.5" />
+                  <span>Reset Movie</span>
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Section C — Authoritative Facility Operations & Danger Zone */}
+      <section aria-labelledby="danger-zone-heading" className="space-y-4">
+        <div>
+          <h2 id="danger-zone-heading" className="text-lg font-semibold text-destructive flex items-center gap-2">
+            <RotateCcw className="h-5 w-5 text-destructive" aria-hidden />
+            Section C — Authoritative Facility Operations &amp; Danger Zone
+          </h2>
+          <p className="text-xs text-muted-foreground">
+            Authoritative reset operations that mutate persistent system state in the database and engine.
+          </p>
+        </div>
+
+        <Card className="border border-destructive/40 bg-destructive/5">
+          <CardHeader>
+            <CardTitle className="text-base text-destructive flex items-center justify-between">
+              <span>Authoritative Project Reset</span>
+              <Badge variant="destructive" className="font-mono text-[10px]">
+                DESTRUCTIVE
+              </Badge>
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Purges active vehicle sessions, frees all 10 parking slots, wipes correlate buffers, and broadcasts a global state flush via WebSocket.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+            <div className="text-xs text-muted-foreground space-y-1">
+              <p>Triggers backend <code className="text-destructive font-mono bg-destructive/10 px-1 py-0.5 rounded">POST /api/v1/parking/reset</code>.</p>
+              <p>Use before fresh testing runs, live client demonstrations, or after completing test scenarios.</p>
+            </div>
+            <ProjectResetButton variant="destructive" size="default" />
           </CardContent>
         </Card>
       </section>

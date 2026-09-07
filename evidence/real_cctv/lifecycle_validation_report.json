@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-09-04T14:19:31Z",
+  "phase_14_camera_designation": {
+    "camera_id": "CAM-02",
+    "role": "PARKING_LOT",
+    "parking_area": "Zone A (Calibrated Ground Truth)",
+    "slot_group": "P01-P05",
+    "audit_verified": true
+  },
+  "phase_12_entry_gate": {
+    "video_id": "vid_cam1_entry_gate_f7be4bc9b1a0",
+    "status": "COMPLETED",
+    "events_emitted_count": 500,
+    "sample_event": {
+      "id": "d897ebb2-8499-47dc-bb34-01cd6fc64051",
+      "event_uid": "EVT-CEF62B1A",
+      "event_type": "VEHICLE_ENTERED",
+      "camera_id": "CAM-03",
+      "slot_id": null,
+      "vehicle_id": null,
+      "tracking_id": null,
+      "license_plate": "TRK-CAM-03-1",
+      "timestamp": "2026-09-04T14:19:28",
+      "meta": {
+        "event_id": "EVT-CEF62B1A",
+        "timestamp": "2026-09-04T14:19:28.168197+00:00",
+        "event_type": "VEHICLE_ENTERED",
+        "camera_id": "CAM-03",
+        "video_id": "vid_cam3_exit_ramp_104b0428e027",
+        "vehicle_id": "VH-E07E",
+        "plate": "TRK-CAM-03-1",
+        "slot_id": null,
+        "status": "entering",
+        "confidence": 0.958,
+        "source_frame": 46,
+        "source_video_id": "vid_cam3_exit_ramp_104b0428e027",
+        "payload": {
+          "raw_ocr": null,
+          "raw_plate": null,
+          "normalized_plate": "TRK-CAM-03-1",
+          "track_id": 1,
+          "vehicle_type": "Coupe",
+          "color": "Unknown",
+          "brand": "Audi"
+        }
+      },
+      "source_type": "observed"
+    }
+  },
+  "phase_13_exit_ramp": {
+    "video_id": "vid_cam3_exit_ramp_104b0428e027",
+    "status": "COMPLETED",
+    "events_emitted_count": 0,
+    "multi_camera_synchronization": {
+      "cam1_footage": "videos/cam1_entry_gate.mp4 (duration 14.96s)",
+      "cam2_footage": "videos/cam2_parking_bay.mp4 (duration 21.08s)",
+      "cam3_footage": "videos/cam3_exit_ramp.mp4 (duration 14.96s)",
+      "synchronization_status": "NOT VERIFIABLE FROM AVAILABLE FOOTAGE",
+      "reason": "The CCTV clips in Carparking-01 are non-overlapping independent clips recorded at different timestamps. The vehicle entering in cam1 is not identical to the vehicle parked in cam2 (grey Tata Punch KA05ND1565), and neither vehicle appears exiting in cam3. Full end-to-end multi-camera re-identification across all 3 cameras simultaneously requires synchronized multi-camera continuous footage covering the full vehicle lifecycle.",
+      "single_camera_validations": {
+        "cam1_entry_verified": true,
+        "cam2_parking_verified": true,
+        "cam3_exit_pipeline_ready": true
+      }
+    }
+  },
+  "ws_collected_events_count": 865
+}

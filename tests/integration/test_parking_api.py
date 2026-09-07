@@ -52,7 +52,7 @@ def _fake_pipeline():
     class FakePipeline:
         is_ready = True
 
-        def process_frame(self, frame, camera_id="camera_01"):
+        def process_frame(self, frame, camera_id="CAM-01"):
             # The caller passes the desired record set via a thread-local hook.
             return list(_fake_pipeline._records)
 
@@ -136,7 +136,7 @@ def test_slots_list_and_filter(client):
 def test_process_frame_opens_session_and_emits_events(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     r = client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     assert r.status_code == 200
     body = r.json()
@@ -149,7 +149,7 @@ def test_process_frame_opens_session_and_emits_events(client):
     # it serializes cleanly over REST (a 500 here would mean it did not).
     assignment = body["summary"]["assignment"]
     assert isinstance(assignment, dict)
-    assert assignment["camera_id"] == "camera_01"
+    assert assignment["camera_id"] == "CAM-01"
     # JSON keys are strings; the wire format carries track_id as "1".
     assert assignment["assignments"] == {"1": "P01"}
     assert assignment["newly_assigned"] == {"1": "P01"}
@@ -167,27 +167,27 @@ def test_process_frame_opens_session_and_emits_events(client):
 def test_engine_exposes_current_assignment_read_only(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     r = client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     assert r.status_code == 200
 
     # Read-only lookup reflects the live mapping without a second ingest.
     eng = get_integration_service().engine
-    assert eng.get_current_assignment("camera_01", 1) == "P01"
-    assert eng.get_current_assignment("camera_01", 999) is None
+    assert eng.get_current_assignment("CAM-01", 1) == "P01"
+    assert eng.get_current_assignment("CAM-01", 999) is None
 
 
 def test_mapping_stable_across_frames(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     sess1 = client.get("/parking/sessions", params={"active_only": True}).json()
     slot_id = sess1[0]["slot_id"]
     # Second frame, same vehicle, slightly moved bbox.
     _records_for(_rec(1, plate="KA01AB1234", bbox=(0.12, 0.12, 0.32, 0.32)))
     r2 = client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     assert r2.status_code == 200
     # Still exactly one active session, same slot assignment (no flapping).
@@ -199,12 +199,12 @@ def test_mapping_stable_across_frames(client):
 def test_vehicle_departure_closes_session(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     # Next frame: vehicle gone -> released (release_after=1).
     _records_for()
     r = client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     assert r.status_code == 200
     assert r.json()["occupancy"]["occupied"] == 0
@@ -222,12 +222,12 @@ def test_vehicle_departure_closes_session(client):
 def test_vehicle_reidentified_event(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     # Same plate, brand-new track id -> re-identified.
     _records_for(_rec(2, plate="KA01AB1234"))
     r = client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     etypes = {e["event_type"] for e in r.json()["events"]}
     assert "vehicle_reidentified" in etypes
@@ -236,7 +236,7 @@ def test_vehicle_reidentified_event(client):
 def test_statistics_endpoint(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     client.post("/parking/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     r = client.get("/parking/statistics")
     assert r.status_code == 200

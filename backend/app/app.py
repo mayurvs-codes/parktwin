@@ -35,6 +35,7 @@ from backend.api.routers.settings import router as settings_router
 from backend.api.routers.streams import router as streams_router
 from backend.api.routers.journey import router as journey_router
 from backend.api.routers.prototype import router as prototype_router
+from backend.api.routers.videos import router as videos_router
 
 
 
@@ -247,6 +248,8 @@ def create_app() -> FastAPI:
     app.include_router(journey_router)
     # Prototype contract APIs — /slots, /sessions, /events, /navigation/route.
     app.include_router(prototype_router)
+    # Video Library & Processing APIs — /videos.
+    app.include_router(videos_router)
 
     # Prometheus Instrumentator (/metrics endpoint)
     from prometheus_fastapi_instrumentator import Instrumentator
@@ -254,10 +257,11 @@ def create_app() -> FastAPI:
 
 
 
-    # ── Static file serving (uploads / outputs / snapshots) ───────────────
+    # ── Static file serving (uploads / outputs / snapshots / videos) ──────
     # These directories are created at startup by anpr_service; StaticFiles
     # is mounted AFTER routers so the /api routes take precedence.
     _base = Path(__file__).resolve().parents[1]
+    _proj_root = _base.parent
     for _dir_name, _mount_path in (
         ("uploads", "/uploads"),
         ("outputs", "/outputs"),
@@ -266,6 +270,19 @@ def create_app() -> FastAPI:
         _dir = _base / _dir_name
         _dir.mkdir(parents=True, exist_ok=True)
         app.mount(_mount_path, StaticFiles(directory=str(_dir)), name=_dir_name)
+
+    # Mount raw video directory
+    _videos_dir = _proj_root / "videos"
+    _videos_dir.mkdir(parents=True, exist_ok=True)
+    app.mount("/videos", StaticFiles(directory=str(_videos_dir)), name="videos")
+
+    # Mount evidence directory
+    _evidence_dir = _base / "snapshots" / "evidence"
+    if not _evidence_dir.exists() and (_proj_root / "apps" / "web" / "public" / "evidence").exists():
+        _evidence_dir = _proj_root / "apps" / "web" / "public" / "evidence"
+    if _evidence_dir.exists():
+        app.mount("/evidence", StaticFiles(directory=str(_evidence_dir)), name="evidence")
+
 
     @app.get("/", tags=["Meta"])
     async def root() -> Dict[str, Any]:

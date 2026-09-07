@@ -20,6 +20,9 @@ class CameraBase(BaseModel):
     name: str
     url: Any
     zone: str = "general"
+    role: Optional[str] = "UNKNOWN"
+    parking_area: Optional[str] = None
+    slot_group: Optional[str] = None
     fps_target: int = 25
     is_enabled: bool = True
 
@@ -28,12 +31,38 @@ class CameraCreate(CameraBase):
     pass
 
 
+class CameraDesignationUpdate(BaseModel):
+    role: str = Field(..., description="ENTRY | PARKING_LOT | EXIT | UNKNOWN")
+    parking_area: Optional[str] = Field(None, description="e.g. Zone A, Zone B")
+    slot_group: Optional[str] = Field(None, description="e.g. P01-P05, P06-P10")
+    coverage_meta: Optional[Dict[str, Any]] = None
+
+
 class CameraResponse(CameraBase):
     id: UUID
     status: str
     created_at: datetime
 
     model_config = {"from_attributes": True}
+
+
+class VideoResponse(BaseModel):
+    id: str
+    filename: str
+    file_path: str
+    date: Optional[str] = None
+    camera_id: Optional[str] = None
+    duration_seconds: float = 0.0
+    fps: float = 25.0
+    resolution: str = "1280x720"
+    file_size_bytes: int = 0
+    processing_status: str = "IDLE"
+    processed_at: Optional[datetime] = None
+    meta: Optional[Dict[str, Any]] = None
+    stream_url: Optional[str] = None
+
+    model_config = {"from_attributes": True}
+
 
 
 # ─── Vehicle Schemas ──────────────────────────────────────────────────────────

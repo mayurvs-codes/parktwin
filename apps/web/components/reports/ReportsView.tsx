@@ -5,6 +5,7 @@ import { FileText, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog } from "@/components/ui/dialog";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { getErrorMessage } from "@/services/reports";
 import { useDownloadReport, useRegenerateReport, useReportHistory } from "@/hooks/useReports";
 import { REPORT_CATEGORIES, REPORT_TYPES } from "./reportConfig";
@@ -77,30 +78,28 @@ export function ReportsView() {
 
   return (
     <div className="mx-auto max-w-7xl space-y-6">
-      <header className="flex flex-col gap-4">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <FileText className="h-5 w-5" aria-hidden />
-            </span>
-            <div>
-              <h1 className="text-xl font-semibold tracking-tight text-foreground">Reports</h1>
-              <p className="text-sm text-muted-foreground">
-                Generate, view, download, and manage parking reports.
-              </p>
-            </div>
-          </div>
+      <PageHeader
+        icon={FileText}
+        title="Reports"
+        subtitle="Generate, view, and download audit reports from canonical facility data"
+        badge={
+          <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
+            {reports.length} Reports Logged
+          </span>
+        }
+        rightSlot={
           <Button
             variant="outline"
             size="sm"
             onClick={() => refetch()}
             aria-label="Refresh reports"
+            className="gap-1.5 text-xs font-mono"
           >
-            <RefreshCw className="h-4 w-4" aria-hidden />
-            Refresh
+            <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`} aria-hidden />
+            <span>Refresh</span>
           </Button>
-        </div>
-      </header>
+        }
+      />
 
       {/* ── Report Categories ── */}
       <section aria-labelledby="categories-heading">

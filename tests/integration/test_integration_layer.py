@@ -62,7 +62,7 @@ def _fake_pipeline():
     class FakePipeline:
         is_ready = True
 
-        def process_frame(self, frame, camera_id="camera_01"):
+        def process_frame(self, frame, camera_id="CAM-01"):
             return list(_fake_pipeline._records)
 
         def get_stats(self):
@@ -197,7 +197,7 @@ def test_future_module_routes_still_absent(client):
 def test_gateway_reads(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     client.post("/integration/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
 
     h = client.get("/integration/health")
@@ -226,7 +226,7 @@ def test_gateway_reads(client):
 def test_gateway_process_frame_emits_events(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     r = client.post("/integration/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     assert r.status_code == 200
     body = r.json()
@@ -253,11 +253,11 @@ def test_gateway_process_frame_emits_events(client):
 def test_gateway_exit_emits_exit_events(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     client.post("/integration/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     _records_for()  # vehicle departs
     r = client.post("/integration/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
     assert r.status_code == 200
     assert r.json()["occupancy"]["occupied"] == 0
@@ -273,14 +273,14 @@ def test_gateway_exit_emits_exit_events(client):
 def test_gateway_sync_endpoint(client):
     _records_for(_rec(1, plate="KA01AB1234"))
     client.post("/integration/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
-    r = client.post("/integration/sync", params={"camera_id": "camera_01"})
+    r = client.post("/integration/sync", params={"camera_id": "CAM-01"})
     assert r.status_code == 200
     assert "corrected" in r.json()
 
 
-# ─── WebSocket: updates are pushed to the right channels ────────────────────
+# ─── WebSocket: updates are pushed to the right channels ────────────────────────────────
 
 def test_websocket_channels_receive_updates(client):
     svc = registry.get_integration_service()
@@ -288,7 +288,7 @@ def test_websocket_channels_receive_updates(client):
 
     _records_for(_rec(1, plate="KA01AB1234"))
     client.post("/integration/process-frame", json={
-        "image_base64": _b64_image(), "camera_id": "camera_01",
+        "image_base64": _b64_image(), "camera_id": "CAM-01",
     })
 
     channels = {ch for ch, _ in svc.ws.calls}
@@ -330,15 +330,15 @@ async def db():
 
 async def test_sync_releases_dangling_occupied_slot(db):
     await pcrud.upsert_slot(db, {
-        "slot_id": "P01", "camera_id": "camera_01",
+        "slot_id": "P01", "camera_id": "CAM-01",
         "state": SlotState.OCCUPIED.value,
     })
     from modules.integration_layer.sync import Synchronizer
 
-    rep = await Synchronizer().reconcile(db, camera_id="camera_01")
+    rep = await Synchronizer().reconcile(db, camera_id="CAM-01")
     assert rep["released_dangling_slots"] >= 1
     assert rep["corrected"] >= 1
-    slot = await pcrud.get_slot(db, "P01", "camera_01")
+    slot = await pcrud.get_slot(db, "P01", "CAM-01")
     assert slot.state == SlotState.FREE
 
 
@@ -348,7 +348,7 @@ async def test_sync_links_session_to_vehicle(db):
     })
     await pcrud.open_session(db, {
         "session_uid": "PS-TEST1",
-        "camera_id": "camera_01",
+        "camera_id": "CAM-01",
         "slot_id": "P02",
         "license_plate": "KA99ZZ9999",
         "tracking_id": 999,
@@ -360,7 +360,7 @@ async def test_sync_links_session_to_vehicle(db):
     })
     from modules.integration_layer.sync import Synchronizer
 
-    rep = await Synchronizer().reconcile(db, camera_id="camera_01")
+    rep = await Synchronizer().reconcile(db, camera_id="CAM-01")
     assert rep["linked_vehicles"] >= 1
     sess = await pcrud.get_session(db, "PS-TEST1")
     assert sess.vehicle_id is not None

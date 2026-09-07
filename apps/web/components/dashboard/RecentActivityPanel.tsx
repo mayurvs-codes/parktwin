@@ -1,119 +1,64 @@
 "use client";
 
-import type { LucideIcon } from "lucide-react";
+import React from "react";
 import {
   Activity,
   Car,
-  CircleDot,
   LogIn,
   LogOut,
   ParkingSquare,
-  RefreshCw,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { EmptyState } from "@/components/ui/empty-state";
-import { ErrorState } from "@/components/ui/error-state";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useEvents } from "@/hooks/useDashboard";
-import { formatRelativeTime } from "@/lib/format";
-import type { IntegrationEventDTO } from "@/types/dashboard";
+import { useDemoMovieStore } from "@/store/useDemoMovieStore";
 
-const EVENT_META: Record<string, { icon: LucideIcon; title: string }> = {
-  VehicleDetected: { icon: Car, title: "Vehicle detected" },
-  VehicleTracked: { icon: Activity, title: "Vehicle tracked" },
-  VehicleParked: { icon: ParkingSquare, title: "Vehicle parked" },
-  VehicleExited: { icon: LogOut, title: "Vehicle exited" },
-  SessionStarted: { icon: LogIn, title: "Parking session started" },
-  SessionEnded: { icon: LogOut, title: "Parking session ended" },
-  SlotOccupied: { icon: ParkingSquare, title: "Slot occupied" },
-  SlotReleased: { icon: CircleDot, title: "Slot released" },
-};
-
-/** Pull a human-readable subject (plate / slot / camera) out of an event. */
-function subjectOf(ev: IntegrationEventDTO): string | null {
-  const p = ev.payload ?? {};
-  const licensePlate =
-    (p.license_plate as string | undefined) ??
-    (p.record as Record<string, unknown> | undefined)?.license_plate as string | undefined;
-  if (licensePlate) return String(licensePlate);
-  const slot = p.slot_id as string | undefined;
-  if (slot) return `Slot ${String(slot)}`;
-  if (ev.camera_id) return String(ev.camera_id);
-  return null;
-}
-
-function describe(ev: IntegrationEventDTO): { icon: LucideIcon; title: string; detail: string } {
-  const meta = EVENT_META[ev.event_type] ?? { icon: RefreshCw, title: ev.event_type ?? "Event" };
-  const subject = subjectOf(ev);
-  return {
-    icon: meta.icon,
-    title: meta.title,
-    detail: subject ? `${subject} · ${ev.camera_id ?? "unknown camera"}` : (ev.camera_id ?? "System event"),
-  };
-}
-
-function ActivitySkeleton() {
-  return (
-    <div className="space-y-3" aria-hidden data-testid="activity-skeleton">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <div key={i} className="flex items-center gap-3">
-          <Skeleton className="h-9 w-9 rounded-full" />
-          <div className="flex-1 space-y-1.5">
-            <Skeleton className="h-3.5 w-32" />
-            <Skeleton className="h-3 w-44" />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/**
- * Recent activity panel — a feed of the latest integration events with
- * timestamps and concise descriptions from the gateway event bus.
- */
 export function RecentActivityPanel() {
-  const { data, isLoading, isError, refetch } = useEvents(50);
-  const events = data?.events ?? [];
+  const events = useDemoMovieStore((s) => s.events);
 
   return (
-    <Card className="flex h-full flex-col">
-      <CardHeader>
-        <CardTitle>Recent Activity</CardTitle>
+    <Card className="border border-border/80 bg-card/60 backdrop-blur-sm shadow-sm">
+      <CardHeader className="flex flex-row items-center justify-between pb-3 border-b border-border/40">
+        <div className="flex items-center gap-2">
+          <Activity className="h-4 w-4 text-primary" />
+          <CardTitle className="text-base font-semibold">Recent Activity</CardTitle>
+        </div>
+        <span className="text-xs font-mono text-muted-foreground">
+          {events.length} Events Logged
+        </span>
       </CardHeader>
-      <CardContent className="flex-1">
-        {isLoading ? (
-          <ActivitySkeleton />
-        ) : isError ? (
-          <ErrorState
-            title="Couldn't load activity"
-            description="The event feed is unavailable."
-            onRetry={() => void refetch()}
-          />
-        ) : events.length === 0 ? (
-          <EmptyState
-            icon={Activity}
-            title="No recent activity"
-            description="Parking events will appear here as they happen."
-          />
+      <CardContent className="pt-4">
+        {events.length === 0 ? (
+          <div className="py-10 text-center text-xs text-muted-foreground flex flex-col items-center justify-center gap-2">
+            <Activity className="h-8 w-8 text-muted-foreground/30" />
+            <p className="font-medium text-foreground">No recent activity</p>
+            <p className="text-[11px] max-w-sm">
+              Press &ldquo;START PROJECT&rdquo; above to launch the deterministic demo movie and stream real-time gate and bay events.
+            </p>
+          </div>
         ) : (
-          <ul className="space-y-3" aria-label="Recent parking activity" role="list">
-            {events.slice(0, 8).map((ev) => {
-              const { icon: Icon, title, detail } = describe(ev);
+          <ul className="divide-y divide-border/30" role="list">
+            {events.slice(0, 10).map((ev) => {
+              const isEntry = ev.eventType === "VEHICLE_ENTRY";
+              const isPark = ev.eventType === "VEHICLE_PARKED";
+              const isExit = ev.eventType === "VEHICLE_EXITING" || ev.eventType === "VEHICLE_EXITED";
+
+              const Icon = isEntry ? LogIn : isPark ? ParkingSquare : isExit ? LogOut : Car;
+              const iconColor = isEntry ? "text-sky-400 bg-sky-500/10" : isPark ? "text-emerald-400 bg-emerald-500/10" : "text-amber-400 bg-amber-500/10";
+
               return (
-                <li key={ev.event_id} className="flex items-start gap-3" role="listitem">
-                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Icon className="h-4 w-4" aria-hidden />
+                <li key={ev.id} className="py-2.5 flex items-center gap-3">
+                  <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border/40 ${iconColor}`}>
+                    <Icon className="h-4 w-4" />
                   </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-foreground">{title}</p>
-                    <p className="truncate text-xs text-muted-foreground">{detail}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-foreground truncate">
+                      {ev.message}
+                    </p>
+                    <p className="text-[10px] font-mono text-muted-foreground">
+                      {ev.plate} · {ev.slotId} · {ev.camera}
+                    </p>
                   </div>
-                  <time
-                    className="shrink-0 text-xs text-muted-foreground"
-                    dateTime={ev.timestamp ?? undefined}
-                  >
-                    {formatRelativeTime(ev.timestamp)}
+                  <time className="text-[10px] font-mono text-muted-foreground whitespace-nowrap">
+                    {ev.timeLabel}
                   </time>
                 </li>
               );

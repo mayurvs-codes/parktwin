@@ -55,6 +55,10 @@ services:
       - ../../shared:/app/shared
       - ../../configs:/app/configs
       - ../../tests:/app/tests
+      - ../../scripts:/app/scripts
+      - ../../videos:/app/videos
+      - ../../evidence:/app/evidence
+      - ../../run_demo.py:/app/run_demo.py
 
       # -----------------------------------------------------------------------
       # PERSISTENT DATA — named volumes (survive container restarts/stops)
