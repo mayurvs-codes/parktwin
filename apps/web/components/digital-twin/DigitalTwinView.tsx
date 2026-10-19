@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import dynamic from "next/dynamic";
 import {
   Layers3,
   Play,
@@ -9,15 +10,34 @@ import {
   Video,
   UserCheck,
   AlertTriangle,
+  Box,
+  Grid2x2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoMovieStore } from "@/store/useDemoMovieStore";
 import { useCctvEvidenceModalStore } from "@/store/useCctvEvidenceModalStore";
 import { useSharedDemoState, type PersonaType } from "@/store/useSharedDemoState";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
+import { useDigitalTwinStore } from "@/store/useDigitalTwinStore";
 import { DigitalTwinMap } from "@/components/user/DigitalTwinMap";
 import { TwinIntelligenceRail } from "./TwinIntelligenceRail";
 import { DigitalTwinStatusBar } from "./DigitalTwinStatusBar";
+import { Twin3DErrorBoundary } from "./Twin3DErrorBoundary";
+
+const UnifiedTwinCanvas3D = dynamic(
+  () => import("./UnifiedTwinCanvas3D").then((m) => m.UnifiedTwinCanvas3D),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[460px] rounded-xl border border-slate-800 bg-[#050811] flex flex-col items-center justify-center gap-3">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-sky-400 border-t-transparent" />
+        <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+          Initializing 3D Digital Twin...
+        </span>
+      </div>
+    ),
+  }
+);
 
 function formatTime(secs: number): string {
   const m = Math.floor(secs / 60);
@@ -45,11 +65,16 @@ export default function DigitalTwinView() {
   const activePersona = useSharedDemoState((s) => s.activePersona);
   const setActivePersona = useSharedDemoState((s) => s.setActivePersona);
   const sharedSelectedSpaceId = useSharedDemoState((s) => s.selectedSpaceId);
+  const selectSharedSpace = useSharedDemoState((s) => s.selectSpace);
   const sharedSpaces = useSharedDemoState((s) => s.spaces);
   const sharedViolation = useSharedDemoState((s) => s.violation);
   const triggerViolation = useSharedDemoState((s) => s.triggerViolation);
   const clearViolation = useSharedDemoState((s) => s.clearViolation);
   const resetAllShared = useSharedDemoState((s) => s.resetAll);
+
+  // 2D / 3D View Mode State
+  const viewMode = useDigitalTwinStore((s) => s.viewMode);
+  const setViewMode = useDigitalTwinStore((s) => s.setViewMode);
 
   // User Portal Driver State
   const selectVehicle = useUserPortalStore((s) => s.selectVehicle);
@@ -202,6 +227,34 @@ export default function DigitalTwinView() {
             ))}
           </div>
 
+          {/* 2D Vector / 3D Twin View Switcher */}
+          <div className="flex items-center rounded-lg border border-border/60 bg-muted/40 p-0.5" data-testid="twin-view-mode-selector">
+            <button
+              type="button"
+              onClick={() => setViewMode("2d")}
+              className={`flex items-center gap-1 px-2 py-0.5 text-[11px] font-mono rounded transition-colors ${
+                viewMode === "2d"
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Grid2x2 className="h-3 w-3" />
+              <span>2D</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("3d")}
+              className={`flex items-center gap-1 px-2 py-0.5 text-[11px] font-mono rounded transition-colors ${
+                viewMode === "3d"
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Box className="h-3 w-3" />
+              <span>3D</span>
+            </button>
+          </div>
+
           {/* Timeline Clock Pill */}
           <div className="px-2.5 py-1 rounded-lg border border-border/60 bg-background/60 text-xs font-mono font-medium text-muted-foreground shadow-sm">
             <span className="text-foreground font-bold">{formatTime(currentTime)}</span>
@@ -304,12 +357,30 @@ export default function DigitalTwinView() {
       <div className="flex-1 flex overflow-hidden min-h-0 relative">
         {/* Center / Hero Facility Viewport (~75%) */}
         <div className="flex-1 h-full min-w-0 p-2 sm:p-2.5 flex flex-col relative overflow-hidden">
-          <DigitalTwinMap
-            hideAdminControls={false}
-            showAdminVehicles={true}
-            showAdminRoutes={true}
-            highlightSlotId={sharedSelectedSpaceId}
-          />
+          {viewMode === "3d" ? (
+            <Twin3DErrorBoundary
+              fallback2D={
+                <DigitalTwinMap
+                  hideAdminControls={false}
+                  showAdminVehicles={true}
+                  showAdminRoutes={true}
+                  highlightSlotId={sharedSelectedSpaceId}
+                />
+              }
+            >
+              <UnifiedTwinCanvas3D
+                highlightSlotId={sharedSelectedSpaceId}
+                onSlotSelect={(slotId) => selectSharedSpace(slotId)}
+              />
+            </Twin3DErrorBoundary>
+          ) : (
+            <DigitalTwinMap
+              hideAdminControls={false}
+              showAdminVehicles={true}
+              showAdminRoutes={true}
+              highlightSlotId={sharedSelectedSpaceId}
+            />
+          )}
         </div>
 
         {/* Right Contextual Operational Inspector Rail (~25%) */}
