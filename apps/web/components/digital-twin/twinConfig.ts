@@ -600,6 +600,10 @@ export function getSlotAnchor(slotId: string): SlotAnchor {
   if (CALIBRATED_SLOT_ANCHORS[slotId]) {
     return CALIBRATED_SLOT_ANCHORS[slotId];
   }
+  const normalizedKey = slotId.startsWith("SP-") ? slotId.replace("SP-", "P") : slotId;
+  if (CALIBRATED_SLOT_ANCHORS[normalizedKey]) {
+    return CALIBRATED_SLOT_ANCHORS[normalizedKey];
+  }
   const match = slotId.match(/\d+/);
   const num = match ? parseInt(match[0], 10) : 1;
   if (num >= 11 && num <= 17) {
@@ -651,19 +655,58 @@ export const STATUS_3D_COLORS: Record<TwinSlotStatus, number> = {
 };
 
 // ─── 3D POSITIONS (for TwinCanvas3D compatibility) ─────────────────────────────
-// Maps legacy P01-P10 to 3D world coordinates (world units: ~10 units wide × 6.4 deep)
-// Based on CALIBRATED_SLOT_ANCHORS 2D positions, converted to 3D space
+// Maps canonical SP-01..SP-24 and legacy P01..P24 to 3D world coordinates
 export const SLOT_3D_POSITIONS: Record<string, { x: number; z: number }> = {
   P01: { x: -3.6, z: -2.4 },
+  "SP-01": { x: -3.6, z: -2.4 },
   P02: { x: -1.8, z: -2.4 },
+  "SP-02": { x: -1.8, z: -2.4 },
   P03: { x: 0.0, z: -2.4 },
+  "SP-03": { x: 0.0, z: -2.4 },
   P04: { x: 1.8, z: -2.4 },
+  "SP-04": { x: 1.8, z: -2.4 },
   P05: { x: 3.6, z: -2.4 },
+  "SP-05": { x: 3.6, z: -2.4 },
   P06: { x: -3.6, z: 2.4 },
+  "SP-06": { x: -3.6, z: 2.4 },
   P07: { x: -1.8, z: 2.4 },
+  "SP-07": { x: -1.8, z: 2.4 },
   P08: { x: 0.0, z: 2.4 },
+  "SP-08": { x: 0.0, z: 2.4 },
   P09: { x: 1.8, z: 2.4 },
+  "SP-09": { x: 1.8, z: 2.4 },
   P10: { x: 3.6, z: 2.4 },
+  "SP-10": { x: 3.6, z: 2.4 },
+
+  P11: { x: -3.6, z: 4.8 },
+  "SP-11": { x: -3.6, z: 4.8 },
+  P12: { x: -2.7, z: 4.8 },
+  "SP-12": { x: -2.7, z: 4.8 },
+  P13: { x: -1.8, z: 4.8 },
+  "SP-13": { x: -1.8, z: 4.8 },
+  P14: { x: -0.9, z: 4.8 },
+  "SP-14": { x: -0.9, z: 4.8 },
+  P15: { x: 0.0, z: 4.8 },
+  "SP-15": { x: 0.0, z: 4.8 },
+  P16: { x: 0.9, z: 4.8 },
+  "SP-16": { x: 0.9, z: 4.8 },
+  P17: { x: 1.8, z: 4.8 },
+  "SP-17": { x: 1.8, z: 4.8 },
+  P18: { x: 2.7, z: 4.8 },
+  "SP-18": { x: 2.7, z: 4.8 },
+  P19: { x: 3.6, z: 4.8 },
+  "SP-19": { x: 3.6, z: 4.8 },
+  P20: { x: 4.5, z: 4.8 },
+  "SP-20": { x: 4.5, z: 4.8 },
+
+  P21: { x: -5.0, z: -4.0 },
+  "SP-21": { x: -5.0, z: -4.0 },
+  P22: { x: -5.0, z: -2.0 },
+  "SP-22": { x: -5.0, z: -2.0 },
+  P23: { x: -5.0, z: 0.0 },
+  "SP-23": { x: -5.0, z: 0.0 },
+  P24: { x: -5.0, z: 2.0 },
+  "SP-24": { x: -5.0, z: 2.0 },
 };
 
 // Legacy slot position helper

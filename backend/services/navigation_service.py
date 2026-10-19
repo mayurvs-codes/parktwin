@@ -96,21 +96,21 @@ def _sync_with_canonical_geometry() -> None:
                     pos = bay.get("canvas", {})
                     name = bay.get("name", bay_id)
                     
-                    # Associate with nav nodes
-                    if bay_id and bay_id not in NAV_NODES:
-                        # Find closest or matching junction
-                        num = int(bay_id.split("-")[1]) if "-" in bay_id else 1
-                        ref_p = f"P{num:02d}" if num <= 10 else "P06"
-                        ref_coords = NAV_NODES.get(ref_p, {"x": pos.get("x", 600), "y": pos.get("y", 400)})
-                        NAV_NODES[bay_id] = {
-                            "name": f"Space {bay_id}",
-                            "x": ref_coords["x"],
-                            "y": ref_coords["y"],
-                            "type": "slot",
-                        }
-                        # Connect edge
-                        junction = "UPPER_WEST_JUNCTION" if num <= 5 or (17 <= num <= 20) else "MID_WEST_JUNCTION"
-                        NAV_EDGES.append((junction, bay_id, 100.0))
+                    num = int(bay_id.split("-")[1]) if "-" in bay_id else 1
+                    ref_p = f"P{num:02d}" if num <= 10 else "P06"
+                    ref_coords = NAV_NODES.get(ref_p, {"x": pos.get("x", 600), "y": pos.get("y", 400)})
+                    junction = "UPPER_WEST_JUNCTION" if num <= 5 or (17 <= num <= 20) else "MID_WEST_JUNCTION"
+
+                    # Associate both canonical ID (SP-XX) and alias (PXX) with nav nodes
+                    for tid in [t for t in (bay_id, alias) if t]:
+                        if tid not in NAV_NODES:
+                            NAV_NODES[tid] = {
+                                "name": f"Space {tid}",
+                                "x": ref_coords["x"],
+                                "y": ref_coords["y"],
+                                "type": "slot",
+                            }
+                            NAV_EDGES.append((junction, tid, 100.0))
                 break
             except Exception:
                 pass
