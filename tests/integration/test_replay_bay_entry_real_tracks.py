@@ -1,3 +1,8 @@
+# No human-labelled accuracy measurement exists yet.
+# These assertions represent a regression snapshot of current detector output
+# to ensure consistent pipeline execution across code changes.
+# They do NOT assert ground truth or physical measurement accuracy.
+
 """
 Integration test for real CCTV track replay through BayEntryDetector and Engine.
 Validates image-space polygon detection strictly in replay mode without calibration.
@@ -47,8 +52,11 @@ async def test_real_cctv_tracks_live_emits_nothing_unconfigured():
 
 
 @pytest.mark.asyncio
-async def test_real_cctv_tracks_replay_emits_expected_bays():
-    """Replay mode must detect bay entries and occupations using image-space polygons."""
+async def test_real_cctv_tracks_replay_detector_output_regression_snapshot():
+    """
+    Replay mode regression snapshot of current detector output using image-space replay polygons.
+    Asserts consistency of current detector outputs across refactors; does not assert accuracy.
+    """
     tracks_file = Path("data/annotations/real_cctv_tracks_camera10.json")
     with open(tracks_file, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -67,26 +75,26 @@ async def test_real_cctv_tracks_replay_emits_expected_bays():
     for ev in replay_events:
         assert ev.source == "replay", f"Event {ev} must carry source='replay'"
 
-    # Verify specific vehicles and their derived bay assignments
+    # Regression snapshot of current detector output per track ID
     entry_bays = {e.track_id: e.bay_id for e in replay_events if e.event_type == BAY_ENTRY_CONFIRMED}
     occupied_bays = {e.track_id: e.bay_id for e in replay_events if e.event_type == BAY_OCCUPIED}
 
-    # Track 1 (Blue hatchback) in BAY-CAM10-05
+    # Regression snapshot: Track 1 (Blue hatchback) in BAY-CAM10-05
     assert entry_bays.get(1) == "BAY-CAM10-05"
     assert occupied_bays.get(1) == "BAY-CAM10-05"
 
-    # Track 2 (Red sedan) in BAY-CAM10-04
+    # Regression snapshot: Track 2 (Red sedan) in BAY-CAM10-04
     assert entry_bays.get(2) == "BAY-CAM10-04"
     assert occupied_bays.get(2) == "BAY-CAM10-04"
 
-    # Track 3 (Red SUV) in BAY-CAM10-02
+    # Regression snapshot: Track 3 (Red SUV) in BAY-CAM10-02
     assert entry_bays.get(3) == "BAY-CAM10-02"
     assert occupied_bays.get(3) == "BAY-CAM10-02"
 
-    # Track 4 (Moving vehicle driving past down aisle) must NOT enter any bay
+    # Regression snapshot: Track 4 (Vehicle driving down aisle) produces no bay entry
     assert 4 not in entry_bays, "Track 4 is driving in aisle and must not trigger bay entry"
 
-    # Track 5 (Black van) in BAY-CAM10-03
+    # Regression snapshot: Track 5 (Black van) in BAY-CAM10-03
     assert entry_bays.get(5) == "BAY-CAM10-03"
 
 
