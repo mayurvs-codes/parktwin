@@ -20,7 +20,7 @@ from sqlalchemy.orm import selectinload
 from backend.database.models import Base, Vehicle
 from backend.core.config import get_settings
 
-from .models import ParkingSlot, ParkingSession, ParkingEvent, SlotState
+from .models import ParkingSlot, ParkingSession, ParkingEvent, SlotState, ViolationEpisode
 from .config_loader import load_slot_definitions
 
 
@@ -308,3 +308,61 @@ async def count_events(db: AsyncSession, event_type: Optional[str] = None) -> in
         query = query.where(ParkingEvent.event_type == event_type)
     result = await db.execute(query)
     return len(result.scalars().all())
+
+
+# ─── Violation Episode CRUD (Phase 3) ─────────────────────────────────────────
+
+async def record_violation_episode(db: AsyncSession, data: dict) -> ViolationEpisode:
+    ep = ViolationEpisode(**data)
+    db.add(ep)
+    await db.flush()
+    return ep
+
+
+async def update_violation_episode(
+    db: AsyncSession,
+    episode_id: str,
+    *,
+    state: Optional[str] = None,
+    resolution_reason: Optional[str] = None,
+    resolved_at: Optional[datetime] = None,
+    duration_seconds: Optional[float] = None,
+) -> Optional[ViolationEpisode]:
+    res = await db.execute(
+        select(ViolationEpisode).where(ViolationEpisode.episode_id == episode_id)
+    )
+    ep = res.scalar_one_or_none()
+    if not ep:
+        return None
+    if state is not None:
+        ep.state = state
+    if resolution_reason is not None:
+        ep.resolution_reason = resolution_reason
+    if resolved_at is not None:
+        ep.resolved_at = resolved_at
+    if duration_seconds is not None:
+        ep.duration_seconds = float(duration_seconds)
+    await db.flush()
+    return ep
+
+
+async def list_violation_episodes(
+    db: AsyncSession,
+    *,
+    active_only: bool = False,
+    vehicle_id: Optional[str] = None,
+    actual_bay: Optional[str] = None,
+    skip: int = 0,
+    limit: int = 100,
+) -> List[ViolationEpisode]:
+    query = select(ViolationEpisode)
+    if active_only:
+        query = query.where(ViolationEpisode.state != "RESOLVED")
+    if vehicle_id:
+        query = query.where(ViolationEpisode.vehicle_id == vehicle_id)
+    if actual_bay:
+        query = query.where(ViolationEpisode.actual_bay == actual_bay)
+    query = query.order_by(ViolationEpisode.started_at.desc()).offset(skip).limit(limit)
+    result = await db.execute(query)
+    return list(result.scalars().all())
+

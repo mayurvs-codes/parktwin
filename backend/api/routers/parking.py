@@ -437,3 +437,18 @@ async def reset_parking_state(
     await integration.ensure_initialized(db)
     result = await integration.reset(db)
     return result
+
+
+@router.get("/violations/episodes", summary="List active or historical violation episodes")
+async def list_parking_violation_episodes(
+    active: bool = Query(True, description="Filter active episodes"),
+    vehicle_id: Optional[str] = Query(None, description="Filter by vehicle plate or ID"),
+    engine: ParkingIntelligenceEngine = Depends(get_parking_engine),
+    db: AsyncSession = Depends(get_db),
+    _user=Depends(require_viewer),
+) -> List[Dict[str, Any]]:
+    """List violation episodes via /parking/violations/episodes."""
+    in_memory = engine.violations.get_episodes(active_only=active)
+    if vehicle_id:
+        in_memory = [ep for ep in in_memory if ep["vehicle_id"] == vehicle_id or ep.get("license_plate") == vehicle_id]
+    return in_memory

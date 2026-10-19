@@ -110,3 +110,26 @@ class ParkingEvent(Base):
     license_plate = Column(String(32), nullable=True, index=True)
     timestamp = Column(DateTime(timezone=True), server_default=func.now(), index=True)
     meta = Column(JSON, default={})
+
+
+# ─── Violation Episode (Phase 3) ──────────────────────────────────────────────
+
+class ViolationEpisode(Base):
+    """Tracks a vehicle's wrong-bay or policy violation episode."""
+
+    __tablename__ = "violation_episodes"
+
+    id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    episode_id = Column(String(64), unique=True, nullable=False, index=True)
+    vehicle_id = Column(String(64), nullable=True, index=True)
+    license_plate = Column(String(32), nullable=True, index=True)
+    assigned_bay = Column(String(32), nullable=True)
+    actual_bay = Column(String(32), nullable=False, index=True)
+    state = Column(String(32), default="WARNED")  # WARNED | ESCALATED | RESOLVED
+    resolution_reason = Column(String(64), nullable=True)
+    started_at = Column(DateTime(timezone=True), nullable=False)
+    resolved_at = Column(DateTime(timezone=True), nullable=True)
+    duration_seconds = Column(Float, default=0.0)
+    source = Column(String(32), default="live")
+    meta = Column(JSON, default={})
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

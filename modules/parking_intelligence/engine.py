@@ -80,6 +80,10 @@ class ParkingIntelligenceEngine:
     def initialized(self) -> bool:
         return self._initialized
 
+    @property
+    def violations(self) -> ViolationEngine:
+        return self._violations
+
     # ── Per-frame ingestion ────────────────────────────────────────────────
 
     async def ingest_frame(

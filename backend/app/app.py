@@ -250,6 +250,9 @@ def create_app() -> FastAPI:
     app.include_router(prototype_router)
     # Video Library & Processing APIs — /videos.
     app.include_router(videos_router)
+    # Violations Intelligence APIs — /violations/episodes.
+    from backend.api.routers.violations import router as violations_router
+    app.include_router(violations_router)
 
     # Prometheus Instrumentator (/metrics endpoint)
     from prometheus_fastapi_instrumentator import Instrumentator
