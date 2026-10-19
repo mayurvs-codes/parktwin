@@ -10,6 +10,7 @@ import {
   CANONICAL_COORDS,
   RUNTIME_TO_PHYSICAL_MAP,
 } from "./twinConfig";
+import facilityGeometryJson from "../../config/facility_geometry.json";
 
 // Re-export for consumers
 export {
@@ -193,10 +194,50 @@ function buildSlotGeometry(): Record<string, SlotGeometry> {
     }
   }
 
+  // Canonical SP-01 to SP-24 bays from authoritative facility JSON
+  for (const bay of facilityGeometryJson.bays || []) {
+    const bayId = bay.id as string;
+    const c = bay.canvas || {};
+    geometry[bayId] = {
+      id: bayId,
+      x: c.x ?? 0,
+      y: c.y ?? 0,
+      width: c.width ?? 48,
+      height: c.height ?? 76,
+      orientation: bay.orientation === "horizontal" ? 90 : 180,
+      zone: bay.zone || "Zone B (Upper Island)",
+      block: "focused_island_1",
+      confidence: bay.confidence || (bay.verified ? "VERIFIED" : "MEDIUM_CONFIDENCE"),
+      vehicleAccessible: true,
+      physicalId: bayId,
+      camera_id: bay.covering_camera || "CAM-12",
+    };
+  }
+
   return geometry;
 }
 
 export const SLOT_GEOMETRY_MAP = buildSlotGeometry();
+
+// Import canonical facility JSON for unified renderer-agnostic geometry
+export const CANONICAL_FACILITY_DATA = facilityGeometryJson;
+
+export interface CanonicalBayGeometry {
+  id: string;
+  alias?: string;
+  name: string;
+  zone: string;
+  verified: boolean;
+  confidence: string;
+  canvas: { x: number; y: number; width: number; height: number };
+  position_3d: [number, number, number];
+  dimensions_meters: { width: number; length: number };
+  orientation: "vertical" | "horizontal";
+  covering_camera: string;
+}
+
+// Typed canonical bays array
+export const CANONICAL_BAYS: CanonicalBayGeometry[] = facilityGeometryJson.bays as unknown as CanonicalBayGeometry[];
 
 export function getSlotGeometry(slotId: string) {
   return SLOT_GEOMETRY_MAP[slotId] || {

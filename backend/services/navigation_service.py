@@ -75,6 +75,48 @@ NAV_EDGES = [
     ("MID_WEST_JUNCTION", "P10", 100.0),
 ]
 
+# Synchronize with canonical shared/facility_geometry.json
+def _sync_with_canonical_geometry() -> None:
+    import json
+    from pathlib import Path
+    
+    # Try finding shared/facility_geometry.json
+    candidates = [
+        Path(__file__).resolve().parents[2] / "shared" / "facility_geometry.json",
+        Path(__file__).resolve().parents[2] / "apps" / "web" / "config" / "facility_geometry.json",
+    ]
+    for geo_path in candidates:
+        if geo_path.exists():
+            try:
+                with open(geo_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                for bay in data.get("bays", []):
+                    bay_id = bay.get("id")
+                    alias = bay.get("alias")
+                    pos = bay.get("canvas", {})
+                    name = bay.get("name", bay_id)
+                    
+                    # Associate with nav nodes
+                    if bay_id and bay_id not in NAV_NODES:
+                        # Find closest or matching junction
+                        num = int(bay_id.split("-")[1]) if "-" in bay_id else 1
+                        ref_p = f"P{num:02d}" if num <= 10 else "P06"
+                        ref_coords = NAV_NODES.get(ref_p, {"x": pos.get("x", 600), "y": pos.get("y", 400)})
+                        NAV_NODES[bay_id] = {
+                            "name": f"Space {bay_id}",
+                            "x": ref_coords["x"],
+                            "y": ref_coords["y"],
+                            "type": "slot",
+                        }
+                        # Connect edge
+                        junction = "UPPER_WEST_JUNCTION" if num <= 5 or (17 <= num <= 20) else "MID_WEST_JUNCTION"
+                        NAV_EDGES.append((junction, bay_id, 100.0))
+                break
+            except Exception:
+                pass
+
+_sync_with_canonical_geometry()
+
 
 class NavigationGraph:
     def __init__(self):

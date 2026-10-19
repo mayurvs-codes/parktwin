@@ -1,0 +1,158 @@
+{
+  "facility_id": "Carparking-01",
+  "name": "Carparking-01 Basement B2",
+  "facility_version": "1.0.0",
+  "coordinate_system": {
+    "units": "meters",
+    "svg_viewbox": {
+      "width": 1472,
+      "height": 1508
+    },
+    "scale_pixels_per_meter": 20.0,
+    "origin": "top-left"
+  },
+  "gateways": [
+    {
+      "id": "ACCESS_POINT_B2",
+      "name": "B2 Vehicle Gateway (Entry & Exit)",
+      "type": "access_point",
+      "centroid": { "x": 55.25, "y": 2.75, "z": 0.0 },
+      "canvas": { "x": 1105, "y": 55 },
+      "cameras": { "entry": "CAM-01", "exit": "CAM-16" },
+      "verified": true
+    }
+  ],
+  "junctions": [
+    { "id": "NORTH_JUNCTION", "name": "North Junction", "x": 706, "y": 180, "type": "junction" },
+    { "id": "UPPER_WEST_JUNCTION", "name": "Upper West Junction", "x": 706, "y": 800, "type": "junction" },
+    { "id": "MID_WEST_JUNCTION", "name": "Mid West Junction", "x": 706, "y": 1361, "type": "junction" },
+    { "id": "LOWER_MID_JUNCTION", "name": "Lower Mid Junction", "x": 706, "y": 1420, "type": "junction" },
+    { "id": "SOUTH_JUNCTION", "name": "South Junction", "x": 792, "y": 1567, "type": "junction" },
+    { "id": "WEST_TRUNK_NORTH", "name": "West Trunk North", "x": 438, "y": 180, "type": "aisle" },
+    { "id": "WEST_TRUNK_SOUTH", "name": "West Trunk South", "x": 438, "y": 1585, "type": "aisle" },
+    { "id": "EAST_UPPER_JUNCTION", "name": "East Upper Junction", "x": 815, "y": 180, "type": "junction" },
+    { "id": "EAST_MID_JUNCTION", "name": "East Mid Junction", "x": 815, "y": 857, "type": "junction" },
+    { "id": "EAST_LOWER_JUNCTION", "name": "East Lower Junction", "x": 815, "y": 1417, "type": "junction" },
+    { "id": "EAST_SOUTH_JUNCTION", "name": "East South Junction", "x": 815, "y": 1585, "type": "junction" }
+  ],
+  "aisles": [
+    {
+      "id": "north_perimeter",
+      "name": "North Perimeter Lane",
+      "type": "aisle",
+      "direction": "bidirectional",
+      "width_meters": 3.4,
+      "centerline_canvas": [[644, 138], [706, 138]]
+    },
+    {
+      "id": "main_west_trunk",
+      "name": "Main West Driving Trunk",
+      "type": "trunk",
+      "direction": "bidirectional",
+      "width_meters": 4.0,
+      "centerline_canvas": [[438, 138], [438, 1585]]
+    },
+    {
+      "id": "upper_west_aisle",
+      "name": "Upper West Aisle",
+      "type": "aisle",
+      "direction": "bidirectional",
+      "width_meters": 3.75,
+      "centerline_canvas": [[701, 800], [817, 800]]
+    },
+    {
+      "id": "mid_west_aisle",
+      "name": "Mid West Aisle",
+      "type": "aisle",
+      "direction": "bidirectional",
+      "width_meters": 3.75,
+      "centerline_canvas": [[701, 1361], [823, 1361]]
+    },
+    {
+      "id": "lower_mid_aisle",
+      "name": "Lower Mid Aisle",
+      "type": "aisle",
+      "direction": "bidirectional",
+      "width_meters": 3.5,
+      "centerline_canvas": [[710, 1420], [815, 1420]]
+    },
+    {
+      "id": "south_exit_aisle",
+      "name": "South Exit Aisle",
+      "type": "connector",
+      "direction": "bidirectional",
+      "width_meters": 3.25,
+      "centerline_canvas": [[710, 1567], [874, 1567]]
+    }
+  ],
+  "restricted_zones": [
+    {
+      "id": "pedestrian_core_left",
+      "name": "Left Stair/Elevator Core",
+      "type": "pedestrian_core",
+      "reason": "Stair and elevator core - pedestrian only",
+      "polygon_canvas": [[150, 3], [313, 3], [313, 1028], [150, 1028]],
+      "vehicle_accessible": false
+    },
+    {
+      "id": "structural_core_tech_park",
+      "name": "Tech Park Structural Core",
+      "type": "structural_core",
+      "reason": "Structural foundation - vehicle forbidden",
+      "polygon_canvas": [[217, 783], [321, 783], [321, 1682], [217, 1682]],
+      "vehicle_accessible": false
+    },
+    {
+      "id": "ramp_core_west",
+      "name": "West Ramp Void",
+      "type": "ramp_void",
+      "reason": "Ramp void - vehicle forbidden",
+      "polygon_canvas": [[372, 613], [472, 613], [472, 1682], [372, 1682]],
+      "vehicle_accessible": false
+    }
+  ],
+  "cameras": [
+    { "id": "CAM-01", "name": "B2 Entrance Gate", "role": "ENTRY", "status": "ONLINE", "verified": true, "canvas": { "x": 1105, "y": 60 } },
+    { "id": "CAM-02", "name": "East Vertical Drive Aisle", "role": "PATH/PARKING", "status": "ONLINE", "verified": true, "canvas": { "x": 1225, "y": 610 } },
+    { "id": "CAM-03", "name": "Southeast Drive Corridor", "role": "PATH/PARKING", "status": "ONLINE", "verified": true, "canvas": { "x": 1225, "y": 1318 } },
+    { "id": "CAM-04", "name": "South Perimeter Corridor East", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 1160, "y": 1318 } },
+    { "id": "CAM-05", "name": "3rd Horizontal Aisle East", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 820, "y": 960 } },
+    { "id": "CAM-06", "name": "3rd Horizontal Aisle West", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 550, "y": 960 } },
+    { "id": "CAM-07", "name": "Southwest Corridor Junction", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 412, "y": 1318 } },
+    { "id": "CAM-08", "name": "West Lift Core 02 Junction", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 344, "y": 960 } },
+    { "id": "CAM-09", "name": "2nd Horizontal Aisle West", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 550, "y": 610 } },
+    { "id": "CAM-10", "name": "2nd Horizontal Aisle Center", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 820, "y": 610 } },
+    { "id": "CAM-11", "name": "East Services Corridor", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 1225, "y": 960 } },
+    { "id": "CAM-12", "name": "Top Horizontal Aisle Center", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 820, "y": 250 } },
+    { "id": "CAM-13", "name": "West Entry Ramp Junction", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 412, "y": 725 } },
+    { "id": "CAM-14", "name": "West Lift Core 01 Junction", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 344, "y": 484 } },
+    { "id": "CAM-15", "name": "Northwest Perimeter Junction", "role": "PATH/PARKING", "status": "STANDBY", "verified": false, "canvas": { "x": 412, "y": 250 } },
+    { "id": "CAM-16", "name": "Exit Gate / Access Point B2", "role": "EXIT", "status": "ONLINE", "verified": true, "canvas": { "x": 1190, "y": 120 } }
+  ],
+  "bays": [
+    { "id": "SP-01", "alias": "P01", "name": "P01", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 610, "y": 365, "width": 48, "height": 76 }, "position_3d": [-14.4, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-02", "alias": "P02", "name": "P02", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 670, "y": 365, "width": 48, "height": 76 }, "position_3d": [-11.2, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-03", "alias": "P03", "name": "P03", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 730, "y": 365, "width": 48, "height": 76 }, "position_3d": [-8.0, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-04", "alias": "P04", "name": "P04", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 790, "y": 365, "width": 48, "height": 76 }, "position_3d": [-4.8, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-05", "alias": "P05", "name": "P05", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 850, "y": 365, "width": 48, "height": 76 }, "position_3d": [-1.6, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-06", "alias": "P06", "name": "P06", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 910, "y": 365, "width": 48, "height": 76 }, "position_3d": [1.6, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-07", "alias": "P07", "name": "P07", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 970, "y": 365, "width": 48, "height": 76 }, "position_3d": [4.8, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-08", "alias": "P08", "name": "P08", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 1030, "y": 365, "width": 48, "height": 76 }, "position_3d": [8.0, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-09", "alias": "P09", "name": "P09", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 610, "y": 505, "width": 48, "height": 76 }, "position_3d": [11.2, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-10", "alias": "P10", "name": "P10", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 670, "y": 505, "width": 48, "height": 76 }, "position_3d": [14.4, 0.0, -6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-11", "alias": "P11", "name": "P11", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 730, "y": 505, "width": 48, "height": 76 }, "position_3d": [-14.4, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-12", "alias": "P12", "name": "P12", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 790, "y": 505, "width": 48, "height": 76 }, "position_3d": [-11.2, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-13", "alias": "P13", "name": "P13", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 850, "y": 505, "width": 48, "height": 76 }, "position_3d": [-8.0, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-14", "alias": "P14", "name": "P14", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 910, "y": 505, "width": 48, "height": 76 }, "position_3d": [-4.8, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-15", "alias": "P15", "name": "P15", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 970, "y": 505, "width": 48, "height": 76 }, "position_3d": [-1.6, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-16", "alias": "P16", "name": "P16", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 1030, "y": 505, "width": 48, "height": 76 }, "position_3d": [1.6, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-12" },
+    { "id": "SP-17", "alias": "P17", "name": "P17", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 530, "y": 340, "width": 76, "height": 48 }, "position_3d": [4.8, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "horizontal", "covering_camera": "CAM-09" },
+    { "id": "SP-18", "alias": "P18", "name": "P18", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 530, "y": 400, "width": 76, "height": 48 }, "position_3d": [8.0, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "horizontal", "covering_camera": "CAM-09" },
+    { "id": "SP-19", "alias": "P19", "name": "P19", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 530, "y": 460, "width": 76, "height": 48 }, "position_3d": [11.2, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "horizontal", "covering_camera": "CAM-09" },
+    { "id": "SP-20", "alias": "P20", "name": "P20", "zone": "Zone B (Upper Island)", "verified": true, "confidence": "VERIFIED", "canvas": { "x": 530, "y": 520, "width": 76, "height": 48 }, "position_3d": [14.4, 0.0, 6.2], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "horizontal", "covering_camera": "CAM-09" },
+    { "id": "SP-21", "alias": "P21", "name": "P21", "zone": "Zone A (North Perimeter)", "verified": false, "confidence": "MEDIUM_CONFIDENCE", "canvas": { "x": 230, "y": 145, "width": 48, "height": 76 }, "position_3d": [-22.0, 0.0, -18.0], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-15" },
+    { "id": "SP-22", "alias": "P22", "name": "P22", "zone": "Zone A (North Perimeter)", "verified": false, "confidence": "MEDIUM_CONFIDENCE", "canvas": { "x": 295, "y": 145, "width": 48, "height": 76 }, "position_3d": [-18.75, 0.0, -18.0], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-15" },
+    { "id": "SP-23", "alias": "P23", "name": "P23", "zone": "Zone A (North Perimeter)", "verified": false, "confidence": "MEDIUM_CONFIDENCE", "canvas": { "x": 360, "y": 145, "width": 48, "height": 76 }, "position_3d": [-15.5, 0.0, -18.0], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-15" },
+    { "id": "SP-24", "alias": "P24", "name": "P24", "zone": "Zone A (North Perimeter)", "verified": false, "confidence": "MEDIUM_CONFIDENCE", "canvas": { "x": 425, "y": 145, "width": 48, "height": 76 }, "position_3d": [-12.25, 0.0, -18.0], "dimensions_meters": { "width": 2.8, "length": 5.4 }, "orientation": "vertical", "covering_camera": "CAM-15" }
+  ]
+}
