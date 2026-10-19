@@ -173,7 +173,7 @@ async def replay_scenario(
     await db.flush()
 
     # 2. Process timeline events in chronological order
-    timeline_events = data.get("timeline_events", [])
+    timeline_events = data.get("timeline_events") or data.get("events", [])
     active_sessions: Dict[str, ParkingSession] = {}
     events_count = 0
 

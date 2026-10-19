@@ -1,0 +1,129 @@
+{
+  "scenario_name": "wrong-bay",
+  "description": "ParkTwin wrong-bay detection, immediate voice warning, and relocation to designated space",
+  "facility": "Carparking-01 B2",
+  "source": "demo",
+  "cameras": [
+    {"camera_id": "CAM-01", "name": "B2 Entrance Gate", "zone": "entrance"},
+    {"camera_id": "CAM-02", "name": "B2 Parking Bays", "zone": "parking"},
+    {"camera_id": "CAM-03", "name": "B2 Exit Ramp", "zone": "exit"}
+  ],
+  "vehicles": [
+    {
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "vehicle_type": "Sedan",
+      "brand": "Honda",
+      "model": "City",
+      "color": "Silver",
+      "plate_confidence": 0.98,
+      "slot_id": "SP-07",
+      "final_status": "parked",
+      "source_evidence": "Demo Scenario Wrong-Bay"
+    }
+  ],
+  "slots": [
+    {"slot_id": "P01", "display_id": "SP-01", "zone": "Zone B", "state": "occupied", "is_reserved": false},
+    {"slot_id": "P02", "display_id": "SP-02", "zone": "Zone B", "state": "occupied", "is_reserved": false},
+    {"slot_id": "P03", "display_id": "SP-03", "zone": "Zone B", "state": "occupied", "is_reserved": false},
+    {"slot_id": "P04", "display_id": "SP-04", "zone": "Zone B", "state": "occupied", "is_reserved": false},
+    {"slot_id": "P05", "display_id": "SP-05", "zone": "Zone B", "state": "occupied", "is_reserved": false},
+    {"slot_id": "P06", "display_id": "SP-06", "zone": "Zone B", "state": "occupied", "is_reserved": false},
+    {"slot_id": "P07", "display_id": "SP-07", "zone": "Zone B", "state": "free", "is_reserved": true, "reserved_for": "KA01MJ5001"},
+    {"slot_id": "P08", "display_id": "SP-08", "zone": "Zone B", "state": "free", "is_reserved": false},
+    {"slot_id": "P09", "display_id": "SP-09", "zone": "Zone B", "state": "occupied", "is_reserved": false},
+    {"slot_id": "P10", "display_id": "SP-10", "zone": "Zone B", "state": "occupied", "is_reserved": false}
+  ],
+  "timeline_events": [
+    {
+      "time_offset_s": 0,
+      "timestamp": "2026-10-19T10:00:00Z",
+      "event_type": "VehicleEntered",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "demo"
+    },
+    {
+      "time_offset_s": 5,
+      "timestamp": "2026-10-19T10:00:05Z",
+      "event_type": "PlateRecognized",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-01",
+      "slot_id": null,
+      "source_type": "demo"
+    },
+    {
+      "time_offset_s": 10,
+      "timestamp": "2026-10-19T10:00:10Z",
+      "event_type": "SlotAssigned",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-01",
+      "slot_id": "SP-07",
+      "source_type": "demo"
+    },
+    {
+      "time_offset_s": 25,
+      "timestamp": "2026-10-19T10:00:25Z",
+      "event_type": "BayEntryConfirmed",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-02",
+      "slot_id": "SP-11",
+      "source_type": "demo"
+    },
+    {
+      "time_offset_s": 26,
+      "timestamp": "2026-10-19T10:00:26Z",
+      "event_type": "WrongBayEntryWarning",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-02",
+      "slot_id": "SP-11",
+      "source_type": "demo"
+    },
+    {
+      "time_offset_s": 50,
+      "timestamp": "2026-10-19T10:00:50Z",
+      "event_type": "BayExitConfirmed",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-02",
+      "slot_id": "SP-11",
+      "source_type": "demo"
+    },
+    {
+      "time_offset_s": 51,
+      "timestamp": "2026-10-19T10:00:51Z",
+      "event_type": "WrongBayResolved",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-02",
+      "slot_id": "SP-11",
+      "source_type": "demo"
+    },
+    {
+      "time_offset_s": 75,
+      "timestamp": "2026-10-19T10:01:15Z",
+      "event_type": "SlotOccupied",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-02",
+      "slot_id": "P07",
+      "source_type": "demo"
+    },
+    {
+      "time_offset_s": 80,
+      "timestamp": "2026-10-19T10:01:20Z",
+      "event_type": "ParkingSessionStarted",
+      "prototype_id": "VEH-001",
+      "license_plate": "KA01MJ5001",
+      "camera_id": "CAM-02",
+      "slot_id": "P07",
+      "source_type": "demo"
+    }
+  ]
+}

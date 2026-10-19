@@ -98,6 +98,10 @@ export default function DigitalTwinView() {
   };
 
   const handleResetBoth = () => {
+    if (typeof window !== "undefined") {
+      const confirmed = window.confirm("Are you sure you want to reset all Digital Twin and parking session states?");
+      if (!confirmed) return;
+    }
     resetAllShared();
     resetUserDemo();
     resetMovie();
