@@ -1,40 +1,55 @@
 [
   {
     "action": "ANNOUNCEMENT",
-    "message_id": "VM-ASSIGN-001",
-    "event_id": "EV-ANPR-001",
+    "message_id": "VM-2c435aebb4",
+    "event_id": "ANPR-ASN-VEH-001-SP-07",
     "kind": "ASSIGNMENT",
     "priority": 50,
-    "text": "Vehicle recognised. Your designated parking space is SP-07. Follow the driving aisle past Upper West Junction.",
+    "text": "Vehicle recognised. Your designated parking space is SP-07. Follow the driving aisle via North Junction, then Upper West Junction, then Mid West Junction to your bay.",
     "vehicle_id": "VEH-001",
     "source": "demo",
-    "timestamp": "2026-10-19T10:00:10.000Z",
-    "delivered": true
+    "timestamp": "2026-10-19T14:05:26.206302+00:00",
+    "preempted_message_id": null
+  },
+  {
+    "action": "CANCEL",
+    "message_id": "VM-2c435aebb4",
+    "reason": "preempted_by_higher_priority",
+    "timestamp": "2026-10-19T14:05:26.315533+00:00"
   },
   {
     "action": "ANNOUNCEMENT",
-    "message_id": "VM-WARN-001",
-    "event_id": "EV-WARN-001",
+    "message_id": "VM-2909d5c74f",
+    "event_id": "VE-037ac991fc",
     "kind": "WRONG_BAY_WARNING",
     "priority": 100,
     "text": "Warning! This is not your designated parking space. Please move to space SP-07.",
     "vehicle_id": "VEH-001",
     "source": "demo",
-    "timestamp": "2026-10-19T10:00:26.000Z",
-    "preempted_message_id": "VM-ASSIGN-001",
-    "delivered": true
+    "timestamp": "2026-10-19T14:05:26.315527+00:00",
+    "preempted_message_id": "VM-2c435aebb4"
+  },
+  {
+    "action": "DUPLICATE_SUPPRESSION_AUDIT",
+    "attempted_event_id": "VE-037ac991fc",
+    "vehicle_id": "VEH-001",
+    "cooldown_seconds": 5.0,
+    "event_ttl_seconds": 300.0,
+    "suppressed": true,
+    "reason": "event_id_seen_and_vehicle_cooldown_active",
+    "timestamp": "2026-10-19T14:05:26.552756+00:00"
   },
   {
     "action": "CANCEL",
-    "message_id": "VM-ASSIGN-001",
-    "reason": "preempted_by_higher_priority",
-    "timestamp": "2026-10-19T10:00:26.001Z"
+    "message_id": "VE-037ac991fc",
+    "reason": "wrong_bay_resolved",
+    "timestamp": "2026-10-19T14:05:26.494866+00:00"
   },
   {
     "action": "RESOLVE",
-    "episode_id": "VE-VEH-001-SP-11",
+    "episode_id": "VE-037ac991fc",
     "reason": "left_bay",
-    "duration_seconds": 25.0,
-    "timestamp": "2026-10-19T10:00:51.000Z"
+    "duration_seconds": 2.6,
+    "timestamp": "2026-10-19T14:05:26.552761+00:00"
   }
 ]
