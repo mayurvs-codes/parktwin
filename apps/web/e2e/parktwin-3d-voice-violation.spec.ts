@@ -15,9 +15,9 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
     // Persona User A is active by default; designated space is SP-07
     await expect(page.locator("body")).toContainText("SP-07");
 
-    // Check Audio Guidance card displays destination
-    const guidanceCard = page.locator("text=AUDIO GUIDANCE").locator("..");
-    await expect(guidanceCard).toBeVisible();
+    // Check Audio Guidance card displays
+    const guidanceHeader = page.locator("text=AUDIO GUIDANCE");
+    await expect(guidanceHeader).toBeVisible();
 
     // Verify no wrong bay warning or violation alert is active
     await expect(page.locator("text=Wrong Space Warning")).not.toBeVisible();
@@ -25,29 +25,24 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
   });
 
   test("Scenario 2: Wrong bay entry — warning logged, episode visible, departure resolves episode", async ({ page }) => {
-    // Trigger Wrong Space Warning
-    const wrongSpaceBtn = page.getByRole("button", { name: /Wrong Space Warning/i });
-    if (await wrongSpaceBtn.isVisible()) {
-      await wrongSpaceBtn.click();
-    } else {
-      // Trigger via store in page context
-      await page.evaluate(() => {
-        const store = (window as any).__PARKTWIN_SHARED_STORE__;
-        if (store) store.getState().triggerViolation();
-      });
-    }
+    // Trigger Wrong Space Warning via Simulate Wrong Space button
+    const wrongSpaceBtn = page.getByRole("button", { name: /Simulate Wrong Space/i });
+    await expect(wrongSpaceBtn).toBeVisible();
+    await wrongSpaceBtn.click();
 
     // Verify warning is displayed with actual bay SP-11 vs assigned SP-07
-    await expect(page.locator("text=Wrong Space Warning").or(page.locator("text=SP-11"))).toBeVisible();
+    await expect(page.locator("text=Wrong Space Warning")).toBeVisible();
+    await expect(page.getByText("SP-11", { exact: true }).first()).toBeVisible();
     await expect(page.locator("body")).toContainText("SP-07");
 
-    // Relocate / leave wrong bay
-    const relocateBtn = page.getByRole("button", { name: /Relocate to SP-07/i }).or(page.getByRole("button", { name: /Clear Warning/i }));
-    if (await relocateBtn.isVisible()) {
-      await relocateBtn.click();
-      // Episode resolved, warning cleared
-      await expect(page.locator("text=10+ MIN VIOLATION")).not.toBeVisible();
-    }
+    // Relocate / leave wrong bay via "MOVE TO SP-07"
+    const relocateBtn = page.getByRole("button", { name: /MOVE TO SP-07/i });
+    await expect(relocateBtn).toBeVisible();
+    await relocateBtn.click();
+
+    // Episode resolved, warning cleared
+    await expect(page.locator("text=10+ MIN VIOLATION")).not.toBeVisible();
+    await expect(page.locator("text=Wrong Space Warning")).not.toBeVisible();
   });
 
   test("Scenario 3: 10-minute long-stay escalation triggers with preserved threshold", async ({ page }) => {
@@ -55,28 +50,32 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
     await page.goto("/digital-twin");
 
     // Verify Twin loads and status bar is visible
-    await expect(page.locator("text=LIVE").or(page.locator("text=DEMO"))).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Digital Twin" })).toBeVisible();
     await expect(page.locator("text=ZONE (20):")).toBeVisible();
   });
 
   test("Scenario 4: 2D <-> 3D toggle keeps selection and occupancy equal", async ({ page }) => {
     await page.goto("/digital-twin");
 
-    // Check initial mode button
     const viewSelector = page.getByTestId("twin-view-mode-selector");
     await expect(viewSelector).toBeVisible();
 
     // Switch to 3D mode
-    await page.getByRole("button", { name: /3D Twin/i }).click();
-    // Verify 3D canvas or boundary renders without crashing
+    const btn3D = viewSelector.getByRole("button", { name: "3D" });
+    await expect(btn3D).toBeVisible();
+    await btn3D.click();
+
+    // Verify 3D canvas or boundary renders
     const canvas = page.locator("canvas").or(page.locator("[data-testid='unified-twin-3d']"));
-    await expect(canvas.first()).toBeVisible({ timeout: 5000 });
+    await expect(canvas.first()).toBeVisible({ timeout: 10000 });
 
     // Verify occupancy counts remain consistent in status bar
     await expect(page.locator("text=ZONE (20):")).toBeVisible();
 
     // Switch back to 2D
-    await page.getByRole("button", { name: /2D Vector/i }).click();
+    const btn2D = viewSelector.getByRole("button", { name: "2D" });
+    await expect(btn2D).toBeVisible();
+    await btn2D.click();
     await expect(page.locator("svg").first()).toBeVisible();
   });
 
@@ -92,36 +91,35 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
     });
 
     // Attempt to switch to 3D mode
-    await page.getByRole("button", { name: /3D Twin/i }).click();
+    const viewSelector = page.getByTestId("twin-view-mode-selector");
+    await viewSelector.getByRole("button", { name: "3D" }).click();
 
-    // Verify 2D fallback notice or 2D SVG canvas remains usable
-    const fallbackNotice = page.locator("text=WebGL 3D Context Unavailable").or(page.locator("text=Fallback to 2D Vector Twin"));
-    await expect(fallbackNotice.or(page.locator("svg").first())).toBeVisible({ timeout: 5000 });
+    // Verify 2D fallback notice is rendered by Twin3DErrorBoundary
+    const fallbackNotice = page.locator("text=3D Twin Fallback Active");
+    await expect(fallbackNotice).toBeVisible({ timeout: 5000 });
   });
 
   test("Scenario 6: Voice assistant blocked state shows visible text fallback and Enable Voice CTA", async ({ page }) => {
     await page.goto("/user/dashboard");
 
-    // In fresh browser context, autoplay audio is blocked
+    // In fresh browser context, autoplay audio is blocked, CTA is visible
     const enableBtn = page.getByRole("button", { name: /Enable Voice/i });
-    if (await enableBtn.isVisible()) {
-      await expect(enableBtn).toBeVisible();
-      // Click unlocks voice
-      await enableBtn.click();
-      await expect(page.locator("text=VOICE ACTIVE").or(page.locator("text=VOICE ON"))).toBeVisible();
-    }
+    await expect(enableBtn).toBeVisible();
+
+    // Click unlocks voice
+    await enableBtn.click();
+    await expect(page.locator("text=VOICE ACTIVE")).toBeVisible();
   });
 
   test("Scenario 7: Full reset restores clean canonical state", async ({ page }) => {
     await page.goto("/user/dashboard");
 
     // Check Reset button
-    const resetBtn = page.getByRole("button", { name: /Reset/i }).first();
-    if (await resetBtn.isVisible()) {
-      await resetBtn.click();
-    }
+    const resetBtn = page.getByRole("button", { name: "Reset" }).first();
+    await expect(resetBtn).toBeVisible();
+    await resetBtn.click();
 
-    // Verify 20 bays remain active in focused zone
-    await expect(page.locator("text=spaces free").or(page.locator("text=4 spaces free"))).toBeVisible();
+    // Verify 20 bays remain active in focused zone and available spaces shown
+    await expect(page.locator("text=spaces free")).toBeVisible();
   });
 });

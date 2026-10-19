@@ -1,0 +1,422 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ASUS\\Desktop\\parktwin\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "apps/web/playwright.config.ts"
+    ],
+    "configFile": "C:\\Users\\ASUS\\Desktop\\parktwin\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/ASUS/Desktop/parktwin/apps/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ASUS/Desktop/parktwin/docs/evidence/3d-voice-violation/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/ASUS/Desktop/parktwin/apps/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "C:\\Users\\ASUS\\Desktop\\parktwin\\apps\\web\\e2e",
+        "snapshotDir": "C:\\Users\\ASUS\\Desktop\\parktwin\\apps\\web\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://localhost:3001",
+          "trace": "on-first-retry",
+          "screenshot": "on",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "../../docs/evidence/3d-voice-violation/e2e/report",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../../docs/evidence/3d-voice-violation/e2e/playwright-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "parktwin-3d-voice-violation.spec.ts",
+      "file": "parktwin-3d-voice-violation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E Suite",
+          "file": "parktwin-3d-voice-violation.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Scenario 1: Correct vehicle — assignment announcement appears and no wrong-bay warning occurs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1413,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-19T14:32:41.360Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-da80b-no-wrong-bay-warning-occurs-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b2068c70ab2042f23f8-a451d1999f3d60f792cf",
+              "file": "parktwin-3d-voice-violation.spec.ts",
+              "line": 14,
+              "column": 7
+            },
+            {
+              "title": "Scenario 2: Wrong bay entry — warning logged, episode visible, departure resolves episode",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1849,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-19T14:32:42.887Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-43a5f--departure-resolves-episode-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b2068c70ab2042f23f8-b29ff821285dbaf2bf92",
+              "file": "parktwin-3d-voice-violation.spec.ts",
+              "line": 27,
+              "column": 7
+            },
+            {
+              "title": "Scenario 3: 10-minute long-stay escalation triggers with preserved threshold",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1774,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-19T14:32:44.745Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-f142a-rs-with-preserved-threshold-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b2068c70ab2042f23f8-251cbeb49318e61ddcaa",
+              "file": "parktwin-3d-voice-violation.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "Scenario 4: 2D <-> 3D toggle keeps selection and occupancy equal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3378,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-19T14:32:46.529Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-3fce6-lection-and-occupancy-equal-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b2068c70ab2042f23f8-81be2fa7bd661934e09e",
+              "file": "parktwin-3d-voice-violation.spec.ts",
+              "line": 57,
+              "column": 7
+            },
+            {
+              "title": "Scenario 5: 3D failure displays graceful 2D fallback notice",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1851,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-19T14:32:49.916Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-5db16-graceful-2D-fallback-notice-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b2068c70ab2042f23f8-db3cadf4855938fed048",
+              "file": "parktwin-3d-voice-violation.spec.ts",
+              "line": 82,
+              "column": 7
+            },
+            {
+              "title": "Scenario 6: Voice assistant blocked state shows visible text fallback and Enable Voice CTA",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1798,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-19T14:32:51.779Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-c7cdf-llback-and-Enable-Voice-CTA-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b2068c70ab2042f23f8-cfd6ca41738a86fcfe67",
+              "file": "parktwin-3d-voice-violation.spec.ts",
+              "line": 102,
+              "column": 7
+            },
+            {
+              "title": "Scenario 7: Full reset restores clean canonical state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1797,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-19T14:32:53.590Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-685f6-tores-clean-canonical-state-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b2068c70ab2042f23f8-762ff01598dbe499ca40",
+              "file": "parktwin-3d-voice-violation.spec.ts",
+              "line": 114,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-19T14:32:40.864Z",
+    "duration": 14612.438,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
