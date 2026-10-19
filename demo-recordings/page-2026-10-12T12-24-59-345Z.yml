@@ -1,0 +1,206 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Decisions" [ref=e24] [cursor=pointer]
+        - button "AI Agent" [ref=e30] [cursor=pointer]
+        - button "Radar" [ref=e35] [cursor=pointer]
+        - button "Discover" [ref=e43] [cursor=pointer]
+        - button "Hackathons" [ref=e48] [cursor=pointer]
+        - button "Internships" [ref=e56] [cursor=pointer]
+        - button "Open Source" [ref=e61] [cursor=pointer]
+        - button "Competitions" [ref=e67] [cursor=pointer]
+        - button "Research" [ref=e72] [cursor=pointer]
+        - button "Saved" [ref=e76] [cursor=pointer]
+        - button "Tracker" [ref=e80] [cursor=pointer]
+        - button "Projects" [ref=e83] [cursor=pointer]
+        - button "Sources" [ref=e89] [cursor=pointer]
+      - generic [ref=e93]:
+        - button "6" [ref=e168]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e98]': LIVE
+        - button "Deep Discover" [ref=e101] [cursor=pointer]
+        - button "Student Profile" [ref=e106]
+  - main [ref=e111]:
+    - generic [ref=e1935]:
+      - generic [ref=e1936]:
+        - generic [ref=e1937]:
+          - generic [ref=e1938]:
+            - generic [ref=e1939]:
+              - generic [ref=e1940]: Phase 8 Personal Decision Engine
+              - generic [ref=e1941]: 2026-10-12
+            - heading "Strategic Prioritization & Action Planning" [level=1] [ref=e1942]
+            - paragraph [ref=e1943]: "\"Focused Execution: Drive forward 'This Week in Open Source for October 2, ' with high-impact project reuse.\""
+          - button "Refresh Decision Engine" [ref=e1945]
+        - generic [ref=e1952]:
+          - generic [ref=e1953]:
+            - generic [ref=e1954]: "Tracked Opportunities:"
+            - generic [ref=e1955]: "0"
+          - generic [ref=e1956]:
+            - generic [ref=e1957]: "In Progress:"
+            - generic [ref=e1958]: "0"
+          - generic [ref=e1959]:
+            - generic [ref=e1960]: "Applied / Submitted:"
+            - generic [ref=e1961]: "0"
+          - generic [ref=e1962]:
+            - generic [ref=e1963]: "Shortlist → Applied Conversion:"
+            - generic [ref=e1964]: 0%
+      - generic [ref=e1965]:
+        - button "Today's Actions (5)" [ref=e1966]
+        - button "2x2 Value Matrix" [active] [ref=e1970]
+        - button "Opportunity Comparison (2)" [ref=e1974]
+        - button "Personal Queue (0)" [ref=e1980]
+        - button "Conversion Funnel" [ref=e1985]
+      - generic [ref=e2362]:
+        - generic [ref=e2363]:
+          - generic [ref=e2364]:
+            - heading "Strategic Opportunity Value Matrix" [level=2] [ref=e2365]
+            - paragraph [ref=e2368]: Plots opportunities along Strategic Portfolio Value (Y) vs Execution Feasibility / Low Friction (X).
+          - generic [ref=e2369]: "Evaluated: 21"
+        - generic [ref=e2370]:
+          - generic [ref=e2371]:
+            - generic [ref=e2372]:
+              - heading "🚀 Quick Wins (High Value, High Feasibility)" [level=3] [ref=e2373]
+              - generic [ref=e2374]: "13"
+            - paragraph [ref=e2375]: "Low-hanging fruit: Strong resume lift with low execution effort and established reusable components."
+            - generic [ref=e2376]:
+              - generic [ref=e2377] [cursor=pointer]:
+                - generic [ref=e2378]:
+                  - generic [ref=e2379]: This Week in Open Source for October 2, 2026
+                  - generic [ref=e2380]: "78"
+                - generic [ref=e2381]:
+                  - generic [ref=e2382]: Linux Foundation / Google OS
+                  - generic [ref=e2383]: ~11h effort
+              - generic [ref=e2384] [cursor=pointer]:
+                - generic [ref=e2385]:
+                  - generic [ref=e2386]: "[aphelion-engine/aphelion-editor] Improve object tracking accuracy and stability"
+                  - generic [ref=e2387]: "76"
+                - generic [ref=e2388]:
+                  - generic [ref=e2389]: aphelion-engine
+                  - generic [ref=e2390]: ~9h effort
+              - generic [ref=e2391] [cursor=pointer]:
+                - generic [ref=e2392]:
+                  - generic [ref=e2393]: "[uvic-auvic/Snappy2027] Research computer vision models"
+                  - generic [ref=e2394]: "76"
+                - generic [ref=e2395]:
+                  - generic [ref=e2396]: uvic-auvic
+                  - generic [ref=e2397]: ~9h effort
+              - generic [ref=e2398] [cursor=pointer]:
+                - generic [ref=e2399]:
+                  - generic [ref=e2400]: "[pyronear/vision-rd] How much calibration errors change the position"
+                  - generic [ref=e2401]: "65"
+                - generic [ref=e2402]:
+                  - generic [ref=e2403]: pyronear
+                  - generic [ref=e2404]: ~21h effort
+              - generic [ref=e2405] [cursor=pointer]:
+                - generic [ref=e2406]:
+                  - generic [ref=e2407]: Synergy 2026
+                  - generic [ref=e2408]: "64"
+                - generic [ref=e2409]:
+                  - generic [ref=e2410]: Fr. Conceicao Rodrigues College of Engineering (FRCRCE), Bandra
+                  - generic [ref=e2411]: ~28h effort
+              - generic [ref=e2412] [cursor=pointer]:
+                - generic [ref=e2413]:
+                  - generic [ref=e2414]: HerHack
+                  - generic [ref=e2415]: "64"
+                - generic [ref=e2416]:
+                  - generic [ref=e2417]: ECHELON INSTITUTE OF TECHNOLOGY
+                  - generic [ref=e2418]: ~28h effort
+              - generic [ref=e2419] [cursor=pointer]:
+                - generic [ref=e2420]:
+                  - generic [ref=e2421]: Hack On Hills 8.0
+                  - generic [ref=e2422]: "62"
+                - generic [ref=e2423]:
+                  - generic [ref=e2424]: Hack
+                  - generic [ref=e2425]: ~31h effort
+              - generic [ref=e2426] [cursor=pointer]:
+                - generic [ref=e2427]:
+                  - generic [ref=e2428]: Glitched
+                  - generic [ref=e2429]: "62"
+                - generic [ref=e2430]:
+                  - generic [ref=e2431]: Fr. Conceicao Rodrigues College of Engineering (FRCRCE), Bandra
+                  - generic [ref=e2432]: ~25h effort
+              - generic [ref=e2433] [cursor=pointer]:
+                - generic [ref=e2434]:
+                  - generic [ref=e2435]: Escape Room
+                  - generic [ref=e2436]: "62"
+                - generic [ref=e2437]:
+                  - generic [ref=e2438]: Fr. Conceicao Rodrigues College of Engineering (FRCRCE), Bandra
+                  - generic [ref=e2439]: ~25h effort
+              - generic [ref=e2440] [cursor=pointer]:
+                - generic [ref=e2441]:
+                  - generic [ref=e2442]: HACK WITH GDG S4
+                  - generic [ref=e2443]: "60"
+                - generic [ref=e2444]:
+                  - generic [ref=e2445]: HACK
+                  - generic [ref=e2446]: ~31h effort
+              - generic [ref=e2447] [cursor=pointer]:
+                - generic [ref=e2448]:
+                  - generic [ref=e2449]: Convergence
+                  - generic [ref=e2450]: "60"
+                - generic [ref=e2451]:
+                  - generic [ref=e2452]: Convergence
+                  - generic [ref=e2453]: ~31h effort
+              - generic [ref=e2454] [cursor=pointer]:
+                - generic [ref=e2455]:
+                  - generic [ref=e2456]: haxfinity
+                  - generic [ref=e2457]: "60"
+                - generic [ref=e2458]:
+                  - generic [ref=e2459]: haxfinity
+                  - generic [ref=e2460]: ~31h effort
+              - generic [ref=e2461] [cursor=pointer]:
+                - generic [ref=e2462]:
+                  - generic [ref=e2463]: Hacknauts 2.0
+                  - generic [ref=e2464]: "60"
+                - generic [ref=e2465]:
+                  - generic [ref=e2466]: Hacknauts
+                  - generic [ref=e2467]: ~31h effort
+          - generic [ref=e2468]:
+            - generic [ref=e2469]:
+              - heading "💎 High-Value Strategic Bets (High Value, High Effort)" [level=3] [ref=e2470]
+              - generic [ref=e2471]: "1"
+            - paragraph [ref=e2472]: "Flagship commitments: High career capital and prestige requiring intensive preparation and dedicated sprint focus."
+            - generic [ref=e2474] [cursor=pointer]:
+              - generic [ref=e2475]:
+                - generic [ref=e2476]: Line-O-Mania | A Line Follower Competition
+                - generic [ref=e2477]: "61"
+              - generic [ref=e2478]:
+                - generic [ref=e2479]: Indian Institute of Information Technology (IIIT), Nagpur
+                - generic [ref=e2480]: ~25h effort
+          - generic [ref=e2481]:
+            - generic [ref=e2482]:
+              - heading "⚡ Tactical Fillers (Lower Value, High Feasibility)" [level=3] [ref=e2483]
+              - generic [ref=e2484]: "0"
+            - paragraph [ref=e2485]: Easy to deliver but limited resume differentiation. Recommended only if idle time allows.
+          - generic [ref=e2486]:
+            - generic [ref=e2487]:
+              - heading "🛑 Low Priority / Pass (Low Value, High Effort)" [level=3] [ref=e2488]
+              - generic [ref=e2489]: "7"
+            - paragraph [ref=e2490]: "Energy traps: Poor yield on time committed or severe schedule constraints. Consciously skip."
+            - generic [ref=e2491]:
+              - generic [ref=e2493] [cursor=pointer]:
+                - generic [ref=e2494]: Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge
+                - generic [ref=e2495]: "60"
+              - generic [ref=e2497] [cursor=pointer]:
+                - generic [ref=e2498]: Tech Mafia - Trust No One. Debug Everyone.
+                - generic [ref=e2499]: "56"
+              - generic [ref=e2501] [cursor=pointer]:
+                - generic [ref=e2502]: "Science One Framework: A verifiable autonomous research framework via Chain-of-Evidence"
+                - generic [ref=e2503]: "0"
+              - generic [ref=e2505] [cursor=pointer]:
+                - generic [ref=e2506]: Research into how AI can help users understand skin conditions
+                - generic [ref=e2507]: "0"
+              - generic [ref=e2509] [cursor=pointer]:
+                - generic [ref=e2510]: BlockHunt'26
+                - generic [ref=e2511]: "0"
+              - generic [ref=e2513] [cursor=pointer]:
+                - generic [ref=e2514]: Code The Cosmos '26
+                - generic [ref=e2515]: "0"
+              - generic [ref=e2517] [cursor=pointer]:
+                - generic [ref=e2518]: MindTech Arena 2026 – National Hackathon
+                - generic [ref=e2519]: "0"

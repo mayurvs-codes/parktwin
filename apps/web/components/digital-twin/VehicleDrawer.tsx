@@ -119,7 +119,9 @@ export function VehicleDrawer() {
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-mono text-sm font-bold tracking-tight text-foreground">
-                  {vehicle.license_plate || vehicle.prototype_id || "VEHICLE"}
+                  {vehicle.prototype_id && vehicle.prototype_id.startsWith("VEH-")
+                    ? vehicle.prototype_id
+                    : (vehicle.license_plate || vehicle.prototype_id || "VEHICLE")}
                 </span>
                 <Badge
                   variant={
@@ -206,6 +208,27 @@ export function VehicleDrawer() {
               </div>
             )}
           </div>
+
+          {/* Provenance Card for VEH-001 or KA04MN8049 */}
+          {(vehicle.prototype_id === "VEH-001" || vehicle.license_plate === "KA04MN8049") && (
+            <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-2.5 space-y-1 font-mono text-[11px]">
+              <div className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">
+                PROVENANCE DISCLOSURE
+              </div>
+              <div className="text-muted-foreground">
+                <span className="text-foreground font-semibold">ANPR BENCHMARK:</span> KA04MN8049 (Independent benchmark)
+              </div>
+              <div className="text-muted-foreground">
+                <span className="text-foreground font-semibold">CAM-01 CCTV:</span> KA05ML7220 (Visually observed, OCR unverified)
+              </div>
+              <div className="text-amber-300 font-bold text-[10px] pt-0.5 border-t border-amber-500/20">
+                IDENTITY LINKAGE: UNVERIFIED
+              </div>
+              <div className="text-amber-400/90 text-[9px] font-semibold text-center pt-0.5">
+                ANPR BENCHMARK ≠ PHYSICAL CCTV IDENTITY
+              </div>
+            </div>
+          )}
 
           {/* Shortest Path Routing Card */}
           <div className="rounded-lg border border-primary/20 bg-primary/5 p-3 space-y-2">

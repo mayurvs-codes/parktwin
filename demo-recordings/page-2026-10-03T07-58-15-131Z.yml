@@ -1,0 +1,192 @@
+- generic [active] [ref=f16e1]:
+  - generic [ref=f16e5]:
+    - banner [ref=f16e6]:
+      - generic [ref=f16e8]:
+        - generic [ref=f16e9]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=f16e10] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f16e15]:
+              - generic [ref=f16e16]:
+                - generic [ref=f16e17]: PARKTWIN AI
+                - generic [ref=f16e18]: Driver
+              - generic [ref=f16e19]: Smart Journey Guidance
+          - navigation [ref=f16e20]:
+            - link "Dashboard" [ref=f16e21] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [ref=f16e28] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=f16e33] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=f16e38] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=f16e44] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=f16e48]:
+          - generic [ref=f16e49]:
+            - generic [ref=f16e51]: VEH-002
+            - generic [ref=f16e52]: CAM-01
+          - button "CCTV Evidence" [ref=f16e53] [cursor=pointer]
+          - link [ref=f16e58] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=f16e59]
+          - button "Toggle color theme" [ref=f16e65] [cursor=pointer]
+      - generic [ref=f16e70]:
+        - generic [ref=f16e71]:
+          - generic [ref=f16e72]:
+            - button "DEMO MODE" [ref=f16e73] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=f16e79] [cursor=pointer]
+          - generic [ref=f16e85]:
+            - generic [ref=f16e86]:
+              - strong [ref=f16e88]: KA05BZ2700
+              - generic [ref=f16e89]: (98% paddleocr)
+              - generic [ref=f16e90]: "Track #10"
+            - generic [ref=f16e91]: 5. Navigating to Bay
+        - generic [ref=f16e93]:
+          - generic [ref=f16e94]:
+            - generic [ref=f16e95]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=f16e100] [cursor=pointer]:
+              - generic [ref=f16e101]: VEH-001
+              - generic "Reserved" [ref=f16e102]
+            - button "VEH-002 Reserved" [ref=f16e103] [cursor=pointer]:
+              - generic [ref=f16e104]: VEH-002
+              - generic "Reserved" [ref=f16e105]
+            - button "VEH-003 No Reservation" [ref=f16e106] [cursor=pointer]:
+              - generic [ref=f16e107]: VEH-003
+              - generic "No Reservation" [ref=f16e108]
+            - button "VEH-004 No Reservation" [ref=f16e109] [cursor=pointer]:
+              - generic [ref=f16e110]: VEH-004
+              - generic "No Reservation" [ref=f16e111]
+            - button "VEH-005 No Reservation" [ref=f16e112] [cursor=pointer]:
+              - generic [ref=f16e113]: VEH-005
+              - generic "No Reservation" [ref=f16e114]
+          - generic [ref=f16e115]:
+            - button "Next Event" [ref=f16e116] [cursor=pointer]
+            - button "Reset Vehicle" [ref=f16e120] [cursor=pointer]
+            - button "Reset Demo" [ref=f16e125] [cursor=pointer]
+    - main [ref=f16e127]:
+      - generic [ref=f16e213]:
+        - generic [ref=f16e214]:
+          - generic [ref=f16e216]:
+            - button "Zoom In (+)" [ref=f16e217] [cursor=pointer]
+            - button "Zoom Out (−)" [ref=f16e221] [cursor=pointer]
+            - button "Reset View / Home" [ref=f16e225] [cursor=pointer]
+            - button "FIT" [ref=f16e229] [cursor=pointer]
+            - button "Center on Selected Item" [ref=f16e236] [cursor=pointer]
+            - generic [ref=f16e241]: 100%
+          - generic:
+            - generic: ACCESS_POINT_B2
+            - generic: Single Physical Gateway (Entry & Exit)
+          - img [ref=f16e242]:
+            - generic:
+              - generic:
+                - generic: LIFT
+                - generic: STAIR & LIFT CORE 01
+              - generic: ◄ ENTRY RAMP
+              - generic:
+                - generic: LIFT
+                - generic: STAIR & LIFT CORE 02
+              - generic:
+                - generic:
+                  - generic: LOBBY
+                  - generic: 2.8M WIDE
+                - generic: SERVICES / STORAGE
+                - generic:
+                  - generic: LOBBY
+                  - generic: 3.0M WIDE
+            - generic: "★ FOCUSED DEMO ZONE: SP-01 – SP-20"
+            - generic [ref=f16e256]:
+              - generic [ref=f16e257] [cursor=pointer]: P01
+              - generic [ref=f16e259] [cursor=pointer]: P02
+              - generic [ref=f16e261] [cursor=pointer]: P03
+              - generic [ref=f16e263] [cursor=pointer]: P04
+              - generic [ref=f16e265] [cursor=pointer]: P05
+              - generic [ref=f16e267] [cursor=pointer]: P06
+              - generic [ref=f16e269] [cursor=pointer]: ★ P07
+              - generic [ref=f16e271] [cursor=pointer]: P08
+              - generic [ref=f16e273] [cursor=pointer]: P09
+              - generic [ref=f16e275] [cursor=pointer]: P10
+              - generic [ref=f16e277] [cursor=pointer]: P11
+              - generic [ref=f16e279] [cursor=pointer]: P12
+              - generic [ref=f16e281] [cursor=pointer]: P13
+              - generic [ref=f16e283] [cursor=pointer]: RESERVED
+              - generic [ref=f16e285] [cursor=pointer]: P15
+              - generic [ref=f16e287] [cursor=pointer]: P16
+              - generic [ref=f16e289] [cursor=pointer]: P17
+              - generic [ref=f16e291] [cursor=pointer]: P18
+              - generic [ref=f16e293] [cursor=pointer]: P19
+              - generic [ref=f16e295] [cursor=pointer]: P20
+              - generic [ref=f16e297] [cursor=pointer]: P21
+              - generic [ref=f16e299] [cursor=pointer]: P22
+              - generic [ref=f16e301] [cursor=pointer]: P23
+              - generic [ref=f16e303] [cursor=pointer]: RESERVED
+              - generic [ref=f16e305] [cursor=pointer]: P25
+              - generic [ref=f16e307] [cursor=pointer]: P26
+              - generic [ref=f16e309] [cursor=pointer]: P27
+              - generic [ref=f16e311] [cursor=pointer]: P28
+              - generic [ref=f16e313] [cursor=pointer]: P29
+              - generic [ref=f16e315] [cursor=pointer]: P30
+              - generic [ref=f16e317] [cursor=pointer]: P31
+              - generic [ref=f16e319] [cursor=pointer]: P32
+              - generic [ref=f16e321] [cursor=pointer]: P33
+              - generic [ref=f16e323] [cursor=pointer]: P34
+              - generic [ref=f16e325] [cursor=pointer]: P35
+              - generic [ref=f16e327] [cursor=pointer]: P36
+              - generic [ref=f16e329] [cursor=pointer]: P37
+              - generic [ref=f16e331] [cursor=pointer]: P38
+              - generic [ref=f16e333] [cursor=pointer]: P39
+              - generic [ref=f16e335] [cursor=pointer]: P40
+              - generic [ref=f16e337] [cursor=pointer]: P41
+              - generic [ref=f16e339] [cursor=pointer]: P42
+              - generic [ref=f16e341] [cursor=pointer]: P43
+              - generic [ref=f16e343] [cursor=pointer]: P44
+              - generic [ref=f16e345] [cursor=pointer]: P45
+              - generic [ref=f16e347] [cursor=pointer]: P46
+              - generic [ref=f16e349] [cursor=pointer]: P47
+              - generic [ref=f16e351] [cursor=pointer]: P48
+              - generic [ref=f16e353] [cursor=pointer]: P49
+              - generic [ref=f16e355] [cursor=pointer]: P50
+              - generic [ref=f16e357] [cursor=pointer]: P51
+              - generic [ref=f16e359] [cursor=pointer]: P52
+              - generic [ref=f16e361] [cursor=pointer]: P53
+              - generic [ref=f16e363] [cursor=pointer]: P54
+              - generic [ref=f16e365] [cursor=pointer]: P55
+              - generic [ref=f16e367] [cursor=pointer]: P56
+              - generic [ref=f16e369] [cursor=pointer]: P57
+              - generic [ref=f16e371] [cursor=pointer]: P58
+              - generic [ref=f16e373] [cursor=pointer]: P59
+              - generic [ref=f16e375] [cursor=pointer]: P60
+            - generic [ref=f16e377]: ACCESS_POINT_B2
+            - generic: ★ SP-14
+            - generic: ● YOU
+          - generic:
+            - generic: Available
+            - generic: Occupied
+            - generic: Reserved
+            - generic: Selected
+        - generic [ref=f16e383]:
+          - generic [ref=f16e384]:
+            - generic [ref=f16e385]:
+              - text: 🚗
+              - generic [ref=f16e386]: YOU
+              - text: (VEH-002)
+            - generic [ref=f16e387]:
+              - generic [ref=f16e388]: →
+              - generic [ref=f16e389]: →
+              - generic [ref=f16e390]: →
+            - generic [ref=f16e391]: 🅿️ SP-14
+          - generic [ref=f16e393]:
+            - generic [ref=f16e394]: Continue straight
+            - generic [ref=f16e395]: 81 m
+        - generic [ref=f16e396]:
+          - generic [ref=f16e400]:
+            - generic [ref=f16e401]: Continue straight
+            - generic [ref=f16e402]: 81 m
+          - generic [ref=f16e403]:
+            - generic [ref=f16e404]: VEHICLE
+            - text: VEH-002
+        - generic [ref=f16e405]:
+          - button "Step Forward" [ref=f16e406] [cursor=pointer]
+          - button "ARRIVED" [ref=f16e407] [cursor=pointer]
+    - contentinfo [ref=f16e202]: ParkTwin AI Driver Portal · Verified Facility Geometry & Real CCTV Physical Evidence
+  - button "Open Next.js Dev Tools" [ref=f16e208] [cursor=pointer]
+  - alert [ref=f16e212]: Digital Twin Navigation · ParkTwin AI · ParkTwin AI

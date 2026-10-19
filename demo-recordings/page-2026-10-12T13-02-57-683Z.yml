@@ -1,0 +1,44 @@
+- generic [ref=e4]:
+  - region "Navigation sidebar collapsed" [ref=e6]:
+    - navigation "Main Navigation" [ref=e8]:
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - listitem [ref=e12]:
+            - link [ref=e13] [cursor=pointer]:
+              - /url: /
+        - listitem [ref=e18]:
+          - listitem [ref=e19]:
+            - link [ref=e20] [cursor=pointer]:
+              - /url: /internship
+        - listitem [ref=e25]:
+          - listitem [ref=e26]:
+            - link [ref=e27] [cursor=pointer]:
+              - /url: /job
+        - listitem [ref=e32]:
+          - listitem [ref=e33]:
+            - link [ref=e34] [cursor=pointer]:
+              - /url: /competitions
+        - listitem [ref=e39]:
+          - listitem [ref=e40]:
+            - link [ref=e41] [cursor=pointer]:
+              - /url: /practice/ai-powered-role-based-mock-tests
+        - listitem [ref=e49]:
+          - listitem [ref=e50]:
+            - link [ref=e51] [cursor=pointer]:
+              - /url: /practice/ai-mock-interview
+        - listitem [ref=e56]:
+          - listitem [ref=e57]:
+            - link [ref=e58] [cursor=pointer]:
+              - /url: /mentor
+        - listitem [ref=e64]:
+          - listitem [ref=e65]:
+            - link [ref=e66] [cursor=pointer]:
+              - /url: /prep-zone
+    - generic [ref=e72]:
+      - link [ref=e73] [cursor=pointer]:
+        - /url: /auth/login?login_as=recruiter
+        - img "search-color" [ref=e75]
+      - link [ref=e76] [cursor=pointer]:
+        - /url: /become-a-mentor
+        - img "mentor-color" [ref=e78]
+  - main [ref=e79]

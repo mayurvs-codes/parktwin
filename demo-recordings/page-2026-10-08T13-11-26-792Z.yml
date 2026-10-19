@@ -1,0 +1,383 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Radar" [ref=e24] [cursor=pointer]
+        - button "Discover" [ref=e32] [cursor=pointer]
+        - button "Hackathons" [ref=e37] [cursor=pointer]
+        - button "Internships" [ref=e45] [cursor=pointer]
+        - button "Open Source" [ref=e50] [cursor=pointer]
+        - button "Competitions" [ref=e56] [cursor=pointer]
+        - button "Research" [ref=e61] [cursor=pointer]
+        - button "Saved" [ref=e65] [cursor=pointer]
+        - button "Tracker" [ref=e69] [cursor=pointer]
+        - button "Projects" [ref=e72] [cursor=pointer]
+        - button "Sources" [active] [ref=e78] [cursor=pointer]
+      - generic [ref=e82]:
+        - button "6" [ref=e157]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e87]': LIVE
+        - button "Deep Discover" [ref=e90] [cursor=pointer]
+        - button "Student Profile" [ref=e95]
+  - main [ref=e100]:
+    - generic [ref=e1924]:
+      - generic [ref=e1925]:
+        - generic [ref=e1926]:
+          - heading "Source Health & Connector Observability" [level=2] [ref=e1927]
+          - paragraph [ref=e1930]: Real-time status, rate limits, authority tiers, and discovery history across all registered connectors.
+        - generic [ref=e1931]:
+          - button "Deep Discovery Mode" [ref=e1932] [cursor=pointer]
+          - button "Standard Discovery" [ref=e1937] [cursor=pointer]
+      - generic [ref=e1944]:
+        - heading "Active Source Connectors" [level=3] [ref=e1945]
+        - generic [ref=e1946]:
+          - generic [ref=e1947]:
+            - generic [ref=e1948]:
+              - heading "GitHub" [level=4] [ref=e1949]
+              - generic [ref=e1950]: Healthy
+            - generic [ref=e1954]:
+              - generic [ref=e1955]:
+                - generic [ref=e1956]: "Authority:"
+                - generic [ref=e1957]: PRIMARY
+              - generic [ref=e1958]:
+                - generic [ref=e1959]: "Success Rate:"
+                - generic [ref=e1960]: 100%
+              - generic [ref=e1961]:
+                - generic [ref=e1962]: "Items Indexed:"
+                - generic [ref=e1963]: "18"
+              - generic [ref=e1964]:
+                - generic [ref=e1965]: "Last Execution:"
+                - generic [ref=e1966]: 12:55:18 PM
+          - generic [ref=e1967]:
+            - generic [ref=e1968]:
+              - heading "Reddit" [level=4] [ref=e1969]
+              - generic [ref=e1970]: Healthy
+            - generic [ref=e1974]:
+              - generic [ref=e1975]:
+                - generic [ref=e1976]: "Authority:"
+                - generic [ref=e1977]: COMMUNITY
+              - generic [ref=e1978]:
+                - generic [ref=e1979]: "Success Rate:"
+                - generic [ref=e1980]: 100%
+              - generic [ref=e1981]:
+                - generic [ref=e1982]: "Items Indexed:"
+                - generic [ref=e1983]: "0"
+              - generic [ref=e1984]:
+                - generic [ref=e1985]: "Last Execution:"
+                - generic [ref=e1986]: 12:55:19 PM
+          - generic [ref=e1987]:
+            - generic [ref=e1988]:
+              - heading "Devpost" [level=4] [ref=e1989]
+              - generic [ref=e1990]: Healthy
+            - generic [ref=e1994]:
+              - generic [ref=e1995]:
+                - generic [ref=e1996]: "Authority:"
+                - generic [ref=e1997]: PRIMARY
+              - generic [ref=e1998]:
+                - generic [ref=e1999]: "Success Rate:"
+                - generic [ref=e2000]: 100%
+              - generic [ref=e2001]:
+                - generic [ref=e2002]: "Items Indexed:"
+                - generic [ref=e2003]: "0"
+              - generic [ref=e2004]:
+                - generic [ref=e2005]: "Last Execution:"
+                - generic [ref=e2006]: 12:55:38 PM
+          - generic [ref=e2007]:
+            - generic [ref=e2008]:
+              - heading "Devfolio" [level=4] [ref=e2009]
+              - generic [ref=e2010]: Healthy
+            - generic [ref=e2014]:
+              - generic [ref=e2015]:
+                - generic [ref=e2016]: "Authority:"
+                - generic [ref=e2017]: UNKNOWN
+              - generic [ref=e2018]:
+                - generic [ref=e2019]: "Success Rate:"
+                - generic [ref=e2020]: 100%
+              - generic [ref=e2021]:
+                - generic [ref=e2022]: "Items Indexed:"
+                - generic [ref=e2023]: "10"
+              - generic [ref=e2024]:
+                - generic [ref=e2025]: "Last Execution:"
+                - generic [ref=e2026]: 12:55:38 PM
+          - generic [ref=e2027]:
+            - generic [ref=e2028]:
+              - heading "RSSFeed" [level=4] [ref=e2029]
+              - generic [ref=e2030]: Healthy
+            - generic [ref=e2034]:
+              - generic [ref=e2035]:
+                - generic [ref=e2036]: "Authority:"
+                - generic [ref=e2037]: UNKNOWN
+              - generic [ref=e2038]:
+                - generic [ref=e2039]: "Success Rate:"
+                - generic [ref=e2040]: 100%
+              - generic [ref=e2041]:
+                - generic [ref=e2042]: "Items Indexed:"
+                - generic [ref=e2043]: "2"
+              - generic [ref=e2044]:
+                - generic [ref=e2045]: "Last Execution:"
+                - generic [ref=e2046]: 12:55:48 PM
+          - generic [ref=e2047]:
+            - generic [ref=e2048]:
+              - heading "StudentPrograms" [level=4] [ref=e2049]
+              - generic [ref=e2050]: Healthy
+            - generic [ref=e2054]:
+              - generic [ref=e2055]:
+                - generic [ref=e2056]: "Authority:"
+                - generic [ref=e2057]: UNKNOWN
+              - generic [ref=e2058]:
+                - generic [ref=e2059]: "Success Rate:"
+                - generic [ref=e2060]: 100%
+              - generic [ref=e2061]:
+                - generic [ref=e2062]: "Items Indexed:"
+                - generic [ref=e2063]: "15"
+              - generic [ref=e2064]:
+                - generic [ref=e2065]: "Last Execution:"
+                - generic [ref=e2066]: 12:55:51 PM
+          - generic [ref=e2067]:
+            - generic [ref=e2068]:
+              - heading "Kaggle" [level=4] [ref=e2069]
+              - generic [ref=e2070]: Healthy
+            - generic [ref=e2074]:
+              - generic [ref=e2075]:
+                - generic [ref=e2076]: "Authority:"
+                - generic [ref=e2077]: PRIMARY
+              - generic [ref=e2078]:
+                - generic [ref=e2079]: "Success Rate:"
+                - generic [ref=e2080]: 100%
+              - generic [ref=e2081]:
+                - generic [ref=e2082]: "Items Indexed:"
+                - generic [ref=e2083]: "0"
+              - generic [ref=e2084]:
+                - generic [ref=e2085]: "Last Execution:"
+                - generic [ref=e2086]: 12:55:56 PM
+          - generic [ref=e2087]:
+            - generic [ref=e2088]:
+              - heading "Unstop" [level=4] [ref=e2089]
+              - generic [ref=e2090]: Healthy
+            - generic [ref=e2094]:
+              - generic [ref=e2095]:
+                - generic [ref=e2096]: "Authority:"
+                - generic [ref=e2097]: PRIMARY
+              - generic [ref=e2098]:
+                - generic [ref=e2099]: "Success Rate:"
+                - generic [ref=e2100]: 100%
+              - generic [ref=e2101]:
+                - generic [ref=e2102]: "Items Indexed:"
+                - generic [ref=e2103]: "10"
+              - generic [ref=e2104]:
+                - generic [ref=e2105]: "Last Execution:"
+                - generic [ref=e2106]: 12:56:03 PM
+          - generic [ref=e2107]:
+            - generic [ref=e2108]:
+              - heading "WebSearch" [level=4] [ref=e2109]
+              - generic [ref=e2110]: Healthy
+            - generic [ref=e2114]:
+              - generic [ref=e2115]:
+                - generic [ref=e2116]: "Authority:"
+                - generic [ref=e2117]: SEARCH_INDEX
+              - generic [ref=e2118]:
+                - generic [ref=e2119]: "Success Rate:"
+                - generic [ref=e2120]: 100%
+              - generic [ref=e2121]:
+                - generic [ref=e2122]: "Items Indexed:"
+                - generic [ref=e2123]: "0"
+              - generic [ref=e2124]:
+                - generic [ref=e2125]: "Last Execution:"
+                - generic [ref=e2126]: 12:56:04 PM
+      - generic [ref=e2127]:
+        - heading "Source Credentials & Configuration Status" [level=3] [ref=e2128]
+        - generic [ref=e2133]:
+          - generic [ref=e2134]:
+            - generic [ref=e2135]:
+              - generic [ref=e2136]: GitHub
+              - generic [ref=e2137]: Public Access
+            - generic [ref=e2138]: "Category: OpenSource"
+            - generic [ref=e2139]:
+              - text: "Rate Limit:"
+              - generic [ref=e2140]: 20/min
+          - generic [ref=e2141]:
+            - generic [ref=e2142]:
+              - generic [ref=e2143]: Reddit
+              - generic [ref=e2144]: Key Configured
+            - generic [ref=e2145]: "Category: Community"
+            - generic [ref=e2146]:
+              - text: "Rate Limit:"
+              - generic [ref=e2147]: 20/min
+          - generic [ref=e2148]:
+            - generic [ref=e2149]:
+              - generic [ref=e2150]: Devpost
+              - generic [ref=e2151]: Key Configured
+            - generic [ref=e2152]: "Category: Hackathons"
+            - generic [ref=e2153]:
+              - text: "Rate Limit:"
+              - generic [ref=e2154]: 20/min
+          - generic [ref=e2155]:
+            - generic [ref=e2156]:
+              - generic [ref=e2157]: Devfolio
+              - generic [ref=e2158]: Key Configured
+            - generic [ref=e2159]: "Category: Hackathons"
+            - generic [ref=e2160]:
+              - text: "Rate Limit:"
+              - generic [ref=e2161]: 20/min
+          - generic [ref=e2162]:
+            - generic [ref=e2163]:
+              - generic [ref=e2164]: RSSFeed
+              - generic [ref=e2165]: Key Configured
+            - generic [ref=e2166]: "Category: Feeds"
+            - generic [ref=e2167]:
+              - text: "Rate Limit:"
+              - generic [ref=e2168]: 30/min
+          - generic [ref=e2169]:
+            - generic [ref=e2170]:
+              - generic [ref=e2171]: StudentPrograms
+              - generic [ref=e2172]: Key Configured
+            - generic [ref=e2173]: "Category: OpenSource"
+            - generic [ref=e2174]:
+              - text: "Rate Limit:"
+              - generic [ref=e2175]: 30/min
+          - generic [ref=e2176]:
+            - generic [ref=e2177]:
+              - generic [ref=e2178]: Kaggle
+              - generic [ref=e2179]: Key Configured
+            - generic [ref=e2180]: "Category: Competitions"
+            - generic [ref=e2181]:
+              - text: "Rate Limit:"
+              - generic [ref=e2182]: 15/min
+          - generic [ref=e2183]:
+            - generic [ref=e2184]:
+              - generic [ref=e2185]: Unstop
+              - generic [ref=e2186]: Key Configured
+            - generic [ref=e2187]: "Category: Competitions"
+            - generic [ref=e2188]:
+              - text: "Rate Limit:"
+              - generic [ref=e2189]: 15/min
+          - generic [ref=e2190]:
+            - generic [ref=e2191]:
+              - generic [ref=e2192]: WebSearch
+              - generic [ref=e2193]: Mock / Fallback
+            - generic [ref=e2194]: "Category: Search Engine Index"
+            - generic [ref=e2195]:
+              - text: "Rate Limit:"
+              - generic [ref=e2196]: 30/min
+      - generic [ref=e2197]:
+        - heading "Historical Discovery Cycles" [level=3] [ref=e2198]
+        - table [ref=e2204]:
+          - rowgroup [ref=e2205]:
+            - row [ref=e2206]:
+              - columnheader "Run ID" [ref=e2207]
+              - columnheader "Type" [ref=e2208]
+              - columnheader "Status" [ref=e2209]
+              - columnheader "Items Found" [ref=e2210]
+              - columnheader "Unique Ingested" [ref=e2211]
+              - columnheader "Relevant Matches" [ref=e2212]
+              - columnheader "Date" [ref=e2213]
+          - rowgroup [ref=e2214]:
+            - row [ref=e2215]:
+              - cell "05eb8fb2" [ref=e2216]
+              - cell "cli_scan" [ref=e2217]
+              - cell "SUCCESS" [ref=e2218]
+              - cell "40" [ref=e2219]
+              - cell "36" [ref=e2220]
+              - cell "19" [ref=e2221]
+              - cell "10/8/2026, 12:55:18 PM" [ref=e2222]
+            - row [ref=e2223]:
+              - cell "f5c04bde" [ref=e2224]
+              - cell "cli_scan" [ref=e2225]
+              - cell "SUCCESS" [ref=e2226]
+              - cell "10" [ref=e2227]
+              - cell "10" [ref=e2228]
+              - cell "1" [ref=e2229]
+              - cell "10/8/2026, 11:14:00 AM" [ref=e2230]
+            - row [ref=e2231]:
+              - cell "0bab56ab" [ref=e2232]
+              - cell "cli_scan" [ref=e2233]
+              - cell "SUCCESS" [ref=e2234]
+              - cell "5" [ref=e2235]
+              - cell "1" [ref=e2236]
+              - cell "3" [ref=e2237]
+              - cell "10/8/2026, 10:28:04 AM" [ref=e2238]
+            - row [ref=e2239]:
+              - cell "1e4ab7bf" [ref=e2240]
+              - cell "deep" [ref=e2241]
+              - cell "SUCCESS" [ref=e2242]
+              - cell "27" [ref=e2243]
+              - cell "0" [ref=e2244]
+              - cell "20" [ref=e2245]
+              - cell "10/6/2026, 12:23:38 PM" [ref=e2246]
+            - row [ref=e2247]:
+              - cell "b3125237" [ref=e2248]
+              - cell "deep" [ref=e2249]
+              - cell "SUCCESS" [ref=e2250]
+              - cell "27" [ref=e2251]
+              - cell "0" [ref=e2252]
+              - cell "0" [ref=e2253]
+              - cell "10/3/2026, 7:00:47 AM" [ref=e2254]
+            - row [ref=e2255]:
+              - cell "62fce3e4" [ref=e2256]
+              - cell "deep" [ref=e2257]
+              - cell "SUCCESS" [ref=e2258]
+              - cell "13" [ref=e2259]
+              - cell "0" [ref=e2260]
+              - cell "9" [ref=e2261]
+              - cell "10/3/2026, 6:42:08 AM" [ref=e2262]
+            - row [ref=e2263]:
+              - cell "94d782ee" [ref=e2264]
+              - cell "deep" [ref=e2265]
+              - cell "SUCCESS" [ref=e2266]
+              - cell "13" [ref=e2267]
+              - cell "0" [ref=e2268]
+              - cell "9" [ref=e2269]
+              - cell "10/3/2026, 6:41:43 AM" [ref=e2270]
+            - row [ref=e2271]:
+              - cell "7574725d" [ref=e2272]
+              - cell "deep" [ref=e2273]
+              - cell "SUCCESS" [ref=e2274]
+              - cell "61" [ref=e2275]
+              - cell "1" [ref=e2276]
+              - cell "39" [ref=e2277]
+              - cell "10/3/2026, 6:17:18 AM" [ref=e2278]
+            - row [ref=e2279]:
+              - cell "3b2efa72" [ref=e2280]
+              - cell "deep" [ref=e2281]
+              - cell "SUCCESS" [ref=e2282]
+              - cell "19" [ref=e2283]
+              - cell "0" [ref=e2284]
+              - cell "12" [ref=e2285]
+              - cell "10/3/2026, 6:13:53 AM" [ref=e2286]
+            - row [ref=e2287]:
+              - cell "f6e99cff" [ref=e2288]
+              - cell "deep" [ref=e2289]
+              - cell "SUCCESS" [ref=e2290]
+              - cell "19" [ref=e2291]
+              - cell "0" [ref=e2292]
+              - cell "0" [ref=e2293]
+              - cell "10/3/2026, 6:13:33 AM" [ref=e2294]
+            - row [ref=e2295]:
+              - cell "2de46a33" [ref=e2296]
+              - cell "deep" [ref=e2297]
+              - cell "SUCCESS" [ref=e2298]
+              - cell "19" [ref=e2299]
+              - cell "9" [ref=e2300]
+              - cell "6" [ref=e2301]
+              - cell "10/3/2026, 5:43:05 AM" [ref=e2302]
+            - row [ref=e2303]:
+              - cell "dbb9cdf4" [ref=e2304]
+              - cell "deep" [ref=e2305]
+              - cell "RUNNING" [ref=e2306]
+              - cell "0" [ref=e2307]
+              - cell "0" [ref=e2308]
+              - cell "0" [ref=e2309]
+              - cell "10/3/2026, 5:42:49 AM" [ref=e2310]
+            - row [ref=e2311]:
+              - cell "5a38ea99" [ref=e2312]
+              - cell "deep" [ref=e2313]
+              - cell "RUNNING" [ref=e2314]
+              - cell "0" [ref=e2315]
+              - cell "0" [ref=e2316]
+              - cell "0" [ref=e2317]
+              - cell "10/3/2026, 5:42:24 AM" [ref=e2318]

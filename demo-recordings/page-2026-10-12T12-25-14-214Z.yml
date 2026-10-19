@@ -1,0 +1,65 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Decisions" [ref=e24] [cursor=pointer]
+        - button "AI Agent" [ref=e30] [cursor=pointer]
+        - button "Radar" [ref=e35] [cursor=pointer]
+        - button "Discover" [ref=e43] [cursor=pointer]
+        - button "Hackathons" [ref=e48] [cursor=pointer]
+        - button "Internships" [ref=e56] [cursor=pointer]
+        - button "Open Source" [ref=e61] [cursor=pointer]
+        - button "Competitions" [ref=e67] [cursor=pointer]
+        - button "Research" [ref=e72] [cursor=pointer]
+        - button "Saved" [ref=e76] [cursor=pointer]
+        - button "Tracker" [ref=e80] [cursor=pointer]
+        - button "Projects" [ref=e83] [cursor=pointer]
+        - button "Sources" [ref=e89] [cursor=pointer]
+      - generic [ref=e93]:
+        - button "6" [ref=e168]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e98]': LIVE
+        - button "Deep Discover" [ref=e101] [cursor=pointer]
+        - button "Student Profile" [ref=e106]
+  - main [ref=e111]:
+    - generic [ref=e1935]:
+      - generic [ref=e1936]:
+        - generic [ref=e1937]:
+          - generic [ref=e1938]:
+            - generic [ref=e1939]:
+              - generic [ref=e1940]: Phase 8 Personal Decision Engine
+              - generic [ref=e1941]: 2026-10-12
+            - heading "Strategic Prioritization & Action Planning" [level=1] [ref=e1942]
+            - paragraph [ref=e1943]: "\"Focused Execution: Drive forward 'This Week in Open Source for October 2, ' with high-impact project reuse.\""
+          - button "Refresh Decision Engine" [ref=e1945]
+        - generic [ref=e1952]:
+          - generic [ref=e1953]:
+            - generic [ref=e1954]: "Tracked Opportunities:"
+            - generic [ref=e1955]: "0"
+          - generic [ref=e1956]:
+            - generic [ref=e1957]: "In Progress:"
+            - generic [ref=e1958]: "0"
+          - generic [ref=e1959]:
+            - generic [ref=e1960]: "Applied / Submitted:"
+            - generic [ref=e1961]: "0"
+          - generic [ref=e1962]:
+            - generic [ref=e1963]: "Shortlist → Applied Conversion:"
+            - generic [ref=e1964]: 0%
+      - generic [ref=e1965]:
+        - button "Today's Actions (5)" [ref=e1966]
+        - button "2x2 Value Matrix" [ref=e1970]
+        - button "Opportunity Comparison (2)" [active] [ref=e1974]
+        - button "Personal Queue (0)" [ref=e1980]
+        - button "Conversion Funnel" [ref=e1985]
+      - generic [ref=e2520]:
+        - generic [ref=e2521]:
+          - generic [ref=e2522]:
+            - heading "Opportunity Comparison Matrix" [level=2] [ref=e2523]
+            - paragraph [ref=e2528]: Evaluating 2 candidates across 6 decision dimensions.
+          - button "Run Analysis" [ref=e2529]
+        - paragraph [ref=e2541]: Select 2 to 5 opportunities from the Today tab or below to generate a side-by-side analysis.

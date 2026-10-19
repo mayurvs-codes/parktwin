@@ -1,0 +1,50 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e7]:
+    - generic:
+      - generic [ref=f4e10]:
+        - link "Dashboard" [ref=f4e11] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f4e21]:
+          - generic [ref=f4e22]: PARKTWIN 3D
+          - generic [ref=f4e23]: DRIVER ZONE
+        - button "VEH-003 (Urban Compact)" [ref=f4e166] [cursor=pointer]:
+          - generic [ref=f4e30]: VEH-003
+          - generic [ref=f4e31]: (Urban Compact)
+        - generic [ref=f4e225]: 🔷 NAVIGATING
+      - generic [ref=f4e77]:
+        - button "TOP" [ref=f4e78] [cursor=pointer]
+        - button "DRIVER VIEW" [ref=f4e83] [cursor=pointer]
+        - button "ORBIT" [ref=f4e89] [cursor=pointer]
+        - button "Reset" [ref=f4e95] [cursor=pointer]
+    - generic [ref=f4e101]:
+      - generic [ref=f4e102]:
+        - generic [ref=f4e103]: ZONE C · MINIMAP
+        - generic [ref=f4e104]: LEVEL B2
+      - img [ref=f4e105]:
+        - generic [ref=f4e107]: ← EXIT B2
+        - generic [ref=f4e108]: "19"
+        - generic [ref=f4e111]: "20"
+        - generic [ref=f4e114]: "21"
+        - generic [ref=f4e117]: "22"
+        - generic [ref=f4e120]: "23"
+        - generic [ref=f4e123]: "24"
+        - generic [ref=f4e126]: "25"
+        - generic [ref=f4e129]: "26"
+    - generic [ref=f4e247]:
+      - generic [ref=f4e248]:
+        - generic [ref=f4e253]:
+          - generic [ref=f4e254]: VEH-003 · BAY GUIDANCE
+          - generic [ref=f4e255]: Continue straight along aisle
+        - generic [ref=f4e256]:
+          - generic [ref=f4e257]: 63 m
+          - text: to SP-19
+      - generic [ref=f4e259]:
+        - generic [ref=f4e260]: ENTRY GATE
+        - generic [ref=f4e261]: 27%
+        - generic [ref=f4e262]: SP-19
+      - generic [ref=f4e264]:
+        - button "PAUSE" [ref=f4e265] [cursor=pointer]
+        - button "CANCEL NAVIGATION" [ref=f4e270] [cursor=pointer]
+    - generic: Drag = Rotate · Scroll = Zoom · R = Reset Camera
+  - button "Open Next.js Dev Tools" [ref=f4e161] [cursor=pointer]
+  - alert [ref=f4e165]

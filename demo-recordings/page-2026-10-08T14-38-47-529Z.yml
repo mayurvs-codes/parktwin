@@ -1,0 +1,195 @@
+- generic [ref=f1e3]:
+  - banner [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - generic [ref=f1e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=f1e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=f1e16]: AI
+        - paragraph [ref=f1e17]: Personal Opportunity Intelligence
+      - navigation [ref=f1e18]:
+        - button "Dashboard" [ref=f1e19] [cursor=pointer]
+        - button "AI Agent" [active] [ref=f1e24] [cursor=pointer]
+        - button "Radar" [ref=f1e29] [cursor=pointer]
+        - button "Discover" [ref=f1e37] [cursor=pointer]
+        - button "Hackathons" [ref=f1e42] [cursor=pointer]
+        - button "Internships" [ref=f1e50] [cursor=pointer]
+        - button "Open Source" [ref=f1e55] [cursor=pointer]
+        - button "Competitions" [ref=f1e61] [cursor=pointer]
+        - button "Research" [ref=f1e66] [cursor=pointer]
+        - button "Saved" [ref=f1e70] [cursor=pointer]
+        - button "Tracker" [ref=f1e74] [cursor=pointer]
+        - button "Projects" [ref=f1e77] [cursor=pointer]
+        - button "Sources" [ref=f1e83] [cursor=pointer]
+      - generic [ref=f1e87]:
+        - button "6" [ref=f1e162]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=f1e92]': LIVE
+        - button "Deep Discover" [ref=f1e95] [cursor=pointer]
+        - button "Student Profile" [ref=f1e100]
+  - main [ref=f1e105]:
+    - generic [ref=f1e1929]:
+      - generic [ref=f1e1930]:
+        - generic [ref=f1e1931]:
+          - generic [ref=f1e1932]:
+            - generic [ref=f1e1933]: Phase 7 Personal AI Agent
+            - heading "What Should I Do Today?" [level=1] [ref=f1e1937]
+            - paragraph [ref=f1e1938]: Ask your personal AI opportunity agent in plain English. Recommendations are grounded exclusively in verified live opportunities, tailored to your technical portfolio, and continuously refined by your actions.
+          - button "Refresh Intelligence Brief" [ref=f1e1939]
+        - generic [ref=f1e1945]:
+          - generic [ref=f1e1946]:
+            - textbox "Ask e.g. 'I have 10 hours this weekend, what hackathon should I do?'" [ref=f1e1948]
+            - button "Ask Agent" [disabled] [ref=f1e1952]
+          - generic [ref=f1e1956]:
+            - generic [ref=f1e1957]: "Try asking:"
+            - button "I have 10 hours this weekend, what hackathon should I do?" [ref=f1e1958]
+            - button "Find open source Python projects with upcoming deadlines" [ref=f1e1959]
+            - button "What can I build leveraging my ParkTwin AI project?" [ref=f1e1960]
+            - button "What opportunities are closing in the next 7 days?" [ref=f1e1961]
+      - generic [ref=f1e1962]:
+        - generic [ref=f1e1963]:
+          - generic [ref=f1e1969]:
+            - heading "Daily Intelligence Brief" [level=3] [ref=f1e1970]
+            - generic [ref=f1e1971]: "Date: 2026-10-08"
+          - generic [ref=f1e1972]:
+            - generic [ref=f1e1973]: "Today's Focus: Urgent: 'BlockHunt'26' closes in 2 days! Prepare submission using strategy 'ADAPT EXISTING PROJECT'."
+            - generic [ref=f1e1974]:
+              - generic [ref=f1e1975]:
+                - generic [ref=f1e1976]: "3"
+                - generic [ref=f1e1977]: Urgent (<7d)
+              - generic [ref=f1e1978]:
+                - generic [ref=f1e1979]: "4"
+                - generic [ref=f1e1980]: Prime Match
+              - generic [ref=f1e1981]:
+                - generic [ref=f1e1982]: "16"
+                - generic [ref=f1e1983]: Ready to Act
+            - generic [ref=f1e1984]:
+              - generic [ref=f1e1985]: Urgent Closing Opportunities
+              - generic [ref=f1e1986]:
+                - generic [ref=f1e1987]:
+                  - generic [ref=f1e1988]:
+                    - generic [ref=f1e1989]: BlockHunt'26
+                    - generic [ref=f1e1990]: Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad • 2d remaining
+                  - link "Act →" [ref=f1e1991] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/blockhunt26-indian-institute-of-technology-indian-school-of-mines-iit-ism-dhanbad-1764178
+                - generic [ref=f1e1992]:
+                  - generic [ref=f1e1993]:
+                    - generic [ref=f1e1994]: Code The Cosmos '26
+                    - generic [ref=f1e1995]: Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad • 0d remaining
+                  - link "Act →" [ref=f1e1996] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/code-the-cosmos-indian-institute-of-technology-indian-school-of-mines-iit-ism-dhanbad-1767675
+                - generic [ref=f1e1997]:
+                  - generic [ref=f1e1998]:
+                    - generic [ref=f1e1999]: MindTech Arena 2026 – National Hackathon
+                    - generic [ref=f1e2000]: Indian Institute of Information Technology (IIIT), Kottayam • 2d remaining
+                  - link "Act →" [ref=f1e2001] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/mindtech-arena-2026-national-hackathon-iiit-kottayam-1767173
+        - generic [ref=f1e2002]:
+          - generic [ref=f1e2007]:
+            - heading "Weekly Strategic Focus" [level=3] [ref=f1e2008]
+            - generic [ref=f1e2009]: "Week: 2026-10-05"
+          - generic [ref=f1e2010]:
+            - generic [ref=f1e2011]:
+              - generic [ref=f1e2012]: Strategic Priorities
+              - generic [ref=f1e2013]:
+                - generic [ref=f1e2014]: "Accelerate submissions in preferred domains: Python, Computer Science."
+                - generic [ref=f1e2018]: Monitor 5 opportunities closing within the next 14 days.
+                - generic [ref=f1e2022]: "Close high-yield portfolio skill gap: Computer Science (demanded across 7 targets)."
+            - generic [ref=f1e2026]:
+              - generic [ref=f1e2027]: Portfolio Asset Adaptations
+              - generic [ref=f1e2028]:
+                - generic [ref=f1e2029]: Repurpose 'ParkTwin AI' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+                - generic [ref=f1e2035]: Repurpose 'ANPR System' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+                - generic [ref=f1e2041]: Repurpose 'StaticsLab' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+      - generic [ref=f1e2047]:
+        - generic [ref=f1e2048]:
+          - generic [ref=f1e2049]:
+            - heading "Learned User Preferences & Behavioral Profile" [level=3] [ref=f1e2050]
+            - paragraph [ref=f1e2052]: Continuously updated from your saves, feedback, and applications with gradual decay (60-day half-life).
+          - generic [ref=f1e2053]:
+            - generic [ref=f1e2054]:
+              - text: "Interactions Logged:"
+              - strong [ref=f1e2055]: "3"
+            - button "Reset Preferences" [ref=f1e2056]
+        - generic [ref=f1e2060]:
+          - generic [ref=f1e2061]:
+            - generic [ref=f1e2062]:
+              - generic [ref=f1e2063]: Top Technologies
+              - generic [ref=f1e2064]:
+                - generic [ref=f1e2065]: Python
+                - generic [ref=f1e2066]: Computer Science
+                - generic [ref=f1e2067]: Software Engineering
+                - generic [ref=f1e2068]: Javascript
+                - generic [ref=f1e2069]: Cloud
+            - generic [ref=f1e2070]:
+              - generic [ref=f1e2071]: Preferred Categories
+              - generic [ref=f1e2072]:
+                - generic [ref=f1e2073]: HACKATHON
+                - generic [ref=f1e2074]: OPEN_SOURCE
+            - generic [ref=f1e2075]:
+              - generic [ref=f1e2076]: Avoided Topics
+              - generic [ref=f1e2077]: None marked irrelevant or dismissed
+          - table [ref=f1e2080]:
+            - rowgroup [ref=f1e2081]:
+              - row [ref=f1e2082]:
+                - columnheader "Dimension" [ref=f1e2083]
+                - columnheader "Value" [ref=f1e2084]
+                - columnheader "Net Score" [ref=f1e2085]
+                - columnheader "Confidence" [ref=f1e2086]
+                - columnheader "Signals" [ref=f1e2087]
+                - columnheader "Last Interaction" [ref=f1e2088]
+            - rowgroup [ref=f1e2089]:
+              - row [ref=f1e2090]:
+                - cell "TECHNOLOGY" [ref=f1e2091]
+                - cell "python" [ref=f1e2092]
+                - cell "+1.60" [ref=f1e2093]
+                - cell "25%" [ref=f1e2094]
+                - cell "2 evidence items" [ref=f1e2095]
+                - cell "10/8/2026" [ref=f1e2096]
+              - row [ref=f1e2097]:
+                - cell "TECHNOLOGY" [ref=f1e2098]
+                - cell "computer science" [ref=f1e2099]
+                - cell "+0.80" [ref=f1e2100]
+                - cell "9%" [ref=f1e2101]
+                - cell "1 evidence items" [ref=f1e2102]
+                - cell "10/8/2026" [ref=f1e2103]
+              - row [ref=f1e2104]:
+                - cell "TECHNOLOGY" [ref=f1e2105]
+                - cell "software engineering" [ref=f1e2106]
+                - cell "+0.80" [ref=f1e2107]
+                - cell "9%" [ref=f1e2108]
+                - cell "1 evidence items" [ref=f1e2109]
+                - cell "10/8/2026" [ref=f1e2110]
+              - row [ref=f1e2111]:
+                - cell "TECHNOLOGY" [ref=f1e2112]
+                - cell "javascript" [ref=f1e2113]
+                - cell "+0.80" [ref=f1e2114]
+                - cell "9%" [ref=f1e2115]
+                - cell "1 evidence items" [ref=f1e2116]
+                - cell "10/8/2026" [ref=f1e2117]
+              - row [ref=f1e2118]:
+                - cell "TECHNOLOGY" [ref=f1e2119]
+                - cell "cloud" [ref=f1e2120]
+                - cell "+0.80" [ref=f1e2121]
+                - cell "9%" [ref=f1e2122]
+                - cell "1 evidence items" [ref=f1e2123]
+                - cell "10/8/2026" [ref=f1e2124]
+              - row [ref=f1e2125]:
+                - cell "CATEGORY" [ref=f1e2126]
+                - cell "HACKATHON" [ref=f1e2127]
+                - cell "+0.80" [ref=f1e2128]
+                - cell "9%" [ref=f1e2129]
+                - cell "1 evidence items" [ref=f1e2130]
+                - cell "10/8/2026" [ref=f1e2131]
+              - row [ref=f1e2132]:
+                - cell "DOMAIN" [ref=f1e2133]
+                - cell "engineering" [ref=f1e2134]
+                - cell "+0.80" [ref=f1e2135]
+                - cell "9%" [ref=f1e2136]
+                - cell "1 evidence items" [ref=f1e2137]
+                - cell "10/8/2026" [ref=f1e2138]
+              - row [ref=f1e2139]:
+                - cell "DOMAIN" [ref=f1e2140]
+                - cell "hackathons" [ref=f1e2141]
+                - cell "+0.80" [ref=f1e2142]
+                - cell "9%" [ref=f1e2143]
+                - cell "1 evidence items" [ref=f1e2144]
+                - cell "10/8/2026" [ref=f1e2145]

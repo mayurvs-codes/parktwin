@@ -1,0 +1,396 @@
+- generic [ref=f5e1]:
+  - generic [ref=f5e2]:
+    - complementary "Primary" [ref=f5e3]:
+      - link "ParkTwin AI" [ref=f5e8] [cursor=pointer]:
+        - /url: /
+      - navigation "Primary" [ref=f5e10]:
+        - generic [ref=f5e11]: overview
+        - link "Dashboard" [ref=f5e12] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f5e20]: operations
+        - link "Live Parking" [ref=f5e21] [cursor=pointer]:
+          - /url: /parking
+        - link "Digital Twin" [ref=f5e30] [cursor=pointer]:
+          - /url: /digital-twin
+        - link "Vehicles" [ref=f5e37] [cursor=pointer]:
+          - /url: /vehicles
+        - link "Video" [ref=f5e44] [cursor=pointer]:
+          - /url: /video-library
+        - link "CCTV" [ref=f5e49] [cursor=pointer]:
+          - /url: /video-processing
+        - generic [ref=f5e59]: intelligence
+        - link "ANPR" [ref=f5e60] [cursor=pointer]:
+          - /url: /anpr
+        - link "Analytics" [ref=f5e68] [cursor=pointer]:
+          - /url: /analytics
+        - link "Reports" [ref=f5e73] [cursor=pointer]:
+          - /url: /reports
+        - generic [ref=f5e79]: system
+        - link "Settings" [ref=f5e80] [cursor=pointer]:
+          - /url: /settings
+      - generic [ref=f5e87]:
+        - generic [ref=f5e88]: SYSTEM ONLINE
+        - generic [ref=f5e93]: v1.0.0
+    - generic [ref=f5e94]:
+      - banner [ref=f5e95]:
+        - button "Toggle sidebar" [ref=f5e96] [cursor=pointer]
+        - navigation "Breadcrumb" [ref=f5e99]:
+          - link "Home" [ref=f5e101] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f5e106]: Digital Twin
+        - generic [ref=f5e110]:
+          - button "Toggle notifications panel" [ref=f5e111] [cursor=pointer]
+          - link [ref=f5e115] [cursor=pointer]:
+            - /url: /user/dashboard
+            - button "Driver Portal" [ref=f5e116]
+          - button "Toggle color theme" [ref=f5e121] [cursor=pointer]
+          - generic [ref=f5e124]: Admin System
+      - link "Skip to content" [ref=f5e131] [cursor=pointer]:
+        - /url: "#main-content"
+      - main [ref=f5e132]:
+        - generic [ref=f5e134]:
+          - generic [ref=f5e135]:
+            - generic [ref=f5e142]:
+              - generic [ref=f5e143]:
+                - heading "Digital Twin" [level=1] [ref=f5e144]
+                - generic [ref=f5e145]: Carparking-01 B2
+                - generic [ref=f5e146]: READY
+              - paragraph [ref=f5e147]: 1472×1508 Operational Coordinate Space · 60 Canonical Bays
+            - generic [ref=f5e148]:
+              - button "Start" [ref=f5e149] [cursor=pointer]
+              - button "Reset" [ref=f5e153] [cursor=pointer]
+              - button "CCTV Evidence Viewer" [ref=f5e158] [cursor=pointer]
+              - generic [ref=f5e163]:
+                - button "0.5x" [ref=f5e164] [cursor=pointer]
+                - button "1x" [ref=f5e165] [cursor=pointer]
+                - button "2x" [ref=f5e166] [cursor=pointer]
+                - button "4x" [ref=f5e167] [cursor=pointer]
+              - generic [ref=f5e168]: 00:00/03:00
+          - generic [ref=f5e169]:
+            - generic [ref=f5e170]:
+              - generic [ref=f5e171]: "Persona:"
+              - button "User A (SP-07)" [ref=f5e176] [cursor=pointer]
+              - button "User B" [ref=f5e177] [cursor=pointer]
+              - button "Guest" [ref=f5e178] [cursor=pointer]
+            - generic [ref=f5e179]:
+              - generic [ref=f5e180]:
+                - strong [ref=f5e181]: "15"
+                - text: Occ ·
+                - strong [ref=f5e182]: "4"
+                - text: Avail ·
+                - strong [ref=f5e183]: "1"
+                - text: Desig
+              - button "Simulate Violation" [ref=f5e184] [cursor=pointer]
+              - button "Reset Demo" [active] [ref=f5e188] [cursor=pointer]
+          - generic [ref=f5e193]:
+            - generic [ref=f5e195]:
+              - generic [ref=f5e196]:
+                - button "Layers" [ref=f5e198] [cursor=pointer]
+                - generic [ref=f5e204]:
+                  - button "Zoom In (+)" [ref=f5e205] [cursor=pointer]
+                  - button "Zoom Out (−)" [ref=f5e209] [cursor=pointer]
+                  - button "Focus Demo Zone (Home)" [ref=f5e213] [cursor=pointer]
+                  - button "FIT" [ref=f5e217] [cursor=pointer]
+                  - button "Center on Selected Item" [ref=f5e224] [cursor=pointer]
+                  - generic [ref=f5e229]: 155%
+              - generic:
+                - generic: Carparking-01 B2
+                - generic: 60 Operational Spaces · 16 Verified Cameras
+              - generic:
+                - generic: ACCESS_POINT_B2
+                - generic: Single Physical Gateway (Entry & Exit)
+              - img [ref=f5e230]:
+                - generic:
+                  - generic:
+                    - generic: LIFT
+                    - generic: STAIR & LIFT CORE 01
+                  - generic: ◄ ENTRY RAMP
+                  - generic:
+                    - generic: LIFT
+                    - generic: STAIR & LIFT CORE 02
+                  - generic:
+                    - generic:
+                      - generic: LOBBY
+                      - generic: 2.8M WIDE
+                    - generic: SERVICES / STORAGE
+                    - generic:
+                      - generic: LOBBY
+                      - generic: 3.0M WIDE
+                - generic:
+                  - generic: FOCUSED DEMO ZONE · ISLAND 1 (20 SPACES)
+                  - generic: NORTH ROW · 8 STALLS (SP-01 – SP-08)
+                  - generic: SOUTH ROW · 8 STALLS (SP-09 – SP-16)
+                  - generic: WEST END · 4 STALLS (SP-17 – SP-20)
+                  - generic: OCC 15 · AVAIL 4 · DESIG 1
+                - generic [ref=f5e244]:
+                  - generic [ref=f5e245] [cursor=pointer]: P01
+                  - generic [ref=f5e247] [cursor=pointer]: P02
+                  - generic [ref=f5e249] [cursor=pointer]: P03
+                  - generic [ref=f5e251] [cursor=pointer]: P04
+                  - generic [ref=f5e253] [cursor=pointer]: P05
+                  - generic [ref=f5e255] [cursor=pointer]: P06
+                  - generic [ref=f5e257] [cursor=pointer]: ★ P07
+                  - generic [ref=f5e259] [cursor=pointer]: P08
+                  - generic [ref=f5e261] [cursor=pointer]: P09
+                  - generic [ref=f5e263] [cursor=pointer]: P10
+                  - generic [ref=f5e265] [cursor=pointer]: P11
+                  - generic [ref=f5e267] [cursor=pointer]: P12
+                  - generic [ref=f5e269] [cursor=pointer]: P13
+                  - generic [ref=f5e271] [cursor=pointer]: P14
+                  - generic [ref=f5e273] [cursor=pointer]: P15
+                  - generic [ref=f5e275] [cursor=pointer]: P16
+                  - generic [ref=f5e277] [cursor=pointer]: P17
+                  - generic [ref=f5e279] [cursor=pointer]: P18
+                  - generic [ref=f5e281] [cursor=pointer]: P19
+                  - generic [ref=f5e283] [cursor=pointer]: P20
+                  - generic [ref=f5e285] [cursor=pointer]: P21
+                  - generic [ref=f5e287] [cursor=pointer]: P22
+                  - generic [ref=f5e289] [cursor=pointer]: P23
+                  - generic [ref=f5e291] [cursor=pointer]: P24
+                  - generic [ref=f5e293] [cursor=pointer]: P25
+                  - generic [ref=f5e295] [cursor=pointer]: P26
+                  - generic [ref=f5e297] [cursor=pointer]: P27
+                  - generic [ref=f5e299] [cursor=pointer]: P28
+                  - generic [ref=f5e301] [cursor=pointer]: P29
+                  - generic [ref=f5e303] [cursor=pointer]: P30
+                  - generic [ref=f5e305] [cursor=pointer]: P31
+                  - generic [ref=f5e307] [cursor=pointer]: P32
+                  - generic [ref=f5e309] [cursor=pointer]: P33
+                  - generic [ref=f5e311] [cursor=pointer]: P34
+                  - generic [ref=f5e313] [cursor=pointer]: P35
+                  - generic [ref=f5e315] [cursor=pointer]: P36
+                  - generic [ref=f5e317] [cursor=pointer]: P37
+                  - generic [ref=f5e319] [cursor=pointer]: P38
+                  - generic [ref=f5e321] [cursor=pointer]: P39
+                  - generic [ref=f5e323] [cursor=pointer]: P40
+                  - generic [ref=f5e325] [cursor=pointer]: P41
+                  - generic [ref=f5e327] [cursor=pointer]: P42
+                  - generic [ref=f5e329] [cursor=pointer]: P43
+                  - generic [ref=f5e331] [cursor=pointer]: P44
+                  - generic [ref=f5e333] [cursor=pointer]: P45
+                  - generic [ref=f5e335] [cursor=pointer]: P46
+                  - generic [ref=f5e337] [cursor=pointer]: P47
+                  - generic [ref=f5e339] [cursor=pointer]: P48
+                  - generic [ref=f5e341] [cursor=pointer]: P49
+                  - generic [ref=f5e343] [cursor=pointer]: P50
+                  - generic [ref=f5e345] [cursor=pointer]: P51
+                  - generic [ref=f5e347] [cursor=pointer]: P52
+                  - generic [ref=f5e349] [cursor=pointer]: P53
+                  - generic [ref=f5e351] [cursor=pointer]: P54
+                  - generic [ref=f5e353] [cursor=pointer]: P55
+                  - generic [ref=f5e355] [cursor=pointer]: P56
+                  - generic [ref=f5e357] [cursor=pointer]: P57
+                  - generic [ref=f5e359] [cursor=pointer]: P58
+                  - generic [ref=f5e361] [cursor=pointer]: P59
+                  - generic [ref=f5e363] [cursor=pointer]: P60
+                - generic [ref=f5e365]:
+                  - generic [ref=f5e366] [cursor=pointer]
+                  - generic [ref=f5e367] [cursor=pointer]
+                  - generic [ref=f5e368] [cursor=pointer]
+                  - generic [ref=f5e369] [cursor=pointer]
+                  - generic [ref=f5e370] [cursor=pointer]
+                  - generic [ref=f5e371] [cursor=pointer]
+                  - generic [ref=f5e372] [cursor=pointer]
+                  - generic [ref=f5e373] [cursor=pointer]
+                  - generic [ref=f5e374] [cursor=pointer]
+                  - generic [ref=f5e375] [cursor=pointer]
+                  - generic [ref=f5e376] [cursor=pointer]
+                  - generic [ref=f5e377] [cursor=pointer]
+                  - generic [ref=f5e378] [cursor=pointer]
+                  - generic [ref=f5e379] [cursor=pointer]
+                  - generic [ref=f5e380] [cursor=pointer]
+                  - generic [ref=f5e381] [cursor=pointer]
+                  - generic [ref=f5e382] [cursor=pointer]
+                  - generic [ref=f5e383] [cursor=pointer]
+                  - generic [ref=f5e384] [cursor=pointer]
+                  - generic [ref=f5e385] [cursor=pointer]
+                  - generic [ref=f5e386] [cursor=pointer]
+                  - generic [ref=f5e387] [cursor=pointer]
+                  - generic [ref=f5e388] [cursor=pointer]
+                  - generic [ref=f5e389] [cursor=pointer]
+                  - generic [ref=f5e390] [cursor=pointer]
+                  - generic [ref=f5e391] [cursor=pointer]
+                  - generic [ref=f5e392] [cursor=pointer]
+                  - generic [ref=f5e393] [cursor=pointer]
+                  - generic [ref=f5e394] [cursor=pointer]
+                  - generic [ref=f5e395] [cursor=pointer]
+                  - generic [ref=f5e396] [cursor=pointer]
+                  - generic [ref=f5e397] [cursor=pointer]
+                  - generic [ref=f5e398] [cursor=pointer]
+                  - generic [ref=f5e399] [cursor=pointer]
+                  - generic [ref=f5e400] [cursor=pointer]
+                  - generic [ref=f5e401] [cursor=pointer]
+                  - generic [ref=f5e402] [cursor=pointer]
+                  - generic [ref=f5e403] [cursor=pointer]
+                  - generic [ref=f5e404] [cursor=pointer]
+                  - generic [ref=f5e405] [cursor=pointer]
+                  - generic [ref=f5e406] [cursor=pointer]
+                  - generic [ref=f5e407] [cursor=pointer]
+                  - generic [ref=f5e408] [cursor=pointer]
+                  - generic [ref=f5e409] [cursor=pointer]
+                  - generic [ref=f5e410] [cursor=pointer]
+                  - generic [ref=f5e411] [cursor=pointer]
+                  - generic [ref=f5e412] [cursor=pointer]
+                  - generic [ref=f5e413] [cursor=pointer]
+                  - generic [ref=f5e414] [cursor=pointer]
+                  - generic [ref=f5e415] [cursor=pointer]
+                  - generic [ref=f5e416] [cursor=pointer]
+                  - generic [ref=f5e417] [cursor=pointer]
+                  - generic [ref=f5e418] [cursor=pointer]
+                  - generic [ref=f5e419] [cursor=pointer]
+                  - generic [ref=f5e420] [cursor=pointer]
+                - generic [ref=f5e421]: ACCESS_POINT_B2
+                - generic: ★ SP-07
+                - generic: ● YOU
+              - generic:
+                - generic: Available
+                - generic: Occupied
+                - generic: Reserved
+                - generic: Selected
+            - generic [ref=f5e428]:
+              - generic [ref=f5e429]:
+                - generic [ref=f5e431]:
+                  - heading "Bay Inspector (Focused Zone)" [level=3] [ref=f5e432]
+                  - button "Clear" [ref=f5e436] [cursor=pointer]
+                - generic [ref=f5e442]:
+                  - generic [ref=f5e443]:
+                    - generic [ref=f5e444]:
+                      - generic [ref=f5e445]:
+                        - generic [ref=f5e446]: Bay P07
+                        - generic [ref=f5e447]: ★
+                      - generic [ref=f5e448]: "Slot Identifier: SP-07 (Focused Demo Zone)"
+                    - generic [ref=f5e449]: DESIGNATED
+                  - generic [ref=f5e450]:
+                    - generic [ref=f5e451]:
+                      - generic [ref=f5e452]: Zone
+                      - generic [ref=f5e453]: Focused Zone
+                    - generic [ref=f5e454]:
+                      - generic [ref=f5e455]: Camera
+                      - generic [ref=f5e456]: CAM-12
+                    - generic [ref=f5e457]:
+                      - generic [ref=f5e458]: Rate
+                      - generic [ref=f5e459]: $3.50/hr
+                  - generic [ref=f5e460]:
+                    - generic [ref=f5e461]:
+                      - generic [ref=f5e462]: User
+                      - generic [ref=f5e463]: Registered User A
+                    - generic [ref=f5e464]:
+                      - generic [ref=f5e465]: Reservation
+                      - generic [ref=f5e466]: ACTIVE
+                    - generic [ref=f5e467]:
+                      - generic [ref=f5e468]: Designated For
+                      - generic [ref=f5e469]: USER A (VEH-001)
+                    - generic [ref=f5e470]:
+                      - generic [ref=f5e471]: Vehicle
+                      - generic [ref=f5e472]: None (Available / Empty Bay)
+              - generic [ref=f5e473]:
+                - generic [ref=f5e475]:
+                  - heading "Evidence Coverage Summary" [level=3] [ref=f5e476]
+                  - generic [ref=f5e481]: PARTIALLY EVIDENCE-BACKED
+                - generic [ref=f5e482]:
+                  - generic [ref=f5e483]:
+                    - generic [ref=f5e484]: CCTV Sources
+                    - generic [ref=f5e485]: 3 (CAM-01, CAM-02, CAM-03)
+                  - generic [ref=f5e486]:
+                    - generic [ref=f5e487]: ANPR Benchmark Sources
+                    - generic [ref=f5e488]: "1 (test_video.mp4 · Track #6)"
+                  - generic [ref=f5e489]:
+                    - generic [ref=f5e490]: Entry Observations
+                    - generic [ref=f5e491]: AVAILABLE / PARTIAL
+                  - generic [ref=f5e492]:
+                    - generic [ref=f5e493]: Parking Maneuver Evidence
+                    - generic [ref=f5e494]: NOT AVAILABLE (NOT PROVEN)
+                  - generic [ref=f5e495]:
+                    - generic [ref=f5e496]: Physical Exit Evidence
+                    - generic [ref=f5e497]: NOT AVAILABLE (NOT OBSERVED)
+                  - generic [ref=f5e498]:
+                    - generic [ref=f5e499]: Cross-Camera Identity
+                    - generic [ref=f5e500]: UNVERIFIED
+                  - generic [ref=f5e501]:
+                    - generic [ref=f5e502]: Complete Lifecycle Proof
+                    - generic [ref=f5e503]: NOT AVAILABLE
+              - generic [ref=f5e504]:
+                - generic [ref=f5e505]:
+                  - generic [ref=f5e506]:
+                    - 'heading "Timeline: Evidence vs Application" [level=3] [ref=f5e507]'
+                    - button "CCTV EVIDENCE" [ref=f5e511] [cursor=pointer]
+                  - generic [ref=f5e516]:
+                    - button "ALL" [ref=f5e517] [cursor=pointer]
+                    - button "EVIDENCE TIMELINE" [ref=f5e518] [cursor=pointer]
+                    - button "APPLICATION TIMELINE" [ref=f5e519] [cursor=pointer]
+                - generic [ref=f5e520]:
+                  - generic [ref=f5e521]:
+                    - generic [ref=f5e522]:
+                      - generic [ref=f5e523]: ● EVIDENCE TIMELINE (CCTV / SENSORS)
+                      - generic [ref=f5e524]: Ground Truth
+                    - generic [ref=f5e525]:
+                      - generic [ref=f5e526]:
+                        - generic [ref=f5e527]: CAM-01 (B2 Gate)
+                        - generic [ref=f5e528]: OBSERVED
+                      - paragraph [ref=f5e529]: "Vehicle entrance observed. Plate visually legible: KA05ML7220. Barrier arm lift verified."
+                    - generic [ref=f5e530]:
+                      - generic [ref=f5e531]:
+                        - generic [ref=f5e532]: "Track #6 (PaddleOCR)"
+                        - generic [ref=f5e533]: INFERRED
+                      - paragraph [ref=f5e534]: "ANPR benchmark detected KA04MN8049 (98% conf, test_video.mp4). Identity linkage: UNVERIFIED."
+                    - generic [ref=f5e535]:
+                      - generic [ref=f5e536]:
+                        - generic [ref=f5e537]: CAM-02 (Bay Cluster)
+                        - generic [ref=f5e538]: NOT OBSERVED
+                      - paragraph [ref=f5e539]: "Stationary dwell observed for KA05ND1565 & KA03NY0035. Parking maneuver: NOT OBSERVED IN CCTV."
+                    - generic [ref=f5e540]:
+                      - generic [ref=f5e541]:
+                        - generic [ref=f5e542]: CAM-03 (Exit Ramp)
+                        - generic [ref=f5e543]: NOT OBSERVED
+                      - paragraph [ref=f5e544]: "Exit infrastructure verified. Vehicle egress: NOT OBSERVED IN SOURCE CLIP (roadway clear)."
+                  - generic [ref=f5e545]:
+                    - generic [ref=f5e546]:
+                      - generic [ref=f5e547]: ● APPLICATION TIMELINE (DEMO & EVENTS)
+                      - generic [ref=f5e548]: State Machine
+                    - generic [ref=f5e549]:
+                      - generic [ref=f5e550]:
+                        - generic [ref=f5e551]: FACILITY
+                        - generic [ref=f5e552]:
+                          - generic [ref=f5e553]: 5:55:32 PM
+                          - generic [ref=f5e554]: SYSTEM RESET
+                      - paragraph [ref=f5e555]: "Demo reset: restored 15 occupied, 4 available, 1 designated for User A (SP-07)."
+                - generic [ref=f5e556]:
+                  - generic [ref=f5e557]: "● EVIDENCE COVERAGE SUMMARY:"
+                  - generic [ref=f5e558]: "Entry: PARTIAL | Maneuver: NOT PROVEN | Exit: NOT OBSERVED"
+          - generic [ref=f5e560]:
+            - generic [ref=f5e561]:
+              - generic [ref=f5e562]: LIVE
+              - generic [ref=f5e567]:
+                - generic [ref=f5e568]: "ZONE (20):"
+                - generic [ref=f5e569]: 15 Occ
+                - generic [ref=f5e570]: ·
+                - generic [ref=f5e571]: 4 Avail
+                - generic [ref=f5e572]: ·
+                - generic [ref=f5e573]: 1 Desig
+              - generic [ref=f5e575]:
+                - generic [ref=f5e576]: Total Occ
+                - generic [ref=f5e577]: "20"
+              - generic [ref=f5e578]:
+                - generic [ref=f5e579]: Available
+                - generic [ref=f5e580]: "38"
+              - generic [ref=f5e581]:
+                - generic [ref=f5e582]: Reserved
+                - generic [ref=f5e583]: "2"
+              - generic [ref=f5e584]:
+                - generic [ref=f5e585]: Total
+                - generic [ref=f5e586]: "60"
+              - generic [ref=f5e588]:
+                - generic [ref=f5e589]: Cameras
+                - generic [ref=f5e590]:
+                  - text: "4"
+                  - generic [ref=f5e591]: / 16
+              - generic [ref=f5e592]:
+                - generic [ref=f5e593]: Vehicles
+                - generic [ref=f5e594]: "20"
+            - generic [ref=f5e595]:
+              - generic [ref=f5e603]:
+                - text: "Gateway:"
+                - strong [ref=f5e604]: ACCESS_POINT_B2
+              - generic [ref=f5e606]: System Online
+  - button "Open Next.js Dev Tools" [ref=f5e616] [cursor=pointer]
+  - alert [ref=f5e620]

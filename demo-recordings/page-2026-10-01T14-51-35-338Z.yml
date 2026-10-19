@@ -1,0 +1,49 @@
+- generic [ref=f19e1]:
+  - generic [ref=f19e7]:
+    - generic [ref=f19e9] [cursor=pointer]
+    - generic:
+      - generic [ref=f19e10]:
+        - link "Dashboard" [ref=f19e11] [cursor=pointer]:
+          - /url: /user/dashboard
+        - generic [ref=f19e20]:
+          - generic [ref=f19e21]:
+            - generic [ref=f19e22]: PARKTWIN AI
+            - generic [ref=f19e23]: ·
+            - generic [ref=f19e24]: 3D PARKING LOT
+          - generic [ref=f19e25]: CARPARKING-01 · LEVEL B2 · ZONE C
+        - generic [ref=f19e26]:
+          - generic [ref=f19e27]: 20 TOTAL
+          - generic [ref=f19e28]: ● 12 OCCUPIED
+          - generic [ref=f19e29]: ● 7 AVAILABLE
+          - generic [ref=f19e74]: ★ 1 SELECTED (SP-13)
+      - generic [ref=f19e30]:
+        - button "TOP VIEW" [ref=f19e31] [cursor=pointer]
+        - button "PERSPECTIVE" [ref=f19e36] [cursor=pointer]
+        - button "RESET" [ref=f19e43] [cursor=pointer]
+    - generic [ref=f19e58]:
+      - generic [ref=f19e59]:
+        - generic [ref=f19e60]:
+          - generic [ref=f19e61]: 🅿️ SP-13
+          - generic [ref=f19e62]: ★ SELECTED
+        - button "Close inspector" [ref=f19e63] [cursor=pointer]: ✕
+      - generic [ref=f19e64]:
+        - generic [ref=f19e65]:
+          - generic [ref=f19e66]: "Location: Zone C · Level B2"
+          - generic [ref=f19e67]: 2.8m × 5.4m
+        - generic [ref=f19e68]:
+          - generic [ref=f19e69]: Space is open and ready for parking
+          - button "CHANGE SELECTION" [ref=f19e75] [cursor=pointer]
+    - generic [ref=f19e76]:
+      - generic [ref=f19e77]:
+        - generic [ref=f19e78]: SPACE CONFIRMED
+        - generic [ref=f19e81]: SP-13
+      - generic [ref=f19e82]:
+        - generic [ref=f19e83]: ✓ SPACE SELECTED
+        - generic [ref=f19e86]: Your parking space SP-13 is ready.
+        - generic [ref=f19e87]: Zone C · Level B2 · Ground stenciled bay
+      - generic [ref=f19e88]:
+        - button "NAVIGATE TO SP-13" [active] [ref=f19e98] [cursor=pointer]
+        - button "Change Space" [ref=f19e101] [cursor=pointer]
+    - generic: Click available space to select · Drag to rotate · Scroll to zoom
+  - button "Open Next.js Dev Tools" [ref=f19e53] [cursor=pointer]
+  - alert [ref=f19e57]

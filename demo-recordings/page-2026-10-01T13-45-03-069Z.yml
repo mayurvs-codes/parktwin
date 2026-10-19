@@ -1,0 +1,23 @@
+- generic [active] [ref=f12e1]:
+  - generic [ref=f12e7]:
+    - generic:
+      - generic [ref=f12e10]:
+        - link "Dashboard" [ref=f12e11] [cursor=pointer]:
+          - /url: /user/dashboard
+        - generic [ref=f12e20]:
+          - generic [ref=f12e21]:
+            - generic [ref=f12e22]: PARKTWIN AI
+            - generic [ref=f12e23]: ·
+            - generic [ref=f12e24]: 3D PARKING LOT
+          - generic [ref=f12e25]: CARPARKING-01 · LEVEL B2 · ZONE C
+        - generic [ref=f12e26]:
+          - generic [ref=f12e27]: 20 TOTAL
+          - generic [ref=f12e28]: ● 12 OCCUPIED
+          - generic [ref=f12e29]: ● 8 AVAILABLE
+      - generic [ref=f12e30]:
+        - button "TOP VIEW" [ref=f12e31] [cursor=pointer]
+        - button "PERSPECTIVE" [ref=f12e36] [cursor=pointer]
+        - button "RESET" [ref=f12e43] [cursor=pointer]
+    - generic: Click space to inspect · Drag to rotate · Scroll to zoom
+  - button "Open Next.js Dev Tools" [ref=f12e53] [cursor=pointer]
+  - alert [ref=f12e57]

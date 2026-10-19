@@ -1,0 +1,66 @@
+- generic [ref=f11e2]:
+  - complementary "Primary" [ref=f11e3]:
+    - link "ParkTwin AI" [ref=f11e8] [cursor=pointer]:
+      - /url: /
+    - navigation "Primary" [ref=f11e10]:
+      - generic [ref=f11e11]: overview
+      - link "Dashboard" [ref=f11e12] [cursor=pointer]:
+        - /url: /dashboard
+      - generic [ref=f11e20]: operations
+      - link "Live Parking" [ref=f11e21] [cursor=pointer]:
+        - /url: /parking
+      - link "Digital Twin" [ref=f11e30] [cursor=pointer]:
+        - /url: /digital-twin
+      - link "Vehicles" [ref=f11e37] [cursor=pointer]:
+        - /url: /vehicles
+      - link "Video" [ref=f11e44] [cursor=pointer]:
+        - /url: /video-library
+      - link "CCTV" [ref=f11e49] [cursor=pointer]:
+        - /url: /video-processing
+      - generic [ref=f11e59]: intelligence
+      - link "ANPR" [ref=f11e60] [cursor=pointer]:
+        - /url: /anpr
+      - link "Analytics" [ref=f11e68] [cursor=pointer]:
+        - /url: /analytics
+      - link "Reports" [ref=f11e73] [cursor=pointer]:
+        - /url: /reports
+      - generic [ref=f11e79]: system
+      - link "Settings" [ref=f11e80] [cursor=pointer]:
+        - /url: /settings
+    - generic [ref=f11e87]:
+      - generic [ref=f11e88]: SYSTEM ONLINE
+      - generic [ref=f11e93]: v1.0.0
+  - generic [ref=f11e94]:
+    - banner [ref=f11e95]:
+      - button "Toggle sidebar" [ref=f11e96] [cursor=pointer]
+      - navigation "Breadcrumb" [ref=f11e99]:
+        - link "Home" [ref=f11e101] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f11e106]: ANPR
+      - generic [ref=f11e110]:
+        - button "Toggle notifications panel" [ref=f11e111] [cursor=pointer]
+        - link [ref=f11e115] [cursor=pointer]:
+          - /url: /user/dashboard
+          - button "Driver Portal" [ref=f11e116]
+        - button "Toggle color theme" [ref=f11e121] [cursor=pointer]
+        - generic [ref=f11e124]: Admin System
+    - link "Skip to content" [ref=f11e131] [cursor=pointer]:
+      - /url: "#main-content"
+    - main [ref=f11e132]:
+      - generic [ref=f11e133]:
+        - generic [ref=f11e142]:
+          - generic [ref=f11e143]:
+            - heading "ANPR" [level=1] [ref=f11e144]
+            - generic [ref=f11e145]: OCR Engine
+          - paragraph [ref=f11e146]: Automated number-plate recognition, vehicle OCR pipeline, and confidence telemetry
+        - generic [ref=f11e147]:
+          - generic [ref=f11e154]:
+            - heading "Upload Video" [level=3] [ref=f11e155]
+            - paragraph [ref=f11e156]: Accepts .mp4, .avi, and .mov files. The same ANPR pipeline used by Demo Mode processes your video.
+          - button "Drag and drop a video here, or click to browse" [ref=f11e158] [cursor=pointer]:
+            - paragraph [ref=f11e162]: Drag & drop a video
+            - paragraph [ref=f11e163]: mp4, avi, or mov
+            - button "Browse Video" [ref=f11e164]
+      - generic [ref=f11e168]:
+        - generic [ref=f11e169]: © 2026 ParkTwin AI
+        - generic [ref=f11e170]: Smart Parking Intelligence Platform

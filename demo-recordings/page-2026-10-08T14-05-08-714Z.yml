@@ -1,0 +1,270 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "AI Agent" [ref=e24] [cursor=pointer]
+        - button "Radar" [ref=e29] [cursor=pointer]
+        - button "Discover" [ref=e37] [cursor=pointer]
+        - button "Hackathons" [ref=e42] [cursor=pointer]
+        - button "Internships" [ref=e50] [cursor=pointer]
+        - button "Open Source" [ref=e55] [cursor=pointer]
+        - button "Competitions" [ref=e61] [cursor=pointer]
+        - button "Research" [ref=e66] [cursor=pointer]
+        - button "Saved" [ref=e70] [cursor=pointer]
+        - button "Tracker" [ref=e74] [cursor=pointer]
+        - button "Projects" [ref=e77] [cursor=pointer]
+        - button "Sources" [ref=e83] [cursor=pointer]
+      - generic [ref=e87]:
+        - button "6" [ref=e162]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e92]': LIVE
+        - button "Deep Discover" [ref=e95] [cursor=pointer]
+        - button "Student Profile" [ref=e100]
+  - main [ref=e105]:
+    - generic [ref=e1929]:
+      - generic [ref=e1930]:
+        - generic [ref=e1931]:
+          - generic [ref=e1932]:
+            - generic [ref=e1933]: Phase 7 Personal AI Agent
+            - heading "What Should I Do Today?" [level=1] [ref=e1937]
+            - paragraph [ref=e1938]: Ask your personal AI opportunity agent in plain English. Recommendations are grounded exclusively in verified live opportunities, tailored to your technical portfolio, and continuously refined by your actions.
+          - button "Refresh Intelligence Brief" [ref=e1939]
+        - generic [ref=e1945]:
+          - generic [ref=e1946]:
+            - textbox "Ask e.g. 'I have 10 hours this weekend, what hackathon should I do?'" [ref=e1948]: I have 10 hours this weekend, what hackathon should I do?
+            - button "Ask Agent" [ref=e1952]
+          - generic [ref=e1956]:
+            - generic [ref=e1957]: "Try asking:"
+            - button "I have 10 hours this weekend, what hackathon should I do?" [ref=e1958]
+            - button "Find open source Python projects with upcoming deadlines" [ref=e1959]
+            - button "What can I build leveraging my ParkTwin AI project?" [ref=e1960]
+            - button "What opportunities are closing in the next 7 days?" [ref=e1961]
+      - generic [ref=e2156]: Learned signal 'INTERESTED' recorded! Preferences updated.
+      - generic [ref=e2060]:
+        - generic [ref=e2061]:
+          - generic [ref=e2062]:
+            - generic [ref=e2063]: Grounded Agent Recommendations
+            - 'heading "Query: \"I have 10 hours this weekend, what hackathon should I do?\"" [level=2] [ref=e2066]'
+            - paragraph [ref=e2067]: Evaluated 21 opportunities. Identified 3 high-confidence actionable matches aligning with your profile and goal.
+          - generic [ref=e2068]:
+            - generic [ref=e2069]: "Confidence: 87%"
+            - generic [ref=e2070]: 21 Opportunities Scored
+        - generic [ref=e2071]:
+          - generic [ref=e2072]:
+            - generic [ref=e2073]:
+              - generic [ref=e2074]:
+                - generic [ref=e2075]: "Rank #1"
+                - generic [ref=e2076]: 87% Match
+              - heading "Synergy 2026" [level=3] [ref=e2077]
+              - generic [ref=e2078]: Fr. Conceicao Rodrigues College of Engineering (FRCRCE), Bandra
+              - generic [ref=e2079]: Closing in 24 days (Nov 01)
+              - generic [ref=e2082]:
+                - generic [ref=e2083]: "Strategy: ADAPT EXISTING_PROJECT"
+                - paragraph [ref=e2084]: "Rank #1 match (87%). Matches your background in Python, JavaScript. Your 'ParkTwin AI' project has high reuse potential (ADAPT_EXISTING_PROJECT). Aligns with your interests in Engineering. Eligibility note: No restrictive eligibility criteria stated in source. Application closes in 24 days (OPEN). Strategy: ADAPT EXISTING PROJECT."
+              - generic [ref=e2085]: "Action: Step 1: Review requirements at https://unstop.com/hackathons/synergy-2026-crescendo-26-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1767480. Step 2: Start 7-day preparation sprint with 'ParkTwin AI'."
+            - generic [ref=e2086]:
+              - generic [ref=e2087]:
+                - link "Apply" [ref=e2088] [cursor=pointer]:
+                  - /url: https://unstop.com/hackathons/synergy-2026-crescendo-26-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1767480
+                - button "Details" [ref=e2094]
+              - generic [ref=e2095]:
+                - generic [ref=e2096]: "Rate recommendation:"
+                - generic [ref=e2097]:
+                  - button "👍 Interested" [active] [ref=e2098]
+                  - button "👎 Not for me" [ref=e2099]
+          - generic [ref=e2100]:
+            - generic [ref=e2101]:
+              - generic [ref=e2102]:
+                - generic [ref=e2103]: "Rank #2"
+                - generic [ref=e2104]: 87% Match
+              - heading "HerHack" [level=3] [ref=e2105]
+              - generic [ref=e2106]: ECHELON INSTITUTE OF TECHNOLOGY
+              - generic [ref=e2107]: Closing in 33 days (Nov 10)
+              - generic [ref=e2110]:
+                - generic [ref=e2111]: "Strategy: ADAPT EXISTING_PROJECT"
+                - paragraph [ref=e2112]: "Rank #2 match (87%). Matches your background in Python, JavaScript. Your 'ParkTwin AI' project has high reuse potential (ADAPT_EXISTING_PROJECT). Aligns with your interests in Engineering. Eligibility note: No restrictive eligibility criteria stated in source. Application closes in 33 days (UPCOMING). Strategy: ADAPT EXISTING PROJECT."
+              - generic [ref=e2113]: "Action: Step 1: Review requirements at https://unstop.com/hackathons/herhack-echelon-institute-of-technology-1767590. Step 2: Start 7-day preparation sprint with 'ParkTwin AI'."
+            - generic [ref=e2114]:
+              - generic [ref=e2115]:
+                - link "Apply" [ref=e2116] [cursor=pointer]:
+                  - /url: https://unstop.com/hackathons/herhack-echelon-institute-of-technology-1767590
+                - button "Details" [ref=e2122]
+              - generic [ref=e2123]:
+                - generic [ref=e2124]: "Rate recommendation:"
+                - generic [ref=e2125]:
+                  - button "👍 Interested" [ref=e2126]
+                  - button "👎 Not for me" [ref=e2127]
+          - generic [ref=e2128]:
+            - generic [ref=e2129]:
+              - generic [ref=e2130]:
+                - generic [ref=e2131]: "Rank #3"
+                - generic [ref=e2132]: 86% Match
+              - heading "HACK WITH GDG S4" [level=3] [ref=e2133]
+              - generic [ref=e2134]: HACK
+              - generic [ref=e2135]: Closing in 107 days (Jan 24)
+              - generic [ref=e2138]:
+                - generic [ref=e2139]: "Strategy: ADAPT EXISTING_PROJECT"
+                - paragraph [ref=e2140]: "Rank #3 match (86%). Matches your background in Python, JavaScript, React. Your 'ParkTwin AI' project has high reuse potential (ADAPT_EXISTING_PROJECT). Aligns with your interests in Open Source. Eligibility note: No restrictive eligibility criteria stated in source. Application closes in 107 days (UPCOMING). Strategy: ADAPT EXISTING PROJECT."
+              - generic [ref=e2141]: "Action: Step 1: Review requirements at https://hack-with-gdg-s4.devfolio.co/. Step 2: Start 7-day preparation sprint with 'ParkTwin AI'."
+            - generic [ref=e2142]:
+              - generic [ref=e2143]:
+                - link "Apply" [ref=e2144] [cursor=pointer]:
+                  - /url: https://hack-with-gdg-s4.devfolio.co/
+                - button "Details" [ref=e2150]
+              - generic [ref=e2151]:
+                - generic [ref=e2152]: "Rate recommendation:"
+                - generic [ref=e2153]:
+                  - button "👍 Interested" [ref=e2154]
+                  - button "👎 Not for me" [ref=e2155]
+      - generic [ref=e1962]:
+        - generic [ref=e1963]:
+          - generic [ref=e1969]:
+            - heading "Daily Intelligence Brief" [level=3] [ref=e1970]
+            - generic [ref=e1971]: "Date: 2026-10-08"
+          - generic [ref=e1972]:
+            - generic [ref=e1973]: "Today's Focus: Urgent: 'BlockHunt'26' closes in 2 days! Prepare submission using strategy 'ADAPT EXISTING PROJECT'."
+            - generic [ref=e1974]:
+              - generic [ref=e1975]:
+                - generic [ref=e1976]: "3"
+                - generic [ref=e1977]: Urgent (<7d)
+              - generic [ref=e1978]:
+                - generic [ref=e1979]: "4"
+                - generic [ref=e1980]: Prime Match
+              - generic [ref=e1981]:
+                - generic [ref=e1982]: "16"
+                - generic [ref=e1983]: Ready to Act
+            - generic [ref=e1984]:
+              - generic [ref=e1985]: Urgent Closing Opportunities
+              - generic [ref=e1986]:
+                - generic [ref=e1987]:
+                  - generic [ref=e1988]:
+                    - generic [ref=e1989]: BlockHunt'26
+                    - generic [ref=e1990]: Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad • 2d remaining
+                  - link "Act →" [ref=e1991] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/blockhunt26-indian-institute-of-technology-indian-school-of-mines-iit-ism-dhanbad-1764178
+                - generic [ref=e1992]:
+                  - generic [ref=e1993]:
+                    - generic [ref=e1994]: Code The Cosmos '26
+                    - generic [ref=e1995]: Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad • 0d remaining
+                  - link "Act →" [ref=e1996] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/code-the-cosmos-indian-institute-of-technology-indian-school-of-mines-iit-ism-dhanbad-1767675
+                - generic [ref=e1997]:
+                  - generic [ref=e1998]:
+                    - generic [ref=e1999]: MindTech Arena 2026 – National Hackathon
+                    - generic [ref=e2000]: Indian Institute of Information Technology (IIIT), Kottayam • 2d remaining
+                  - link "Act →" [ref=e2001] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/mindtech-arena-2026-national-hackathon-iiit-kottayam-1767173
+        - generic [ref=e2002]:
+          - generic [ref=e2007]:
+            - heading "Weekly Strategic Focus" [level=3] [ref=e2008]
+            - generic [ref=e2009]: "Week: 2026-10-05"
+          - generic [ref=e2010]:
+            - generic [ref=e2011]:
+              - generic [ref=e2012]: Strategic Priorities
+              - generic [ref=e2013]:
+                - generic [ref=e2014]: "Accelerate submissions in preferred domains: Computer Science, Software Engineering."
+                - generic [ref=e2018]: Monitor 5 opportunities closing within the next 14 days.
+                - generic [ref=e2161]: "Close high-yield portfolio skill gap: Computer Science (demanded across 7 targets)."
+            - generic [ref=e2022]:
+              - generic [ref=e2023]: Portfolio Asset Adaptations
+              - generic [ref=e2024]:
+                - generic [ref=e2025]: Repurpose 'ParkTwin AI' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+                - generic [ref=e2031]: Repurpose 'ANPR System' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+                - generic [ref=e2037]: Repurpose 'StaticsLab' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+      - generic [ref=e2043]:
+        - generic [ref=e2044]:
+          - generic [ref=e2045]:
+            - heading "Learned User Preferences & Behavioral Profile" [level=3] [ref=e2046]
+            - paragraph [ref=e2048]: Continuously updated from your saves, feedback, and applications with gradual decay (60-day half-life).
+          - generic [ref=e2049]:
+            - generic [ref=e2050]:
+              - text: "Interactions Logged:"
+              - strong [ref=e2051]: "2"
+            - button "Reset Preferences" [ref=e2052]
+        - generic [ref=e2056]:
+          - generic [ref=e2165]:
+            - generic [ref=e2166]:
+              - generic [ref=e2167]: Top Technologies
+              - generic [ref=e2168]:
+                - generic [ref=e2169]: Computer Science
+                - generic [ref=e2170]: Software Engineering
+                - generic [ref=e2171]: Python
+                - generic [ref=e2172]: Javascript
+                - generic [ref=e2173]: Cloud
+            - generic [ref=e2174]:
+              - generic [ref=e2175]: Preferred Categories
+              - generic [ref=e2176]: HACKATHON
+            - generic [ref=e2178]:
+              - generic [ref=e2179]: Avoided Topics
+              - generic [ref=e2180]: None marked irrelevant or dismissed
+          - table [ref=e2183]:
+            - rowgroup [ref=e2184]:
+              - row [ref=e2185]:
+                - columnheader "Dimension" [ref=e2186]
+                - columnheader "Value" [ref=e2187]
+                - columnheader "Net Score" [ref=e2188]
+                - columnheader "Confidence" [ref=e2189]
+                - columnheader "Signals" [ref=e2190]
+                - columnheader "Last Interaction" [ref=e2191]
+            - rowgroup [ref=e2192]:
+              - row [ref=e2193]:
+                - cell "TECHNOLOGY" [ref=e2194]
+                - cell "computer science" [ref=e2195]
+                - cell "+0.80" [ref=e2196]
+                - cell "9%" [ref=e2197]
+                - cell "1 evidence items" [ref=e2198]
+                - cell "10/8/2026" [ref=e2199]
+              - row [ref=e2200]:
+                - cell "TECHNOLOGY" [ref=e2201]
+                - cell "software engineering" [ref=e2202]
+                - cell "+0.80" [ref=e2203]
+                - cell "9%" [ref=e2204]
+                - cell "1 evidence items" [ref=e2205]
+                - cell "10/8/2026" [ref=e2206]
+              - row [ref=e2207]:
+                - cell "TECHNOLOGY" [ref=e2208]
+                - cell "python" [ref=e2209]
+                - cell "+0.80" [ref=e2210]
+                - cell "9%" [ref=e2211]
+                - cell "1 evidence items" [ref=e2212]
+                - cell "10/8/2026" [ref=e2213]
+              - row [ref=e2214]:
+                - cell "TECHNOLOGY" [ref=e2215]
+                - cell "javascript" [ref=e2216]
+                - cell "+0.80" [ref=e2217]
+                - cell "9%" [ref=e2218]
+                - cell "1 evidence items" [ref=e2219]
+                - cell "10/8/2026" [ref=e2220]
+              - row [ref=e2221]:
+                - cell "TECHNOLOGY" [ref=e2222]
+                - cell "cloud" [ref=e2223]
+                - cell "+0.80" [ref=e2224]
+                - cell "9%" [ref=e2225]
+                - cell "1 evidence items" [ref=e2226]
+                - cell "10/8/2026" [ref=e2227]
+              - row [ref=e2228]:
+                - cell "CATEGORY" [ref=e2229]
+                - cell "HACKATHON" [ref=e2230]
+                - cell "+0.80" [ref=e2231]
+                - cell "9%" [ref=e2232]
+                - cell "1 evidence items" [ref=e2233]
+                - cell "10/8/2026" [ref=e2234]
+              - row [ref=e2235]:
+                - cell "DOMAIN" [ref=e2236]
+                - cell "engineering" [ref=e2237]
+                - cell "+0.80" [ref=e2238]
+                - cell "9%" [ref=e2239]
+                - cell "1 evidence items" [ref=e2240]
+                - cell "10/8/2026" [ref=e2241]
+              - row [ref=e2242]:
+                - cell "DOMAIN" [ref=e2243]
+                - cell "hackathons" [ref=e2244]
+                - cell "+0.80" [ref=e2245]
+                - cell "9%" [ref=e2246]
+                - cell "1 evidence items" [ref=e2247]
+                - cell "10/8/2026" [ref=e2248]

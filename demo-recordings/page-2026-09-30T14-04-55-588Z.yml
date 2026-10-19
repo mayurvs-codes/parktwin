@@ -1,0 +1,167 @@
+- generic [active] [ref=f9e1]:
+  - generic [ref=f9e6]:
+    - banner [ref=f9e7]:
+      - generic [ref=f9e9]:
+        - generic [ref=f9e10]:
+          - link "P ParkTwin AI" [ref=f9e11] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f9e12]: P
+            - generic [ref=f9e15]:
+              - generic [ref=f9e16]: ParkTwin
+              - generic [ref=f9e17]: AI
+          - navigation [ref=f9e18]:
+            - link "Home" [ref=f9e19] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Navigate" [ref=f9e24] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "Parking" [ref=f9e29] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Activity" [ref=f9e34] [cursor=pointer]:
+              - /url: /user/activity
+        - generic [ref=f9e38]:
+          - generic [ref=f9e39]: VEH-001
+          - link [ref=f9e44] [cursor=pointer]:
+            - /url: /digital-twin
+            - button "Admin System ↗" [ref=f9e45]
+          - button "Toggle Demo Controls" [ref=f9e51] [cursor=pointer]
+          - button "Toggle color theme" [ref=f9e55] [cursor=pointer]
+    - main [ref=f9e58]:
+      - generic [ref=f9e59]:
+        - generic [ref=f9e60]:
+          - generic [ref=f9e62]:
+            - button "FIT" [ref=f9e63] [cursor=pointer]
+            - button "Zoom In (+)" [ref=f9e64] [cursor=pointer]
+            - button "Zoom Out (−)" [ref=f9e68] [cursor=pointer]
+            - button "Reset View" [ref=f9e72] [cursor=pointer]
+            - generic [ref=f9e76]: 100%
+          - img [ref=f9e77]:
+            - generic [ref=f9e91]:
+              - generic [ref=f9e92]: Stair & Lift Core 01
+              - generic [ref=f9e95]: Electrical & Services Room
+              - generic [ref=f9e98]: Stair & Lift Core 02
+              - generic [ref=f9e101]: Vehicle Ramp (Level Transition)
+              - generic [ref=f9e104]: Access Ramp Void
+              - generic [ref=f9e107]: Structural Foundation Void
+            - generic [ref=f9e110]:
+              - generic [ref=f9e111] [cursor=pointer]:
+                - generic [ref=f9e114]: P01
+                - generic [ref=f9e115]: VEH-011
+              - generic [ref=f9e116] [cursor=pointer]: P02
+              - generic [ref=f9e120] [cursor=pointer]:
+                - generic [ref=f9e123]: P03
+                - generic [ref=f9e124]: VEH-012
+              - generic [ref=f9e125] [cursor=pointer]: P04
+              - generic [ref=f9e129] [cursor=pointer]: P05
+              - generic [ref=f9e133] [cursor=pointer]: P06
+              - generic [ref=f9e137] [cursor=pointer]:
+                - generic [ref=f9e140]: P07
+                - generic [ref=f9e141]: VEH-013
+              - generic [ref=f9e142] [cursor=pointer]: P08
+              - generic [ref=f9e146] [cursor=pointer]:
+                - generic [ref=f9e149]: P09
+                - generic [ref=f9e150]: VEH-014
+              - generic [ref=f9e151] [cursor=pointer]: P10
+              - generic [ref=f9e155] [cursor=pointer]:
+                - generic [ref=f9e158]: P11
+                - generic [ref=f9e159]: VEH-015
+              - generic [ref=f9e160] [cursor=pointer]: P12
+              - generic [ref=f9e164] [cursor=pointer]: P13
+              - generic [ref=f9e168] [cursor=pointer]: P14
+              - generic [ref=f9e172] [cursor=pointer]:
+                - generic [ref=f9e175]: P15
+                - generic [ref=f9e176]: VEH-016
+              - generic [ref=f9e177] [cursor=pointer]: P16
+              - generic [ref=f9e181] [cursor=pointer]: P17
+              - generic [ref=f9e185] [cursor=pointer]:
+                - generic [ref=f9e188]: P18
+                - generic [ref=f9e189]: VEH-017
+              - generic [ref=f9e190] [cursor=pointer]: P19
+              - generic [ref=f9e194] [cursor=pointer]:
+                - generic [ref=f9e197]: P20
+                - generic [ref=f9e198]: VEH-018
+              - generic [ref=f9e199] [cursor=pointer]: P21
+              - generic [ref=f9e203] [cursor=pointer]:
+                - generic [ref=f9e206]: P22
+                - generic [ref=f9e207]: VEH-019
+              - generic [ref=f9e208] [cursor=pointer]: P23
+              - generic [ref=f9e212] [cursor=pointer]: P24
+              - generic [ref=f9e216] [cursor=pointer]:
+                - generic [ref=f9e219]: P25
+                - generic [ref=f9e220]: VEH-020
+              - generic [ref=f9e221] [cursor=pointer]: P26
+              - generic [ref=f9e225] [cursor=pointer]: P27
+              - generic [ref=f9e229] [cursor=pointer]: P28
+              - generic [ref=f9e233] [cursor=pointer]: P29
+              - generic [ref=f9e237] [cursor=pointer]: P30
+              - generic [ref=f9e241] [cursor=pointer]: P31
+              - generic [ref=f9e245] [cursor=pointer]:
+                - generic [ref=f9e248]: P32
+                - generic [ref=f9e249]: VEH-021
+              - generic [ref=f9e250] [cursor=pointer]: P33
+              - generic [ref=f9e254] [cursor=pointer]: P34
+              - generic [ref=f9e258] [cursor=pointer]:
+                - generic [ref=f9e261]: P35
+                - generic [ref=f9e262]: VEH-022
+              - generic [ref=f9e263] [cursor=pointer]: P36
+              - generic [ref=f9e267] [cursor=pointer]: P37
+              - generic [ref=f9e271] [cursor=pointer]: P38
+              - generic [ref=f9e275] [cursor=pointer]:
+                - generic [ref=f9e278]: P39
+                - generic [ref=f9e279]: VEH-023
+              - generic [ref=f9e280] [cursor=pointer]: P40
+              - generic [ref=f9e284] [cursor=pointer]: P41
+              - generic [ref=f9e288] [cursor=pointer]:
+                - generic [ref=f9e291]: P42
+                - generic [ref=f9e292]: VEH-024
+              - generic [ref=f9e293] [cursor=pointer]: P43
+              - generic [ref=f9e297] [cursor=pointer]: P44
+              - generic [ref=f9e301] [cursor=pointer]:
+                - generic [ref=f9e304]: P45
+                - generic [ref=f9e305]: VEH-025
+              - generic [ref=f9e306] [cursor=pointer]: P46
+              - generic [ref=f9e310] [cursor=pointer]: P47
+              - generic [ref=f9e314] [cursor=pointer]: P48
+              - generic [ref=f9e318] [cursor=pointer]:
+                - generic [ref=f9e321]: P49
+                - generic [ref=f9e322]: VEH-026
+              - generic [ref=f9e323] [cursor=pointer]: P50
+              - generic [ref=f9e327] [cursor=pointer]: P51
+              - generic [ref=f9e331] [cursor=pointer]: P52
+              - generic [ref=f9e335] [cursor=pointer]:
+                - generic [ref=f9e338]: P53
+                - generic [ref=f9e339]: VEH-027
+              - generic [ref=f9e340] [cursor=pointer]: P54
+              - generic [ref=f9e344] [cursor=pointer]:
+                - generic [ref=f9e347]: P55
+                - generic [ref=f9e348]: VEH-028
+              - generic [ref=f9e349] [cursor=pointer]: P56
+              - generic [ref=f9e353] [cursor=pointer]:
+                - generic [ref=f9e356]: P57
+                - generic [ref=f9e357]: VEH-029
+              - generic [ref=f9e358] [cursor=pointer]: P58
+              - generic [ref=f9e362] [cursor=pointer]: P59
+              - generic [ref=f9e366] [cursor=pointer]:
+                - generic [ref=f9e369]: P60
+                - generic [ref=f9e370]: VEH-030
+            - generic [ref=f9e371]: ACCESS_POINT_B2
+            - generic: ★ SP-24
+            - generic: ● YOU
+        - generic:
+          - generic [ref=f9e377]:
+            - link [ref=f9e378] [cursor=pointer]:
+              - /url: /user/dashboard
+              - button "Back to Home" [ref=f9e379]
+            - generic [ref=f9e386]:
+              - generic [ref=f9e387]:
+                - generic [ref=f9e388]: TO PARKING
+                - generic [ref=f9e389]: VEH-001
+              - generic [ref=f9e390]: SP-24 · Zone B (Upper Island) · B2
+          - generic [ref=f9e392]: FACILITY B2 · CANONICAL DIGITAL TWIN
+        - generic [ref=f9e395]:
+          - generic [ref=f9e401]:
+            - generic [ref=f9e402]: Turn left into parking aisle
+            - generic [ref=f9e404]: 53 m remaining
+          - generic [ref=f9e405]:
+            - button "Step Forward" [ref=f9e406] [cursor=pointer]
+            - button "I'M PARKED" [ref=f9e407] [cursor=pointer]
+  - alert [ref=f9e5]: Digital Twin Navigation · ParkTwin AI · ParkTwin AI

@@ -94,10 +94,10 @@ export function SlotDetailDrawer({
               Occupying Vehicle
             </h3>
 
-            {/* License Plate Badge */}
+            {/* License Plate / Primary Identity Badge */}
             <div className="flex items-center justify-between">
               <div className="border border-slate-700 bg-[#f8fafc] text-slate-950 px-3 py-1 rounded font-mono font-black text-sm tracking-widest">
-                {slot.license_plate}
+                {slot.slot_id === "SP-24" || slot.license_plate === "KA04MN8049" ? "VEH-001" : slot.license_plate}
               </div>
               {onSelectVehicle && (
                 <Button
@@ -110,6 +110,27 @@ export function SlotDetailDrawer({
                 </Button>
               )}
             </div>
+
+            {/* Provenance Card if VEH-001 / SP-24 / KA04MN8049 */}
+            {(slot.slot_id === "SP-24" || slot.license_plate === "KA04MN8049") && (
+              <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-2.5 space-y-1 font-mono text-[11px]">
+                <div className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">
+                  PROVENANCE DISCLOSURE
+                </div>
+                <div className="text-muted-foreground">
+                  <span className="text-foreground font-semibold">ANPR BENCHMARK:</span> KA04MN8049 (Independent benchmark)
+                </div>
+                <div className="text-muted-foreground">
+                  <span className="text-foreground font-semibold">CAM-01 CCTV:</span> KA05ML7220 (Visually observed, OCR unverified)
+                </div>
+                <div className="text-amber-300 font-bold text-[10px] pt-0.5 border-t border-amber-500/20">
+                  IDENTITY LINKAGE: UNVERIFIED
+                </div>
+                <div className="text-amber-400/90 text-[9px] font-semibold text-center pt-0.5">
+                  ANPR BENCHMARK ≠ PHYSICAL CCTV IDENTITY
+                </div>
+              </div>
+            )}
 
             {/* Parking Duration */}
             <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800/80">

@@ -28,6 +28,16 @@ export const ROUTES = {
   analytics: "/analytics",
   reports: "/reports",
   settings: "/settings",
+  // User Portal Routes (Driver Journey)
+  user: "/user",
+  userDashboard: "/user/dashboard",
+  userParking: "/user/parking",
+  userFindParking: "/user/parking/find",
+  userReservation: "/user/parking/reservation",
+  userSession: "/user/parking/session",
+  userNavigation: "/user/navigation",
+  userVehicles: "/user/vehicles",
+  userAnalytics: "/user/analytics",
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
@@ -68,6 +78,11 @@ const SEGMENT_LABELS: Record<string, string> = {
   analytics: "Analytics",
   reports: "Reports",
   settings: "Settings",
+  user: "User Portal",
+  navigation: "Navigation",
+  session: "Parking Session",
+  reservation: "My Reservation",
+  find: "Find Parking",
 };
 
 export interface Crumb {

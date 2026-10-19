@@ -1,0 +1,54 @@
+- generic [active] [ref=f13e1]:
+  - generic [ref=f13e2]:
+    - complementary "Primary" [ref=f13e3]:
+      - link "ParkTwin AI" [ref=f13e8] [cursor=pointer]:
+        - /url: /
+      - navigation "Primary" [ref=f13e10]:
+        - generic [ref=f13e11]: overview
+        - link "Dashboard" [ref=f13e12] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f13e20]: operations
+        - link "Live Parking" [ref=f13e21] [cursor=pointer]:
+          - /url: /parking
+        - link "Digital Twin" [ref=f13e30] [cursor=pointer]:
+          - /url: /digital-twin
+        - link "Vehicles" [ref=f13e37] [cursor=pointer]:
+          - /url: /vehicles
+        - link "Video" [ref=f13e44] [cursor=pointer]:
+          - /url: /video-library
+        - link "CCTV" [ref=f13e49] [cursor=pointer]:
+          - /url: /video-processing
+        - generic [ref=f13e59]: intelligence
+        - link "ANPR" [ref=f13e60] [cursor=pointer]:
+          - /url: /anpr
+        - link "Analytics" [ref=f13e68] [cursor=pointer]:
+          - /url: /analytics
+        - link "Reports" [ref=f13e73] [cursor=pointer]:
+          - /url: /reports
+        - generic [ref=f13e79]: system
+        - link "Settings" [ref=f13e80] [cursor=pointer]:
+          - /url: /settings
+      - generic [ref=f13e87]:
+        - generic [ref=f13e88]: SYSTEM ONLINE
+        - generic [ref=f13e93]: v1.0.0
+    - generic [ref=f13e94]:
+      - banner [ref=f13e95]:
+        - button "Toggle sidebar" [ref=f13e96] [cursor=pointer]
+        - navigation "Breadcrumb" [ref=f13e99]:
+          - link "Home" [ref=f13e101] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f13e106]: Digital Twin
+        - generic [ref=f13e110]:
+          - button "Toggle notifications panel" [ref=f13e111] [cursor=pointer]
+          - link [ref=f13e115] [cursor=pointer]:
+            - /url: /user/dashboard
+            - button "Driver Portal" [ref=f13e116]
+          - button "Toggle color theme" [ref=f13e121] [cursor=pointer]
+          - generic [ref=f13e124]: Admin System
+      - link "Skip to content" [ref=f13e131] [cursor=pointer]:
+        - /url: "#main-content"
+      - main [ref=f13e132]:
+        - generic [ref=f13e134]:
+          - generic [ref=f13e135]: © 2026 ParkTwin AI
+          - generic [ref=f13e136]: Smart Parking Intelligence Platform
+  - alert [ref=f13e137]

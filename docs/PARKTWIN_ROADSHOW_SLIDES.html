@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ParkTwin AI — Smart Parking Digital Twin | PES University</title>
+  <!-- Optional Tailwind CDN with complete offline self-contained fallback styles below -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    :root {
+      --bg-dark: #070b14;
+      --card-dark: #0e1726;
+      --border-dark: #1b263b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --cyan-accent: #06b6d4;
+      --emerald-accent: #10b981;
+      --purple-accent: #a855f7;
+      --amber-accent: #f59e0b;
+      --red-accent: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      user-select: none;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 12px 18px;
+    }
+
+    /* Print Styles: Export all 8 slides cleanly to PDF */
+    @media print {
+      body {
+        overflow: visible !important;
+        height: auto !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+      }
+      header, footer, aside, #demo-modal, #jump-modal, #laser-dot {
+        display: none !important;
+      }
+      .slide {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: none !important;
+        page-break-after: always;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        padding: 30px !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+      .slide * {
+        color: #0f172a !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+      }
+      .slide .text-white {
+        color: #020617 !important;
+      }
+      .slide .text-slate-400, .slide .text-slate-300 {
+        color: #334155 !important;
+      }
+      .slide pre {
+        background: #f1f5f9 !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+      }
+    }
+
+    .slide {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      transform: scale(0.99);
+      height: 100%;
+      width: 100%;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .glow-cyan {
+      box-shadow: 0 0 35px -8px rgba(6, 182, 212, 0.3);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 35px -8px rgba(16, 185, 129, 0.3);
+    }
+    .glow-purple {
+      box-shadow: 0 0 35px -8px rgba(168, 85, 247, 0.3);
+    }
+
+    .gradient-text-cyan {
+      background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 50%, #2dd4bf 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text-emerald {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text-purple {
+      background: linear-gradient(135deg, #c084fc 0%, #8b5cf6 50%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Laser pointer dot */
+    #laser-dot {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 16px 4px #ef4444, 0 0 30px 10px rgba(239, 68, 68, 0.6);
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      display: none;
+      transition: opacity 0.1s ease;
+    }
+
+    /* Custom scrollbar */
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #0b111e;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #253349;
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #384c6c;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Laser Pointer Element -->
+  <div id="laser-dot"></div>
+
+  <!-- ============================================================ -->
+  <!-- TOP CONTROLS BAR: Header, Slide Indicator, Timer, Toolset -->
+  <!-- ============================================================ -->
+  <header class="flex items-center justify-between px-4 py-2 bg-[#0c1322]/90 backdrop-blur-md rounded-2xl border border-slate-800 shadow-xl z-50 shrink-0">
+    <!-- Brand / Department -->
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 font-bold text-slate-950 text-sm">
+        PT
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-black tracking-wider text-white uppercase">PARKTWIN<span class="text-cyan-400"> AI</span></span>
+          <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700 font-mono">B.Tech Mechanical</span>
+        </div>
+        <p class="text-[11px] text-slate-400 hidden sm:block">PES University · Ring Road Campus · Bangalore</p>
+      </div>
+    </div>
+
+    <!-- Center Slide Indicators -->
+    <div class="flex items-center gap-1.5" id="slide-indicators"></div>
+
+    <!-- Right Controls -->
+    <div class="flex items-center gap-2">
+      <!-- Quick Slide Jump Menu Button -->
+      <button id="jump-btn" class="flex items-center gap-1 px-2.5 py-1 bg-slate-800/90 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition" title="View all slides (M)">
+        <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+        <span class="hidden md:inline">Slides</span>
+        <kbd class="text-[10px] bg-slate-900 text-slate-400 px-1 rounded border border-slate-800">M</kbd>
+      </button>
+
+      <!-- Laser Pointer Toggle -->
+      <button id="laser-btn" class="flex items-center gap-1 px-2.5 py-1 bg-slate-800/90 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition" title="Toggle Laser Pointer (L)">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <span class="hidden md:inline">Pointer</span>
+        <kbd class="text-[10px] bg-slate-900 text-slate-400 px-1 rounded border border-slate-800">L</kbd>
+      </button>
+
+      <!-- Timer -->
+      <div class="flex items-center gap-1.5 px-3 py-1 bg-slate-900 border border-slate-700/80 rounded-lg text-xs font-mono text-cyan-400">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span id="timer-display">00:00</span>
+        <button id="timer-toggle-btn" class="text-slate-400 hover:text-white ml-1 text-[11px]" title="Play / Pause Timer">⏯</button>
+      </div>
+
+      <!-- Notes Drawer Toggle -->
+      <button id="toggle-notes-btn" class="flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition" title="Toggle What to say (N)">
+        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        <span class="hidden sm:inline">What to say</span>
+        <kbd class="text-[10px] bg-emerald-500/20 text-emerald-300 px-1 rounded border border-emerald-500/40 font-mono">N</kbd>
+      </button>
+
+      <!-- Slide Counter -->
+      <div class="text-xs font-mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800">
+        <span id="current-slide-num" class="text-white font-bold">1</span> / <span id="total-slides-num">8</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- MAIN SLIDES CONTAINER (MAX-WIDTH 7XL, RESPONSIVE AUTOFIT) -->
+  <!-- ============================================================ -->
+  <main class="relative flex-1 w-full max-w-7xl mx-auto my-2 flex items-center justify-center overflow-hidden">
+
+    <!-- ========================================== -->
+    <!-- SLIDE 1: PROJECT INTRODUCTION -->
+    <!-- ========================================== -->
+    <section class="slide active flex-col justify-between p-6 md:p-8 bg-gradient-to-br from-[#0b1220] via-[#080d18] to-[#040810] rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden" data-slide="1">
+      <div class="absolute -right-32 -bottom-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-32 -top-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Top Tag -->
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wider uppercase">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          Slide 01 · Capstone Project Introduction
+        </div>
+        <span class="text-xs font-mono text-slate-400">Department of Mechanical Engineering · PES University</span>
+      </div>
+
+      <!-- Center Hero Area -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto">
+        <div class="lg:col-span-7 space-y-4">
+          <div class="space-y-1">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white leading-none">
+              PARKTWIN <span class="gradient-text-cyan">AI</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-bold text-slate-200">
+              AI-Powered Smart Parking & <span class="text-emerald-400">Digital Twin Platform</span>
+            </p>
+          </div>
+          <p class="text-sm md:text-base text-slate-300 leading-relaxed max-w-xl">
+            A cyber-physical smart parking platform transforming passive campus camera infrastructure into an <strong class="text-white">intelligent, event-driven operational system</strong>. Bridging computer-vision perception with a live 3D Digital Twin.
+          </p>
+
+          <div class="pt-2 flex flex-wrap gap-2 text-xs">
+            <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> YOLOv8 + ByteTrack
+            </span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live 3D Spatial Mesh
+            </span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> In-Facility Wayfinding
+            </span>
+          </div>
+        </div>
+
+        <!-- Academic Affiliation Card -->
+        <div class="lg:col-span-5 p-5 md:p-6 rounded-2xl bg-slate-900/90 border border-cyan-500/30 glow-cyan space-y-3.5">
+          <div class="border-b border-slate-800 pb-2.5">
+            <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest block mb-0.5">PRESENTED BY</span>
+            <h3 class="text-base font-bold text-white">Team ParkTwin AI</h3>
+            <p class="text-xs text-slate-300">B.Tech in Mechanical Engineering</p>
+            <p class="text-xs text-slate-400">PES University, Ring Road Campus, Bangalore</p>
+          </div>
+
+          <div class="border-b border-slate-800 pb-2.5">
+            <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest block mb-0.5">UNDER THE GUIDANCE OF</span>
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 id="guide-name-display" class="text-sm font-bold text-white cursor-pointer hover:text-emerald-300" title="Click to edit guide name">
+                  Faculty Guide & Department Review Panel
+                </h4>
+                <p class="text-[11px] text-slate-400">Department of Mechanical Engineering, PES University</p>
+              </div>
+              <button id="edit-guide-btn" class="text-[10px] text-slate-500 hover:text-emerald-400 font-mono" title="Edit guide name">✏️</button>
+            </div>
+          </div>
+
+          <div>
+            <span class="text-[10px] font-mono text-purple-400 uppercase tracking-widest block mb-0.5">PROBLEM STATEMENT PROVIDED BY</span>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-xs font-bold text-slate-200">PES University</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-0.5">Smart Campus Mobility & Infrastructure Modernization</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide Bottom -->
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <span>Transforming campus infrastructure from passive surveillance to an active digital operational model.</span>
+        <span class="font-mono text-cyan-400">PESU Capstone 2026</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 2: PROBLEM STATEMENT -->
+    <!-- ========================================== -->
+    <section class="slide flex-col justify-between p-6 md:p-8 bg-gradient-to-br from-[#0b1220] via-[#080d18] to-[#040810] rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden" data-slide="2">
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold tracking-wider uppercase">
+          Slide 02 · Problem Statement
+        </div>
+        <span class="text-xs font-mono text-slate-400">The Parking Intelligence Gap</span>
+      </div>
+
+      <div class="space-y-4 my-auto">
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+            The Parking Intelligence Gap
+          </h2>
+          <p class="text-sm md:text-base text-slate-300 mt-1">
+            Modern facilities are inundated with video data, but lack real-time structured facility state.
+          </p>
+        </div>
+
+        <!-- Problem Banner -->
+        <div class="p-4 rounded-2xl bg-slate-900/90 border border-amber-500/40 glow-cyan">
+          <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest block mb-1">CORE RESEARCH QUESTION</span>
+          <p class="text-base md:text-xl font-bold text-white">
+            “How can we transform raw parking-lot video into structured, real-time parking intelligence?”
+          </p>
+        </div>
+
+        <!-- 5 Questions -->
+        <div class="space-y-1.5">
+          <span class="text-xs font-mono text-slate-400 uppercase tracking-widest block">The 5 Questions Every Autonomous Facility Must Answer:</span>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-center">
+              <span class="text-lg font-black text-cyan-400 font-mono">WHO?</span>
+              <p class="text-xs font-bold text-white mt-1">Identity & Plate</p>
+              <p class="text-[11px] text-slate-400">Which vehicle entered?</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-center">
+              <span class="text-lg font-black text-cyan-400 font-mono">WHERE?</span>
+              <p class="text-xs font-bold text-white mt-1">Spatial Tracking</p>
+              <p class="text-[11px] text-slate-400">Where is it moving?</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-center">
+              <span class="text-lg font-black text-cyan-400 font-mono">WHICH SPACE?</span>
+              <p class="text-xs font-bold text-white mt-1">Slot Association</p>
+              <p class="text-[11px] text-slate-400">Which bay is affected?</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-center">
+              <span class="text-lg font-black text-cyan-400 font-mono">WHAT STATE?</span>
+              <p class="text-xs font-bold text-white mt-1">State Machine</p>
+              <p class="text-[11px] text-slate-400">Approaching, parked, exit?</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-center col-span-2 md:col-span-1">
+              <span class="text-lg font-black text-emerald-400 font-mono">WHAT ACTION?</span>
+              <p class="text-xs font-bold text-white mt-1">Action & Guidance</p>
+              <p class="text-[11px] text-slate-400">Wayfind, alert, log?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <span>The problem is not lack of cameras; it is transforming passive pixels into stateful intelligence.</span>
+        <span class="font-mono text-amber-400">Foundational Thesis</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 3: EXISTING CHALLENGES -->
+    <!-- ========================================== -->
+    <section class="slide flex-col justify-between p-6 md:p-8 bg-gradient-to-br from-[#0b1220] via-[#080d18] to-[#040810] rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden" data-slide="3">
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-semibold tracking-wider uppercase">
+          Slide 03 · Gap Analysis
+        </div>
+        <span class="text-xs font-mono text-slate-400">Why Traditional Systems Fail</span>
+      </div>
+
+      <div class="space-y-4 my-auto">
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+            Why Traditional Monitoring Is Insufficient
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Analyzing the 6 systemic failure modes in legacy parking infrastructure.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-red-400 font-mono font-bold text-xs">01 · PASSIVE CCTV</span>
+            <h4 class="text-xs font-bold text-white mt-0.5">Continuous Raw Video</h4>
+            <p class="text-[11px] text-slate-400 mt-1">Cameras stream pixels without extracting structured occupancy or vehicle status.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-red-400 font-mono font-bold text-xs">02 · FRAGMENTED DATA</span>
+            <h4 class="text-xs font-bold text-white mt-0.5">Isolated Siloed Tech</h4>
+            <p class="text-[11px] text-slate-400 mt-1">ANPR at gates, magnetic loops in asphalt, and signage operate in disconnected databases.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-red-400 font-mono font-bold text-xs">03 · MANUAL MONITORING</span>
+            <h4 class="text-xs font-bold text-white mt-0.5">Operator Fatigue</h4>
+            <p class="text-[11px] text-slate-400 mt-1">Security guards must stare at dozens of CRT/LCD feeds to detect violations manually.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-amber-400 font-mono font-bold text-xs">04 · NO SPATIAL INTELLIGENCE</span>
+            <h4 class="text-xs font-bold text-white mt-0.5">Detections Lack Coordinates</h4>
+            <p class="text-[11px] text-slate-400 mt-1">A bounding box on camera does not tell the system which physical parking bay it occupies.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-amber-400 font-mono font-bold text-xs">05 · ZERO DRIVER ASSISTANCE</span>
+            <h4 class="text-xs font-bold text-white mt-0.5">Blind Aisle Circling</h4>
+            <p class="text-[11px] text-slate-400 mt-1">Drivers search blindly for spaces, producing unnecessary fuel burn and campus congestion.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-800/60">
+            <span class="text-cyan-400 font-mono font-bold text-xs">06 · NO UNIFIED MODEL</span>
+            <h4 class="text-xs font-bold text-white mt-0.5">Missing Physical-Digital Link</h4>
+            <p class="text-[11px] text-slate-300 mt-1">No single live chain connecting: <strong>Vehicle → Camera → Space → Event → User</strong>.</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-800/70 border border-slate-700 flex items-center justify-between text-xs">
+          <span class="text-slate-200">Core Design Axiom: <strong>Connect Vehicle Intelligence with Spatial Intelligence.</strong></span>
+          <span class="text-cyan-400 font-mono">ParkTwin Principle</span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <span>From isolated camera feeds $\rightarrow$ Unified cyber-physical operational twin.</span>
+        <span class="font-mono text-red-400">Existing Bottlenecks</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 4: METHODOLOGY -->
+    <!-- ========================================== -->
+    <section class="slide flex-col justify-between p-6 md:p-8 bg-gradient-to-br from-[#0b1220] via-[#080d18] to-[#040810] rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden" data-slide="4">
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wider uppercase">
+          Slide 04 · Engineering Methodology
+        </div>
+        <span class="text-xs font-mono text-slate-400">Perception $\rightarrow$ Event $\rightarrow$ Action</span>
+      </div>
+
+      <div class="space-y-4 my-auto">
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+            Engineering Methodology
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Converting pixel observations into structured, timestamped parking events.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+          <!-- Left: 3 Stages -->
+          <div class="md:col-span-7 space-y-2.5">
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-start gap-3">
+              <span class="px-2 py-1 rounded bg-cyan-500/20 text-cyan-400 font-mono font-bold text-xs">STEP 1</span>
+              <div>
+                <h4 class="text-xs font-bold text-white">Camera Ingestion Layer</h4>
+                <p class="text-xs text-slate-400">Consumes RTSP/ONVIF streams, NVR network video, or recorded ground-truth MP4 camera feeds.</p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-start gap-3">
+              <span class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold text-xs">STEP 2</span>
+              <div>
+                <h4 class="text-xs font-bold text-white">Computer Vision Pipeline</h4>
+                <p class="text-xs text-slate-400">
+                  • <strong>YOLOv8</strong>: Real-time bounding box vehicle detection & classification.<br>
+                  • <strong>ByteTrack</strong>: Multi-object tracking across frames with trajectory permanence.<br>
+                  • <strong>PaddleOCR & EasyOCR</strong>: License-plate localization and alphanumeric OCR.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-start gap-3">
+              <span class="px-2 py-1 rounded bg-purple-500/20 text-purple-400 font-mono font-bold text-xs">STEP 3</span>
+              <div>
+                <h4 class="text-xs font-bold text-white">Structured Event Generation</h4>
+                <p class="text-xs text-slate-400">Detections are published as immutable JSON telemetry deltas to an asynchronous event bus.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Live Event Delta Code -->
+          <div class="md:col-span-5 p-4 rounded-2xl bg-slate-950 border border-cyan-500/30 glow-cyan font-mono text-[11px]">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2">
+              <span class="text-cyan-400 font-bold">STRUCTURED EVENT SCHEMA</span>
+              <span class="text-emerald-400 text-[10px]">aiosqlite + FastSSE</span>
+            </div>
+            <pre class="text-slate-300 leading-tight space-y-1">
+{
+  <span class="text-cyan-400">"event_id"</span>: "evt_9a41b2",
+  <span class="text-cyan-400">"vehicle_id"</span>: "VEH-001",
+  <span class="text-cyan-400">"license_plate"</span>: "KA05ML7220",
+  <span class="text-cyan-400">"camera_id"</span>: "CAM-01-ENTRY",
+  <span class="text-cyan-400">"timestamp"</span>: "2026-10-03T12:00:15Z",
+  <span class="text-cyan-400">"position_xy"</span>: [142.5, 88.2],
+  <span class="text-cyan-400">"movement_vector"</span>: "APPROACHING_GATE",
+  <span class="text-cyan-400">"confidence"</span>: 0.94
+}</pre>
+            <div class="mt-2 pt-2 border-t border-slate-800 text-[10px] text-slate-400">
+              The event is the foundational unit of truth across the entire platform.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <span>Vision outputs structured events $\rightarrow$ Intelligence reasons over state.</span>
+        <span class="font-mono text-cyan-400">CV Pipeline</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 5: SOLUTION ARCHITECTURE -->
+    <!-- ========================================== -->
+    <section class="slide flex-col justify-between p-6 md:p-8 bg-gradient-to-br from-[#0b1220] via-[#080d18] to-[#040810] rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden" data-slide="5">
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold tracking-wider uppercase">
+          Slide 05 · Solution Architecture
+        </div>
+        <span class="text-xs font-mono text-slate-400">From Events to Parking Intelligence</span>
+      </div>
+
+      <div class="space-y-4 my-auto">
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+            Decoupled Multi-Tier Architecture
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Clean architectural firewall: Vision never touches the frontend, and the frontend never processes raw video frames.
+          </p>
+        </div>
+
+        <!-- 6-Stage Pipeline Graphic -->
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-2.5">
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
+            <span class="text-[10px] font-mono text-cyan-400 block font-bold">STAGE 01</span>
+            <h4 class="text-xs font-bold text-white mt-1">Cameras</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">RTSP / CCTV feeds</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
+            <span class="text-[10px] font-mono text-cyan-400 block font-bold">STAGE 02</span>
+            <h4 class="text-xs font-bold text-white mt-1">Vision Engine</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">YOLOv8 + ByteTrack</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
+            <span class="text-[10px] font-mono text-emerald-400 block font-bold">STAGE 03</span>
+            <h4 class="text-xs font-bold text-white mt-1">Telemetry Layer</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">FastAPI SSE & WS bus</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
+            <span class="text-[10px] font-mono text-emerald-400 block font-bold">STAGE 04</span>
+            <h4 class="text-xs font-bold text-white mt-1">Parking Engine</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">State Machine & Rules</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
+            <span class="text-[10px] font-mono text-purple-400 block font-bold">STAGE 05</span>
+            <h4 class="text-xs font-bold text-white mt-1">Digital Twin</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Three.js Spatial Mesh</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-center">
+            <span class="text-[10px] font-mono text-purple-400 block font-bold">STAGE 06</span>
+            <h4 class="text-xs font-bold text-white mt-1">Application UI</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">Next.js Operator/Driver</p>
+          </div>
+        </div>
+
+        <!-- 2 Persona Pillars -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-cyan-500/30 space-y-1.5">
+            <h4 class="text-xs font-bold text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              Operator Experience (Admin Digital Twin)
+            </h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Provides real-time multi-bay occupancy tracking, live 3D mesh rendering, vehicle dwell-time monitoring, violation alerts, and CCTV evidence inspections.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-emerald-500/30 space-y-1.5">
+            <h4 class="text-xs font-bold text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              Driver Experience (Driver Portal)
+            </h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Provides automated reservation linking upon gate arrival, indoor turn-by-turn guidance along actual drive aisles, and persistent wall-clock session metering.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <span>Perception $\rightarrow$ Structured Events $\rightarrow$ Spatial Twin $\rightarrow$ Actionable UI.</span>
+        <span class="font-mono text-emerald-400">Architecture</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 6: END-TO-END SOLUTION -->
+    <!-- ========================================== -->
+    <section class="slide flex-col justify-between p-6 md:p-8 bg-gradient-to-br from-[#0b1220] via-[#080d18] to-[#040810] rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden" data-slide="6">
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-semibold tracking-wider uppercase">
+          Slide 06 · End-to-End Lifecycle
+        </div>
+        <span class="text-xs font-mono text-slate-400">Vehicle Entry $\rightarrow$ Parking $\rightarrow$ Exit</span>
+      </div>
+
+      <div class="space-y-4 my-auto">
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+            The Closed-Loop Vehicle Journey
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            An 8-stage continuous lifecycle from entrance barrier arrival to facility departure.
+          </p>
+        </div>
+
+        <!-- 8 Steps Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-cyan-400 font-mono font-bold text-[11px]">01 · ENTRY</span>
+            <p class="text-xs font-bold text-white mt-0.5">Facility Ingress</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Vehicle approaches entry boom barrier.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-cyan-400 font-mono font-bold text-[11px]">02 · IDENTIFICATION</span>
+            <p class="text-xs font-bold text-white mt-0.5">ANPR & Tracking</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Camera extracts plate; tracking ID assigned.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-cyan-400 font-mono font-bold text-[11px]">03 · STATE CREATION</span>
+            <p class="text-xs font-bold text-white mt-0.5">Telemetry Delta</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Structured vehicle arrival event emitted.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-emerald-400 font-mono font-bold text-[11px]">04 · PARKING DECISION</span>
+            <p class="text-xs font-bold text-white mt-0.5">Slot Allocation</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Associates reserved bay or dynamic space.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-emerald-400 font-mono font-bold text-[11px]">05 · NAVIGATION</span>
+            <p class="text-xs font-bold text-white mt-0.5">Indoor Wayfinding</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Twin generates turn route along aisles.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-purple-400 font-mono font-bold text-[11px]">06 · PARKING</span>
+            <p class="text-xs font-bold text-white mt-0.5">Bay Occupied</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Vehicle occupies slot; state becomes OCCUPIED.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-purple-400 font-mono font-bold text-[11px]">07 · MONITORING</span>
+            <p class="text-xs font-bold text-white mt-0.5">Active Session</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Dwell-time tracked with wall-clock clock.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-cyan-400 font-mono font-bold text-[11px]">08 · EXIT</span>
+            <p class="text-xs font-bold text-white mt-0.5">Egress & Settlement</p>
+            <p class="text-[11px] text-slate-400 mt-0.5">Camera detects exit; bay liberated in Twin.</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-purple-950/20 border border-purple-900/50 text-center text-xs text-purple-300">
+          <strong>One continuous data pipeline: Camera $\rightarrow$ Event $\rightarrow$ State $\rightarrow$ Digital Twin $\rightarrow$ Navigation $\rightarrow$ Exit.</strong>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <span>Entry $\rightarrow$ Identification $\rightarrow$ Allocation $\rightarrow$ Navigation $\rightarrow$ Parking $\rightarrow$ Monitoring $\rightarrow$ Exit.</span>
+        <span class="font-mono text-purple-400">Lifecycle</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 7: FUTURE SCOPE -->
+    <!-- ========================================== -->
+    <section class="slide flex-col justify-between p-6 md:p-8 bg-gradient-to-br from-[#0b1220] via-[#080d18] to-[#040810] rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden" data-slide="7">
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wider uppercase">
+          Slide 07 · Future Scope
+        </div>
+        <span class="text-xs font-mono text-slate-400">From Prototype to Intelligent Platform</span>
+      </div>
+
+      <div class="space-y-4 my-auto">
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+            Roadmap & Future Scope
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Scaling from single-lot prototype to campus and commercial-grade operational intelligence.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+            <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-mono font-bold">PHASE 1 · SHORT-TERM</span>
+            <h4 class="text-xs font-bold text-white">Full Lifecycle Prototype</h4>
+            <ul class="text-[11px] text-slate-400 space-y-1">
+              <li>• Complete vehicle journey testing</li>
+              <li>• Automated reservation check-in</li>
+              <li>• Dynamic unreserved drive-in allocation</li>
+              <li>• Multi-user concurrency testing</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold">PHASE 2 · MEDIUM-TERM</span>
+            <h4 class="text-xs font-bold text-white">Operational Intelligence</h4>
+            <ul class="text-[11px] text-slate-400 space-y-1">
+              <li>• Real-time occupancy optimization</li>
+              <li>• Multi-camera vehicle handoff</li>
+              <li>• Automated parking violation alerts</li>
+              <li>• Dwell-time & turnover analytics</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+            <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px] font-mono font-bold">PHASE 3 · ADVANCED</span>
+            <h4 class="text-xs font-bold text-white">Autonomous Facility Management</h4>
+            <ul class="text-[11px] text-slate-400 space-y-1">
+              <li>• Predictive occupancy forecasting</li>
+              <li>• Dynamic demand pricing</li>
+              <li>• EV charging bay management</li>
+              <li>• Multi-floor & multi-facility twins</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-slate-950 border border-cyan-500/40 glow-cyan text-center">
+          <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest block mb-0.5">LONG-TERM VISION</span>
+          <p class="text-xs md:text-sm font-bold text-white">
+            “A unified Digital Twin platform capable of managing parking facilities at campus, commercial, hospital, airport, and smart-city scale.”
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <span>From single-lot prototype $\rightarrow$ City-scale smart mobility platform.</span>
+        <span class="font-mono text-cyan-400">Roadmap</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 8: REQUIREMENTS TO COMPLETE THE PROJECT -->
+    <!-- ========================================== -->
+    <section class="slide flex-col justify-between p-6 md:p-8 bg-gradient-to-br from-[#0b1220] via-[#080d18] to-[#040810] rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden" data-slide="8">
+      <div class="flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold tracking-wider uppercase">
+          Slide 08 · Project Completion
+        </div>
+        <span class="text-xs font-mono text-slate-400">Deployment & Full-Scale Requirements</span>
+      </div>
+
+      <div class="space-y-4 my-auto">
+        <div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+            Requirements for Full-Scale Completion
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Bridging software innovation with physical infrastructure, verified facility geometry, and field validation.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-cyan-400 font-mono font-bold text-xs">01 · CAMERAS</span>
+            <h4 class="text-xs font-bold text-white mt-1">Camera Infrastructure</h4>
+            <p class="text-[11px] text-slate-300 mt-0.5">RTSP/ONVIF IP cameras, entry/exit gates, multi-bay coverage & optical calibration.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-cyan-400 font-mono font-bold text-xs">02 · COMPUTE</span>
+            <h4 class="text-xs font-bold text-white mt-1">Compute Infrastructure</h4>
+            <p class="text-[11px] text-slate-300 mt-0.5">Dedicated edge GPU server (VRAM-optimized for parallel YOLO/OCR streams).</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-emerald-400 font-mono font-bold text-xs">03 · FACILITY DATA</span>
+            <h4 class="text-xs font-bold text-white mt-1">Facility Geometry</h4>
+            <p class="text-[11px] text-slate-300 mt-0.5">Architectural floor plans, exact bay $(X,Y)$ coordinates, lanes & multi-floor links.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-emerald-400 font-mono font-bold text-xs">04 · DATA & AI</span>
+            <h4 class="text-xs font-bold text-white mt-1">Model Robustness</h4>
+            <p class="text-[11px] text-slate-300 mt-0.5">Representative local plate datasets, night/glare robustness & continuous training.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-purple-400 font-mono font-bold text-xs">05 · INTEGRATION</span>
+            <h4 class="text-xs font-bold text-white mt-1">Enterprise Software</h4>
+            <p class="text-[11px] text-slate-300 mt-0.5">Automated boom barriers, payment gateways, reservation databases, and audit logs.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-purple-400 font-mono font-bold text-xs">06 · FIELD VALIDATION</span>
+            <h4 class="text-xs font-bold text-white mt-1">Real-World Stress Testing</h4>
+            <p class="text-[11px] text-slate-300 mt-0.5">Testing under high concurrency, occlusions, camera drops & end-to-end latency audits.</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-800/80 border border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+          <span class="text-slate-200">
+            <strong>Conclusion:</strong> Software foundation is established. Full deployment requires physical sensors, geometry & field validation.
+          </span>
+          <button id="open-demo-btn" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold text-xs shadow-md hover:opacity-95 transition">
+            Launch Live Demonstration ➔
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+        <span class="font-bold text-emerald-400">“Thank you. Let us now move to the live demonstration.”</span>
+        <span class="font-mono text-cyan-400">PES University</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- BOTTOM CONTROLS: Prev, Next, Keyboard Shortcuts, PDF Export -->
+  <!-- ============================================================ -->
+  <footer class="flex items-center justify-between px-4 py-2 bg-[#0c1322]/90 backdrop-blur-md rounded-2xl border border-slate-800 shadow-xl shrink-0">
+    <!-- Prev / Next Navigation -->
+    <div class="flex items-center gap-2">
+      <button id="prev-btn" class="flex items-center gap-1.5 px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl border border-slate-700 transition active:scale-95 disabled:opacity-40 disabled:pointer-events-none">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        <span>Previous</span>
+      </button>
+
+      <button id="next-btn" class="flex items-center gap-1.5 px-5 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-slate-950 text-xs font-bold rounded-xl shadow-md shadow-cyan-600/20 transition active:scale-95">
+        <span>Next Slide</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+    </div>
+
+    <!-- Center Keyboard Hints -->
+    <div class="hidden lg:flex items-center gap-3 text-[11px] text-slate-400 font-mono">
+      <span><kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">◀</kbd> <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">▶</kbd> Navigate</span>
+      <span><kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Space</kbd> Advance</span>
+      <span><kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">N</kbd> Notes</span>
+      <span><kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">M</kbd> Jump</span>
+      <span><kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">L</kbd> Laser</span>
+      <span><kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">P</kbd> Print / PDF</span>
+    </div>
+
+    <!-- Right Actions -->
+    <div class="flex items-center gap-2">
+      <button id="print-btn" class="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-xl border border-slate-700 transition" title="Print / Export to PDF (P)">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+        <span class="hidden sm:inline">Export PDF</span>
+      </button>
+
+      <button id="fullscreen-btn" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-xl border border-slate-700 transition" title="Toggle Fullscreen (F)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+        <span class="hidden sm:inline">Fullscreen</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: QUICK SLIDE JUMP SELECTOR (PRESS 'M') -->
+  <!-- ============================================================ -->
+  <div id="jump-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-4xl w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+          <h3 class="text-base font-bold text-white">Slide Directory · Jump to any slide</h3>
+        </div>
+        <button id="close-jump-btn" class="text-slate-400 hover:text-white text-sm font-bold">✕</button>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs" id="jump-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- DRAWER: SPEAKER NOTES TELEPROMPTER (PRESS 'N') -->
+  <!-- ============================================================ -->
+  <aside id="notes-drawer" class="fixed right-4 bottom-20 w-96 max-w-[90vw] max-h-[62vh] bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-2xl p-4 flex flex-col z-50 transform translate-y-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <h4 class="text-xs font-bold text-white uppercase tracking-wider">Teleprompter · What to say</h4>
+      </div>
+      <button id="close-notes-btn" class="text-slate-400 hover:text-white text-xs">✕</button>
+    </div>
+    <div id="notes-content" class="flex-1 overflow-y-auto text-xs text-slate-300 leading-relaxed space-y-2 custom-scroll pr-1"></div>
+    <div class="pt-2 mt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+      <span>Target Pace: ~130 words/min</span>
+      <span id="notes-word-count" class="font-mono text-cyan-400">0 words</span>
+    </div>
+  </aside>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: LIVE DEMO RUNBOOK (PRESS DEMO BUTTON) -->
+  <!-- ============================================================ -->
+  <div id="demo-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+          <h3 class="text-base font-bold text-white">Live Demonstration Handoff Sequence</h3>
+        </div>
+        <button id="close-demo-modal-btn" class="text-slate-400 hover:text-white text-sm font-bold">✕</button>
+      </div>
+
+      <p class="text-xs text-slate-300">
+        To demonstrate ParkTwin AI to examiners, arrange these <strong>3 browser tabs</strong> side-by-side as documented in <strong class="text-cyan-400">DEMO_RUNBOOK.md</strong>:
+      </p>
+
+      <div class="space-y-2 text-xs">
+        <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-white">Tab 1: Driver Portal (User A)</span>
+            <span class="text-slate-400 block text-[11px]">Drives VEH-001 (Reserved SP-24) $\rightarrow$ Show PARKED status & live session counter</span>
+          </div>
+          <code class="text-cyan-400 font-mono text-[11px]">localhost:3001/user/dashboard</code>
+        </div>
+        <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-white">Tab 2: Driver Portal (User B)</span>
+            <span class="text-slate-400 block text-[11px]">Drives VEH-002 (SP-14) or VEH-003 (Drive-in Walk-in dynamically allocated bay)</span>
+          </div>
+          <code class="text-cyan-400 font-mono text-[11px]">localhost:3001/user/dashboard</code>
+        </div>
+        <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-white">Tab 3: Admin Digital Twin</span>
+            <span class="text-slate-400 block text-[11px]">Zero-refresh synchronization, 3D bay visual state, & CCTV Evidence Viewer</span>
+          </div>
+          <code class="text-emerald-400 font-mono text-[11px]">localhost:3001/digital-twin</code>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button id="ack-demo-btn" class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 text-xs font-bold rounded-xl shadow-lg hover:opacity-90">
+          Switch to Browser Tabs Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- JAVASCRIPT CONTROLLER -->
+  <!-- ============================================================ -->
+  <script>
+    const slideTitles = [
+      "01 · Project Introduction",
+      "02 · Problem Statement",
+      "03 · Existing Challenges",
+      "04 · Methodology",
+      "05 · Solution Architecture",
+      "06 · End-to-End Solution",
+      "07 · Future Scope",
+      "08 · Full-Scale Requirements"
+    ];
+
+    const scriptNotes = {
+      1: `<strong>“Good morning everyone.</strong><br><br>
+We are Team ParkTwin AI from PES University, and today we are presenting our project on <strong>AI-powered smart parking using computer vision and a Digital Twin</strong>.<br><br>
+This project was initiated through the problem statement provided by <strong>PES University</strong>, with the objective of exploring how existing parking infrastructure and camera systems can be transformed into an intelligent parking management system.<br><br>
+Our project focuses on developing an end-to-end platform that can understand vehicle movement, parking occupancy and vehicle identity, and represent this information through a Digital Twin.<br><br>
+I would also like to acknowledge our faculty guide and PES University for providing us with the opportunity and infrastructure to work on this problem.”`,
+
+      2: `<strong>“The fundamental problem is not the absence of cameras.</strong><br><br>
+Parking facilities already have cameras generating large amounts of visual data.<br><br>
+The problem is that this data is largely passive.<br><br>
+A camera can show us a vehicle, but the parking system needs to understand <strong>which vehicle it is, where it is, which parking space it is associated with, what state that space is in, and what action should follow.</strong><br><br>
+Therefore, our core problem statement is:<br>
+<strong>How can we convert raw parking-lot video into structured, real-time parking intelligence?</strong><br><br>
+This becomes the foundation for the entire ParkTwin architecture.”`,
+
+      3: `<strong>“Once we examined the problem in more detail, we identified several challenges.</strong><br><br>
+First, CCTV is primarily a <strong>passive observation system</strong>.<br><br>
+Second, the information generated by different systems is often fragmented.<br><br>
+Third, operators may have to manually interpret multiple camera feeds.<br><br>
+Another important challenge is spatial understanding. Detecting a vehicle is not enough. The system needs to understand the relationship between that vehicle and the actual physical parking facility.<br><br>
+Finally, there is a gap on the driver side. Even if the operator knows which spaces are available, the driver still needs to find that space.<br><br>
+This led us to the central design principle of ParkTwin: <strong>connect vehicle intelligence with spatial intelligence.</strong>”`,
+
+      4: `<strong>“Our methodology begins at the camera layer.</strong><br><br>
+ParkTwin can consume CCTV streams, IP-camera feeds or recorded parking footage.<br><br>
+The first stage is perception. We use computer vision to detect vehicles and multi-object tracking to maintain vehicle identity across frames.<br><br>
+ANPR is then used to extract license-plate information.<br><br>
+But an important design decision is that we do not treat these detections as the final output. Instead, we convert them into <strong>structured events</strong>.<br><br>
+An event can contain the vehicle identity, camera, timestamp, position, movement and associated metadata.<br><br>
+This event becomes the basic unit of information throughout the rest of our system.”`,
+
+      5: `<strong>“Once structured events are generated, they enter the intelligence layer.</strong><br><br>
+This is where ParkTwin moves beyond computer vision.<br><br>
+The Parking Intelligence Engine interprets those events and maintains the operational state of vehicles and parking spaces.<br><br>
+The system then maps this state onto the Digital Twin. The Digital Twin contains the spatial representation of the facility — parking spaces, drive lanes, cameras and other relevant entities.<br><br>
+Finally, the application layer consumes this information.<br><br>
+This gives us two major interfaces: The <strong>operator interface</strong> for monitoring and analytics, and the <strong>driver interface</strong> for parking discovery and navigation.<br><br>
+The important architectural principle is separation of responsibilities. The vision engine does not need to know how the dashboard works, and the dashboard does not need to process raw video.”`,
+
+      6: `<strong>“This slide represents the complete operational flow we are building toward.</strong><br><br>
+A vehicle first enters the facility. The system detects and identifies it. That generates a structured event.<br><br>
+The parking intelligence layer then determines the appropriate parking state. For a reserved vehicle, the system associates it with the reserved space. For a walk-in vehicle, it identifies an available space.<br><br>
+The Digital Twin then provides the spatial representation required for navigation. Once the vehicle reaches the space, the parking state changes to occupied.<br><br>
+The system continues maintaining that vehicle's parking session.<br><br>
+Finally, when the vehicle reaches the exit, the exit event closes the parking session and updates the Digital Twin.<br><br>
+So the objective is an <strong>end-to-end closed-loop parking system</strong>, rather than a collection of independent features.”`,
+
+      7: `<strong>“Our current prototype establishes the foundation.</strong><br><br>
+The next objective is to complete the entire vehicle lifecycle from entry to exit.<br><br>
+Once that foundation is stable, the same event architecture can support much more advanced capabilities.<br><br>
+We can introduce real-time occupancy optimization, utilization analytics, automated reporting, multi-camera handoff and reservation management.<br><br>
+At a more advanced level, the Digital Twin could support predictive occupancy, dynamic allocation, EV charging integration and automated access control.<br><br>
+The long-term vision is therefore not limited to one parking lot. The architecture can evolve into a platform capable of representing and managing multiple parking facilities.”`,
+
+      8: `<strong>“To take ParkTwin from a prototype to a fully deployable system, several additional requirements are necessary.</strong><br><br>
+First is <strong>physical infrastructure</strong> — appropriate camera coverage at entry, exit and parking areas.<br><br>
+Second is compute infrastructure capable of processing multiple video streams in real time.<br><br>
+Third is accurate facility information. The Digital Twin is only as accurate as the underlying geometry, so verified parking-space coordinates, lanes, camera positions and access points are essential.<br><br>
+On the AI side, we need larger and more representative datasets and extensive validation across lighting, camera angles, occlusion and traffic conditions.<br><br>
+Finally, the system needs to be tested in an actual operational parking facility with multiple simultaneous vehicles.<br><br>
+So the prototype demonstrates the technical foundation. <strong>Full completion requires combining that software foundation with real-world infrastructure, data and field validation.</strong><br><br>
+That is the path from a working prototype to a deployable smart parking platform.<br><br>
+Thank you.<br>
+<span class="text-emerald-400 font-bold">Let us now move to the live demonstration.”</span>`
+    };
+
+    let currentSlide = 1;
+    const totalSlides = 8;
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const currentNumEl = document.getElementById('current-slide-num');
+    const totalNumEl = document.getElementById('total-slides-num');
+    const indicatorsContainer = document.getElementById('slide-indicators');
+    const notesDrawer = document.getElementById('notes-drawer');
+    const notesContent = document.getElementById('notes-content');
+    const notesWordCount = document.getElementById('notes-word-count');
+    const toggleNotesBtn = document.getElementById('toggle-notes-btn');
+    const closeNotesBtn = document.getElementById('close-notes-btn');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const printBtn = document.getElementById('print-btn');
+    const demoModal = document.getElementById('demo-modal');
+    const closeDemoModalBtn = document.getElementById('close-demo-modal-btn');
+    const ackDemoBtn = document.getElementById('ack-demo-btn');
+    const openDemoBtn = document.getElementById('open-demo-btn');
+    const jumpBtn = document.getElementById('jump-btn');
+    const jumpModal = document.getElementById('jump-modal');
+    const closeJumpBtn = document.getElementById('close-jump-btn');
+    const jumpGrid = document.getElementById('jump-grid');
+    const laserBtn = document.getElementById('laser-btn');
+    const laserDot = document.getElementById('laser-dot');
+    const guideNameDisplay = document.getElementById('guide-name-display');
+    const editGuideBtn = document.getElementById('edit-guide-btn');
+
+    // Guide Name persistence
+    const savedGuide = localStorage.getItem('parktwin_guide_name');
+    if (savedGuide) {
+      guideNameDisplay.innerText = savedGuide;
+    }
+    function promptGuideName() {
+      const current = guideNameDisplay.innerText.trim();
+      const next = prompt("Enter Faculty Guide Name (e.g., Dr. A. K. Sharma):", current);
+      if (next !== null && next.trim() !== "") {
+        guideNameDisplay.innerText = next.trim();
+        localStorage.setItem('parktwin_guide_name', next.trim());
+      }
+    }
+    editGuideBtn.addEventListener('click', promptGuideName);
+    guideNameDisplay.addEventListener('click', promptGuideName);
+
+    // Build Dots Indicators
+    function buildIndicators() {
+      indicatorsContainer.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-6 bg-cyan-400' : 'bg-slate-700 hover:bg-slate-500'}`;
+        dot.title = `Jump to ${slideTitles[i - 1]}`;
+        dot.addEventListener('click', () => goToSlide(i));
+        indicatorsContainer.appendChild(dot);
+      }
+    }
+
+    // Build Quick Jump Grid Modal
+    function buildJumpGrid() {
+      jumpGrid.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const card = document.createElement('button');
+        card.className = `p-3 rounded-xl border text-left transition ${i === currentSlide ? 'bg-cyan-950/80 border-cyan-500 text-white' : 'bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800'}`;
+        card.innerHTML = `
+          <span class="text-[10px] font-mono block text-cyan-400">SLIDE 0${i}</span>
+          <span class="font-bold text-xs block truncate">${slideTitles[i - 1].split('·')[1] || slideTitles[i - 1]}</span>
+        `;
+        card.addEventListener('click', () => {
+          goToSlide(i);
+          jumpModal.classList.add('hidden');
+        });
+        jumpGrid.appendChild(card);
+      }
+    }
+
+    function updateNotes() {
+      const html = scriptNotes[currentSlide] || 'No notes for this slide.';
+      notesContent.innerHTML = html;
+      const plainText = notesContent.innerText || notesContent.textContent || '';
+      const words = plainText.trim().split(/\s+/).filter(w => w.length > 0).length;
+      notesWordCount.innerText = `${words} words (~${Math.ceil(words / 130 * 60)}s)`;
+    }
+
+    function goToSlide(slideIndex) {
+      if (slideIndex < 1 || slideIndex > totalSlides) return;
+      slides.forEach(slide => slide.classList.remove('active'));
+      currentSlide = slideIndex;
+      const activeSlide = document.querySelector(`.slide[data-slide="${currentSlide}"]`);
+      if (activeSlide) activeSlide.classList.add('active');
+
+      currentNumEl.innerText = currentSlide;
+      prevBtn.disabled = currentSlide === 1;
+      nextBtn.innerHTML = currentSlide === totalSlides ? 'Live Demo ➔' : 'Next Slide <svg class="w-4 h-4 ml-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>';
+
+      buildIndicators();
+      buildJumpGrid();
+      updateNotes();
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide === totalSlides) {
+        demoModal.classList.remove('hidden');
+      } else {
+        goToSlide(currentSlide + 1);
+      }
+    });
+
+    // Laser Pointer Logic
+    let laserActive = false;
+    function toggleLaser() {
+      laserActive = !laserActive;
+      if (laserActive) {
+        laserDot.style.display = 'block';
+        laserBtn.classList.add('bg-red-950', 'border-red-500', 'text-red-300');
+        document.body.style.cursor = 'none';
+      } else {
+        laserDot.style.display = 'none';
+        laserBtn.classList.remove('bg-red-950', 'border-red-500', 'text-red-300');
+        document.body.style.cursor = 'default';
+      }
+    }
+    laserBtn.addEventListener('click', toggleLaser);
+    window.addEventListener('mousemove', (e) => {
+      if (laserActive) {
+        laserDot.style.left = `${e.clientX}px`;
+        laserDot.style.top = `${e.clientY}px`;
+      }
+    });
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        if (currentSlide === totalSlides) {
+          demoModal.classList.remove('hidden');
+        } else {
+          goToSlide(currentSlide + 1);
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        goToSlide(currentSlide - 1);
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      } else if (e.key === 'm' || e.key === 'M') {
+        jumpModal.classList.toggle('hidden');
+      } else if (e.key === 'l' || e.key === 'L') {
+        toggleLaser();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (e.key === 'p' || e.key === 'P') {
+        window.print();
+      } else if (e.key === 'Escape') {
+        demoModal.classList.add('hidden');
+        jumpModal.classList.add('hidden');
+        if (notesOpen) toggleNotes();
+        if (laserActive) toggleLaser();
+      }
+    });
+
+    // Notes Drawer
+    let notesOpen = false;
+    function toggleNotes() {
+      notesOpen = !notesOpen;
+      if (notesOpen) {
+        notesDrawer.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-6');
+        notesDrawer.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      } else {
+        notesDrawer.classList.add('opacity-0', 'pointer-events-none', 'translate-y-6');
+        notesDrawer.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      }
+    }
+    toggleNotesBtn.addEventListener('click', toggleNotes);
+    closeNotesBtn.addEventListener('click', toggleNotes);
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    printBtn.addEventListener('click', () => window.print());
+
+    // Modals
+    jumpBtn.addEventListener('click', () => jumpModal.classList.remove('hidden'));
+    closeJumpBtn.addEventListener('click', () => jumpModal.classList.add('hidden'));
+
+    if (openDemoBtn) openDemoBtn.addEventListener('click', () => demoModal.classList.remove('hidden'));
+    closeDemoModalBtn.addEventListener('click', () => demoModal.classList.add('hidden'));
+    ackDemoBtn.addEventListener('click', () => demoModal.classList.add('hidden'));
+
+    // Rehearsal Timer
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let timerRunning = false;
+    const timerDisplay = document.getElementById('timer-display');
+    const timerToggleBtn = document.getElementById('timer-toggle-btn');
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+      const secs = (timerSeconds % 60).toString().padStart(2, '0');
+      timerDisplay.innerText = `${mins}:${secs}`;
+    }
+
+    function toggleTimer() {
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        timerToggleBtn.innerText = '▶';
+      } else {
+        timerRunning = true;
+        timerToggleBtn.innerText = '⏸';
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          updateTimerDisplay();
+        }, 1000);
+      }
+    }
+    timerToggleBtn.addEventListener('click', toggleTimer);
+
+    // Init
+    goToSlide(1);
+    toggleTimer();
+  </script>
+</body>
+</html>

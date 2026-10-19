@@ -1,0 +1,49 @@
+- generic [ref=f47e2]:
+  - complementary "Primary" [ref=f47e3]:
+    - link "ParkTwin AI" [ref=f47e8] [cursor=pointer]:
+      - /url: /
+    - navigation "Primary" [ref=f47e10]:
+      - generic [ref=f47e11]: overview
+      - link "Dashboard" [ref=f47e12] [cursor=pointer]:
+        - /url: /dashboard
+      - generic [ref=f47e20]: operations
+      - link "Live Parking" [ref=f47e21] [cursor=pointer]:
+        - /url: /parking
+      - link "Digital Twin" [ref=f47e30] [cursor=pointer]:
+        - /url: /digital-twin
+      - link "Vehicles" [ref=f47e37] [cursor=pointer]:
+        - /url: /vehicles
+      - link "Video" [ref=f47e44] [cursor=pointer]:
+        - /url: /video-library
+      - link "CCTV" [ref=f47e49] [cursor=pointer]:
+        - /url: /video-processing
+      - generic [ref=f47e59]: intelligence
+      - link "ANPR" [ref=f47e60] [cursor=pointer]:
+        - /url: /anpr
+      - link "Analytics" [ref=f47e68] [cursor=pointer]:
+        - /url: /analytics
+      - link "Reports" [ref=f47e73] [cursor=pointer]:
+        - /url: /reports
+      - generic [ref=f47e79]: system
+      - link "Settings" [ref=f47e80] [cursor=pointer]:
+        - /url: /settings
+    - generic [ref=f47e87]:
+      - generic [ref=f47e88]: SYSTEM ONLINE
+      - generic [ref=f47e93]: v1.0.0
+  - generic [ref=f47e94]:
+    - banner [ref=f47e95]:
+      - button "Toggle sidebar" [ref=f47e96] [cursor=pointer]
+      - navigation "Breadcrumb" [ref=f47e99]:
+        - link "Home" [ref=f47e101] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f47e106]: Digital Twin
+      - generic [ref=f47e110]:
+        - button "Toggle notifications panel" [ref=f47e111] [cursor=pointer]
+        - link [ref=f47e115] [cursor=pointer]:
+          - /url: /user/dashboard
+          - button "Driver Portal" [ref=f47e116]
+        - button "Toggle color theme" [ref=f47e121] [cursor=pointer]
+        - generic [ref=f47e124]: Admin System
+    - link "Skip to content" [ref=f47e131] [cursor=pointer]:
+      - /url: "#main-content"
+    - main [ref=f47e132]

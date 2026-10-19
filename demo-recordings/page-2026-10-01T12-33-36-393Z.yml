@@ -1,0 +1,47 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e7]:
+    - generic:
+      - generic [ref=f3e10]:
+        - link "Dashboard" [ref=f3e11] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f3e21]:
+          - generic [ref=f3e22]: PARKTWIN 3D
+          - generic [ref=f3e23]: DRIVER ZONE
+        - button "VEH-001 (Cyber SUV)" [ref=f3e25] [cursor=pointer]:
+          - generic [ref=f3e30]: VEH-001
+          - generic [ref=f3e31]: (Cyber SUV)
+        - generic [ref=f3e34]: 🟢 RESERVED
+      - generic [ref=f3e35]:
+        - button "TOP" [ref=f3e36] [cursor=pointer]
+        - button "DRIVER VIEW" [ref=f3e41] [cursor=pointer]
+        - button "ORBIT" [ref=f3e47] [cursor=pointer]
+        - button "Reset" [ref=f3e53] [cursor=pointer]
+    - generic [ref=f3e59]:
+      - generic [ref=f3e60]:
+        - generic [ref=f3e61]: ZONE C · MINIMAP
+        - generic [ref=f3e62]: LEVEL B2
+      - img [ref=f3e63]:
+        - generic [ref=f3e65]: ← EXIT B2
+        - generic [ref=f3e66]: "19"
+        - generic [ref=f3e69]: "20"
+        - generic [ref=f3e72]: "21"
+        - generic [ref=f3e75]: "22"
+        - generic [ref=f3e78]: "23"
+        - generic [ref=f3e81]: "24"
+        - generic [ref=f3e84]: "25"
+        - generic [ref=f3e87]: "26"
+    - generic [ref=f3e251]:
+      - generic [ref=f3e257]:
+        - generic [ref=f3e258]: PARKTWIN AI · SMART PARKING
+        - heading "Cyber SUV" [level=2] [ref=f3e259]
+        - paragraph [ref=f3e260]: MH-12-DE-1001
+      - generic [ref=f3e261]:
+        - generic [ref=f3e262]:
+          - generic [ref=f3e263]: Reservation Ready
+          - generic [ref=f3e264]: Zone C · Level B2
+        - generic [ref=f3e265]: SP-24
+        - paragraph [ref=f3e266]: Bay reserved for you at Carparking-01 B2. Route is ready.
+      - button "START NAVIGATION" [ref=f3e268] [cursor=pointer]
+    - generic: Drag = Rotate · Scroll = Zoom · R = Reset Camera
+  - button "Open Next.js Dev Tools" [ref=f3e122] [cursor=pointer]
+  - alert [ref=f3e126]

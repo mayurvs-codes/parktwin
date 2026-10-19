@@ -1,0 +1,32 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e7]:
+    - generic:
+      - generic [ref=f1e10]:
+        - link "Dashboard" [ref=f1e11] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f1e20]:
+          - generic [ref=f1e21]:
+            - generic [ref=f1e22]: PARKTWIN AI · 3D PARKING ZONE
+            - generic [ref=f1e23]: PROTOTYPE
+          - generic [ref=f1e24]:
+            - text: "Carparking-01 B2 · Zone C Row (SP-19 to SP-26) · Target:"
+            - strong [ref=f1e25]: SP-24
+      - generic [ref=f1e26]:
+        - button "TOP" [ref=f1e27] [cursor=pointer]
+        - button "PERSPECTIVE" [ref=f1e32] [cursor=pointer]
+        - button "RESET" [ref=f1e38] [cursor=pointer]
+    - generic [ref=f1e43]:
+      - generic [ref=f1e44]:
+        - generic [ref=f1e49]:
+          - generic [ref=f1e50]: VEH-001 NAVIGATION GUIDANCE
+          - generic [ref=f1e51]: ✓ Arrived at bay SP-24
+        - generic [ref=f1e53]:
+          - generic [ref=f1e54]: 0 m
+          - text: to SP-24
+      - generic [ref=f1e56]:
+        - generic [ref=f1e57]:
+          - button "Step" [disabled]
+          - button "Reset" [ref=f1e58] [cursor=pointer]
+        - button "PARKED (REPLAY)" [active] [ref=f1e76] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f1e70] [cursor=pointer]
+  - alert [ref=f1e74]

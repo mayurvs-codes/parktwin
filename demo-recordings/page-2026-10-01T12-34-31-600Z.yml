@@ -1,0 +1,84 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e7]:
+    - generic:
+      - generic [ref=f3e10]:
+        - link "Dashboard" [ref=f3e11] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f3e21]:
+          - generic [ref=f3e22]: PARKTWIN 3D
+          - generic [ref=f3e23]: DRIVER ZONE
+        - button "VEH-003 (Urban Compact)" [ref=f3e314] [cursor=pointer]:
+          - generic [ref=f3e30]: VEH-003
+          - generic [ref=f3e31]: (Urban Compact)
+      - generic [ref=f3e35]:
+        - button "TOP" [ref=f3e36] [cursor=pointer]
+        - button "DRIVER VIEW" [ref=f3e41] [cursor=pointer]
+        - button "ORBIT" [ref=f3e47] [cursor=pointer]
+        - button "Reset" [ref=f3e53] [cursor=pointer]
+    - generic [ref=f3e59]:
+      - generic [ref=f3e60]:
+        - generic [ref=f3e61]: ZONE C · MINIMAP
+        - generic [ref=f3e62]: LEVEL B2
+      - img [ref=f3e63]:
+        - generic [ref=f3e65]: ← EXIT B2
+        - generic [ref=f3e66]: "19"
+        - generic [ref=f3e69]: "20"
+        - generic [ref=f3e72]: "21"
+        - generic [ref=f3e75]: "22"
+        - generic [ref=f3e78]: "23"
+        - generic [ref=f3e81]: "24"
+        - generic [ref=f3e84]: "25"
+        - generic [ref=f3e87]: "26"
+    - generic [ref=f3e320]:
+      - generic [ref=f3e321]:
+        - generic [ref=f3e322]:
+          - heading "Available Bays · Zone C" [level=3] [ref=f3e323]
+          - paragraph [ref=f3e324]: Select an open slot to begin 3D guidance
+        - generic [ref=f3e325]: 5 OPEN
+      - generic [ref=f3e326]:
+        - button "SP-19 Zone C · B2 OPEN" [ref=f3e327] [cursor=pointer]:
+          - generic [ref=f3e328]:
+            - generic [ref=f3e329]: SP-19
+            - generic [ref=f3e330]: Zone C · B2
+          - generic [ref=f3e331]: OPEN
+        - button "SP-20 Zone C · B2 VEH-018" [disabled] [ref=f3e332]:
+          - generic [ref=f3e333]:
+            - generic [ref=f3e334]: SP-20
+            - generic [ref=f3e335]: Zone C · B2
+          - generic [ref=f3e336]: VEH-018
+        - button "SP-21 Zone C · B2 OPEN" [ref=f3e337] [cursor=pointer]:
+          - generic [ref=f3e338]:
+            - generic [ref=f3e339]: SP-21
+            - generic [ref=f3e340]: Zone C · B2
+          - generic [ref=f3e341]: OPEN
+        - button "SP-22 Zone C · B2 VEH-019" [disabled] [ref=f3e342]:
+          - generic [ref=f3e343]:
+            - generic [ref=f3e344]: SP-22
+            - generic [ref=f3e345]: Zone C · B2
+          - generic [ref=f3e346]: VEH-019
+        - button "SP-23 Zone C · B2 OPEN" [ref=f3e347] [cursor=pointer]:
+          - generic [ref=f3e348]:
+            - generic [ref=f3e349]: SP-23
+            - generic [ref=f3e350]: Zone C · B2
+          - generic [ref=f3e351]: OPEN
+        - button "SP-24 Zone C · B2 OPEN" [ref=f3e352] [cursor=pointer]:
+          - generic [ref=f3e353]:
+            - generic [ref=f3e354]: SP-24
+            - generic [ref=f3e355]: Zone C · B2
+          - generic [ref=f3e356]: OPEN
+        - button "SP-25 Zone C · B2 VEH-020" [disabled] [ref=f3e357]:
+          - generic [ref=f3e358]:
+            - generic [ref=f3e359]: SP-25
+            - generic [ref=f3e360]: Zone C · B2
+          - generic [ref=f3e361]: VEH-020
+        - button "SP-26 Zone C · B2 OPEN" [ref=f3e362] [cursor=pointer]:
+          - generic [ref=f3e363]:
+            - generic [ref=f3e364]: SP-26
+            - generic [ref=f3e365]: Zone C · B2
+          - generic [ref=f3e366]: OPEN
+      - generic [ref=f3e367]:
+        - button "Back" [ref=f3e368] [cursor=pointer]
+        - button "NAVIGATE TO SP-24" [ref=f3e369] [cursor=pointer]
+    - generic: Drag = Rotate · Scroll = Zoom · R = Reset Camera
+  - button "Open Next.js Dev Tools" [ref=f3e122] [cursor=pointer]
+  - alert [ref=f3e126]

@@ -1,0 +1,95 @@
+- generic [ref=f1e3]:
+  - banner [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - generic [ref=f1e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=f1e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=f1e16]: AI
+        - paragraph [ref=f1e17]: Personal Opportunity Intelligence
+      - navigation [ref=f1e18]:
+        - button "Dashboard" [ref=f1e19] [cursor=pointer]
+        - button "Decisions" [ref=f1e24] [cursor=pointer]
+        - button "AI Agent" [ref=f1e30] [cursor=pointer]
+        - button "Radar" [ref=f1e35] [cursor=pointer]
+        - button "Discover" [ref=f1e43] [cursor=pointer]
+        - button "Hackathons" [ref=f1e48] [cursor=pointer]
+        - button "Internships" [ref=f1e56] [cursor=pointer]
+        - button "Open Source" [ref=f1e61] [cursor=pointer]
+        - button "Competitions" [ref=f1e67] [cursor=pointer]
+        - button "Research" [ref=f1e72] [cursor=pointer]
+        - button "Saved 1" [ref=f1e1951] [cursor=pointer]:
+          - generic [ref=f1e79]: Saved
+          - generic [ref=f1e1952]: "1"
+        - button "Tracker" [ref=f1e80] [cursor=pointer]
+        - button "Projects" [ref=f1e83] [cursor=pointer]
+        - button "Sources" [ref=f1e89] [cursor=pointer]
+      - generic [ref=f1e93]:
+        - button "9" [ref=f1e168]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=f1e98]': LIVE
+        - button "Deep Discover" [ref=f1e101] [cursor=pointer]
+        - button "Student Profile" [ref=f1e106]
+  - main [ref=f1e111]:
+    - generic [ref=f1e1955]:
+      - generic [ref=f1e1956]:
+        - generic [ref=f1e1957]:
+          - generic [ref=f1e1958]:
+            - generic [ref=f1e1959]:
+              - generic [ref=f1e1960]: Phase 8 Personal Decision Engine
+              - generic [ref=f1e1961]: 2026-10-12
+            - heading "Strategic Prioritization & Action Planning" [level=1] [ref=f1e1962]
+            - paragraph [ref=f1e1963]: "\"Focused Execution: Drive forward 'This Week in Open Source for October 2, ' with high-impact project reuse.\""
+          - button "Refresh Decision Engine" [ref=f1e1965]
+        - generic [ref=f1e1972]:
+          - generic [ref=f1e1973]:
+            - generic [ref=f1e1974]: "Tracked Opportunities:"
+            - generic [ref=f1e1975]: "1"
+          - generic [ref=f1e1976]:
+            - generic [ref=f1e1977]: "In Progress:"
+            - generic [ref=f1e1978]: "1"
+          - generic [ref=f1e1979]:
+            - generic [ref=f1e1980]: "Applied / Submitted:"
+            - generic [ref=f1e1981]: "0"
+          - generic [ref=f1e1982]:
+            - generic [ref=f1e1983]: "Shortlist → Applied Conversion:"
+            - generic [ref=f1e1984]: 0%
+      - generic [ref=f1e1985]:
+        - button "Today's Actions (5)" [ref=f1e1986]
+        - button "2x2 Value Matrix" [ref=f1e1990]
+        - button "Opportunity Comparison (2)" [ref=f1e1994]
+        - button "Personal Queue (1)" [active] [ref=f1e2000]
+        - button "Conversion Funnel" [ref=f1e2005]
+      - generic [ref=f1e2527]:
+        - generic [ref=f1e2528]:
+          - generic [ref=f1e2529]:
+            - heading "Personal Opportunity Execution Queue" [level=2] [ref=f1e2530]
+            - paragraph [ref=f1e2534]: Your focused backlog with user priority overrides, notes, and workflow statuses.
+          - generic [ref=f1e2535]:
+            - button "ALL" [ref=f1e2536]
+            - button "TODAY" [ref=f1e2537]
+            - button "THIS_WEEK" [ref=f1e2538]
+            - button "LATER" [ref=f1e2539]
+            - button "COMPLETED" [ref=f1e2540]
+            - button "SKIPPED" [ref=f1e2541]
+        - generic [ref=f1e2543]:
+          - generic [ref=f1e2544]:
+            - generic [ref=f1e2545]:
+              - generic [ref=f1e2546]: TODAY
+              - generic [ref=f1e2547]: IN PROGRESS
+              - generic [ref=f1e2548]: RECOMMEND
+            - heading "This Week in Open Source for October 2, 2026" [level=3] [ref=f1e2549]
+            - generic [ref=f1e2550]:
+              - generic [ref=f1e2551]: Linux Foundation / Google OS
+              - generic [ref=f1e2552]: •
+              - generic [ref=f1e2553]: "Effort: ~11h"
+          - generic [ref=f1e2554]:
+            - generic [ref=f1e2555]:
+              - generic [ref=f1e2556]: Priority
+              - generic [ref=f1e2557]: "77.5"
+            - combobox [ref=f1e2558]:
+              - option "TODAY" [selected]
+              - option "THIS WEEK"
+              - option "LATER"
+              - option "WAITING"
+              - option "COMPLETED"
+              - option "SKIPPED"
+            - button "Details" [ref=f1e2559]

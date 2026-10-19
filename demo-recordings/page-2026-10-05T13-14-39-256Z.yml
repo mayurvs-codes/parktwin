@@ -1,0 +1,284 @@
+- generic [ref=f4e1]:
+  - generic [ref=f4e5]:
+    - banner [ref=f4e6]:
+      - generic [ref=f4e8]:
+        - generic [ref=f4e9]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=f4e10] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f4e15]:
+              - generic [ref=f4e16]:
+                - generic [ref=f4e17]: PARKTWIN AI
+                - generic [ref=f4e18]: Driver
+              - generic [ref=f4e19]: Smart Journey Guidance
+          - navigation [ref=f4e20]:
+            - link "Dashboard" [ref=f4e21] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [ref=f4e28] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=f4e33] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=f4e38] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=f4e44] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=f4e48]:
+          - generic [ref=f4e49]:
+            - generic [ref=f4e51]: VEH-003
+            - generic [ref=f4e52]: CAM-01
+          - button "CCTV Evidence" [ref=f4e53] [cursor=pointer]
+          - link [ref=f4e58] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=f4e59]
+          - button "Toggle color theme" [ref=f4e65] [cursor=pointer]
+      - generic [ref=f4e70]:
+        - generic [ref=f4e71]:
+          - generic [ref=f4e72]:
+            - button "DEMO MODE" [ref=f4e73] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=f4e79] [cursor=pointer]
+          - generic [ref=f4e85]:
+            - generic [ref=f4e86]:
+              - strong [ref=f4e88]: KA05NB6963
+              - generic [ref=f4e89]: (92% paddleocr)
+              - generic [ref=f4e90]: "Track #9"
+            - generic [ref=f4e91]: 1. Entry Detected
+        - generic [ref=f4e93]:
+          - generic [ref=f4e94]:
+            - generic [ref=f4e95]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=f4e100] [cursor=pointer]:
+              - generic [ref=f4e101]: VEH-001
+              - generic "Reserved" [ref=f4e102]
+            - button "VEH-002 Reserved" [ref=f4e103] [cursor=pointer]:
+              - generic [ref=f4e104]: VEH-002
+              - generic "Reserved" [ref=f4e105]
+            - button "VEH-003 No Reservation" [ref=f4e106] [cursor=pointer]:
+              - generic [ref=f4e107]: VEH-003
+              - generic "No Reservation" [ref=f4e108]
+            - button "VEH-004 No Reservation" [ref=f4e109] [cursor=pointer]:
+              - generic [ref=f4e110]: VEH-004
+              - generic "No Reservation" [ref=f4e111]
+            - button "VEH-005 No Reservation" [ref=f4e112] [cursor=pointer]:
+              - generic [ref=f4e113]: VEH-005
+              - generic "No Reservation" [ref=f4e114]
+          - generic [ref=f4e115]:
+            - button "Next Event" [ref=f4e116] [cursor=pointer]
+            - button "Reset Vehicle" [ref=f4e120] [cursor=pointer]
+            - button "Reset Demo" [ref=f4e125] [cursor=pointer]
+    - main [ref=f4e127]:
+      - generic [ref=f4e754]:
+        - generic [ref=f4e755]:
+          - generic [ref=f4e761]:
+            - generic [ref=f4e762]:
+              - generic [ref=f4e763]: PARKTWIN
+              - generic [ref=f4e765]: Carparking-01 · Level B2
+            - generic [ref=f4e767]:
+              - text: GUEST DRIVER ·
+              - strong [ref=f4e768]: VISITOR
+              - text: (VEH-003)
+          - generic [ref=f4e769]:
+            - generic [ref=f4e770]:
+              - button "USER A" [ref=f4e771] [cursor=pointer]
+              - button "USER B" [ref=f4e772] [cursor=pointer]
+              - button "GUEST" [active] [ref=f4e773] [cursor=pointer]
+            - generic [ref=f4e774]:
+              - button "Simulate Violation" [ref=f4e775] [cursor=pointer]
+              - button "Reset" [ref=f4e779] [cursor=pointer]
+        - generic [ref=f4e784]:
+          - generic [ref=f4e785]:
+            - generic [ref=f4e786]:
+              - generic [ref=f4e787]:
+                - generic [ref=f4e788]: FACILITY DIGITAL TWIN
+                - generic [ref=f4e789]: · Island 1 (SP-01 to SP-20)
+              - link [ref=f4e790] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Full GPS View" [ref=f4e791]
+            - generic [ref=f4e796]:
+              - generic [ref=f4e798]:
+                - button "Zoom In (+)" [ref=f4e799] [cursor=pointer]
+                - button "Zoom Out (−)" [ref=f4e803] [cursor=pointer]
+                - button "Focus Demo Zone (Home)" [ref=f4e807] [cursor=pointer]
+                - button "FIT" [ref=f4e811] [cursor=pointer]
+                - generic [ref=f4e823]: 155%
+              - generic:
+                - generic: ACCESS_POINT_B2
+                - generic: Single Physical Gateway (Entry & Exit)
+              - img [ref=f4e824]:
+                - generic:
+                  - generic:
+                    - generic: LIFT
+                    - generic: STAIR & LIFT CORE 01
+                  - generic: ◄ ENTRY RAMP
+                  - generic:
+                    - generic: LIFT
+                    - generic: STAIR & LIFT CORE 02
+                  - generic:
+                    - generic:
+                      - generic: LOBBY
+                      - generic: 2.8M WIDE
+                    - generic: SERVICES / STORAGE
+                    - generic:
+                      - generic: LOBBY
+                      - generic: 3.0M WIDE
+                - generic:
+                  - generic: FOCUSED DEMO ZONE · ISLAND 1 (20 SPACES)
+                  - generic: NORTH ROW · 8 STALLS (SP-01 – SP-08)
+                  - generic: SOUTH ROW · 8 STALLS (SP-09 – SP-16)
+                  - generic: WEST END · 4 STALLS (SP-17 – SP-20)
+                  - generic: OCC 15 · AVAIL 4 · DESIG 1
+                - generic [ref=f4e838]:
+                  - generic [ref=f4e839] [cursor=pointer]: P01
+                  - generic [ref=f4e841] [cursor=pointer]: P02
+                  - generic [ref=f4e843] [cursor=pointer]: P03
+                  - generic [ref=f4e845] [cursor=pointer]: P04
+                  - generic [ref=f4e847] [cursor=pointer]: P05
+                  - generic [ref=f4e849] [cursor=pointer]: P06
+                  - generic [ref=f4e851] [cursor=pointer]: ★ P07
+                  - generic [ref=f4e853] [cursor=pointer]: P08
+                  - generic [ref=f4e855] [cursor=pointer]: P09
+                  - generic [ref=f4e857] [cursor=pointer]: P10
+                  - generic [ref=f4e859] [cursor=pointer]: P11
+                  - generic [ref=f4e861] [cursor=pointer]: P12
+                  - generic [ref=f4e863] [cursor=pointer]: P13
+                  - generic [ref=f4e865] [cursor=pointer]: P14
+                  - generic [ref=f4e867] [cursor=pointer]: P15
+                  - generic [ref=f4e869] [cursor=pointer]: P16
+                  - generic [ref=f4e871] [cursor=pointer]: P17
+                  - generic [ref=f4e873] [cursor=pointer]: P18
+                  - generic [ref=f4e875] [cursor=pointer]: P19
+                  - generic [ref=f4e877] [cursor=pointer]: P20
+                  - generic [ref=f4e879] [cursor=pointer]: P21
+                  - generic [ref=f4e881] [cursor=pointer]: P22
+                  - generic [ref=f4e883] [cursor=pointer]: P23
+                  - generic [ref=f4e885] [cursor=pointer]: P24
+                  - generic [ref=f4e887] [cursor=pointer]: P25
+                  - generic [ref=f4e889] [cursor=pointer]: P26
+                  - generic [ref=f4e891] [cursor=pointer]: P27
+                  - generic [ref=f4e893] [cursor=pointer]: P28
+                  - generic [ref=f4e895] [cursor=pointer]: P29
+                  - generic [ref=f4e897] [cursor=pointer]: P30
+                  - generic [ref=f4e899] [cursor=pointer]: P31
+                  - generic [ref=f4e901] [cursor=pointer]: P32
+                  - generic [ref=f4e903] [cursor=pointer]: P33
+                  - generic [ref=f4e905] [cursor=pointer]: P34
+                  - generic [ref=f4e907] [cursor=pointer]: P35
+                  - generic [ref=f4e909] [cursor=pointer]: P36
+                  - generic [ref=f4e911] [cursor=pointer]: P37
+                  - generic [ref=f4e913] [cursor=pointer]: P38
+                  - generic [ref=f4e915] [cursor=pointer]: P39
+                  - generic [ref=f4e917] [cursor=pointer]: P40
+                  - generic [ref=f4e919] [cursor=pointer]: P41
+                  - generic [ref=f4e921] [cursor=pointer]: P42
+                  - generic [ref=f4e923] [cursor=pointer]: P43
+                  - generic [ref=f4e925] [cursor=pointer]: P44
+                  - generic [ref=f4e927] [cursor=pointer]: P45
+                  - generic [ref=f4e929] [cursor=pointer]: P46
+                  - generic [ref=f4e931] [cursor=pointer]: P47
+                  - generic [ref=f4e933] [cursor=pointer]: P48
+                  - generic [ref=f4e935] [cursor=pointer]: P49
+                  - generic [ref=f4e937] [cursor=pointer]: P50
+                  - generic [ref=f4e939] [cursor=pointer]: P51
+                  - generic [ref=f4e941] [cursor=pointer]: P52
+                  - generic [ref=f4e943] [cursor=pointer]: P53
+                  - generic [ref=f4e945] [cursor=pointer]: P54
+                  - generic [ref=f4e947] [cursor=pointer]: P55
+                  - generic [ref=f4e949] [cursor=pointer]: P56
+                  - generic [ref=f4e951] [cursor=pointer]: P57
+                  - generic [ref=f4e953] [cursor=pointer]: P58
+                  - generic [ref=f4e955] [cursor=pointer]: P59
+                  - generic [ref=f4e957] [cursor=pointer]: P60
+                - generic [ref=f4e959]:
+                  - generic [ref=f4e960] [cursor=pointer]
+                  - generic [ref=f4e961] [cursor=pointer]
+                  - generic [ref=f4e962] [cursor=pointer]
+                  - generic [ref=f4e963] [cursor=pointer]
+                  - generic [ref=f4e964] [cursor=pointer]
+                  - generic [ref=f4e965] [cursor=pointer]
+                  - generic [ref=f4e966] [cursor=pointer]
+                  - generic [ref=f4e967] [cursor=pointer]
+                  - generic [ref=f4e968] [cursor=pointer]
+                  - generic [ref=f4e969] [cursor=pointer]
+                  - generic [ref=f4e970] [cursor=pointer]
+                  - generic [ref=f4e971] [cursor=pointer]
+                  - generic [ref=f4e972] [cursor=pointer]
+                  - generic [ref=f4e973] [cursor=pointer]
+                  - generic [ref=f4e974] [cursor=pointer]
+                  - generic [ref=f4e975] [cursor=pointer]
+                  - generic [ref=f4e976] [cursor=pointer]
+                  - generic [ref=f4e977] [cursor=pointer]
+                  - generic [ref=f4e978] [cursor=pointer]
+                  - generic [ref=f4e979] [cursor=pointer]
+                  - generic [ref=f4e980] [cursor=pointer]
+                  - generic [ref=f4e981] [cursor=pointer]
+                  - generic [ref=f4e982] [cursor=pointer]
+                  - generic [ref=f4e983] [cursor=pointer]
+                  - generic [ref=f4e984] [cursor=pointer]
+                  - generic [ref=f4e985] [cursor=pointer]
+                  - generic [ref=f4e986] [cursor=pointer]
+                  - generic [ref=f4e987] [cursor=pointer]
+                  - generic [ref=f4e988] [cursor=pointer]
+                  - generic [ref=f4e989] [cursor=pointer]
+                  - generic [ref=f4e990] [cursor=pointer]
+                  - generic [ref=f4e991] [cursor=pointer]
+                  - generic [ref=f4e992] [cursor=pointer]
+                  - generic [ref=f4e993] [cursor=pointer]
+                  - generic [ref=f4e994] [cursor=pointer]
+                  - generic [ref=f4e995] [cursor=pointer]
+                  - generic [ref=f4e996] [cursor=pointer]
+                  - generic [ref=f4e997] [cursor=pointer]
+                  - generic [ref=f4e998] [cursor=pointer]
+                  - generic [ref=f4e999] [cursor=pointer]
+                  - generic [ref=f4e1000] [cursor=pointer]
+                  - generic [ref=f4e1001] [cursor=pointer]
+                  - generic [ref=f4e1002] [cursor=pointer]
+                  - generic [ref=f4e1003] [cursor=pointer]
+                  - generic [ref=f4e1004] [cursor=pointer]
+                  - generic [ref=f4e1005] [cursor=pointer]
+                  - generic [ref=f4e1006] [cursor=pointer]
+                  - generic [ref=f4e1007] [cursor=pointer]
+                  - generic [ref=f4e1008] [cursor=pointer]
+                  - generic [ref=f4e1009] [cursor=pointer]
+                  - generic [ref=f4e1010] [cursor=pointer]
+                  - generic [ref=f4e1011] [cursor=pointer]
+                  - generic [ref=f4e1012] [cursor=pointer]
+                  - generic [ref=f4e1013] [cursor=pointer]
+                  - generic [ref=f4e1014] [cursor=pointer]
+                - generic [ref=f4e1015]: ACCESS_POINT_B2
+                - generic: ● YOU
+              - generic:
+                - generic: Available
+                - generic: Occupied
+                - generic: Reserved
+                - generic: Selected
+          - generic [ref=f4e1022]:
+            - generic [ref=f4e1025]:
+              - generic [ref=f4e1026]: DRIVER ACTION PANEL
+              - generic [ref=f4e1027]: 4 spaces free
+            - generic [ref=f4e1029]:
+              - generic [ref=f4e1030]:
+                - generic [ref=f4e1031]: PARKING
+                - generic [ref=f4e1057]: GUEST DRIVER
+              - generic [ref=f4e1036]:
+                - generic [ref=f4e1059]: 4 spaces available
+                - paragraph [ref=f4e1060]: Unregistered visitor access. Select an available bay on the map to navigate.
+              - generic [ref=f4e1061]:
+                - generic [ref=f4e1062]: "Available Bays:"
+                - generic [ref=f4e1063]:
+                  - button "SP-11 Free" [ref=f4e1064] [cursor=pointer]:
+                    - generic [ref=f4e1065]: SP-11
+                    - generic [ref=f4e1066]: Free
+                  - button "SP-14 Free" [ref=f4e1067] [cursor=pointer]:
+                    - generic [ref=f4e1068]: SP-14
+                    - generic [ref=f4e1069]: Free
+                  - button "SP-17 Free" [ref=f4e1070] [cursor=pointer]:
+                    - generic [ref=f4e1071]: SP-17
+                    - generic [ref=f4e1072]: Free
+                  - button "SP-19 Free" [ref=f4e1073] [cursor=pointer]:
+                    - generic [ref=f4e1074]: SP-19
+                    - generic [ref=f4e1075]: Free
+              - button "FIND PARKING" [ref=f4e1076] [cursor=pointer]
+        - group [ref=f4e1046]:
+          - generic "TECHNICAL AUDIT & PHYSICAL EVIDENCE PROVENANCE [ DIAGNOSTICS ]" [ref=f4e1047] [cursor=pointer]:
+            - generic [ref=f4e1048]: TECHNICAL AUDIT & PHYSICAL EVIDENCE PROVENANCE
+            - generic [ref=f4e1053]: "[ DIAGNOSTICS ]"
+    - contentinfo [ref=f4e753]: ParkTwin AI Driver Portal · Verified Facility Geometry & Real CCTV Physical Evidence
+  - button "Open Next.js Dev Tools" [ref=f4e388] [cursor=pointer]
+  - alert [ref=f4e392]: Driver Dashboard · ParkTwin AI · ParkTwin AI

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, Loader2, Menu, PanelLeft, X } from "lucide-react";
+import Link from "next/link";
+import { Bell, Compass, Loader2, Menu, PanelLeft, X } from "lucide-react";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { UserMenu } from "./UserMenu";
@@ -97,6 +98,16 @@ export function TopNav({ onToggleCollapse, onOpenMobile }: TopNavProps) {
             <span className="absolute top-1.5 right-1.5 flex h-2 w-2 rounded-full bg-primary" />
           )}
         </button>
+        <Link href="/user/dashboard">
+          <button
+            type="button"
+            title="Switch to Driver Journey Portal"
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-md border border-sky-500/30 bg-sky-500/10 px-2.5 py-1.5 text-xs font-mono font-semibold text-sky-400 hover:bg-sky-500/20 transition-colors"
+          >
+            <Compass className="h-3.5 w-3.5" />
+            <span>Driver Portal</span>
+          </button>
+        </Link>
         <ThemeToggle />
         <UserMenu />
       </div>

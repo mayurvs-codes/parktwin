@@ -1,0 +1,63 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "AI Agent" [ref=e24] [cursor=pointer]
+        - button "Radar" [ref=e29] [cursor=pointer]
+        - button "Discover" [ref=e37] [cursor=pointer]
+        - button "Hackathons" [ref=e42] [cursor=pointer]
+        - button "Internships" [ref=e50] [cursor=pointer]
+        - button "Open Source" [ref=e55] [cursor=pointer]
+        - button "Competitions" [ref=e61] [cursor=pointer]
+        - button "Research" [ref=e66] [cursor=pointer]
+        - button "Saved" [ref=e70] [cursor=pointer]
+        - button "Tracker" [ref=e74] [cursor=pointer]
+        - button "Projects" [ref=e77] [cursor=pointer]
+        - button "Sources" [ref=e83] [cursor=pointer]
+      - generic [ref=e87]:
+        - button "Notifications & Alerts" [ref=e88]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e92]': LIVE
+        - button "Deep Discover" [ref=e95] [cursor=pointer]
+        - button "Student Profile" [ref=e100]
+  - main [ref=e105]:
+    - generic [ref=e106]:
+      - generic [ref=e107]:
+        - textbox "Ask Opportunity Radar anything... (e.g. 'Find remote computer vision internships')" [ref=e112]
+        - button "Search" [disabled] [ref=e113]
+      - generic [ref=e117]:
+        - generic [ref=e118]: "Try:"
+        - button "\"Find AI hackathons I can join this month\"" [ref=e119] [cursor=pointer]
+        - button "\"Find remote computer vision internships\"" [ref=e120] [cursor=pointer]
+        - button "\"Find open source projects suitable for my current skills\"" [ref=e121] [cursor=pointer]
+        - button "\"Find opportunities related to ParkTwin\"" [ref=e122] [cursor=pointer]
+    - generic [ref=e123]:
+      - generic [ref=e124]:
+        - generic [ref=e125]:
+          - heading "Recommended For You" [level=2] [ref=e126]
+          - paragraph [ref=e127]: Showing 0 opportunities ranked by personal match score and portfolio relevance.
+        - generic [ref=e128]:
+          - generic [ref=e129]: Verified Live Data
+          - button "⚡ Actionable Only" [ref=e132]:
+            - generic [ref=e133]: ⚡
+            - generic [ref=e134]: Actionable Only
+          - button "Posted <24h" [ref=e135]
+          - button "Next 7 Days" [ref=e139]
+          - generic [ref=e144]:
+            - button "≥80% Match" [ref=e145]
+            - button "≥60% Match" [ref=e146]
+          - button "🌐 Remote" [ref=e147]
+          - combobox [ref=e148]:
+            - option "All Strategies" [selected]
+            - option "Direct Reuse"
+            - option "Adapt Existing"
+            - option "Combine Projects"
+            - option "Build New"
+          - button "Deep Discover" [ref=e149] [cursor=pointer]
+          - button "Quick Sync" [ref=e154] [cursor=pointer]
+      - generic [ref=e161]: Scanning and normalizing opportunities...

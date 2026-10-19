@@ -1,0 +1,77 @@
+- generic [active] [ref=f9e1]:
+  - generic [ref=f9e6]:
+    - banner [ref=f9e7]:
+      - generic [ref=f9e9]:
+        - generic [ref=f9e10]:
+          - link "P ParkTwin AI" [ref=f9e11] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f9e12]: P
+            - generic [ref=f9e15]:
+              - generic [ref=f9e16]: ParkTwin
+              - generic [ref=f9e17]: AI
+          - navigation [ref=f9e18]:
+            - link "Home" [ref=f9e19] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Navigate" [ref=f9e24] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "Parking" [ref=f9e29] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Activity" [ref=f9e34] [cursor=pointer]:
+              - /url: /user/activity
+        - generic [ref=f9e38]:
+          - generic [ref=f9e39]: VEH-001
+          - link [ref=f9e44] [cursor=pointer]:
+            - /url: /digital-twin
+            - button "Admin System ↗" [ref=f9e45]
+          - button "Toggle Demo Controls" [ref=f9e51] [cursor=pointer]
+          - button "Toggle color theme" [ref=f9e55] [cursor=pointer]
+    - main [ref=f9e58]:
+      - generic [ref=f9e412]:
+        - generic [ref=f9e413]:
+          - generic [ref=f9e414]:
+            - generic [ref=f9e415]: Live Parking Session
+            - heading "PARKING SESSION" [level=1] [ref=f9e418]
+            - paragraph [ref=f9e419]: Vehicle actively parked in facility bay. Live duration and gateway tracking active.
+          - generic [ref=f9e420]: ● PARTIALLY EVIDENCE-BACKED
+        - generic [ref=f9e421]:
+          - generic [ref=f9e423]:
+            - generic [ref=f9e424]:
+              - generic [ref=f9e425]: ● PARKED · SESSION ACTIVE
+              - generic [ref=f9e426]: Entry Gateway Session (ACCESS_POINT_B2)
+            - heading "Space SP-24" [level=3] [ref=f9e427]
+            - paragraph [ref=f9e428]: Zone B (Upper Island) · Level B2
+          - generic [ref=f9e429]:
+            - generic [ref=f9e430]:
+              - generic [ref=f9e431]: ELAPSED PARKING DURATION
+              - generic [ref=f9e432]: 00:00:00
+              - generic [ref=f9e433]: Live counter synchronized with demo state
+            - generic [ref=f9e434]:
+              - generic [ref=f9e435]:
+                - generic [ref=f9e436]: VEHICLE
+                - generic [ref=f9e437]: VEH-001
+                - text: Executive SUV
+              - generic [ref=f9e438]:
+                - generic [ref=f9e439]: ENTRY TIME
+                - generic [ref=f9e440]: 2026-08-31T11:20:44.444315+00:00
+                - text: ACCESS_POINT_B2
+              - generic [ref=f9e441]:
+                - generic [ref=f9e442]: PARKED TIME
+                - generic [ref=f9e443]: 7:35 PM
+                - text: SP-24
+            - generic [ref=f9e444]:
+              - generic [ref=f9e445]: PROVENANCE DISCLOSURE
+              - generic [ref=f9e446]:
+                - generic [ref=f9e447]: "ANPR BENCHMARK:"
+                - generic [ref=f9e448]: "KA04MN8049 (Independent benchmark · Track #6)"
+              - generic [ref=f9e449]:
+                - generic [ref=f9e450]: "CAM-01 CCTV OBSERVATION:"
+                - generic [ref=f9e451]: KA05ML7220 (Visually observed · OCR unverified)
+              - generic [ref=f9e452]:
+                - generic [ref=f9e453]: "IDENTITY LINKAGE:"
+                - generic [ref=f9e454]: UNVERIFIED
+              - generic [ref=f9e455]: ANPR BENCHMARK ≠ PHYSICAL CCTV IDENTITY
+            - generic [ref=f9e456]:
+              - button "EXIT PARKING" [ref=f9e457] [cursor=pointer]
+              - button "View CAM-02 Bay Evidence" [ref=f9e463] [cursor=pointer]
+              - generic [ref=f9e468]: Reroutes destination to ACCESS_POINT_B2 on Digital Twin. Bay maneuver is governed by application state (NOT OBSERVED in CAM-02 CCTV clip).
+  - alert [ref=f9e5]: Parking Session · ParkTwin AI · ParkTwin AI

@@ -1,0 +1,112 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e5]:
+    - banner [ref=f4e6]:
+      - generic [ref=f4e8]:
+        - generic [ref=f4e9]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=f4e10] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f4e15]:
+              - generic [ref=f4e16]:
+                - generic [ref=f4e17]: PARKTWIN AI
+                - generic [ref=f4e18]: Driver
+              - generic [ref=f4e19]: Smart Journey Guidance
+          - navigation [ref=f4e20]:
+            - link "Dashboard" [ref=f4e21] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [ref=f4e28] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=f4e33] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=f4e38] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=f4e44] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=f4e48]:
+          - generic [ref=f4e49]:
+            - generic [ref=f4e51]: VEH-002
+            - generic [ref=f4e52]: CAM-01
+          - button "CCTV Evidence" [ref=f4e53] [cursor=pointer]
+          - link [ref=f4e58] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=f4e59]
+          - button "Toggle color theme" [ref=f4e65] [cursor=pointer]
+      - generic [ref=f4e70]:
+        - generic [ref=f4e71]:
+          - generic [ref=f4e72]:
+            - button "DEMO MODE" [ref=f4e73] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=f4e79] [cursor=pointer]
+          - generic [ref=f4e85]:
+            - generic [ref=f4e86]:
+              - strong [ref=f4e88]: KA05BZ2700
+              - generic [ref=f4e89]: (98% paddleocr)
+              - generic [ref=f4e90]: "Track #10"
+            - generic [ref=f4e91]: 12. Session Complete
+        - generic [ref=f4e93]:
+          - generic [ref=f4e94]:
+            - generic [ref=f4e95]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=f4e100] [cursor=pointer]:
+              - generic [ref=f4e101]: VEH-001
+              - generic "Reserved" [ref=f4e102]
+            - button "VEH-002 Reserved" [ref=f4e103] [cursor=pointer]:
+              - generic [ref=f4e104]: VEH-002
+              - generic "Reserved" [ref=f4e105]
+            - button "VEH-003 No Reservation" [ref=f4e106] [cursor=pointer]:
+              - generic [ref=f4e107]: VEH-003
+              - generic "No Reservation" [ref=f4e108]
+            - button "VEH-004 No Reservation" [ref=f4e109] [cursor=pointer]:
+              - generic [ref=f4e110]: VEH-004
+              - generic "No Reservation" [ref=f4e111]
+            - button "VEH-005 No Reservation" [ref=f4e112] [cursor=pointer]:
+              - generic [ref=f4e113]: VEH-005
+              - generic "No Reservation" [ref=f4e114]
+          - generic [ref=f4e115]:
+            - button "Next Event" [ref=f4e116] [cursor=pointer]
+            - button "Reset Vehicle" [ref=f4e120] [cursor=pointer]
+            - button "Reset Demo" [ref=f4e125] [cursor=pointer]
+    - main [ref=f4e127]:
+      - generic [ref=f4e701]:
+        - generic [ref=f4e702]:
+          - generic [ref=f4e703]:
+            - generic [ref=f4e704]: Completed Journey
+            - heading "SESSION COMPLETE" [level=1] [ref=f4e707]
+            - paragraph [ref=f4e708]: Your parking session has been finalized at ACCESS_POINT_B2. Space returned to available.
+          - generic [ref=f4e709]: ● APPLICATION-ONLY
+        - generic [ref=f4e710]:
+          - generic [ref=f4e715]:
+            - generic [ref=f4e716]: ● EXIT PROCESSED (APP_DECISION)
+            - heading "VEH-002" [level=2] [ref=f4e717]
+            - paragraph [ref=f4e718]: Parking session completed successfully via application state machine.
+          - generic [ref=f4e719]:
+            - generic [ref=f4e720]:
+              - generic [ref=f4e721]: SPACE
+              - generic [ref=f4e722]: SP-14
+            - generic [ref=f4e723]:
+              - generic [ref=f4e724]: DURATION
+              - generic [ref=f4e725]: 00:01:11
+            - generic [ref=f4e726]:
+              - generic [ref=f4e727]: EXIT TIME
+              - generic [ref=f4e728]: 6:43 PM
+            - generic [ref=f4e729]:
+              - generic [ref=f4e730]: GATEWAY
+              - generic [ref=f4e731]: ACCESS_POINT_B2 (CONFIGURED)
+          - generic [ref=f4e732]:
+            - generic [ref=f4e733]:
+              - text: ✓ Space
+              - strong [ref=f4e734]: SP-14
+              - text: has transitioned from
+              - strong [ref=f4e735]: OCCUPIED
+              - text: →
+              - strong [ref=f4e736]: AVAILABLE
+              - text: in the shared facility twin.
+            - generic [ref=f4e737]: "CCTV Notice: Exit finalized via APP_DECISION. Physical vehicle egress not recorded in CAM-03 clip."
+          - button "View CAM-03 Exit Infrastructure" [ref=f4e739] [cursor=pointer]
+          - generic [ref=f4e744]:
+            - link [ref=f4e745] [cursor=pointer]:
+              - /url: /user/dashboard
+              - button "BACK TO DASHBOARD" [ref=f4e746]
+            - link [ref=f4e750] [cursor=pointer]:
+              - /url: /user/analytics
+              - button "View Analytics" [ref=f4e751]
+    - contentinfo [ref=f4e753]: ParkTwin AI Driver Portal · Verified Facility Geometry & Real CCTV Physical Evidence
+  - button "Open Next.js Dev Tools" [ref=f4e388] [cursor=pointer]
+  - alert [ref=f4e392]: Parking Session · ParkTwin AI · ParkTwin AI

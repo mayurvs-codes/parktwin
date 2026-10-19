@@ -1,0 +1,36 @@
+- generic [active] [ref=f19e1]:
+  - generic [ref=f19e7]:
+    - generic [ref=f19e9] [cursor=pointer]
+    - generic:
+      - generic [ref=f19e10]:
+        - link "Dashboard" [ref=f19e11] [cursor=pointer]:
+          - /url: /user/dashboard
+        - generic [ref=f19e20]:
+          - generic [ref=f19e21]:
+            - generic [ref=f19e22]: PARKTWIN AI
+            - generic [ref=f19e23]: ·
+            - generic [ref=f19e24]: 3D PARKING LOT
+          - generic [ref=f19e25]: CARPARKING-01 · LEVEL B2 · ZONE C
+        - generic [ref=f19e26]:
+          - generic [ref=f19e27]: 20 TOTAL
+          - generic [ref=f19e28]: ● 12 OCCUPIED
+          - generic [ref=f19e29]: ● 7 AVAILABLE
+          - generic [ref=f19e150]: ★ 1 SELECTED (SP-20)
+      - generic [ref=f19e30]:
+        - button "TOP VIEW" [ref=f19e31] [cursor=pointer]
+        - button "PERSPECTIVE" [ref=f19e36] [cursor=pointer]
+        - button "RESET" [ref=f19e43] [cursor=pointer]
+    - generic [ref=f19e152]:
+      - generic [ref=f19e153]:
+        - generic [ref=f19e154]: SPACE CONFIRMED
+        - generic [ref=f19e157]: SP-20
+      - generic [ref=f19e196]:
+        - generic [ref=f19e197]: ✓ SPACE SELECTED
+        - generic [ref=f19e202]: Your parking space SP-20 is ready.
+        - generic [ref=f19e203]: Zone C · Level B2 · Ground stenciled bay
+      - generic [ref=f19e204]:
+        - button "NAVIGATE TO SP-20" [ref=f19e205] [cursor=pointer]
+        - button "Change Space" [ref=f19e209] [cursor=pointer]
+    - generic: Click available space to select · Drag to rotate · Scroll to zoom
+  - button "Open Next.js Dev Tools" [ref=f19e53] [cursor=pointer]
+  - alert [ref=f19e57]

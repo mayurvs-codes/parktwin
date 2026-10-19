@@ -1,0 +1,108 @@
+- generic [ref=f49e1]:
+  - generic [ref=f49e5]:
+    - banner [ref=f49e6]:
+      - generic [ref=f49e8]:
+        - generic [ref=f49e9]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=f49e10] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f49e15]:
+              - generic [ref=f49e16]:
+                - generic [ref=f49e17]: PARKTWIN AI
+                - generic [ref=f49e18]: Driver
+              - generic [ref=f49e19]: Smart Journey Guidance
+          - navigation [ref=f49e20]:
+            - link "Dashboard" [ref=f49e21] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [active] [ref=f49e28] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=f49e33] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=f49e38] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=f49e44] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=f49e48]:
+          - generic [ref=f49e49]:
+            - generic [ref=f49e51]: VEH-002
+            - generic [ref=f49e52]: CAM-01
+          - button "CCTV Evidence" [ref=f49e53] [cursor=pointer]
+          - link [ref=f49e58] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=f49e59]
+          - button "Toggle color theme" [ref=f49e65] [cursor=pointer]
+      - generic [ref=f49e70]:
+        - generic [ref=f49e71]:
+          - generic [ref=f49e72]:
+            - button "DEMO MODE" [ref=f49e73] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=f49e79] [cursor=pointer]
+          - generic [ref=f49e85]:
+            - generic [ref=f49e86]:
+              - strong [ref=f49e88]: KA05BZ2700
+              - generic [ref=f49e89]: (98% paddleocr)
+              - generic [ref=f49e90]: "Track #10"
+            - generic [ref=f49e91]: 5. Navigating to Bay
+        - generic [ref=f49e93]:
+          - generic [ref=f49e94]:
+            - generic [ref=f49e95]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=f49e100] [cursor=pointer]:
+              - generic [ref=f49e101]: VEH-001
+              - generic "Reserved" [ref=f49e102]
+            - button "VEH-002 Reserved" [ref=f49e103] [cursor=pointer]:
+              - generic [ref=f49e104]: VEH-002
+              - generic "Reserved" [ref=f49e105]
+            - button "VEH-003 No Reservation" [ref=f49e106] [cursor=pointer]:
+              - generic [ref=f49e107]: VEH-003
+              - generic "No Reservation" [ref=f49e108]
+            - button "VEH-004 No Reservation" [ref=f49e109] [cursor=pointer]:
+              - generic [ref=f49e110]: VEH-004
+              - generic "No Reservation" [ref=f49e111]
+            - button "VEH-005 No Reservation" [ref=f49e112] [cursor=pointer]:
+              - generic [ref=f49e113]: VEH-005
+              - generic "No Reservation" [ref=f49e114]
+          - generic [ref=f49e115]:
+            - button "Next Event" [ref=f49e116] [cursor=pointer]
+            - button "Reset Vehicle" [ref=f49e120] [cursor=pointer]
+            - button "Reset Demo" [ref=f49e125] [cursor=pointer]
+    - main [ref=f49e127]:
+      - generic [ref=f49e517]:
+        - generic [ref=f49e518]:
+          - generic [ref=f49e519]: Reservation Experience
+          - heading "RESERVATION FOUND" [level=1] [ref=f49e522]
+          - paragraph [ref=f49e523]: Your reserved parking space is waiting for you. No space searching required.
+        - generic [ref=f49e525]:
+          - generic [ref=f49e527]:
+            - generic [ref=f49e528]:
+              - generic [ref=f49e529]: ● CONFIRMED RESERVATION
+              - generic [ref=f49e530]:
+                - text: "Vehicle:"
+                - strong [ref=f49e531]: VEH-002
+            - heading "Space SP-14" [level=3] [ref=f49e532]
+            - paragraph [ref=f49e533]: Level B2 · Zone B
+          - generic [ref=f49e534]:
+            - generic [ref=f49e535]:
+              - generic [ref=f49e536]:
+                - generic [ref=f49e537]: SPACE
+                - generic [ref=f49e538]: SP-14
+              - generic [ref=f49e539]:
+                - generic [ref=f49e540]: ZONE
+                - generic [ref=f49e541]: B
+              - generic [ref=f49e542]:
+                - generic [ref=f49e543]: LEVEL
+                - generic [ref=f49e544]: B2
+              - generic [ref=f49e545]:
+                - generic [ref=f49e546]: WINDOW
+                - generic [ref=f49e547]: 4:30 PM – 6:30 PM
+            - generic [ref=f49e551]:
+              - strong [ref=f49e552]: Verified Digital Twin Bay Allocation
+              - generic [ref=f49e553]:
+                - text: The navigation system will guide your vehicle directly from gateway
+                - strong [ref=f49e554]: ACCESS_POINT_B2
+                - text: to bay
+                - strong [ref=f49e555]: SP-14
+                - text: using the facility route network.
+            - link [ref=f49e557] [cursor=pointer]:
+              - /url: /user/navigation
+              - button "START NAVIGATION" [ref=f49e558]
+    - contentinfo [ref=f49e506]: ParkTwin AI Driver Portal · Verified Facility Geometry & Real CCTV Physical Evidence
+  - button "Open Next.js Dev Tools" [ref=f49e512] [cursor=pointer]
+  - alert [ref=f49e516]: ParkTwin AI — Smart Parking Intelligence

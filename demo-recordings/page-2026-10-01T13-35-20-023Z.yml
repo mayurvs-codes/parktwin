@@ -1,0 +1,30 @@
+- generic [ref=f9e1]:
+  - generic [ref=f9e7]:
+    - generic:
+      - generic [ref=f9e10]:
+        - link "Dashboard" [ref=f9e11] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f9e15]: PARKTWIN AI · 3D PARKING LOT
+        - generic [ref=f9e21]:
+          - generic [ref=f9e22]: 20 TOTAL
+          - generic [ref=f9e23]: ● 12 OCCUPIED
+          - generic [ref=f9e24]: ● 8 AVAILABLE
+      - generic [ref=f9e25]:
+        - button "TOP VIEW" [ref=f9e26] [cursor=pointer]
+        - button "PERSPECTIVE" [ref=f9e31] [cursor=pointer]
+        - button "RESET" [active] [ref=f9e38] [cursor=pointer]
+    - generic [ref=f9e53]:
+      - generic [ref=f9e54]:
+        - generic [ref=f9e55]:
+          - generic [ref=f9e56]: SP-03
+          - generic [ref=f9e57]: OCCUPIED
+        - button "✕" [ref=f9e58] [cursor=pointer]
+      - generic [ref=f9e59]:
+        - generic [ref=f9e60]: "Type: Standard Bay (2.8m × 5.4m)"
+        - generic [ref=f9e61]:
+          - text: "Parked:"
+          - strong [ref=f9e62]: VEH-003
+          - text: (Urban Compact)
+    - generic: Click space to inspect · Drag to rotate · Scroll to zoom
+  - button "Open Next.js Dev Tools" [ref=f9e48] [cursor=pointer]
+  - alert [ref=f9e52]

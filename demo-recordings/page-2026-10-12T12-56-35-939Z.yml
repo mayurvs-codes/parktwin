@@ -1,0 +1,182 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Decisions" [ref=e24] [cursor=pointer]
+        - button "AI Agent" [active] [ref=e30] [cursor=pointer]
+        - button "Radar" [ref=e35] [cursor=pointer]
+        - button "Discover" [ref=e43] [cursor=pointer]
+        - button "Hackathons" [ref=e48] [cursor=pointer]
+        - button "Internships" [ref=e56] [cursor=pointer]
+        - button "Open Source" [ref=e61] [cursor=pointer]
+        - button "Competitions" [ref=e67] [cursor=pointer]
+        - button "Research" [ref=e72] [cursor=pointer]
+        - button "Saved" [ref=e76] [cursor=pointer]
+        - button "Tracker" [ref=e80] [cursor=pointer]
+        - button "Projects" [ref=e83] [cursor=pointer]
+        - button "Sources" [ref=e89] [cursor=pointer]
+      - generic [ref=e93]:
+        - button "6" [ref=e168]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e98]': LIVE
+        - button "Deep Discover" [ref=e101] [cursor=pointer]
+        - button "Student Profile" [ref=e106]
+  - main [ref=e111]:
+    - generic [ref=e2362]:
+      - generic [ref=e2363]:
+        - generic [ref=e2364]:
+          - generic [ref=e2365]:
+            - generic [ref=e2366]: Phase 7 Personal AI Agent
+            - heading "What Should I Do Today?" [level=1] [ref=e2370]
+            - paragraph [ref=e2371]: Ask your personal AI opportunity agent in plain English. Recommendations are grounded exclusively in verified live opportunities, tailored to your technical portfolio, and continuously refined by your actions.
+          - button "Refresh Intelligence Brief" [ref=e2372]
+        - generic [ref=e2378]:
+          - generic [ref=e2379]:
+            - textbox "Ask e.g. 'I have 10 hours this weekend, what hackathon should I do?'" [ref=e2381]
+            - button "Ask Agent" [disabled] [ref=e2385]
+          - generic [ref=e2389]:
+            - generic [ref=e2390]: "Try asking:"
+            - button "I have 10 hours this weekend, what hackathon should I do?" [ref=e2391]
+            - button "Find open source Python projects with upcoming deadlines" [ref=e2392]
+            - button "What can I build leveraging my ParkTwin AI project?" [ref=e2393]
+            - button "What opportunities are closing in the next 7 days?" [ref=e2394]
+      - generic [ref=e2395]:
+        - generic [ref=e2396]:
+          - generic [ref=e2402]:
+            - heading "Daily Intelligence Brief" [level=3] [ref=e2403]
+            - generic [ref=e2404]: "Date: 2026-10-12"
+          - generic [ref=e2405]:
+            - generic [ref=e2406]: "Today's Focus: Urgent: 'Tech Mafia - Trust No One. Debug Everyone.' closes in 4 days! Prepare submission using strategy 'ADAPT EXISTING PROJECT'."
+            - generic [ref=e2407]:
+              - generic [ref=e2408]:
+                - generic [ref=e2409]: "5"
+                - generic [ref=e2410]: Urgent (<7d)
+              - generic [ref=e2411]:
+                - generic [ref=e2412]: "4"
+                - generic [ref=e2413]: Prime Match
+              - generic [ref=e2414]:
+                - generic [ref=e2415]: "16"
+                - generic [ref=e2416]: Ready to Act
+            - generic [ref=e2417]:
+              - generic [ref=e2418]: Urgent Closing Opportunities
+              - generic [ref=e2419]:
+                - generic [ref=e2420]:
+                  - generic [ref=e2421]:
+                    - generic [ref=e2422]: Tech Mafia - Trust No One. Debug Everyone.
+                    - generic [ref=e2423]: Netaji Subhas University of Technology (NSUT), Delhi • 4d remaining
+                  - link "Act →" [ref=e2424] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/tech-mafia-trust-no-one-debug-everyone-netaji-subhas-university-of-technology-nsut-delhi-1767566
+                - generic [ref=e2425]:
+                  - generic [ref=e2426]:
+                    - generic [ref=e2427]: Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge
+                    - generic [ref=e2428]: Vidyalankar Institute of Technology (VIT), Mumbai • 4d remaining
+                  - link "Act →" [ref=e2429] [cursor=pointer]:
+                    - /url: https://unstop.com/competitions/sync-or-sink-the-ultimate-3-player-tech-communication-challenge-vidyalankar-institute-of-technology-vit-mum-1765314
+                - generic [ref=e2430]:
+                  - generic [ref=e2431]:
+                    - generic [ref=e2432]: BlockHunt'26
+                    - generic [ref=e2433]: Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad • 0d remaining
+                  - link "Act →" [ref=e2434] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/blockhunt26-indian-institute-of-technology-indian-school-of-mines-iit-ism-dhanbad-1764178
+        - generic [ref=e2435]:
+          - generic [ref=e2440]:
+            - heading "Weekly Strategic Focus" [level=3] [ref=e2441]
+            - generic [ref=e2442]: "Week: 2026-10-12"
+          - generic [ref=e2443]:
+            - generic [ref=e2444]:
+              - generic [ref=e2445]: Strategic Priorities
+              - generic [ref=e2446]:
+                - generic [ref=e2447]: "Accelerate submissions in preferred domains: Open Source, Git."
+                - generic [ref=e2451]: Monitor 6 opportunities closing within the next 14 days.
+                - generic [ref=e2455]: "Close high-yield portfolio skill gap: Computer Science (demanded across 7 targets)."
+            - generic [ref=e2459]:
+              - generic [ref=e2460]: Portfolio Asset Adaptations
+              - generic [ref=e2461]:
+                - generic [ref=e2462]: Repurpose 'ParkTwin AI' for upcoming Tech Mafia - Trust No One. Debug Everyone., Line-O-Mania | A Line Follower Competition.
+                - generic [ref=e2468]: Repurpose 'ANPR System' for upcoming Tech Mafia - Trust No One. Debug Everyone., Line-O-Mania | A Line Follower Competition.
+                - generic [ref=e2474]: Repurpose 'StaticsLab' for upcoming Tech Mafia - Trust No One. Debug Everyone., Line-O-Mania | A Line Follower Competition.
+      - generic [ref=e2480]:
+        - generic [ref=e2481]:
+          - generic [ref=e2482]:
+            - heading "Learned User Preferences & Behavioral Profile" [level=3] [ref=e2483]
+            - paragraph [ref=e2485]: Continuously updated from your saves, feedback, and applications with gradual decay (60-day half-life).
+          - generic [ref=e2486]:
+            - generic [ref=e2487]:
+              - text: "Interactions Logged:"
+              - strong [ref=e2488]: "6"
+            - button "Reset Preferences" [ref=e2489]
+        - generic [ref=e2493]:
+          - generic [ref=e2494]:
+            - generic [ref=e2495]:
+              - generic [ref=e2496]: Top Technologies
+              - generic [ref=e2497]: Interacting with tech stacks will populate this
+            - generic [ref=e2499]:
+              - generic [ref=e2500]: Preferred Categories
+              - generic [ref=e2501]: No category biases recorded yet
+            - generic [ref=e2503]:
+              - generic [ref=e2504]: Avoided Topics
+              - generic [ref=e2505]: None marked irrelevant or dismissed
+          - table [ref=e2508]:
+            - rowgroup [ref=e2509]:
+              - row [ref=e2510]:
+                - columnheader "Dimension" [ref=e2511]
+                - columnheader "Value" [ref=e2512]
+                - columnheader "Net Score" [ref=e2513]
+                - columnheader "Confidence" [ref=e2514]
+                - columnheader "Signals" [ref=e2515]
+                - columnheader "Last Interaction" [ref=e2516]
+            - rowgroup [ref=e2517]:
+              - row [ref=e2518]:
+                - cell "TECHNOLOGY" [ref=e2519]
+                - cell "open source" [ref=e2520]
+                - cell "+0.10" [ref=e2521]
+                - cell "2%" [ref=e2522]
+                - cell "1 evidence items" [ref=e2523]
+                - cell "10/12/2026" [ref=e2524]
+              - row [ref=e2525]:
+                - cell "TECHNOLOGY" [ref=e2526]
+                - cell "git" [ref=e2527]
+                - cell "+0.10" [ref=e2528]
+                - cell "2%" [ref=e2529]
+                - cell "1 evidence items" [ref=e2530]
+                - cell "10/12/2026" [ref=e2531]
+              - row [ref=e2532]:
+                - cell "TECHNOLOGY" [ref=e2533]
+                - cell "python" [ref=e2534]
+                - cell "+0.10" [ref=e2535]
+                - cell "2%" [ref=e2536]
+                - cell "1 evidence items" [ref=e2537]
+                - cell "10/12/2026" [ref=e2538]
+              - row [ref=e2539]:
+                - cell "CATEGORY" [ref=e2540]
+                - cell "OPEN_SOURCE" [ref=e2541]
+                - cell "+0.10" [ref=e2542]
+                - cell "2%" [ref=e2543]
+                - cell "1 evidence items" [ref=e2544]
+                - cell "10/12/2026" [ref=e2545]
+              - row [ref=e2546]:
+                - cell "DOMAIN" [ref=e2547]
+                - cell "open source" [ref=e2548]
+                - cell "+0.10" [ref=e2549]
+                - cell "2%" [ref=e2550]
+                - cell "1 evidence items" [ref=e2551]
+                - cell "10/12/2026" [ref=e2552]
+              - row [ref=e2553]:
+                - cell "DOMAIN" [ref=e2554]
+                - cell "software engineering" [ref=e2555]
+                - cell "+0.10" [ref=e2556]
+                - cell "2%" [ref=e2557]
+                - cell "1 evidence items" [ref=e2558]
+                - cell "10/12/2026" [ref=e2559]
+              - row [ref=e2560]:
+                - cell "ORGANIZATION" [ref=e2561]
+                - cell "Linux Foundation / Google OS" [ref=e2562]
+                - cell "+0.10" [ref=e2563]
+                - cell "2%" [ref=e2564]
+                - cell "1 evidence items" [ref=e2565]
+                - cell "10/12/2026" [ref=e2566]

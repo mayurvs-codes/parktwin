@@ -1,0 +1,85 @@
+- generic [ref=f4e1]:
+  - generic [ref=f4e7]:
+    - generic:
+      - generic [ref=f4e10]:
+        - link "Dashboard" [ref=f4e11] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f4e21]:
+          - generic [ref=f4e22]: PARKTWIN 3D
+          - generic [ref=f4e23]: DRIVER ZONE
+        - generic [ref=f4e24]:
+          - button "VEH-001 (Cyber SUV)" [active] [ref=f4e25] [cursor=pointer]:
+            - generic [ref=f4e30]: VEH-001
+            - generic [ref=f4e31]: (Cyber SUV)
+          - generic [ref=f4e34]:
+            - generic [ref=f4e35]: Select Demo Vehicle
+            - button "VEH-001 Cyber SUV MH-12-DE-1001 SP-24" [ref=f4e36] [cursor=pointer]:
+              - generic [ref=f4e37]:
+                - generic [ref=f4e38]:
+                  - generic [ref=f4e40]: VEH-001
+                  - generic [ref=f4e41]: Cyber SUV
+                - generic [ref=f4e42]: MH-12-DE-1001
+              - generic [ref=f4e43]: SP-24
+            - button "VEH-002 Executive Sedan MH-12-EX-2002 SP-21" [ref=f4e44] [cursor=pointer]:
+              - generic [ref=f4e45]:
+                - generic [ref=f4e46]:
+                  - generic [ref=f4e48]: VEH-002
+                  - generic [ref=f4e49]: Executive Sedan
+                - generic [ref=f4e50]: MH-12-EX-2002
+              - generic [ref=f4e51]: SP-21
+            - button "VEH-003 Urban Compact MH-12-HB-3003 Walk-in" [ref=f4e52] [cursor=pointer]:
+              - generic [ref=f4e53]:
+                - generic [ref=f4e54]:
+                  - generic [ref=f4e56]: VEH-003
+                  - generic [ref=f4e57]: Urban Compact
+                - generic [ref=f4e58]: MH-12-HB-3003
+              - generic [ref=f4e59]: Walk-in
+            - button "VEH-004 Performance GT MH-12-GT-4004 Walk-in" [ref=f4e60] [cursor=pointer]:
+              - generic [ref=f4e61]:
+                - generic [ref=f4e62]:
+                  - generic [ref=f4e64]: VEH-004
+                  - generic [ref=f4e65]: Performance GT
+                - generic [ref=f4e66]: MH-12-GT-4004
+              - generic [ref=f4e67]: Walk-in
+            - button "VEH-005 Utility Van MH-12-VN-5005 Walk-in" [ref=f4e68] [cursor=pointer]:
+              - generic [ref=f4e69]:
+                - generic [ref=f4e70]:
+                  - generic [ref=f4e72]: VEH-005
+                  - generic [ref=f4e73]: Utility Van
+                - generic [ref=f4e74]: MH-12-VN-5005
+              - generic [ref=f4e75]: Walk-in
+        - generic [ref=f4e76]: 🟢 RESERVED
+      - generic [ref=f4e77]:
+        - button "TOP" [ref=f4e78] [cursor=pointer]
+        - button "DRIVER VIEW" [ref=f4e83] [cursor=pointer]
+        - button "ORBIT" [ref=f4e89] [cursor=pointer]
+        - button "Reset" [ref=f4e95] [cursor=pointer]
+    - generic [ref=f4e101]:
+      - generic [ref=f4e102]:
+        - generic [ref=f4e103]: ZONE C · MINIMAP
+        - generic [ref=f4e104]: LEVEL B2
+      - img [ref=f4e105]:
+        - generic [ref=f4e107]: ← EXIT B2
+        - generic [ref=f4e108]: "19"
+        - generic [ref=f4e111]: "20"
+        - generic [ref=f4e114]: "21"
+        - generic [ref=f4e117]: "22"
+        - generic [ref=f4e120]: "23"
+        - generic [ref=f4e123]: "24"
+        - generic [ref=f4e126]: "25"
+        - generic [ref=f4e129]: "26"
+    - generic [ref=f4e135]:
+      - generic [ref=f4e141]:
+        - generic [ref=f4e142]: PARKTWIN AI · SMART PARKING
+        - heading "Cyber SUV" [level=2] [ref=f4e143]
+        - paragraph [ref=f4e144]: MH-12-DE-1001
+      - generic [ref=f4e145]:
+        - generic [ref=f4e146]:
+          - generic [ref=f4e147]: Reservation Ready
+          - generic [ref=f4e148]: Zone C · Level B2
+        - generic [ref=f4e149]: SP-24
+        - paragraph [ref=f4e150]: Bay reserved for you at Carparking-01 B2. Route is ready.
+      - button "START NAVIGATION" [ref=f4e152] [cursor=pointer]
+    - generic: Drag = Rotate · Scroll = Zoom · R = Reset Camera
+  - button "Open Next.js Dev Tools" [ref=f4e161] [cursor=pointer]
+  - alert [ref=f4e165]

@@ -1,0 +1,714 @@
+<USER_REQUEST>
+PARKTWIN AI — DIGITAL TWIN FINAL STABILIZATION
+PHYSICAL MAP + PARKING BAY ALIGNMENT
+THEN FREEZE THE DIGITAL TWIN
+
+THIS IS THE FINAL DIGITAL TWIN STABILIZATION PASS.
+
+After this task is complete, the Digital Twin should be considered FROZEN.
+
+DO NOT start another redesign.
+
+DO NOT add new features.
+
+DO NOT change the shared-state architecture.
+
+DO NOT change User Portal functionality.
+
+DO NOT touch /3d-zone.
+
+DO NOT change backend/database.
+
+The only objective now is to make the existing Digital Twin spatially correct,
+clean, readable, and stable.
+
+============================================================
+1. CURRENT PROBLEM
+============================================================
+
+The current Digital Twin has a visually clean dark map, but the parking
+representation still needs stabilization.
+
+The uploaded screenshot shows:
+
+- parking rows are difficult to distinguish
+- some vehicle positioning feels inconsistent
+- some vehicles appear too close to parking boundaries
+- the focused 20-space zone is not sufficiently obvious
+- there is excessive unused map space
+- the operational parking spaces do not visually dominate enough
+
+DO NOT solve this by redesigning the entire UI.
+
+Fix the spatial presentation.
+
+============================================================
+2. FREEZE THE CANONICAL FACILITY GEOMETRY
+============================================================
+
+IMPORTANT:
+
+DO NOT redraw the facility.
+
+DO NOT invent parking spaces.
+
+DO NOT move camera coordinates.
+
+DO NOT change canonical facility dimensions.
+
+DO NOT change the existing verified coordinate system.
+
+Use the existing canonical geometry.
+
+The Digital Twin remains the single canonical facility visualization.
+
+============================================================
+3. FOCUSED DEMO ZONE
+============================================================
+
+The demo zone is exactly:
+
+20 parking spaces.
+
+The focused demo zone must be visually obvious.
+
+Create a subtle boundary around ONLY the focused zone.
+
+Label:
+
+FOCUSED DEMO ZONE
+
+20 SPACES
+
+The boundary must be:
+
+- subtle
+- professional
+- thin
+- non-neon
+- visually clear
+
+Do not draw a huge rectangle that hides the parking geometry.
+
+============================================================
+4. EXACT FOCUSED ZONE STATE
+============================================================
+
+The focused zone MUST remain:
+
+20 TOTAL
+
+15 OCCUPIED
+
+4 AVAILABLE
+
+1 DESIGNATED
+
+The five non-occupied spaces are:
+
+SP-07
+SP-11
+SP-14
+SP-17
+SP-19
+
+States:
+
+SP-07 = DESIGNATED
+SP-11 = AVAILABLE
+SP-14 = AVAILABLE initially
+SP-17 = AVAILABLE
+SP-19 = AVAILABLE
+
+Do not change these IDs.
+
+============================================================
+5. PARKING BAY ALIGNMENT AUDIT
+============================================================
+
+For every one of the 20 focused spaces:
+
+Inspect:
+
+- bay center
+- bay width
+- bay depth
+- vehicle center
+- vehicle rotation
+- vehicle scale
+- parking line alignment
+
+Create a deterministic mapping:
+
+SPACE_ID
+→
+POSITION
+→
+ROTATION
+→
+VEHICLE_ID if occupied
+
+Do not use random positioning.
+
+Do not calculate vehicle positions from approximate visual guesses if canonical
+bay geometry already exists.
+
+Use the actual bay geometry.
+
+============================================================
+6. ONE VEHICLE PER OCCUPIED BAY
+============================================================
+
+For each of the 15 occupied spaces:
+
+EXACTLY ONE vehicle.
+
+For each of the 5 non-occupied spaces:
+
+ZERO vehicles.
+
+Invariant:
+
+occupiedSpace.vehicleCount = 1
+
+available/designatedSpace.vehicleCount = 0
+
+There must be:
+
+NO overlapping vehicles.
+
+NO vehicle between two parking bays.
+
+NO vehicle sitting across a parking line.
+
+NO vehicle outside the bay.
+
+NO duplicate vehicle assignments.
+
+============================================================
+7. VEHICLE POSITIONING
+============================================================
+
+Every parked vehicle should be centered inside its bay.
+
+Use a consistent inset.
+
+The vehicle should not touch the bay boundary.
+
+Use approximately:
+
+70–80% of the bay width
+
+and
+
+70–80% of the bay depth
+
+as the maximum vehicle footprint.
+
+Do not make vehicles unrealistically small.
+
+The goal is:
+
+parking bay
+┌──────────────────┐
+│                  │
+│      VEHICLE     │
+│                  │
+└──────────────────┘
+
+NOT:
+
+┌──────────────────┐
+│ VEHICLE          │
+│                  │
+└──────────────────┘
+
+and NOT:
+
+┌──────────────────┐
+│    VEHICLE       │
+│───────────────   │
+└──────────────────┘
+
+============================================================
+8. VEHICLE ROTATION
+============================================================
+
+Vehicle orientation must match the physical orientation of the bay.
+
+For horizontal parking rows:
+
+all vehicles in that row should have consistent orientation.
+
+For vertical/perimeter bays:
+
+use the orientation dictated by the canonical geometry.
+
+Do not rotate vehicles arbitrarily.
+
+============================================================
+9. PARKING BAY VISUALS
+============================================================
+
+Each focused parking bay should have:
+
+- clean boundary
+- readable ID when necessary
+- consistent dimensions
+- consistent spacing
+- vehicle centered if occupied
+
+AVAILABLE:
+
+subtle green
+
+DESIGNATED:
+
+cyan/blue
+
+RESERVED:
+
+amber
+
+VIOLATION:
+
+red
+
+OCCUPIED:
+
+neutral
+
+Do not make every bay glow.
+
+Only state-bearing bays should receive stronger color.
+
+============================================================
+10. MAKE THE PARKING ROWS READABLE
+============================================================
+
+The viewer should immediately understand:
+
+ROW
+↓
+PARKING BAYS
+↓
+VEHICLES
+↓
+DRIVE AISLE
+
+Use subtle lane/aisle boundaries.
+
+Do not add decorative graphics.
+
+Do not add 3D effects.
+
+============================================================
+11. FOCUSED ZONE SCALE
+============================================================
+
+On initial Digital Twin load:
+
+center the focused zone.
+
+The focused 20-space zone should occupy most of the map viewport.
+
+Do not fit the entire facility so tightly that the focused zone becomes tiny.
+
+The surrounding facility can remain visible as contextual background.
+
+Target visual hierarchy:
+
+FOCUSED ZONE
+████████████████████████
+
+BACKGROUND FACILITY
+░░░░░░░░░░░░░░░░░░░░░░
+
+The focused zone is the hero.
+
+============================================================
+12. DO NOT REMOVE THE FULL FACILITY
+============================================================
+
+The complete facility must remain accessible.
+
+The user must still be able to:
+
+- zoom out
+- fit facility
+- inspect other areas
+- use layers
+
+But the default view should prioritize the focused demo zone.
+
+============================================================
+13. SPACE LABELS
+============================================================
+
+Do not put giant labels on every bay.
+
+For the focused zone:
+
+SP-07
+SP-11
+SP-14
+SP-17
+SP-19
+
+must be easy to identify.
+
+Other occupied bay IDs can remain subtle.
+
+When a bay is selected:
+
+its ID becomes prominent.
+
+============================================================
+14. PERSONA VISUALIZATION
+============================================================
+
+USER A:
+
+SP-07 clearly highlighted.
+
+USER B after reservation:
+
+SP-14 clearly highlighted.
+
+GUEST:
+
+no stale User A/User B bay selection.
+
+When changing persona:
+
+clear the previous inspector selection.
+
+Do NOT change the actual underlying state.
+
+Example:
+
+switch USER A → GUEST
+
+SP-07 remains DESIGNATED in the data.
+
+But the inspector should return to:
+
+FOCUSED ZONE OVERVIEW
+
+rather than showing USER A's SP-07 as if Guest selected it.
+
+============================================================
+15. VIOLATION VISUALIZATION
+============================================================
+
+When violation is triggered:
+
+VEH-001
+
+Designated:
+SP-07
+
+Actual:
+SP-11
+
+SP-11 must show:
+
+RED BAY HIGHLIGHT
+
+VEH-001:
+RED VEHICLE HIGHLIGHT
+
+Inspector:
+
+PARKING VIOLATION
+
+EXPECTED:
+SP-07
+
+ACTUAL:
+SP-11
+
+STATUS:
+INCORRECT PARKING
+
+Do not change the underlying violation logic.
+
+============================================================
+16. MAP BACKGROUND
+============================================================
+
+The current dark background is acceptable.
+
+Keep it restrained.
+
+Do not add:
+
+- gradients everywhere
+- glowing roads
+- 3D effects
+- decorative particles
+- excessive neon
+
+The goal is:
+
+enterprise parking operations map.
+
+============================================================
+17. REMOVE VISUAL NOISE ONLY
+============================================================
+
+If any of these obscure parking:
+
+- unnecessary grid lines
+- dimension annotations
+- excessive camera labels
+- redundant technical IDs
+- CAD construction marks
+
+keep them behind existing layer controls.
+
+Do not delete canonical data.
+
+Default:
+
+OPERATIONAL VIEW
+
+not
+
+CAD VIEW.
+
+============================================================
+18. RIGHT PANEL
+============================================================
+
+Do NOT redesign the right panel.
+
+Only ensure that it does not cover or obscure the focused zone.
+
+The map remains the hero.
+
+The inspector is secondary.
+
+============================================================
+19. KPI SCOPE
+============================================================
+
+Focused zone:
+
+20 SPACES
+15 OCCUPIED
+4 AVAILABLE
+1 DESIGNATED
+
+If USER B reserves SP-14:
+
+20 SPACES
+15 OCCUPIED
+3 AVAILABLE
+1 DESIGNATED
+1 RESERVED
+
+Full facility metrics must be clearly labelled:
+
+FACILITY TOTAL
+
+Do not mix the two scopes.
+
+============================================================
+20. CRITICAL STATE INVARIANTS
+============================================================
+
+Add/assert tests for:
+
+focusedZone.total === 20
+
+occupied === 15 initially
+
+available === 4 initially
+
+designated === 1 initially
+
+occupied + available + designated === 20
+
+After USER B reservation:
+
+occupied + available + designated + reserved === 20
+
+No space has more than one vehicle.
+
+No vehicle is assigned to more than one space.
+
+============================================================
+21. BROWSER VISUAL AUDIT
+============================================================
+
+After implementation:
+
+Open:
+
+/digital-twin
+
+Take screenshot.
+
+Then inspect each focused-zone space individually.
+
+Verify:
+
+SP-07
+SP-11
+SP-14
+SP-17
+SP-19
+
+Then inspect representative occupied spaces across all rows.
+
+Verify no vehicle overlaps.
+
+============================================================
+22. CROSS-PAGE REGRESSION
+============================================================
+
+Verify:
+
+USER A
+→ SP-07
+
+USER B
+→ SP-14
+
+GUEST
+→ no allocation
+
+Violation:
+VEH-001
+SP-07 → SP-11
+
+Reset:
+baseline restored
+
+Do not change the already verified shared-state implementation.
+
+============================================================
+23. AUTOMATED QUALITY GATES
+============================================================
+
+Run:
+
+npm --prefix apps/web run typecheck
+
+npm --prefix apps/web run lint
+
+npm --prefix apps/web test
+
+Expected:
+
+0 TypeScript errors
+
+0 ESLint errors
+
+ALL tests passing
+
+Then run Playwright/browser tests.
+
+============================================================
+24. FINAL SCREENSHOT REQUIREMENTS
+============================================================
+
+Capture:
+
+1. Initial focused-zone view
+2. USER A / SP-07 designated
+3. USER B / SP-14 reserved
+4. Violation / SP-11
+5. Reset state
+
+The initial screenshot must make the focused 20-space zone immediately
+understandable.
+
+============================================================
+25. FINAL FREEZE
+============================================================
+
+After all tests pass:
+
+DO NOT continue modifying the Digital Twin.
+
+Create:
+
+DIGITAL_TWIN_FREEZE_REPORT.md
+
+Include:
+
+- canonical geometry source
+- focused zone ID
+- 20 space IDs
+- 15 occupied space IDs
+- 5 non-occupied space IDs
+- vehicle-to-space mapping
+- designation mapping
+- reservation mapping
+- violation mapping
+- state invariants
+- test results
+- Playwright results
+- screenshots
+- files changed
+
+Then explicitly state:
+
+"DIGITAL TWIN FROZEN"
+
+============================================================
+26. FREEZE RULE
+============================================================
+
+After this task:
+
+NO MORE DIGITAL TWIN REDESIGN.
+
+NO MORE LAYOUT CHANGES.
+
+NO MORE STATE ARCHITECTURE CHANGES.
+
+NO MORE PARKING GEOMETRY CHANGES.
+
+Any future modification requires an explicit new task.
+
+The objective is stability.
+
+============================================================
+FINAL SUCCESS CONDITION
+============================================================
+
+When I open /digital-twin, I should immediately see:
+
+ONE CLEAR PARKING ZONE
+
+20 SPACES
+
+15 OCCUPIED
+4 AVAILABLE
+1 DESIGNATED
+
+with:
+
+- perfectly aligned vehicles
+- no overlaps
+- readable parking bays
+- obvious focused zone
+- professional operational map
+- clean inspector
+- correct User A/B/Guest states
+- correct violation state
+- correct reset
+
+Once this is achieved and all tests pass:
+
+FREEZE THE DIGITAL TWIN.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-03T15:02:08+05:30.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from Claude Sonnet 4.6 (Thinking) to Gemini 3.8 Flash (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>

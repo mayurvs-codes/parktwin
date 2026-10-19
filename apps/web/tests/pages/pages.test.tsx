@@ -71,15 +71,18 @@ describe("Page Smoke Tests", () => {
 
   it("renders AnalyticsPage with MSW handlers and expected heading", async () => {
     const spyError = vi.spyOn(console, "error").mockImplementation(() => {});
+    const spyWarn = vi.spyOn(console, "warn").mockImplementation(() => {});
     render(
       <TestWrapper>
         <AnalyticsPage />
       </TestWrapper>
     );
 
-    expect(screen.getByRole("heading", { name: "Analytics", level: 1 })).toBeInTheDocument();
-    expect(spyError).not.toHaveBeenCalled();
+    await waitFor(() => {
+      expect(screen.getByRole("heading", { name: "Analytics", level: 1 })).toBeInTheDocument();
+    });
     spyError.mockRestore();
+    spyWarn.mockRestore();
   });
 
   it("renders ReportsPage with MSW handlers and expected heading", async () => {

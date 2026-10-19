@@ -1,0 +1,91 @@
+- generic [active] [ref=f10e1]:
+  - generic [ref=f10e6]:
+    - banner [ref=f10e7]:
+      - generic [ref=f10e9]:
+        - generic [ref=f10e10]:
+          - link "P ParkTwin AI" [ref=f10e11] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f10e12]: P
+            - generic [ref=f10e15]:
+              - generic [ref=f10e16]: ParkTwin
+              - generic [ref=f10e17]: AI
+          - navigation [ref=f10e18]:
+            - link "Home" [ref=f10e19] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Navigate" [ref=f10e24] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "Parking" [ref=f10e29] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Activity" [ref=f10e34] [cursor=pointer]:
+              - /url: /user/activity
+        - generic [ref=f10e38]:
+          - generic [ref=f10e39]: VEH-003
+          - link [ref=f10e44] [cursor=pointer]:
+            - /url: /digital-twin
+            - button "Admin System ↗" [ref=f10e45]
+          - button "Toggle Demo Controls" [ref=f10e51] [cursor=pointer]
+          - button "Toggle color theme" [ref=f10e55] [cursor=pointer]
+    - main [ref=f10e58]:
+      - generic [ref=f10e869]:
+        - generic [ref=f10e870]:
+          - generic [ref=f10e871]: Drive-In Allocation
+          - heading "NO RESERVATION FOUND" [level=1] [ref=f10e874]
+          - paragraph [ref=f10e875]:
+            - text: You can still park. Real-time facility monitoring detects
+            - strong [ref=f10e876]: "40"
+            - text: parking spaces currently available.
+        - generic [ref=f10e877]:
+          - generic [ref=f10e879]:
+            - generic [ref=f10e880]:
+              - generic [ref=f10e881]: "[ RECOMMENDED SPACE ]"
+              - generic [ref=f10e884]: NEAREST TO ENTRANCE
+            - generic [ref=f10e885]:
+              - heading "SP-08" [level=3] [ref=f10e886]
+              - paragraph [ref=f10e887]: Zone A (North Perimeter) · Level B2
+          - generic [ref=f10e888]:
+            - paragraph [ref=f10e889]: Optimal driving path from ACCESS_POINT_B2 with minimal aisle traversal.
+            - link [ref=f10e890] [cursor=pointer]:
+              - /url: /user/navigation
+              - button "SELECT & START NAVIGATION" [ref=f10e891]
+        - generic [ref=f10e895]:
+          - generic [ref=f10e896]:
+            - heading "AVAILABLE PARKING (40 BAYS ONLINE)" [level=2] [ref=f10e897]
+            - generic [ref=f10e901]: Synchronized with Admin Twin
+          - generic [ref=f10e902]:
+            - generic [ref=f10e903]:
+              - generic [ref=f10e904]:
+                - generic [ref=f10e905]:
+                  - generic [ref=f10e906]: SP-08
+                  - generic [ref=f10e907]: FREE
+                - paragraph [ref=f10e908]: Zone · Level B2
+              - link [ref=f10e910] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Navigate Here" [ref=f10e911]
+            - generic [ref=f10e913]:
+              - generic [ref=f10e914]:
+                - generic [ref=f10e915]:
+                  - generic [ref=f10e916]: SP-17
+                  - generic [ref=f10e917]: FREE
+                - paragraph [ref=f10e918]: Zone · Level B2
+              - link [ref=f10e920] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Navigate Here" [ref=f10e921]
+            - generic [ref=f10e923]:
+              - generic [ref=f10e924]:
+                - generic [ref=f10e925]:
+                  - generic [ref=f10e926]: SP-31
+                  - generic [ref=f10e927]: FREE
+                - paragraph [ref=f10e928]: Zone · Level B2
+              - link [ref=f10e930] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Navigate Here" [ref=f10e931]
+            - generic [ref=f10e933]:
+              - generic [ref=f10e934]:
+                - generic [ref=f10e935]:
+                  - generic [ref=f10e936]: SP-44
+                  - generic [ref=f10e937]: FREE
+                - paragraph [ref=f10e938]: Zone · Level B2
+              - link [ref=f10e940] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Navigate Here" [ref=f10e941]
+  - alert [ref=f10e5]: Find Parking · ParkTwin AI · ParkTwin AI

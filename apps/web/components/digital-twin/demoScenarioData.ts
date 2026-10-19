@@ -1,11 +1,11 @@
 /**
  * ParkTwin AI — Canonical Demo Scenario & Floor Plan Geometry
  * ==========================================================
- * Derived directly from authoritative user floor plan reference:
- * "WhatsApp Image 2026-09-06 at 8.27.12 PM.jpeg"
+ * Architectural Vector Specification matching authoritative blueprint:
+ * media_1791002045319.png (Carparking-01 B2).
  *
  * Canvas dimensions: 1472 × 1508
- * All coordinates, cameras, and bays map 1:1 with the user drawing.
+ * All coordinates, cameras, aisles, columns, and bays map 1:1 with the blueprint.
  */
 
 export interface DemoCamera {
@@ -46,6 +46,25 @@ export interface DemoVehicleConfig {
   exitRoute: [number, number][];
 }
 
+/**
+ * Canonical reservation predicate for facility parking bays.
+ * Spaces SP-14 and SP-24 (P14, P24) are designated reserved bays.
+ */
+export function isSlotReserved(
+  slot: { id: string; name?: string; isReserved?: boolean } | null | undefined
+): boolean {
+  if (!slot) return false;
+  return (
+    slot.id === "SP-14" ||
+    slot.id === "SP-24" ||
+    slot.id === "P14" ||
+    slot.id === "P24" ||
+    slot.name === "P14" ||
+    slot.name === "P24" ||
+    Boolean(slot.isReserved)
+  );
+}
+
 // ─── 1. ACCESS POINT B2 (Single Physical Gateway) ────────────────────────────
 export const ACCESS_POINT_B2 = {
   id: "ACCESS_POINT_B2",
@@ -54,7 +73,7 @@ export const ACCESS_POINT_B2 = {
   y: 55,
 } as const;
 
-// ─── 2. 16 CAMERAS VERIFIED FROM USER DRAWING ────────────────────────────────
+// ─── 2. 16 CAMERAS MATCHING BLUEPRINT AISLE VANTAGES ────────────────────────
 export const CANONICAL_16_CAMERAS: DemoCamera[] = [
   {
     id: "CAM-01",
@@ -69,55 +88,55 @@ export const CANONICAL_16_CAMERAS: DemoCamera[] = [
   {
     id: "CAM-02",
     role: "PATH/PARKING",
-    x: 1204,
-    y: 644,
+    x: 1225,
+    y: 610,
     label: "East Vertical Drive Aisle",
-    locationName: "Corridor East (North-South)",
+    locationName: "East Vertical Trunk / 2nd Aisle Junction",
     videoUrl: "/videos/cam2_parking_bay.mp4",
     status: "ONLINE",
   },
   {
     id: "CAM-03",
     role: "PATH/PARKING",
-    x: 1162,
-    y: 1291,
-    label: "South Perimeter Corridor",
-    locationName: "South Perimeter Driveway",
+    x: 1225,
+    y: 1318,
+    label: "Southeast Drive Corridor",
+    locationName: "East Vertical Trunk / Bottom Aisle Junction",
     videoUrl: "/videos/cam3_exit_ramp.mp4",
     status: "ONLINE",
   },
   {
     id: "CAM-04",
     role: "PATH/PARKING",
-    x: 1208,
-    y: 1208,
-    label: "Southeast Corner Junction",
-    locationName: "Corridor Turn East-South",
+    x: 1160,
+    y: 1318,
+    label: "South Perimeter Corridor East",
+    locationName: "South Perimeter Driveway East",
     status: "STANDBY",
   },
   {
     id: "CAM-05",
     role: "PATH/PARKING",
-    x: 863,
-    y: 1091,
-    label: "Lower Horizontal Aisle East",
+    x: 820,
+    y: 960,
+    label: "3rd Horizontal Aisle East",
     locationName: "Lower Drive Aisle East",
     status: "STANDBY",
   },
   {
     id: "CAM-06",
     role: "PATH/PARKING",
-    x: 661,
-    y: 1090,
-    label: "Lower Horizontal Aisle West",
+    x: 550,
+    y: 960,
+    label: "3rd Horizontal Aisle West",
     locationName: "Lower Drive Aisle West",
     status: "STANDBY",
   },
   {
     id: "CAM-07",
     role: "PATH/PARKING",
-    x: 493,
-    y: 1274,
+    x: 412,
+    y: 1318,
     label: "Southwest Corridor Junction",
     locationName: "South Perimeter West Corner",
     status: "STANDBY",
@@ -125,180 +144,176 @@ export const CANONICAL_16_CAMERAS: DemoCamera[] = [
   {
     id: "CAM-08",
     role: "PATH/PARKING",
-    x: 439,
-    y: 1005,
-    label: "Mid-West Lift Core Corner",
-    locationName: "Lift Core Intersection",
+    x: 344,
+    y: 960,
+    label: "West Lift Core 02 Junction",
+    locationName: "Stair & Lift Core 02 Corner",
     status: "STANDBY",
   },
   {
     id: "CAM-09",
     role: "PATH/PARKING",
-    x: 546,
-    y: 937,
-    label: "Lower-Mid Bay Island West",
-    locationName: "Zone D Entry Junction",
+    x: 550,
+    y: 610,
+    label: "2nd Horizontal Aisle West",
+    locationName: "Zone C Entry Junction",
     status: "STANDBY",
   },
   {
     id: "CAM-10",
     role: "PATH/PARKING",
-    x: 826,
-    y: 596,
-    label: "Central Ramp Drive Corridor",
-    locationName: "Central Ramp Driveway",
+    x: 820,
+    y: 610,
+    label: "2nd Horizontal Aisle Center",
+    locationName: "Central Cross Driveway",
     status: "STANDBY",
   },
   {
     id: "CAM-11",
     role: "PATH/PARKING",
-    x: 440,
-    y: 549,
-    label: "Services Room Corridor",
-    locationName: "Services Room Drive Aisle",
+    x: 1225,
+    y: 960,
+    label: "East Services Corridor",
+    locationName: "Services & Storage Drive Aisle",
     status: "STANDBY",
   },
   {
     id: "CAM-12",
     role: "PATH/PARKING",
-    x: 543,
-    y: 427,
-    label: "Upper-Mid Bay Island West",
-    locationName: "Zone B West Perimeter",
+    x: 820,
+    y: 250,
+    label: "Top Horizontal Aisle Center",
+    locationName: "Zone B North Drive Aisle",
     status: "STANDBY",
   },
   {
     id: "CAM-13",
     role: "PATH/PARKING",
-    x: 210,
-    y: 1189,
-    label: "Far Southwest Extension Wing",
-    locationName: "Southwest Wing Corridor",
+    x: 412,
+    y: 725,
+    label: "West Entry Ramp Junction",
+    locationName: "West Aisle Gateway",
     status: "STANDBY",
   },
   {
     id: "CAM-14",
     role: "PATH/PARKING",
-    x: 430,
-    y: 394,
-    label: "Upper Lift Core Corridor",
-    locationName: "Upper Lift Access Lane",
+    x: 344,
+    y: 484,
+    label: "West Lift Core 01 Junction",
+    locationName: "Stair & Lift Core 01 Corner",
     status: "STANDBY",
   },
   {
     id: "CAM-15",
     role: "PATH/PARKING",
-    x: 440,
-    y: 290,
-    label: "Northwest Perimeter Corridor",
+    x: 412,
+    y: 250,
+    label: "Northwest Perimeter Junction",
     locationName: "Northwest Drive Aisle",
     status: "STANDBY",
   },
   {
     id: "CAM-16",
     role: "EXIT",
-    x: 1022,
-    y: 191,
+    x: 1190,
+    y: 120,
     label: "Exit Gate / Access Point B2",
     locationName: "Exit Throttle Lane",
     status: "ONLINE",
   },
 ];
 
-// ─── 3. 60 UNIFIED PARKING SPACES ─────────────────────────────────────────────
+// ─── 3. 60 UNIFIED OPERATIONAL PARKING SPACES ─────────────────────────────────
 export const CANONICAL_60_SPACES: DemoParkingSpace[] = [
-  // Zone A: North Perimeter (13 spaces, SP-01 to SP-13)
-  ...Array.from({ length: 13 }, (_, i) => ({
+  // ─── FOCUSED DEMO ZONE: ISLAND 1 (SP-01 to SP-20) ──────────────────────────
+  // North Row (SP-01 to SP-08): 8 vertical stalls facing Top Horizontal Aisle (y=365)
+  ...Array.from({ length: 8 }, (_, i) => ({
     id: `SP-${String(i + 1).padStart(2, "0")}`,
     name: `P${String(i + 1).padStart(2, "0")}`,
-    x: Math.round(245 + i * 61.5),
-    y: 108,
+    x: Math.round(610 + i * 60),
+    y: 365,
     width: 48,
-    height: 72,
+    height: 76,
+    zone: "Zone B (Upper Island)",
+    orientation: "vertical" as const,
+    coveringCamera: "CAM-12",
+  })),
+
+  // South Row (SP-09 to SP-16): 8 vertical stalls facing 2nd Horizontal Aisle (y=505)
+  ...Array.from({ length: 8 }, (_, i) => ({
+    id: `SP-${String(9 + i).padStart(2, "0")}`,
+    name: `P${String(9 + i).padStart(2, "0")}`,
+    x: Math.round(610 + i * 60),
+    y: 505,
+    width: 48,
+    height: 76,
+    zone: "Zone B (Upper Island)",
+    orientation: "vertical" as const,
+    coveringCamera: "CAM-12",
+  })),
+
+  // West End (SP-17 to SP-20): 4 horizontal stalls facing West Vertical Trunk (x=530)
+  ...Array.from({ length: 4 }, (_, i) => ({
+    id: `SP-${String(17 + i).padStart(2, "0")}`,
+    name: `P${String(17 + i).padStart(2, "0")}`,
+    x: 530,
+    y: Math.round(340 + i * 60),
+    width: 76,
+    height: 48,
+    zone: "Zone B (Upper Island)",
+    orientation: "horizontal" as const,
+    coveringCamera: "CAM-09",
+  })),
+
+  // ─── BACKGROUND FACILITY SPACES (SP-21 to SP-60) ──────────────────────────
+  // Zone A: North Perimeter Row A (13 spaces, SP-21 to SP-33)
+  ...Array.from({ length: 13 }, (_, i) => ({
+    id: `SP-${String(21 + i).padStart(2, "0")}`,
+    name: `P${String(21 + i).padStart(2, "0")}`,
+    x: Math.round(230 + i * 65),
+    y: 145,
+    width: 48,
+    height: 76,
     zone: "Zone A (North Perimeter)",
     orientation: "vertical" as const,
     coveringCamera: i < 6 ? "CAM-15" : "CAM-01",
   })),
 
-  // Zone B: Upper Island (16 spaces, SP-14 to SP-29)
-  ...[
-    // Row 1 (y=230)
-    { id: "SP-14", x: 615, y: 230 },
-    { id: "SP-15", x: 675, y: 230 },
-    { id: "SP-16", x: 875, y: 230 },
-    { id: "SP-17", x: 935, y: 230 },
-    // Row 2 (y=290)
-    { id: "SP-18", x: 615, y: 290 },
-    { id: "SP-19", x: 675, y: 290 },
-    { id: "SP-20", x: 875, y: 290 },
-    { id: "SP-21", x: 935, y: 290 },
-    // Row 3 (y=350)
-    { id: "SP-22", x: 615, y: 350 },
-    { id: "SP-23", x: 675, y: 350 },
-    { id: "SP-24", x: 875, y: 350 },
-    { id: "SP-25", x: 935, y: 350 },
-    // Row 4 (y=410)
-    { id: "SP-26", x: 615, y: 410 },
-    { id: "SP-27", x: 675, y: 410 },
-    { id: "SP-28", x: 875, y: 410 },
-    { id: "SP-29", x: 935, y: 410 },
-  ].map((b) => ({
-    id: b.id,
-    name: b.id.replace("SP-", "P"),
-    x: b.x,
-    y: b.y,
-    width: 54,
-    height: 44,
-    zone: "Zone B (Upper Island)",
-    orientation: "horizontal" as const,
-    coveringCamera: "CAM-12",
-  })),
-
-  // Zone C: Central Ramp Row (11 spaces, SP-30 to SP-40)
-  ...Array.from({ length: 11 }, (_, i) => ({
-    id: `SP-${String(30 + i).padStart(2, "0")}`,
-    name: `P${String(30 + i).padStart(2, "0")}`,
-    x: Math.round(580 + i * 50),
-    y: 430,
-    width: 42,
-    height: 68,
+  // Zone C: Central Ramp Row (10 spaces, SP-34 to SP-43)
+  ...Array.from({ length: 10 }, (_, i) => ({
+    id: `SP-${String(34 + i).padStart(2, "0")}`,
+    name: `P${String(34 + i).padStart(2, "0")}`,
+    x: Math.round(520 + i * 58),
+    y: 718,
+    width: 46,
+    height: 76,
     zone: "Zone C (Central Ramp Row)",
     orientation: "vertical" as const,
     coveringCamera: "CAM-10",
   })),
 
-  // Zone D: Lower Island (10 spaces, SP-41 to SP-50)
-  ...[
-    { id: "SP-41", x: 615, y: 900 },
-    { id: "SP-42", x: 675, y: 900 },
-    { id: "SP-43", x: 875, y: 900 },
-    { id: "SP-44", x: 935, y: 900 },
-    { id: "SP-45", x: 615, y: 960 },
-    { id: "SP-46", x: 675, y: 960 },
-    { id: "SP-47", x: 875, y: 960 },
-    { id: "SP-48", x: 615, y: 1020 },
-    { id: "SP-49", x: 675, y: 1020 },
-    { id: "SP-50", x: 875, y: 1020 },
-  ].map((b) => ({
-    id: b.id,
-    name: b.id.replace("SP-", "P"),
-    x: b.x,
-    y: b.y,
-    width: 54,
-    height: 44,
+  // Zone D: Lower Island (8 spaces, SP-44 to SP-51)
+  ...Array.from({ length: 8 }, (_, i) => ({
+    id: `SP-${String(44 + i).padStart(2, "0")}`,
+    name: `P${String(44 + i).padStart(2, "0")}`,
+    x: Math.round(550 + i * 58),
+    y: 1065,
+    width: 46,
+    height: 76,
     zone: "Zone D (Lower Island)",
-    orientation: "horizontal" as const,
+    orientation: "vertical" as const,
     coveringCamera: "CAM-09",
   })),
 
-  // Zone E: South Perimeter (6 spaces, SP-51 to SP-56)
-  ...Array.from({ length: 6 }, (_, i) => ({
-    id: `SP-${String(51 + i).padStart(2, "0")}`,
-    name: `P${String(51 + i).padStart(2, "0")}`,
-    x: Math.round(580 + i * 55),
-    y: 1210,
-    width: 46,
-    height: 68,
+  // Zone E: South Perimeter (5 spaces, SP-52 to SP-56)
+  ...Array.from({ length: 5 }, (_, i) => ({
+    id: `SP-${String(52 + i).padStart(2, "0")}`,
+    name: `P${String(52 + i).padStart(2, "0")}`,
+    x: Math.round(580 + i * 65),
+    y: 1425,
+    width: 48,
+    height: 76,
     zone: "Zone E (South Perimeter)",
     orientation: "vertical" as const,
     coveringCamera: "CAM-06",
@@ -308,81 +323,127 @@ export const CANONICAL_60_SPACES: DemoParkingSpace[] = [
   ...Array.from({ length: 4 }, (_, i) => ({
     id: `SP-${String(57 + i).padStart(2, "0")}`,
     name: `P${String(57 + i).padStart(2, "0")}`,
-    x: 250,
-    y: Math.round(600 + i * 90),
-    width: 68,
-    height: 44,
+    x: Math.round(85 + i * 65),
+    y: 608,
+    width: 50,
+    height: 74,
     zone: "Zone F (West Wing)",
-    orientation: "horizontal" as const,
+    orientation: "vertical" as const,
     coveringCamera: "CAM-08",
   })),
 ];
 
-// ─── 4. CLEAN VECTOR SVG FACILITY ARCHITECTURE GEOMETRY ───────────────────────
-// Defined in canonical 1472 × 1508 canvas space
+// ─── 4. VECTOR SVG FACILITY ARCHITECTURE GEOMETRY (MATCHING BLUEPRINT) ────────
 export const FACILITY_SVG_GEOMETRY = {
   viewBox: "0 0 1472 1508",
   width: 1472,
   height: 1508,
 
-  // L-Shaped Exterior Outer Wall Polygon
-  outerBoundary: `M 140 50
-    L 1150 50
-    L 1150 180
-    L 1220 180
-    L 1220 1280
-    L 420 1280
-    L 420 1490
-    L 140 1490
+  // Outer Building Footprint Boundary with Top Ramp and West Entry
+  outerBoundary: `M 45 90
+    L 1161 90
+    L 1161 0
+    L 1290 0
+    L 1290 90
+    L 1420 90
+    L 1420 1490
+    L 45 1490
+    L 45 776
+    L 0 776
+    L 0 674
+    L 45 674
     Z`,
 
-  // Inner Road Aisle Corridors (Clean Brown Driveway Polygons)
+  // Continuous Brown Asphalt Drive Aisle Network (#5a3d24)
   driveAisles: [
-    // Main Entry Throat (Top Right)
-    { id: "entry_throat", d: "M 1060 50 L 1150 50 L 1150 190 L 1060 190 Z" },
-    // East Main Vertical Trunk (CAM-02 Corridor)
-    { id: "east_trunk", d: "M 1060 180 L 1210 180 L 1210 1270 L 1060 1270 Z" },
-    // North Horizontal Drive Aisle (Accessing Zone A)
-    { id: "north_aisle", d: "M 150 150 L 1060 150 L 1060 210 L 150 210 Z" },
-    // Central Cross Aisle (Above Ramp)
-    { id: "central_aisle_top", d: "M 480 470 L 1060 470 L 1060 530 L 480 530 Z" },
-    // Lower Cross Aisle (CAM-05 & CAM-06 Corridor)
-    { id: "lower_aisle", d: "M 380 1070 L 1060 1070 L 1060 1140 L 380 1140 Z" },
-    // South Perimeter Lane
-    { id: "south_lane", d: "M 420 1240 L 1210 1240 L 1210 1280 L 420 1280 Z" },
-    // West Vertical Trunk (Between Stairs and Island)
-    { id: "west_trunk", d: "M 460 200 L 550 200 L 550 1140 L 460 1140 Z" },
-    // Far Southwest Extension Corridor (CAM-13 Wing)
-    { id: "southwest_extension", d: "M 150 1140 L 420 1140 L 420 1480 L 150 1480 Z" },
+    // Top-Right Ramp Gateway (ACCESS_POINT_B2)
+    { id: "entry_ramp_top", d: "M 1161 0 L 1290 0 L 1290 200 L 1161 200 Z" },
+    // West Entry Ramp
+    { id: "entry_ramp_west", d: "M 0 674 L 345 674 L 345 776 L 0 776 Z" },
+    // East Vertical Drive Trunk
+    { id: "east_trunk", d: "M 1161 90 L 1290 90 L 1290 1370 L 1161 1370 Z" },
+    // West Vertical Drive Trunk
+    { id: "west_trunk", d: "M 345 200 L 478 200 L 478 1370 L 345 1370 Z" },
+    // Top Horizontal Drive Aisle
+    { id: "top_aisle", d: "M 45 200 L 1290 200 L 1290 303 L 45 303 Z" },
+    // 2nd Horizontal Drive Aisle
+    { id: "second_aisle", d: "M 345 565 L 1290 565 L 1290 657 L 345 657 Z" },
+    // 3rd Horizontal Drive Aisle
+    { id: "third_aisle", d: "M 345 913 L 1290 913 L 1290 1005 L 345 1005 Z" },
+    // Bottom Horizontal Drive Aisle
+    { id: "bottom_aisle", d: "M 45 1267 L 1290 1267 L 1290 1370 L 45 1370 Z" },
   ],
 
-  // Structural & Forbidden Core Blocks (Lift cores, stairs, services)
+  // Structural & Architectural Cores matching the blueprint
   structuralCores: [
-    // Upper Lift & Stair Core (CAM-14 area)
-    { id: "lift_stair_upper", x: 180, y: 260, w: 220, h: 180, name: "Stair & Lift Core 01" },
-    // Services Room (CAM-11 area)
-    { id: "services_room", x: 180, y: 450, w: 220, h: 130, name: "Electrical & Services Room" },
-    // Middle Lift & Stair Core (CAM-08 area)
-    { id: "lift_stair_mid", x: 180, y: 690, w: 220, h: 180, name: "Stair & Lift Core 02" },
-    // Ramp Core (Between Zone B and Zone C)
-    { id: "central_ramp_core", x: 550, y: 540, w: 510, h: 130, name: "Vehicle Ramp (Level Transition)" },
-    // Lower Ramp Void
-    { id: "lower_ramp_void", x: 550, y: 730, w: 510, h: 130, name: "Access Ramp Void" },
-    // Tech Park Foundation Pillar Group
-    { id: "pillar_core_se", x: 550, y: 1320, w: 550, h: 150, name: "Structural Foundation Void" },
+    // Upper Stair & Lift Core (West side between Cluster 1 and Cluster 2)
+    { id: "lift_stair_upper", x: 45, y: 425, w: 300, h: 118, name: "Stair & Lift Core 01" },
+    // Lower Stair & Lift Core (West side between Cluster 3 and Cluster 4)
+    { id: "lift_stair_mid", x: 45, y: 906, w: 300, h: 116, name: "Stair & Lift Core 02" },
+    // East Services & Storage Room (Blue outline box)
+    { id: "services_room", x: 1375, y: 360, w: 85, h: 790, name: "SERVICES / STORAGE" },
+    // East Top Lobby (2.8m wide)
+    { id: "lobby_top", x: 1375, y: 90, w: 85, h: 210, name: "LOBBY 2.8M WIDE" },
+    // East Bottom Lobby (3.0m wide)
+    { id: "lobby_bottom", x: 1375, y: 1260, w: 85, h: 200, name: "LOBBY 3.0 WIDE" },
+  ],
+
+  // 3 Central Architectural Parking Islands
+  islands: [
+    { id: "island_1", x: 478, y: 303, w: 683, h: 262 },
+    { id: "island_2", x: 478, y: 657, w: 683, h: 256 },
+    { id: "island_3", x: 478, y: 1005, w: 683, h: 262 },
+  ],
+
+  // West Wing Parking Clusters (4 stalls each)
+  westClusters: [
+    { id: "west_c1", x: 45, y: 305, w: 300, h: 118 },
+    { id: "west_c2", x: 45, y: 545, w: 300, h: 127 },
+    { id: "west_c3", x: 45, y: 778, w: 300, h: 126 },
+    { id: "west_c4", x: 45, y: 1023, w: 300, h: 128 },
+  ],
+
+  // Structural Columns with Yellow Collars at Grid Intersections
+  gridColumns: [
+    // Top wall line (y = 90)
+    { x: 240, y: 90 }, { x: 478, y: 90 }, { x: 820, y: 90 }, { x: 1161, y: 90 },
+    // Island 1 columns (top line y=303, bottom line y=565)
+    { x: 478, y: 303 }, { x: 820, y: 303 }, { x: 1161, y: 303 },
+    { x: 478, y: 565 }, { x: 820, y: 565 }, { x: 1161, y: 565 },
+    // Island 2 columns (top line y=657, bottom line y=913)
+    { x: 478, y: 657 }, { x: 820, y: 657 }, { x: 1161, y: 657 },
+    { x: 478, y: 913 }, { x: 820, y: 913 }, { x: 1161, y: 913 },
+    // Island 3 columns (top line y=1005, bottom line y=1267)
+    { x: 478, y: 1005 }, { x: 820, y: 1005 }, { x: 1161, y: 1005 },
+    { x: 478, y: 1267 }, { x: 820, y: 1267 }, { x: 1161, y: 1267 },
+    // West perimeter columns
+    { x: 45, y: 305 }, { x: 345, y: 305 },
+    { x: 45, y: 425 }, { x: 345, y: 425 },
+    { x: 45, y: 545 }, { x: 345, y: 545 },
+    { x: 45, y: 672 }, { x: 345, y: 672 },
+    { x: 45, y: 778 }, { x: 345, y: 778 },
+    { x: 45, y: 906 }, { x: 345, y: 906 },
+    { x: 45, y: 1023 }, { x: 345, y: 1023 },
+    { x: 45, y: 1151 }, { x: 345, y: 1151 },
+    // East perimeter columns (along x = 1290)
+    { x: 1290, y: 90 }, { x: 1290, y: 303 }, { x: 1290, y: 565 },
+    { x: 1290, y: 657 }, { x: 1290, y: 913 }, { x: 1290, y: 1005 },
+    { x: 1290, y: 1267 }, { x: 1290, y: 1370 },
+    // Bottom wall line (y = 1480)
+    { x: 240, y: 1480 }, { x: 478, y: 1480 }, { x: 820, y: 1480 }, { x: 1161, y: 1480 },
   ],
 };
 
 // ─── 5. 30 DETERMINISTIC DEMO VEHICLES (Type A Tracked vs Type B Static) ───────
 export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
   // ─── TYPE A: 10 Tracked / Dynamic Movie Vehicles ───────────────────────────
-  // VEH-001: Early Entry to Zone A (SP-02) -> Stays -> Exits near end
+  // VEH-001: Entry to Island 1 (SP-02) -> Stays -> Exits near end
   {
     id: "VEH-001",
     plate: "DEMO-001",
     isTypeA: true,
     assignedSlot: "SP-02",
-    color: "#3b82f6", // Blue
+    color: "#ef4444", // Red
     model: "Electric Sedan",
     entryTime: 4,
     parkTime: 16,
@@ -390,27 +451,26 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 110,
     entryRoute: [
       [1105, 55],   // ACCESS_POINT_B2 (CAM-01)
-      [1105, 175],  // North Junction
-      [700, 175],   // Along North Aisle
-      [306, 175],   // Turn toward SP-02
-      [306, 144],   // Bay entrance
+      [1105, 250],  // Down to Top Horizontal Aisle
+      [670, 250],   // Along Top Aisle to SP-02
+      [670, 365],   // Bay entrance SP-02
     ],
     exitRoute: [
-      [306, 144],   // Leave SP-02
-      [306, 175],   // North Aisle
-      [1040, 175],  // Toward Exit
-      [1022, 191],  // Pass CAM-16
+      [670, 365],   // Leave SP-02
+      [670, 250],   // Top Aisle
+      [1190, 250],  // Toward Exit
+      [1190, 120],  // Pass CAM-16
       [1105, 55],   // Reach ACCESS_POINT_B2 -> Disappear
     ],
   },
 
-  // VEH-002: Entry to Zone B (SP-14) -> Stays
+  // VEH-002: Entry to Island 1 South Row (SP-14) -> Stays
   {
     id: "VEH-002",
     plate: "DEMO-002",
     isTypeA: true,
     assignedSlot: "SP-14",
-    color: "#10b981", // Emerald
+    color: "#10b981", // Green
     model: "Compact Hybrid",
     entryTime: 12,
     parkTime: 26,
@@ -418,14 +478,19 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 136,
     entryRoute: [
       [1105, 55],   // ACCESS_POINT_B2
-      [1105, 230],  // Turn to Upper Island
-      [750, 230],   // Approach SP-14
-      [642, 230],   // In bay
+      [1105, 250],  // Top Horizontal Aisle
+      [1225, 250],  // East Trunk
+      [1225, 610],  // 2nd Horizontal Aisle
+      [910, 610],   // Approach SP-14
+      [910, 505],   // In bay SP-14
     ],
     exitRoute: [
-      [642, 230],
-      [1060, 230],
-      [1022, 191],
+      [910, 505],
+      [910, 610],
+      [1225, 610],
+      [1225, 250],
+      [1190, 250],
+      [1190, 120],
       [1105, 55],
     ],
   },
@@ -436,7 +501,7 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     plate: "DEMO-003",
     isTypeA: true,
     assignedSlot: "SP-33",
-    color: "#f59e0b", // Amber
+    color: "#ef4444", // Red
     model: "Executive SUV",
     entryTime: 22,
     parkTime: 40,
@@ -444,16 +509,16 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 154,
     entryRoute: [
       [1105, 55],
-      [1130, 250],
-      [1130, 500],  // Down East Trunk past CAM-02
-      [800, 500],   // Along Ramp Aisle past CAM-10
-      [730, 464],   // Park in SP-33
+      [1225, 120],
+      [1225, 610],  // Down East Trunk past CAM-02
+      [694, 610],   // Along 2nd Aisle past CAM-10
+      [694, 678],   // Park in SP-33
     ],
     exitRoute: [
-      [730, 464],
-      [1130, 500],
-      [1130, 190],
-      [1022, 191],
+      [694, 678],
+      [694, 610],
+      [1225, 610],
+      [1225, 120],
       [1105, 55],
     ],
   },
@@ -464,7 +529,7 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     plate: "DEMO-004",
     isTypeA: true,
     assignedSlot: "SP-44",
-    color: "#8b5cf6", // Purple
+    color: "#10b981", // Green
     model: "City Hatchback",
     entryTime: 32,
     parkTime: 52,
@@ -472,15 +537,16 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 172,
     entryRoute: [
       [1105, 55],
-      [1130, 600],  // Down East Trunk past CAM-02
-      [1130, 900],  // Approach Zone D
-      [962, 900],   // Turn into SP-44
+      [1225, 120],
+      [1225, 960],  // Down East Trunk past CAM-02 & CAM-11
+      [724, 960],   // Along 3rd Aisle past CAM-05
+      [724, 1025],  // Turn into SP-44
     ],
     exitRoute: [
-      [962, 900],
-      [1130, 900],
-      [1130, 200],
-      [1022, 191],
+      [724, 1025],
+      [724, 960],
+      [1225, 960],
+      [1225, 120],
       [1105, 55],
     ],
   },
@@ -491,7 +557,7 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     plate: "DEMO-005",
     isTypeA: true,
     assignedSlot: "SP-52",
-    color: "#ec4899", // Pink
+    color: "#ef4444", // Red
     model: "Crossover EV",
     entryTime: 42,
     parkTime: 65,
@@ -499,17 +565,16 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 185,
     entryRoute: [
       [1105, 55],
-      [1130, 800],
-      [1130, 1100], // Down East Trunk
-      [800, 1100],  // Lower Aisle past CAM-05
-      [635, 1176],  // Turn into SP-52
+      [1225, 120],
+      [1225, 1318], // Down East Trunk to Bottom Aisle
+      [645, 1318],  // Along Bottom Aisle past CAM-04
+      [645, 1385],  // Turn into SP-52
     ],
     exitRoute: [
-      [635, 1176],
-      [800, 1100],
-      [1130, 1100],
-      [1130, 190],
-      [1022, 191],
+      [645, 1385],
+      [645, 1318],
+      [1225, 1318],
+      [1225, 120],
       [1105, 55],
     ],
   },
@@ -520,7 +585,7 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     plate: "DEMO-006",
     isTypeA: true,
     assignedSlot: "SP-05",
-    color: "#06b6d4", // Cyan
+    color: "#10b981", // Green
     model: "Station Wagon",
     entryTime: 50,
     parkTime: 66,
@@ -528,9 +593,9 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 999,
     entryRoute: [
       [1105, 55],
-      [1105, 175],
-      [491, 175],
-      [491, 144],
+      [1105, 250],
+      [490, 250],
+      [490, 185],
     ],
     exitRoute: [],
   },
@@ -541,7 +606,7 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     plate: "DEMO-007",
     isTypeA: true,
     assignedSlot: "SP-16",
-    color: "#eab308", // Yellow
+    color: "#ef4444", // Red
     model: "Compact Sedan",
     entryTime: 60,
     parkTime: 75,
@@ -549,8 +614,9 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 999,
     entryRoute: [
       [1105, 55],
-      [1105, 230],
-      [902, 230],
+      [1105, 250],
+      [730, 250],
+      [730, 325],
     ],
     exitRoute: [],
   },
@@ -561,7 +627,7 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     plate: "DEMO-008",
     isTypeA: true,
     assignedSlot: "SP-37",
-    color: "#14b8a6", // Teal
+    color: "#10b981", // Green
     model: "Luxury Sedan",
     entryTime: 70,
     parkTime: 90,
@@ -569,9 +635,10 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 999,
     entryRoute: [
       [1105, 55],
-      [1130, 500],
-      [930, 500],
-      [930, 464],
+      [1225, 120],
+      [1225, 610],
+      [926, 610],
+      [926, 678],
     ],
     exitRoute: [],
   },
@@ -582,7 +649,7 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     plate: "DEMO-009",
     isTypeA: true,
     assignedSlot: "SP-47",
-    color: "#6366f1", // Indigo
+    color: "#ef4444", // Red
     model: "SUV 4x4",
     entryTime: 80,
     parkTime: 104,
@@ -590,8 +657,10 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 999,
     entryRoute: [
       [1105, 55],
-      [1130, 960],
-      [902, 960],
+      [1225, 120],
+      [1225, 960],
+      [898, 960],
+      [898, 1025],
     ],
     exitRoute: [],
   },
@@ -602,7 +671,7 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     plate: "DEMO-010",
     isTypeA: true,
     assignedSlot: "SP-58",
-    color: "#f43f5e", // Rose
+    color: "#10b981", // Green
     model: "Fleet Van",
     entryTime: 88,
     parkTime: 118,
@@ -610,37 +679,37 @@ export const DEMO_30_VEHICLES: DemoVehicleConfig[] = [
     exitCompleteTime: 999,
     entryRoute: [
       [1105, 55],
-      [1105, 175],
-      [510, 175],   // Past Lift Core
-      [510, 690],   // Down West Trunk
-      [284, 690],   // Park in SP-58
+      [1105, 250],
+      [412, 250],   // Along Top Aisle to Left Trunk
+      [412, 610],   // Down Left Trunk to Cluster 2
+      [150, 610],   // Turn into bay SP-58
     ],
     exitRoute: [],
   },
 
   // ─── TYPE B: 20 Static Background Parked Vehicles ─────────────────────────
-  // Parked at t=0, no fake driving route or timestamps
+  // Parked at t=0, no fake driving route or timestamps (All strictly Green or Red)
   ...[
-    { id: "VEH-011", slot: "SP-01", color: "#64748b", model: "Sedan" },
-    { id: "VEH-012", slot: "SP-03", color: "#475569", model: "Hatchback" },
-    { id: "VEH-013", slot: "SP-07", color: "#334155", model: "Crossover" },
-    { id: "VEH-014", slot: "SP-09", color: "#64748b", model: "EV" },
-    { id: "VEH-015", slot: "SP-11", color: "#475569", model: "SUV" },
-    { id: "VEH-016", slot: "SP-15", color: "#334155", model: "Sedan" },
-    { id: "VEH-017", slot: "SP-18", color: "#64748b", model: "Compact" },
-    { id: "VEH-018", slot: "SP-20", color: "#475569", model: "Hybrid" },
-    { id: "VEH-019", slot: "SP-22", color: "#334155", model: "Sedan" },
-    { id: "VEH-020", slot: "SP-25", color: "#64748b", model: "Wagon" },
-    { id: "VEH-021", slot: "SP-31", color: "#475569", model: "EV" },
-    { id: "VEH-022", slot: "SP-35", color: "#334155", model: "SUV" },
-    { id: "VEH-023", slot: "SP-39", color: "#64748b", model: "Crossover" },
-    { id: "VEH-024", slot: "SP-42", color: "#475569", model: "Compact" },
-    { id: "VEH-025", slot: "SP-45", color: "#334155", model: "Sedan" },
-    { id: "VEH-026", slot: "SP-49", color: "#64748b", model: "Hatchback" },
-    { id: "VEH-027", slot: "SP-53", color: "#475569", model: "SUV" },
-    { id: "VEH-028", slot: "SP-55", color: "#334155", model: "Sedan" },
-    { id: "VEH-029", slot: "SP-57", color: "#64748b", model: "Van" },
-    { id: "VEH-030", slot: "SP-60", color: "#475569", model: "Pickup" },
+    { id: "VEH-011", slot: "SP-01", color: "#10b981", model: "Sedan" },
+    { id: "VEH-012", slot: "SP-03", color: "#ef4444", model: "Hatchback" },
+    { id: "VEH-013", slot: "SP-07", color: "#10b981", model: "Crossover" },
+    { id: "VEH-014", slot: "SP-09", color: "#ef4444", model: "EV" },
+    { id: "VEH-015", slot: "SP-11", color: "#10b981", model: "SUV" },
+    { id: "VEH-016", slot: "SP-15", color: "#ef4444", model: "Sedan" },
+    { id: "VEH-017", slot: "SP-18", color: "#10b981", model: "Compact" },
+    { id: "VEH-018", slot: "SP-20", color: "#ef4444", model: "Hybrid" },
+    { id: "VEH-019", slot: "SP-22", color: "#10b981", model: "Sedan" },
+    { id: "VEH-020", slot: "SP-25", color: "#ef4444", model: "Wagon" },
+    { id: "VEH-021", slot: "SP-32", color: "#10b981", model: "EV" },
+    { id: "VEH-022", slot: "SP-35", color: "#ef4444", model: "SUV" },
+    { id: "VEH-023", slot: "SP-39", color: "#10b981", model: "Crossover" },
+    { id: "VEH-024", slot: "SP-42", color: "#ef4444", model: "Compact" },
+    { id: "VEH-025", slot: "SP-45", color: "#10b981", model: "Sedan" },
+    { id: "VEH-026", slot: "SP-49", color: "#ef4444", model: "Hatchback" },
+    { id: "VEH-027", slot: "SP-53", color: "#10b981", model: "SUV" },
+    { id: "VEH-028", slot: "SP-55", color: "#ef4444", model: "Sedan" },
+    { id: "VEH-029", slot: "SP-57", color: "#10b981", model: "Van" },
+    { id: "VEH-030", slot: "SP-60", color: "#ef4444", model: "Pickup" },
   ].map((s) => ({
     id: s.id,
     plate: s.id.replace("VEH-", "DEMO-"),

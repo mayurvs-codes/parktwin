@@ -1,0 +1,49 @@
+- generic [ref=f6e2]:
+  - complementary "Primary" [ref=f6e3]:
+    - link "ParkTwin AI" [ref=f6e8] [cursor=pointer]:
+      - /url: /
+    - navigation "Primary" [ref=f6e10]:
+      - generic [ref=f6e11]: overview
+      - link "Dashboard" [ref=f6e12] [cursor=pointer]:
+        - /url: /dashboard
+      - generic [ref=f6e20]: operations
+      - link "Live Parking" [ref=f6e21] [cursor=pointer]:
+        - /url: /parking
+      - link "Digital Twin" [ref=f6e30] [cursor=pointer]:
+        - /url: /digital-twin
+      - link "Vehicles" [ref=f6e37] [cursor=pointer]:
+        - /url: /vehicles
+      - link "Video" [ref=f6e44] [cursor=pointer]:
+        - /url: /video-library
+      - link "CCTV" [ref=f6e49] [cursor=pointer]:
+        - /url: /video-processing
+      - generic [ref=f6e59]: intelligence
+      - link "ANPR" [ref=f6e60] [cursor=pointer]:
+        - /url: /anpr
+      - link "Analytics" [ref=f6e68] [cursor=pointer]:
+        - /url: /analytics
+      - link "Reports" [ref=f6e73] [cursor=pointer]:
+        - /url: /reports
+      - generic [ref=f6e79]: system
+      - link "Settings" [ref=f6e80] [cursor=pointer]:
+        - /url: /settings
+    - generic [ref=f6e87]:
+      - generic [ref=f6e88]: SYSTEM ONLINE
+      - generic [ref=f6e93]: v1.0.0
+  - generic [ref=f6e94]:
+    - banner [ref=f6e95]:
+      - button "Toggle sidebar" [ref=f6e96] [cursor=pointer]
+      - navigation "Breadcrumb" [ref=f6e99]:
+        - link "Home" [ref=f6e101] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f6e106]: Digital Twin
+      - generic [ref=f6e110]:
+        - button "Toggle notifications panel" [ref=f6e111] [cursor=pointer]
+        - link [ref=f6e115] [cursor=pointer]:
+          - /url: /user/dashboard
+          - button "Driver Portal" [ref=f6e116]
+        - button "Toggle color theme" [ref=f6e121] [cursor=pointer]
+        - generic [ref=f6e124]: Admin System
+    - link "Skip to content" [ref=f6e131] [cursor=pointer]:
+      - /url: "#main-content"
+    - main [ref=f6e132]

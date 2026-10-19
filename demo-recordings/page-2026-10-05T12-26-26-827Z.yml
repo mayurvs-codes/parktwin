@@ -1,0 +1,400 @@
+- generic [ref=f6e1]:
+  - generic [ref=f6e5]:
+    - banner [ref=f6e6]:
+      - generic [ref=f6e8]:
+        - generic [ref=f6e9]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=f6e10] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f6e15]:
+              - generic [ref=f6e16]:
+                - generic [ref=f6e17]: PARKTWIN AI
+                - generic [ref=f6e18]: Driver
+              - generic [ref=f6e19]: Smart Journey Guidance
+          - navigation [ref=f6e20]:
+            - link "Dashboard" [ref=f6e21] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [ref=f6e28] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=f6e33] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=f6e38] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=f6e44] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=f6e48]:
+          - generic [ref=f6e49]:
+            - generic [ref=f6e51]: VEH-001
+            - generic [ref=f6e52]: CAM-01
+          - button "CCTV Evidence" [ref=f6e53] [cursor=pointer]
+          - link [ref=f6e58] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=f6e59]
+          - button "Toggle color theme" [ref=f6e65] [cursor=pointer]
+      - generic [ref=f6e70]:
+        - generic [ref=f6e71]:
+          - generic [ref=f6e72]:
+            - button "DEMO MODE" [ref=f6e73] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=f6e79] [cursor=pointer]
+          - generic [ref=f6e85]:
+            - generic [ref=f6e86]:
+              - strong [ref=f6e88]: KA04MN8049
+              - generic [ref=f6e89]: (98% paddleocr)
+              - generic [ref=f6e90]: "Track #6"
+            - generic [ref=f6e91]: 4. Space Assigned
+        - generic [ref=f6e93]:
+          - generic [ref=f6e94]:
+            - generic [ref=f6e95]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=f6e100] [cursor=pointer]:
+              - generic [ref=f6e101]: VEH-001
+              - generic "Reserved" [ref=f6e102]
+            - button "VEH-002 Reserved" [ref=f6e103] [cursor=pointer]:
+              - generic [ref=f6e104]: VEH-002
+              - generic "Reserved" [ref=f6e105]
+            - button "VEH-003 No Reservation" [ref=f6e106] [cursor=pointer]:
+              - generic [ref=f6e107]: VEH-003
+              - generic "No Reservation" [ref=f6e108]
+            - button "VEH-004 No Reservation" [ref=f6e109] [cursor=pointer]:
+              - generic [ref=f6e110]: VEH-004
+              - generic "No Reservation" [ref=f6e111]
+            - button "VEH-005 No Reservation" [ref=f6e112] [cursor=pointer]:
+              - generic [ref=f6e113]: VEH-005
+              - generic "No Reservation" [ref=f6e114]
+          - generic [ref=f6e115]:
+            - button "Next Event" [ref=f6e116] [cursor=pointer]
+            - button "Reset Vehicle" [ref=f6e120] [cursor=pointer]
+            - button "Reset Demo" [ref=f6e125] [cursor=pointer]
+    - main [ref=f6e127]:
+      - generic [ref=f6e128]:
+        - generic [ref=f6e129]:
+          - generic [ref=f6e130]:
+            - generic [ref=f6e131]:
+              - generic [ref=f6e132]: Select Demo Persona
+              - generic [ref=f6e138]: Cross-Tab Synchronized
+            - generic [ref=f6e139]:
+              - button "USER A (Registered) Active Reservation · SP-07 ★ Designated Space Ready" [active] [ref=f6e140] [cursor=pointer]:
+                - generic [ref=f6e141]: USER A (Registered)
+                - generic [ref=f6e148]:
+                  - text: Active Reservation ·
+                  - strong [ref=f6e149]: SP-07
+                - generic [ref=f6e150]: ★ Designated Space Ready
+              - button "USER B (Registered) Valid Eligibility · No Pre-Designation Select & Reserve Bay" [ref=f6e151] [cursor=pointer]:
+                - generic [ref=f6e152]: USER B (Registered)
+                - generic [ref=f6e159]: Valid Eligibility · No Pre-Designation
+                - generic [ref=f6e160]: Select & Reserve Bay
+              - button "GUEST USER Unregistered · No Prior Allocation Check Live Availability" [ref=f6e161] [cursor=pointer]:
+                - generic [ref=f6e162]: GUEST USER
+                - generic [ref=f6e168]: Unregistered · No Prior Allocation
+                - generic [ref=f6e169]: Check Live Availability
+            - generic [ref=f6e170]:
+              - generic [ref=f6e171]:
+                - generic [ref=f6e172]: "DEMO STATUS:"
+                - generic [ref=f6e174]:
+                  - strong [ref=f6e175]: "16"
+                  - text: Occ ·
+                  - strong [ref=f6e176]: "3"
+                  - text: Avail ·
+                  - strong [ref=f6e177]: "1"
+                  - text: Desig
+                  - generic [ref=f6e590]:
+                    - text: ·
+                    - strong [ref=f6e591]: ⚠ VIOLATION (SP-11)
+              - generic [ref=f6e178]:
+                - button "Clear Violation" [ref=f6e592] [cursor=pointer]
+                - button "Reset Demo" [ref=f6e183] [cursor=pointer]
+          - generic [ref=f6e188]:
+            - generic [ref=f6e189]:
+              - generic [ref=f6e190]: Active Driver Vehicles
+              - generic [ref=f6e195]: 5 active driver profiles
+            - generic [ref=f6e196]:
+              - 'button "VEH-001 #ef4444 Executive SUV Res: SP-07" [ref=f6e197] [cursor=pointer]':
+                - generic [ref=f6e198]:
+                  - generic [ref=f6e199]: VEH-001
+                  - generic "#ef4444" [ref=f6e200]
+                - generic [ref=f6e201]: Executive SUV
+                - generic [ref=f6e202]: "Res: SP-07"
+              - 'button "VEH-002 #10b981 Compact Hybrid Drive-in" [ref=f6e205] [cursor=pointer]':
+                - generic [ref=f6e206]:
+                  - generic [ref=f6e207]: VEH-002
+                  - generic "#10b981" [ref=f6e208]
+                - generic [ref=f6e209]: Compact Hybrid
+                - generic [ref=f6e210]: Drive-in
+              - 'button "VEH-003 #ef4444 Electric Sedan Drive-in" [ref=f6e213] [cursor=pointer]':
+                - generic [ref=f6e214]:
+                  - generic [ref=f6e215]: VEH-003
+                  - generic "#ef4444" [ref=f6e216]
+                - generic [ref=f6e217]: Electric Sedan
+                - generic [ref=f6e218]: Drive-in
+              - 'button "VEH-004 #10b981 Crossover Drive-in" [ref=f6e224] [cursor=pointer]':
+                - generic [ref=f6e225]:
+                  - generic [ref=f6e226]: VEH-004
+                  - generic "#10b981" [ref=f6e227]
+                - generic [ref=f6e228]: Crossover
+                - generic [ref=f6e229]: Drive-in
+              - 'button "VEH-005 #ef4444 City Hatchback Drive-in" [ref=f6e232] [cursor=pointer]':
+                - generic [ref=f6e233]:
+                  - generic [ref=f6e234]: VEH-005
+                  - generic "#ef4444" [ref=f6e235]
+                - generic [ref=f6e236]: City Hatchback
+                - generic [ref=f6e237]: Drive-in
+        - generic [ref=f6e240]:
+          - generic [ref=f6e241]:
+            - generic [ref=f6e242]:
+              - generic [ref=f6e244]: PARKTWIN AI
+              - generic [ref=f6e245]: FOCUSED ZONE (SP-01 – SP-20)
+            - generic [ref=f6e246]:
+              - generic [ref=f6e250]: "3"
+              - generic [ref=f6e251]: spaces available
+          - generic [ref=f6e252]:
+            - generic [ref=f6e253]:
+              - generic [ref=f6e254]:
+                - generic [ref=f6e255]: REGISTERED DRIVER
+                - generic [ref=f6e256]:
+                  - heading "VEH-001" [level=2] [ref=f6e605]
+                  - generic [ref=f6e258]: (Executive SUV)
+              - generic [ref=f6e259]: ★ USER A · DESIGNATED
+            - generic [ref=f6e261]:
+              - generic [ref=f6e262]:
+                - generic [ref=f6e263]: ★ DESIGNATED PARKING READY
+                - generic [ref=f6e266]: NO SEARCHING REQUIRED
+              - generic [ref=f6e267]: SP-07
+              - paragraph [ref=f6e607]:
+                - text: Your designated parking space is
+                - strong [ref=f6e608]: SP-07
+                - text: (Zone A · North Concourse · Level B2).
+          - button "START NAVIGATION TO SP-07" [ref=f6e609] [cursor=pointer]
+        - generic [ref=f6e276]:
+          - generic [ref=f6e277]:
+            - heading "Digital Twin Facility Guidance" [level=2] [ref=f6e282]
+            - link [ref=f6e283] [cursor=pointer]:
+              - /url: /user/navigation
+              - button "Full Screen GPS View" [ref=f6e284]
+          - generic [ref=f6e289]:
+            - generic [ref=f6e291]:
+              - button "Zoom In (+)" [ref=f6e292] [cursor=pointer]
+              - button "Zoom Out (−)" [ref=f6e296] [cursor=pointer]
+              - button "Focus Demo Zone (Home)" [ref=f6e300] [cursor=pointer]
+              - button "FIT" [ref=f6e304] [cursor=pointer]
+              - button "Center on Selected Item" [ref=f6e593] [cursor=pointer]
+              - generic [ref=f6e311]: 155%
+            - generic:
+              - generic: ACCESS_POINT_B2
+              - generic: Single Physical Gateway (Entry & Exit)
+            - img [ref=f6e312]:
+              - generic:
+                - generic:
+                  - generic: LIFT
+                  - generic: STAIR & LIFT CORE 01
+                - generic: ◄ ENTRY RAMP
+                - generic:
+                  - generic: LIFT
+                  - generic: STAIR & LIFT CORE 02
+                - generic:
+                  - generic:
+                    - generic: LOBBY
+                    - generic: 2.8M WIDE
+                  - generic: SERVICES / STORAGE
+                  - generic:
+                    - generic: LOBBY
+                    - generic: 3.0M WIDE
+              - generic:
+                - generic: FOCUSED DEMO ZONE · ISLAND 1 (20 SPACES)
+                - generic: NORTH ROW · 8 STALLS (SP-01 – SP-08)
+                - generic: SOUTH ROW · 8 STALLS (SP-09 – SP-16)
+                - generic: WEST END · 4 STALLS (SP-17 – SP-20)
+                - generic: OCC 16 · AVAIL 3 · DESIG 1 · ⚠ VIOLATION
+              - generic [ref=f6e326]:
+                - generic [ref=f6e327] [cursor=pointer]: P01
+                - generic [ref=f6e329] [cursor=pointer]: P02
+                - generic [ref=f6e331] [cursor=pointer]: P03
+                - generic [ref=f6e333] [cursor=pointer]: P04
+                - generic [ref=f6e335] [cursor=pointer]: P05
+                - generic [ref=f6e337] [cursor=pointer]: P06
+                - generic [ref=f6e339] [cursor=pointer]: ★ P07
+                - generic [ref=f6e341] [cursor=pointer]: P08
+                - generic [ref=f6e343] [cursor=pointer]: P09
+                - generic [ref=f6e345] [cursor=pointer]: P10
+                - generic [ref=f6e347] [cursor=pointer]: VIOLATION
+                - generic [ref=f6e349] [cursor=pointer]: P12
+                - generic [ref=f6e351] [cursor=pointer]: P13
+                - generic [ref=f6e353] [cursor=pointer]: P14
+                - generic [ref=f6e355] [cursor=pointer]: P15
+                - generic [ref=f6e357] [cursor=pointer]: P16
+                - generic [ref=f6e359] [cursor=pointer]: P17
+                - generic [ref=f6e361] [cursor=pointer]: P18
+                - generic [ref=f6e363] [cursor=pointer]: P19
+                - generic [ref=f6e365] [cursor=pointer]: P20
+                - generic [ref=f6e367] [cursor=pointer]: P21
+                - generic [ref=f6e369] [cursor=pointer]: P22
+                - generic [ref=f6e371] [cursor=pointer]: P23
+                - generic [ref=f6e373] [cursor=pointer]: P24
+                - generic [ref=f6e375] [cursor=pointer]: P25
+                - generic [ref=f6e377] [cursor=pointer]: P26
+                - generic [ref=f6e379] [cursor=pointer]: P27
+                - generic [ref=f6e381] [cursor=pointer]: P28
+                - generic [ref=f6e383] [cursor=pointer]: P29
+                - generic [ref=f6e385] [cursor=pointer]: P30
+                - generic [ref=f6e387] [cursor=pointer]: P31
+                - generic [ref=f6e389] [cursor=pointer]: P32
+                - generic [ref=f6e391] [cursor=pointer]: P33
+                - generic [ref=f6e393] [cursor=pointer]: P34
+                - generic [ref=f6e395] [cursor=pointer]: P35
+                - generic [ref=f6e397] [cursor=pointer]: P36
+                - generic [ref=f6e399] [cursor=pointer]: P37
+                - generic [ref=f6e401] [cursor=pointer]: P38
+                - generic [ref=f6e403] [cursor=pointer]: P39
+                - generic [ref=f6e405] [cursor=pointer]: P40
+                - generic [ref=f6e407] [cursor=pointer]: P41
+                - generic [ref=f6e409] [cursor=pointer]: P42
+                - generic [ref=f6e411] [cursor=pointer]: P43
+                - generic [ref=f6e413] [cursor=pointer]: P44
+                - generic [ref=f6e415] [cursor=pointer]: P45
+                - generic [ref=f6e417] [cursor=pointer]: P46
+                - generic [ref=f6e419] [cursor=pointer]: P47
+                - generic [ref=f6e421] [cursor=pointer]: P48
+                - generic [ref=f6e423] [cursor=pointer]: P49
+                - generic [ref=f6e425] [cursor=pointer]: P50
+                - generic [ref=f6e427] [cursor=pointer]: P51
+                - generic [ref=f6e429] [cursor=pointer]: P52
+                - generic [ref=f6e431] [cursor=pointer]: P53
+                - generic [ref=f6e433] [cursor=pointer]: P54
+                - generic [ref=f6e435] [cursor=pointer]: P55
+                - generic [ref=f6e437] [cursor=pointer]: P56
+                - generic [ref=f6e439] [cursor=pointer]: P57
+                - generic [ref=f6e441] [cursor=pointer]: P58
+                - generic [ref=f6e443] [cursor=pointer]: P59
+                - generic [ref=f6e445] [cursor=pointer]: P60
+              - generic [ref=f6e447]:
+                - generic [ref=f6e448] [cursor=pointer]
+                - generic [ref=f6e449] [cursor=pointer]
+                - generic [ref=f6e450] [cursor=pointer]
+                - generic [ref=f6e451] [cursor=pointer]
+                - generic [ref=f6e452] [cursor=pointer]
+                - generic [ref=f6e453] [cursor=pointer]
+                - generic [ref=f6e454] [cursor=pointer]
+                - generic [ref=f6e455] [cursor=pointer]
+                - generic [ref=f6e456] [cursor=pointer]
+                - generic [ref=f6e598] [cursor=pointer]: VEH-001 [VIOL]
+                - generic [ref=f6e457] [cursor=pointer]
+                - generic [ref=f6e458] [cursor=pointer]
+                - generic [ref=f6e459] [cursor=pointer]
+                - generic [ref=f6e460] [cursor=pointer]
+                - generic [ref=f6e461] [cursor=pointer]
+                - generic [ref=f6e462] [cursor=pointer]
+                - generic [ref=f6e463] [cursor=pointer]
+                - generic [ref=f6e464] [cursor=pointer]
+                - generic [ref=f6e465] [cursor=pointer]
+                - generic [ref=f6e466] [cursor=pointer]
+                - generic [ref=f6e467] [cursor=pointer]
+                - generic [ref=f6e468] [cursor=pointer]
+                - generic [ref=f6e469] [cursor=pointer]
+                - generic [ref=f6e470] [cursor=pointer]
+                - generic [ref=f6e471] [cursor=pointer]
+                - generic [ref=f6e472] [cursor=pointer]
+                - generic [ref=f6e473] [cursor=pointer]
+                - generic [ref=f6e474] [cursor=pointer]
+                - generic [ref=f6e475] [cursor=pointer]
+                - generic [ref=f6e476] [cursor=pointer]
+                - generic [ref=f6e477] [cursor=pointer]
+                - generic [ref=f6e478] [cursor=pointer]
+                - generic [ref=f6e479] [cursor=pointer]
+                - generic [ref=f6e480] [cursor=pointer]
+                - generic [ref=f6e481] [cursor=pointer]
+                - generic [ref=f6e482] [cursor=pointer]
+                - generic [ref=f6e483] [cursor=pointer]
+                - generic [ref=f6e484] [cursor=pointer]
+                - generic [ref=f6e485] [cursor=pointer]
+                - generic [ref=f6e486] [cursor=pointer]
+                - generic [ref=f6e487] [cursor=pointer]
+                - generic [ref=f6e488] [cursor=pointer]
+                - generic [ref=f6e489] [cursor=pointer]
+                - generic [ref=f6e490] [cursor=pointer]
+                - generic [ref=f6e491] [cursor=pointer]
+                - generic [ref=f6e492] [cursor=pointer]
+                - generic [ref=f6e493] [cursor=pointer]
+                - generic [ref=f6e494] [cursor=pointer]
+                - generic [ref=f6e495] [cursor=pointer]
+                - generic [ref=f6e496] [cursor=pointer]
+                - generic [ref=f6e497] [cursor=pointer]
+                - generic [ref=f6e498] [cursor=pointer]
+                - generic [ref=f6e499] [cursor=pointer]
+                - generic [ref=f6e500] [cursor=pointer]
+                - generic [ref=f6e501] [cursor=pointer]
+                - generic [ref=f6e502] [cursor=pointer]
+              - generic [ref=f6e503]: ACCESS_POINT_B2
+              - generic: ★ SP-07
+            - generic:
+              - generic: Available
+              - generic: Occupied
+              - generic: Reserved
+              - generic: Selected
+        - generic [ref=f6e509]:
+          - generic [ref=f6e511]:
+            - generic [ref=f6e512]:
+              - generic [ref=f6e513]: Lifecycle Provenance Audit
+              - 'heading "VEHICLE JOURNEY: APPLICATION VS PHYSICAL EVIDENCE" [level=3] [ref=f6e518]'
+              - paragraph [ref=f6e519]: Authoritative distinction between software lifecycle transitions and CCTV sensors.
+            - generic [ref=f6e520]:
+              - generic [ref=f6e521]: "EVIDENCE COVERAGE:"
+              - generic [ref=f6e522]: ● PARTIALLY EVIDENCE-BACKED
+          - generic [ref=f6e524]:
+            - generic [ref=f6e525]:
+              - generic [ref=f6e526]:
+                - generic [ref=f6e527]: APPLICATION JOURNEY (SOFTWARE)
+                - generic [ref=f6e528]: APPLICATION STATE
+              - generic [ref=f6e529]:
+                - generic [ref=f6e530]:
+                  - generic [ref=f6e531]:
+                    - generic [ref=f6e532]: 1. GATEWAY ENTRY
+                    - text: Registered at ACCESS_POINT_B2
+                    - generic [ref=f6e533]: Session initiated in memory store
+                  - generic [ref=f6e534]: APPLICATION STATE
+                - generic [ref=f6e535]:
+                  - generic [ref=f6e536]:
+                    - generic [ref=f6e537]: 2. NAVIGATION ROUTING
+                    - generic [ref=f6e613]: A* Guidance to SP-07
+                    - generic [ref=f6e538]: Waypoint trajectory calculation
+                  - generic [ref=f6e539]: APPLICATION STATE
+                - generic [ref=f6e540]:
+                  - generic [ref=f6e541]:
+                    - generic [ref=f6e542]: 3. BAY OCCUPANCY
+                    - text: "Target Bay: SP-07"
+                    - generic [ref=f6e543]: Occupancy flag toggled via arrival event
+                  - generic [ref=f6e544]: APPLICATION STATE
+                - generic [ref=f6e545]:
+                  - generic [ref=f6e546]:
+                    - generic [ref=f6e547]: 4. FACILITY EXIT
+                    - text: Pending Exit Request
+                    - generic [ref=f6e548]: Bay freed and returned to available in twin
+                  - generic [ref=f6e549]: APP_DECISION
+            - generic [ref=f6e550]:
+              - generic [ref=f6e551]:
+                - generic [ref=f6e552]: PHYSICAL EVIDENCE (SENSORS)
+                - generic [ref=f6e553]: DVR / ANPR
+              - generic [ref=f6e554]:
+                - generic [ref=f6e555]:
+                  - generic [ref=f6e556]:
+                    - generic [ref=f6e557]: 1. ENTRANCE CCTV (CAM-01)
+                    - generic [ref=f6e558]: KA05ML7220 physically observed at gate
+                    - generic [ref=f6e559]: "Identity linkage: UNVERIFIED"
+                  - generic [ref=f6e560]: OBSERVED / UNVERIFIED
+                - generic [ref=f6e561]:
+                  - generic [ref=f6e562]:
+                    - generic [ref=f6e563]: 2. PARKING MANEUVER (CAM-02)
+                    - generic [ref=f6e564]: NOT OBSERVED IN CCTV
+                    - generic [ref=f6e565]: CAM-02 shows stationary parked vehicles only. No parking maneuver recorded.
+                  - generic [ref=f6e566]: NOT OBSERVED
+                - generic [ref=f6e567]:
+                  - generic [ref=f6e568]:
+                    - generic [ref=f6e569]: 3. PHYSICAL EXIT (CAM-03)
+                    - generic [ref=f6e570]: NOT OBSERVED IN CCTV
+                    - generic [ref=f6e571]: CAM-03 shows stationary exit barrier. Vehicle egress not recorded.
+                  - generic [ref=f6e572]: NOT OBSERVED
+                - generic [ref=f6e573]:
+                  - generic [ref=f6e574]:
+                    - generic [ref=f6e575]: 4. COMPLETE LIFECYCLE PROOF
+                    - generic [ref=f6e576]: NOT AVAILABLE IN DATASET
+                    - generic [ref=f6e577]: Supplied clips are ~15s and do not record full journey end-to-end.
+                  - generic [ref=f6e578]: AUDIT FACT
+    - contentinfo [ref=f6e579]: ParkTwin AI Driver Portal · Verified Facility Geometry & Real CCTV Physical Evidence
+  - button "Open Next.js Dev Tools" [ref=f6e585] [cursor=pointer]
+  - alert [ref=f6e589]

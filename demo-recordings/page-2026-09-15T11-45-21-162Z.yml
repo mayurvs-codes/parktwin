@@ -1,0 +1,40 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - generic:
+        - generic: +
+        - generic: ACADEMIC PROJECT EVALUATION
+      - generic:
+        - generic: FACILITY B2 · CANONICAL SPATIAL MODEL
+        - generic: +
+    - generic:
+      - generic: DIGITAL TWIN ARCHITECTURE
+      - generic:
+        - generic: 00:00.00
+        - generic: +
+  - generic [ref=e4]:
+    - generic:
+      - generic:
+        - generic:
+          - img:
+            - generic: SP-24 · LEVEL B2
+            - generic: WAYPOINT_06
+            - generic: CAMERA_02_FOV
+        - heading "PARKTWIN AI" [level=1]
+        - paragraph: SMART PARKING DIGITAL TWIN
+    - generic:
+      - generic: PROJECT BY
+      - heading "MAYUR VS" [level=2]
+      - paragraph: MECHANICAL ENGINEERING
+      - paragraph: PES UNIVERSITY
+    - generic:
+      - generic: PROJECT GUIDE
+      - heading "SINDHU R PAI" [level=2]
+      - paragraph: Assistant Professor
+    - generic:
+      - generic: MASTER MENTOR
+      - heading "DR. SHYLAJA S S" [level=2]
+      - generic:
+        - paragraph: Chairperson
+        - paragraph: Director of Cloud Computing & Big Data (CCBD)
+        - paragraph: Centre for Data Sciences & Applied Machine Learning (CDSAML)

@@ -1,0 +1,167 @@
+- generic [ref=f3e2]:
+  - complementary "Primary" [ref=f3e3]:
+    - link "ParkTwin AI" [ref=f3e8] [cursor=pointer]:
+      - /url: /
+    - navigation "Primary" [ref=f3e10]:
+      - generic [ref=f3e11]: overview
+      - link "Dashboard" [ref=f3e12] [cursor=pointer]:
+        - /url: /dashboard
+      - generic [ref=f3e20]: operations
+      - link "Live Parking" [ref=f3e21] [cursor=pointer]:
+        - /url: /parking
+      - link "Digital Twin" [ref=f3e30] [cursor=pointer]:
+        - /url: /digital-twin
+      - link "Vehicles" [ref=f3e37] [cursor=pointer]:
+        - /url: /vehicles
+      - link "Video" [ref=f3e44] [cursor=pointer]:
+        - /url: /video-library
+      - link "CCTV" [ref=f3e49] [cursor=pointer]:
+        - /url: /video-processing
+      - generic [ref=f3e59]: intelligence
+      - link "ANPR" [ref=f3e60] [cursor=pointer]:
+        - /url: /anpr
+      - link "Analytics" [ref=f3e68] [cursor=pointer]:
+        - /url: /analytics
+      - link "Reports" [ref=f3e73] [cursor=pointer]:
+        - /url: /reports
+      - generic [ref=f3e79]: system
+      - link "Settings" [ref=f3e80] [cursor=pointer]:
+        - /url: /settings
+    - generic [ref=f3e87]:
+      - generic [ref=f3e88]: SYSTEM ONLINE
+      - generic [ref=f3e93]: v1.0.0
+  - generic [ref=f3e94]:
+    - banner [ref=f3e95]:
+      - button "Toggle sidebar" [ref=f3e96] [cursor=pointer]
+      - navigation "Breadcrumb" [ref=f3e99]:
+        - link "Home" [ref=f3e101] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f3e106]: Dashboard
+      - generic [ref=f3e110]:
+        - button "Toggle notifications panel" [ref=f3e111] [cursor=pointer]
+        - link [ref=f3e115] [cursor=pointer]:
+          - /url: /user/dashboard
+          - button "Driver Portal" [ref=f3e116]
+        - button "Toggle color theme" [ref=f3e121] [cursor=pointer]
+        - generic [ref=f3e124]: Admin System
+    - link "Skip to content" [ref=f3e131] [cursor=pointer]:
+      - /url: "#main-content"
+    - main [ref=f3e132]:
+      - generic [ref=f3e133]:
+        - generic [ref=f3e134]:
+          - generic [ref=f3e142]:
+            - generic [ref=f3e143]:
+              - heading "Dashboard" [level=1] [ref=f3e144]
+              - generic [ref=f3e145]: System Live
+            - paragraph [ref=f3e146]: Industrial Smart Parking Operating System · B2 Facility Real-Time Operations
+          - generic [ref=f3e148]:
+            - button "Start Project" [ref=f3e150] [cursor=pointer]
+            - button "Project Reset" [ref=f3e154] [cursor=pointer]
+            - button "Refresh dashboard data" [ref=f3e159] [cursor=pointer]: Refresh
+        - generic [ref=f3e165]:
+          - generic [ref=f3e166]: "System Core:"
+          - generic [ref=f3e168]:
+            - generic [ref=f3e169]:
+              - generic [ref=f3e173]: API Gateway
+              - generic [ref=f3e174]: DEGRADED
+            - generic [ref=f3e178]:
+              - generic [ref=f3e183]: Database
+              - generic [ref=f3e184]: SQLite (parktwin.db)
+            - generic [ref=f3e188]:
+              - generic [ref=f3e192]: CV Engine
+              - generic [ref=f3e193]: STANDBY
+            - generic [ref=f3e197]:
+              - generic [ref=f3e204]: WebSocket
+              - generic [ref=f3e205]: OFFLINE
+            - generic [ref=f3e209]:
+              - generic [ref=f3e213]: CCTV Matrix
+              - generic [ref=f3e214]:
+                - generic [ref=f3e215]: 3 Active
+                - generic [ref=f3e216]: / 16 Arch
+        - generic [ref=f3e217]:
+          - generic [ref=f3e220]:
+            - paragraph [ref=f3e221]: Total Parking Slots
+            - paragraph [ref=f3e222]: "60"
+            - paragraph [ref=f3e223]: across 6 facility zones
+          - generic [ref=f3e232]:
+            - paragraph [ref=f3e233]: Occupied Slots
+            - paragraph [ref=f3e234]: "20"
+            - paragraph [ref=f3e235]: 20 occupied (GREEN)
+          - generic [ref=f3e243]:
+            - paragraph [ref=f3e244]: Available Slots
+            - paragraph [ref=f3e245]: "40"
+            - paragraph [ref=f3e246]: 40 available (RED)
+          - generic [ref=f3e253]:
+            - paragraph [ref=f3e254]: Active Parking Sessions
+            - paragraph [ref=f3e255]: "20"
+            - paragraph [ref=f3e256]: live dwell tracking
+          - generic [ref=f3e262]:
+            - paragraph [ref=f3e263]: Today's Vehicles
+            - paragraph [ref=f3e264]: "20"
+            - paragraph [ref=f3e265]: verified vehicle arrivals
+          - generic [ref=f3e274]:
+            - paragraph [ref=f3e275]: Occupancy Percentage
+            - paragraph [ref=f3e276]: 33.3%
+            - paragraph [ref=f3e277]: 20 of 60
+        - generic [ref=f3e283]:
+          - generic [ref=f3e285]:
+            - generic [ref=f3e286]:
+              - heading "Recent Activity" [level=3] [ref=f3e290]
+              - generic [ref=f3e291]: 0 Events Logged
+            - generic [ref=f3e293]:
+              - paragraph [ref=f3e296]: No recent activity
+              - paragraph [ref=f3e297]: Press “START PROJECT” above to launch the deterministic demo movie and stream real-time gate and bay events.
+          - heading "Alerts" [level=3] [ref=f3e301]
+        - generic [ref=f3e307]:
+          - heading "System Health" [level=3] [ref=f3e311]
+          - generic [ref=f3e319]:
+            - heading "System Quick Actions" [level=3] [ref=f3e321]
+            - generic [ref=f3e323]:
+              - link [ref=f3e324] [cursor=pointer]:
+                - /url: /parking
+                - generic [ref=f3e329]:
+                  - paragraph [ref=f3e330]: Live Parking
+                  - paragraph [ref=f3e331]: Real-time slot occupancy and active sessions.
+              - link [ref=f3e334] [cursor=pointer]:
+                - /url: /digital-twin
+                - generic [ref=f3e340]:
+                  - paragraph [ref=f3e341]: Digital Twin
+                  - paragraph [ref=f3e342]: Interactive 2D B2 facility spatial digital twin.
+              - link [ref=f3e345] [cursor=pointer]:
+                - /url: /vehicles
+                - generic [ref=f3e351]:
+                  - paragraph [ref=f3e352]: Vehicles
+                  - paragraph [ref=f3e353]: Vehicle registry, dwell time, and plate search.
+              - link [ref=f3e356] [cursor=pointer]:
+                - /url: /video-library
+                - generic [ref=f3e360]:
+                  - paragraph [ref=f3e361]: Video
+                  - paragraph [ref=f3e362]: Curated recorded CCTV video repository.
+              - link [ref=f3e365] [cursor=pointer]:
+                - /url: /video-processing
+                - generic [ref=f3e371]:
+                  - paragraph [ref=f3e372]: CCTV
+                  - paragraph [ref=f3e373]: 16-camera multi-channel CCTV surveillance center.
+              - link [ref=f3e376] [cursor=pointer]:
+                - /url: /anpr
+                - generic [ref=f3e383]:
+                  - paragraph [ref=f3e384]: ANPR
+                  - paragraph [ref=f3e385]: Automated number-plate recognition & OCR scanning.
+              - link [ref=f3e388] [cursor=pointer]:
+                - /url: /analytics
+                - generic [ref=f3e392]:
+                  - paragraph [ref=f3e393]: Analytics
+                  - paragraph [ref=f3e394]: Dwell time, hourly flow, and occupancy trends.
+              - link [ref=f3e397] [cursor=pointer]:
+                - /url: /reports
+                - generic [ref=f3e402]:
+                  - paragraph [ref=f3e403]: Reports
+                  - paragraph [ref=f3e404]: Generate operational audits and audit export.
+              - link [ref=f3e407] [cursor=pointer]:
+                - /url: /settings
+                - generic [ref=f3e412]:
+                  - paragraph [ref=f3e413]: Settings
+                  - paragraph [ref=f3e414]: System parameters, cameras, and data configuration.
+      - generic [ref=f3e417]:
+        - generic [ref=f3e418]: © 2026 ParkTwin AI
+        - generic [ref=f3e419]: Smart Parking Intelligence Platform

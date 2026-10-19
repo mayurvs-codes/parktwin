@@ -1,0 +1,130 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Radar" [active] [ref=e24] [cursor=pointer]
+        - button "Discover" [ref=e32] [cursor=pointer]
+        - button "Hackathons" [ref=e37] [cursor=pointer]
+        - button "Internships" [ref=e45] [cursor=pointer]
+        - button "Open Source" [ref=e50] [cursor=pointer]
+        - button "Competitions" [ref=e56] [cursor=pointer]
+        - button "Research" [ref=e61] [cursor=pointer]
+        - button "Saved" [ref=e65] [cursor=pointer]
+        - button "Tracker" [ref=e69] [cursor=pointer]
+        - button "Projects" [ref=e72] [cursor=pointer]
+        - button "Sources" [ref=e78] [cursor=pointer]
+      - generic [ref=e82]:
+        - button "6" [ref=e157]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e87]': LIVE
+        - button "Deep Discover" [ref=e90] [cursor=pointer]
+        - button "Student Profile" [ref=e95]
+  - main [ref=e100]:
+    - generic [ref=e1772]:
+      - generic [ref=e1774]:
+        - generic [ref=e1784]:
+          - heading "Always-On Opportunity Radar STANDBY / MANUAL" [level=1] [ref=e1785]:
+            - text: Always-On Opportunity Radar
+            - generic [ref=e1786]: STANDBY / MANUAL
+          - paragraph [ref=e1787]: Continuous multi-source surveillance, field mutation detection, and actionable notification alerts
+        - generic [ref=e1788]:
+          - button "Scan Now" [ref=e1789]
+          - button "Refresh Radar Status" [ref=e1792]
+      - generic [ref=e1796]:
+        - generic [ref=e1797]:
+          - generic [ref=e1798]: Total Indexed
+          - generic [ref=e1804]: "21"
+          - paragraph [ref=e1805]: Cross-source candidate pool
+        - generic [ref=e1806]:
+          - generic [ref=e1807]: Actionable Opportunities
+          - generic [ref=e1812]: "19"
+          - paragraph [ref=e1813]: Truth-verified & ready
+        - generic [ref=e1814]:
+          - generic [ref=e1815]: Unread Alerts
+          - generic [ref=e1819]: "6"
+          - paragraph [ref=e1820]: Matches & deadline notices
+        - generic [ref=e1821]:
+          - generic [ref=e1822]: Monitored Targets
+          - generic [ref=e1826]: "1"
+          - paragraph [ref=e1827]: Watchlist surveillance
+      - generic [ref=e1828]:
+        - generic [ref=e1829]:
+          - generic [ref=e1830]:
+            - generic [ref=e1831]:
+              - heading "📡 Opportunity Radar Daily Digest — October 08, 2026" [level=3] [ref=e1836]
+              - generic [ref=e1837]: 19 Actionable Active
+            - generic [ref=e1838]: "**19 verified actionable opportunities active** 🔥 **High Relevance Matches (Score >= 80%)**: 2 ⏰ **Deadlines in next 72 hours**: 3 **Top Actionable Matches:** • **[uvic-auvic/Snappy2027] Research computer vision models** (uvic-auvic) — Match: 90% | Deadline: Open • **[aphelion-engine/aphelion-editor] Improve object tracking accuracy and stability** (aphelion-engine) — Match: 90% | Deadline: Open **Urgent Deadlines:** • ⚠️ **MindTech Arena 2026 – National Hackathon** (Indian Institute of Information Technology (IIIT), Kottayam) — Oct 10 • ⚠️ **Code The Cosmos '26** (Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad) — Oct 09 • ⚠️ **BlockHunt'26** (Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad) — Oct 10"
+          - generic [ref=e1839]:
+            - generic [ref=e1840]:
+              - heading "Field-Level Mutation & Change Timeline" [level=3] [ref=e1844]
+              - generic [ref=e1845]: 2 events logged
+            - generic [ref=e1846]:
+              - generic [ref=e1847]:
+                - generic [ref=e1848]:
+                  - generic [ref=e1849]:
+                    - generic [ref=e1850]: LOW
+                    - generic [ref=e1851]: DESCRIPTION CHANGED
+                    - generic [ref=e1852]: "field: description"
+                  - generic [ref=e1853]:
+                    - generic [ref=e1854]: by Daryl Ducharme , Open Source Programs Office This Week in Open Source for October 2, 2026 A look around the world of open source As AI becomes part of everyday software development, the most compel...
+                    - generic [ref=e1857]: by Sophia Vargas , Google Open Source We know that AI is actively transforming the sustainability and socio-technical dynamics of OSS communities. Google Open Source is committed to partnering with op...
+                - generic [ref=e1858]:
+                  - generic [ref=e1859]: 12:55 PM
+                  - button "View" [ref=e1860]
+              - generic [ref=e1861]:
+                - generic [ref=e1862]:
+                  - generic [ref=e1863]:
+                    - generic [ref=e1864]: LOW
+                    - generic [ref=e1865]: DESCRIPTION CHANGED
+                    - generic [ref=e1866]: "field: description"
+                  - generic [ref=e1867]:
+                    - generic [ref=e1868]: by Daryl Ducharme , Open Source Programs Office This Week in Open Source for October 2, 2026 A look around the world of open source As AI becomes part of everyday software development, the most compel...
+                    - generic [ref=e1871]: by Daryl Ducharme , Open Source Programs Office This Week in Open Source for July 16, 2026 A look around the world of open source We’re diving into another week of open source news and discussions. As...
+                - generic [ref=e1872]:
+                  - generic [ref=e1873]: 12:55 PM
+                  - button "View" [ref=e1874]
+        - generic [ref=e1875]:
+          - generic [ref=e1876]:
+            - generic [ref=e1877]:
+              - heading "Scan Schedule" [level=3] [ref=e1882]
+              - button [ref=e1883] [cursor=pointer]
+            - generic [ref=e1884]:
+              - generic [ref=e1885]:
+                - generic [ref=e1886]: Background Scanning
+                - generic [ref=e1887]: Disabled (Safe)
+              - generic [ref=e1888]:
+                - generic [ref=e1889]: Current Frequency
+                - generic [ref=e1890]: TWICE_DAILY (12h)
+              - generic [ref=e1891]:
+                - generic [ref=e1892]: Last Scan
+                - generic [ref=e1893]: None yet
+              - generic [ref=e1894]:
+                - generic [ref=e1895]: Next Scheduled
+                - generic [ref=e1896]: 06:28 AM
+            - generic [ref=e1897]:
+              - text: Interval Preset
+              - generic [ref=e1898]:
+                - button "12h" [ref=e1899]
+                - button "24h" [ref=e1900]
+                - button "7 Days" [ref=e1901]
+          - generic [ref=e1902]:
+            - generic [ref=e1903]:
+              - heading "Monitored Watchlist" [level=3] [ref=e1907]
+              - generic [ref=e1908]: 1 items
+            - generic [ref=e1910]:
+              - combobox [ref=e1911]:
+                - option "Organization" [selected]
+                - option "Tech / Skill"
+                - option "Category"
+              - textbox "e.g. Google, YOLO, HACKATHON..." [ref=e1912]
+              - button [disabled] [ref=e1913]
+            - generic [ref=e1916]:
+              - generic [ref=e1917]:
+                - generic [ref=e1918]: Google
+                - generic [ref=e1919]: ORGANIZATION
+              - button "Remove from watchlist" [ref=e1920]

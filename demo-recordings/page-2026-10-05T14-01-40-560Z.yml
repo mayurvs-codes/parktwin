@@ -1,0 +1,246 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=e10] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=e15]:
+              - generic [ref=e16]:
+                - generic [ref=e17]: PARKTWIN AI
+                - generic [ref=e18]: Driver
+              - generic [ref=e19]: Smart Journey Guidance
+          - navigation [ref=e20]:
+            - link "Dashboard" [ref=e21] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [ref=e28] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=e33] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=e38] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=e44] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e51]: VEH-001
+            - generic [ref=e52]: CAM-01
+          - button "CCTV Evidence" [ref=e53] [cursor=pointer]
+          - link [ref=e58] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=e59]
+          - button "Toggle color theme" [ref=e65] [cursor=pointer]
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - button "DEMO MODE" [ref=e73] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=e79] [cursor=pointer]
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - strong [ref=e88]: KA04MN8049
+              - generic [ref=e89]: (98% paddleocr)
+              - generic [ref=e90]: "Track #6"
+            - generic [ref=e91]: 5. Navigating to Bay
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - generic [ref=e95]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=e100] [cursor=pointer]:
+              - generic [ref=e101]: VEH-001
+              - generic "Reserved" [ref=e102]
+            - button "VEH-002 Reserved" [ref=e103] [cursor=pointer]:
+              - generic [ref=e104]: VEH-002
+              - generic "Reserved" [ref=e105]
+            - button "VEH-003 No Reservation" [ref=e106] [cursor=pointer]:
+              - generic [ref=e107]: VEH-003
+              - generic "No Reservation" [ref=e108]
+            - button "VEH-004 No Reservation" [ref=e109] [cursor=pointer]:
+              - generic [ref=e110]: VEH-004
+              - generic "No Reservation" [ref=e111]
+            - button "VEH-005 No Reservation" [ref=e112] [cursor=pointer]:
+              - generic [ref=e113]: VEH-005
+              - generic "No Reservation" [ref=e114]
+          - generic [ref=e115]:
+            - button "Next Event" [ref=e116] [cursor=pointer]
+            - button "Reset Vehicle" [ref=e120] [cursor=pointer]
+            - button "Reset Demo" [ref=e125] [cursor=pointer]
+    - main [ref=e127]:
+      - generic [ref=e685]:
+        - generic [ref=e686]:
+          - link [ref=e687] [cursor=pointer]:
+            - /url: /user/dashboard
+            - button "Dashboard" [ref=e688]
+          - generic [ref=e692]:
+            - generic [ref=e693]: 🚗 VEH-001
+            - generic [ref=e694]: →
+            - generic [ref=e695]: 🅿️ SP-07
+          - generic [ref=e696]:
+            - generic [ref=e697]: ● LIVE GPS GUIDANCE
+            - button "Exit Navigation" [ref=e698] [cursor=pointer]
+        - generic [ref=e700]:
+          - generic [ref=e702]:
+            - button "Zoom In (+)" [ref=e703] [cursor=pointer]
+            - button "Zoom Out (−)" [ref=e707] [cursor=pointer]
+            - button "Focus Demo Zone (Home)" [ref=e711] [cursor=pointer]
+            - button "FIT" [ref=e715] [cursor=pointer]
+            - button "Center on Selected Item" [ref=e722] [cursor=pointer]
+            - generic [ref=e727]: 155%
+          - generic:
+            - generic: ACCESS_POINT_B2
+            - generic: Single Physical Gateway (Entry & Exit)
+          - img [ref=e728]:
+            - generic:
+              - generic:
+                - generic: LIFT
+                - generic: STAIR & LIFT CORE 01
+              - generic: ◄ ENTRY RAMP
+              - generic:
+                - generic: LIFT
+                - generic: STAIR & LIFT CORE 02
+              - generic:
+                - generic:
+                  - generic: LOBBY
+                  - generic: 2.8M WIDE
+                - generic: SERVICES / STORAGE
+                - generic:
+                  - generic: LOBBY
+                  - generic: 3.0M WIDE
+            - generic:
+              - generic: FOCUSED DEMO ZONE · ISLAND 1 (20 SPACES)
+              - generic: NORTH ROW · 8 STALLS (SP-01 – SP-08)
+              - generic: SOUTH ROW · 8 STALLS (SP-09 – SP-16)
+              - generic: WEST END · 4 STALLS (SP-17 – SP-20)
+              - generic: OCC 15 · AVAIL 4 · DESIG 1
+            - generic [ref=e742]:
+              - generic [ref=e743] [cursor=pointer]: P01
+              - generic [ref=e745] [cursor=pointer]: P02
+              - generic [ref=e747] [cursor=pointer]: P03
+              - generic [ref=e749] [cursor=pointer]: P04
+              - generic [ref=e751] [cursor=pointer]: P05
+              - generic [ref=e753] [cursor=pointer]: P06
+              - generic [ref=e755] [cursor=pointer]: ★ P07
+              - generic [ref=e757] [cursor=pointer]: P08
+              - generic [ref=e759] [cursor=pointer]: P09
+              - generic [ref=e761] [cursor=pointer]: P10
+              - generic [ref=e763] [cursor=pointer]: P11
+              - generic [ref=e765] [cursor=pointer]: P12
+              - generic [ref=e767] [cursor=pointer]: P13
+              - generic [ref=e769] [cursor=pointer]: P14
+              - generic [ref=e771] [cursor=pointer]: P15
+              - generic [ref=e773] [cursor=pointer]: P16
+              - generic [ref=e775] [cursor=pointer]: P17
+              - generic [ref=e777] [cursor=pointer]: P18
+              - generic [ref=e779] [cursor=pointer]: P19
+              - generic [ref=e781] [cursor=pointer]: P20
+              - generic [ref=e783] [cursor=pointer]: P21
+              - generic [ref=e785] [cursor=pointer]: P22
+              - generic [ref=e787] [cursor=pointer]: P23
+              - generic [ref=e789] [cursor=pointer]: P24
+              - generic [ref=e791] [cursor=pointer]: P25
+              - generic [ref=e793] [cursor=pointer]: P26
+              - generic [ref=e795] [cursor=pointer]: P27
+              - generic [ref=e797] [cursor=pointer]: P28
+              - generic [ref=e799] [cursor=pointer]: P29
+              - generic [ref=e801] [cursor=pointer]: P30
+              - generic [ref=e803] [cursor=pointer]: P31
+              - generic [ref=e805] [cursor=pointer]: P32
+              - generic [ref=e807] [cursor=pointer]: P33
+              - generic [ref=e809] [cursor=pointer]: P34
+              - generic [ref=e811] [cursor=pointer]: P35
+              - generic [ref=e813] [cursor=pointer]: P36
+              - generic [ref=e815] [cursor=pointer]: P37
+              - generic [ref=e817] [cursor=pointer]: P38
+              - generic [ref=e819] [cursor=pointer]: P39
+              - generic [ref=e821] [cursor=pointer]: P40
+              - generic [ref=e823] [cursor=pointer]: P41
+              - generic [ref=e825] [cursor=pointer]: P42
+              - generic [ref=e827] [cursor=pointer]: P43
+              - generic [ref=e829] [cursor=pointer]: P44
+              - generic [ref=e831] [cursor=pointer]: P45
+              - generic [ref=e833] [cursor=pointer]: P46
+              - generic [ref=e835] [cursor=pointer]: P47
+              - generic [ref=e837] [cursor=pointer]: P48
+              - generic [ref=e839] [cursor=pointer]: P49
+              - generic [ref=e841] [cursor=pointer]: P50
+              - generic [ref=e843] [cursor=pointer]: P51
+              - generic [ref=e845] [cursor=pointer]: P52
+              - generic [ref=e847] [cursor=pointer]: P53
+              - generic [ref=e849] [cursor=pointer]: P54
+              - generic [ref=e851] [cursor=pointer]: P55
+              - generic [ref=e853] [cursor=pointer]: P56
+              - generic [ref=e855] [cursor=pointer]: P57
+              - generic [ref=e857] [cursor=pointer]: P58
+              - generic [ref=e859] [cursor=pointer]: P59
+              - generic [ref=e861] [cursor=pointer]: P60
+            - generic [ref=e863]:
+              - generic [ref=e864] [cursor=pointer]
+              - generic [ref=e865] [cursor=pointer]
+              - generic [ref=e866] [cursor=pointer]
+              - generic [ref=e867] [cursor=pointer]
+              - generic [ref=e868] [cursor=pointer]
+              - generic [ref=e869] [cursor=pointer]
+              - generic [ref=e870] [cursor=pointer]
+              - generic [ref=e871] [cursor=pointer]
+              - generic [ref=e872] [cursor=pointer]
+              - generic [ref=e873] [cursor=pointer]
+              - generic [ref=e874] [cursor=pointer]
+              - generic [ref=e875] [cursor=pointer]
+              - generic [ref=e876] [cursor=pointer]
+              - generic [ref=e877] [cursor=pointer]
+              - generic [ref=e878] [cursor=pointer]
+              - generic [ref=e879] [cursor=pointer]
+              - generic [ref=e880] [cursor=pointer]
+              - generic [ref=e881] [cursor=pointer]
+              - generic [ref=e882] [cursor=pointer]
+              - generic [ref=e883] [cursor=pointer]
+              - generic [ref=e884] [cursor=pointer]
+              - generic [ref=e885] [cursor=pointer]
+              - generic [ref=e886] [cursor=pointer]
+              - generic [ref=e887] [cursor=pointer]
+              - generic [ref=e888] [cursor=pointer]
+              - generic [ref=e889] [cursor=pointer]
+              - generic [ref=e890] [cursor=pointer]
+              - generic [ref=e891] [cursor=pointer]
+              - generic [ref=e892] [cursor=pointer]
+              - generic [ref=e893] [cursor=pointer]
+              - generic [ref=e894] [cursor=pointer]
+              - generic [ref=e895] [cursor=pointer]
+              - generic [ref=e896] [cursor=pointer]
+              - generic [ref=e897] [cursor=pointer]
+              - generic [ref=e898] [cursor=pointer]
+              - generic [ref=e899] [cursor=pointer]
+              - generic [ref=e900] [cursor=pointer]
+              - generic [ref=e901] [cursor=pointer]
+              - generic [ref=e902] [cursor=pointer]
+              - generic [ref=e903] [cursor=pointer]
+              - generic [ref=e904] [cursor=pointer]
+              - generic [ref=e905] [cursor=pointer]
+              - generic [ref=e906] [cursor=pointer]
+              - generic [ref=e907] [cursor=pointer]
+              - generic [ref=e908] [cursor=pointer]
+              - generic [ref=e909] [cursor=pointer]
+              - generic [ref=e910] [cursor=pointer]
+              - generic [ref=e911] [cursor=pointer]
+              - generic [ref=e912] [cursor=pointer]
+              - generic [ref=e913] [cursor=pointer]
+              - generic [ref=e914] [cursor=pointer]
+              - generic [ref=e915] [cursor=pointer]
+              - generic [ref=e916] [cursor=pointer]
+              - generic [ref=e917] [cursor=pointer]
+              - generic [ref=e918] [cursor=pointer]
+            - generic [ref=e919]: ACCESS_POINT_B2
+            - generic: ★ SP-07
+            - generic: ● YOU
+          - generic:
+            - generic: Available
+            - generic: Occupied
+            - generic: Reserved
+            - generic: Selected
+        - generic [ref=e925]:
+          - generic [ref=e930]:
+            - generic [ref=e931]: Continue straight
+            - generic [ref=e932]: 45 m
+          - generic [ref=e933]:
+            - button "Step Forward" [ref=e934] [cursor=pointer]
+            - button "ARRIVED" [ref=e935] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=e435] [cursor=pointer]
+  - alert [ref=e439]: Digital Twin Navigation · ParkTwin AI · ParkTwin AI

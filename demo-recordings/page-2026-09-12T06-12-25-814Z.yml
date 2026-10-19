@@ -1,0 +1,135 @@
+- generic [ref=f14e2]:
+  - complementary "Primary" [ref=f14e3]:
+    - link "ParkTwin AI" [ref=f14e8] [cursor=pointer]:
+      - /url: /
+    - navigation "Primary" [ref=f14e10]:
+      - generic [ref=f14e11]: overview
+      - link "Dashboard" [ref=f14e12] [cursor=pointer]:
+        - /url: /dashboard
+      - generic [ref=f14e20]: operations
+      - link "Live Parking" [ref=f14e21] [cursor=pointer]:
+        - /url: /parking
+      - link "Digital Twin" [ref=f14e30] [cursor=pointer]:
+        - /url: /digital-twin
+      - link "Vehicles" [ref=f14e37] [cursor=pointer]:
+        - /url: /vehicles
+      - link "Video" [ref=f14e44] [cursor=pointer]:
+        - /url: /video-library
+      - link "CCTV" [ref=f14e49] [cursor=pointer]:
+        - /url: /video-processing
+      - generic [ref=f14e59]: intelligence
+      - link "ANPR" [ref=f14e60] [cursor=pointer]:
+        - /url: /anpr
+      - link "Analytics" [ref=f14e68] [cursor=pointer]:
+        - /url: /analytics
+      - link "Reports" [ref=f14e73] [cursor=pointer]:
+        - /url: /reports
+      - generic [ref=f14e79]: system
+      - link "Settings" [ref=f14e80] [cursor=pointer]:
+        - /url: /settings
+    - generic [ref=f14e87]:
+      - generic [ref=f14e88]: SYSTEM ONLINE
+      - generic [ref=f14e93]: v1.0.0
+  - generic [ref=f14e94]:
+    - banner [ref=f14e95]:
+      - button "Toggle sidebar" [ref=f14e96] [cursor=pointer]
+      - navigation "Breadcrumb" [ref=f14e99]:
+        - link "Home" [ref=f14e101] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f14e106]: Reports
+      - generic [ref=f14e110]:
+        - button "Toggle notifications panel" [ref=f14e111] [cursor=pointer]
+        - link [ref=f14e115] [cursor=pointer]:
+          - /url: /user/dashboard
+          - button "Driver Portal" [ref=f14e116]
+        - button "Toggle color theme" [ref=f14e121] [cursor=pointer]
+        - generic [ref=f14e124]: Admin System
+    - link "Skip to content" [ref=f14e131] [cursor=pointer]:
+      - /url: "#main-content"
+    - main [ref=f14e132]:
+      - generic [ref=f14e133]:
+        - generic [ref=f14e134]:
+          - generic [ref=f14e140]:
+            - generic [ref=f14e141]:
+              - heading "Reports" [level=1] [ref=f14e142]
+              - generic [ref=f14e143]: 0 Reports Logged
+            - paragraph [ref=f14e144]: Generate, view, and download audit reports from canonical facility data
+          - button "Refresh reports" [ref=f14e146] [cursor=pointer]:
+            - generic [ref=f14e152]: Refresh
+        - region [ref=f14e153]:
+          - heading "Report Categories" [level=2] [ref=f14e154]
+          - generic [ref=f14e155]:
+            - button "Select Parking Summary report type" [pressed] [ref=f14e156] [cursor=pointer]:
+              - generic [ref=f14e161]:
+                - heading "Parking Summary" [level=3] [ref=f14e162]
+                - paragraph [ref=f14e163]: End-to-end snapshot of the parking system.
+            - button "Select Occupancy Report report type" [ref=f14e164] [cursor=pointer]:
+              - generic [ref=f14e168]:
+                - heading "Occupancy Report" [level=3] [ref=f14e169]
+                - paragraph [ref=f14e170]: Slot occupancy and utilization over time.
+            - button "Select Vehicle Report report type" [ref=f14e171] [cursor=pointer]:
+              - generic [ref=f14e177]:
+                - heading "Vehicle Report" [level=3] [ref=f14e178]
+                - paragraph [ref=f14e179]: Per-vehicle recognitions and history.
+            - button "Select Parking Session Report report type" [ref=f14e180] [cursor=pointer]:
+              - generic [ref=f14e185]:
+                - heading "Parking Session Report" [level=3] [ref=f14e186]
+                - paragraph [ref=f14e187]: Parking sessions, durations, and entries/exits.
+            - button "Select Violation Report report type" [ref=f14e188] [cursor=pointer]:
+              - generic [ref=f14e192]:
+                - heading "Violation Report" [level=3] [ref=f14e193]
+                - paragraph [ref=f14e194]: Detected parking violations and events.
+            - button "Select Analytics Summary report type" [ref=f14e195] [cursor=pointer]:
+              - generic [ref=f14e200]:
+                - heading "Analytics Summary" [level=3] [ref=f14e201]
+                - paragraph [ref=f14e202]: Aggregated analytics insights and trends.
+        - generic [ref=f14e203]:
+          - generic [ref=f14e205]:
+            - generic [ref=f14e206]:
+              - heading "Generate Report" [level=3] [ref=f14e207]
+              - paragraph [ref=f14e208]: Choose a report type and export formats.
+            - generic [ref=f14e209]:
+              - generic [ref=f14e210]:
+                - text: Report Type
+                - combobox "Report type" [ref=f14e212]:
+                  - option "Parking Summary" [selected]
+                  - option "Occupancy Report"
+                  - option "Vehicle Report"
+                  - option "Parking Session Report"
+                  - option "Violation Report"
+                  - option "Analytics Summary"
+              - generic [ref=f14e213]:
+                - text: Export Formats
+                - group "Export Formats" [ref=f14e214]:
+                  - button "JSON" [pressed] [ref=f14e215] [cursor=pointer]
+                  - button "CSV" [pressed] [ref=f14e218] [cursor=pointer]
+                  - button "PDF" [pressed] [ref=f14e221] [cursor=pointer]
+              - button "Generate Report" [ref=f14e224] [cursor=pointer]
+          - generic [ref=f14e228]:
+            - generic [ref=f14e229]:
+              - heading "About Reports" [level=3] [ref=f14e230]
+              - paragraph [ref=f14e231]: How exports work
+            - generic [ref=f14e232]:
+              - paragraph [ref=f14e233]: Each generated report is stored and can be viewed, downloaded as JSON / CSV / PDF, or regenerated against the latest data.
+              - list [ref=f14e234]:
+                - listitem [ref=f14e235]: JSON — full structured payload.
+                - listitem [ref=f14e236]: CSV — tabular data for spreadsheets.
+                - listitem [ref=f14e237]: PDF — print-ready summary document.
+              - paragraph [ref=f14e238]: Report data is produced entirely by the backend — the browser only requests and displays it.
+        - generic [ref=f14e240]:
+          - generic [ref=f14e241]:
+            - heading "Report History" [level=3] [ref=f14e242]
+            - generic [ref=f14e243]: 0 generated
+          - generic [ref=f14e244]:
+            - combobox "Filter by report type" [ref=f14e247]:
+              - option "All types" [selected]
+              - option "Parking Summary"
+              - option "Occupancy Report"
+              - option "Vehicle Report"
+              - option "Parking Session Report"
+              - option "Violation Report"
+              - option "Analytics Summary"
+            - searchbox "Search reports" [ref=f14e249]
+      - generic [ref=f14e260]:
+        - generic [ref=f14e261]: © 2026 ParkTwin AI
+        - generic [ref=f14e262]: Smart Parking Intelligence Platform

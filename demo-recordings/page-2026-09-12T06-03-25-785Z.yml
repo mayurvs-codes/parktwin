@@ -1,0 +1,50 @@
+- generic [ref=f4e2]:
+  - complementary "Primary" [ref=f4e3]:
+    - link "ParkTwin AI" [ref=f4e8] [cursor=pointer]:
+      - /url: /
+    - navigation "Primary" [ref=f4e10]:
+      - generic [ref=f4e11]: overview
+      - link "Dashboard" [ref=f4e12] [cursor=pointer]:
+        - /url: /dashboard
+      - generic [ref=f4e20]: operations
+      - link "Live Parking" [ref=f4e21] [cursor=pointer]:
+        - /url: /parking
+      - link "Digital Twin" [ref=f4e30] [cursor=pointer]:
+        - /url: /digital-twin
+      - link "Vehicles" [ref=f4e37] [cursor=pointer]:
+        - /url: /vehicles
+      - link "Video" [ref=f4e44] [cursor=pointer]:
+        - /url: /video-library
+      - link "CCTV" [ref=f4e49] [cursor=pointer]:
+        - /url: /video-processing
+      - generic [ref=f4e59]: intelligence
+      - link "ANPR" [ref=f4e60] [cursor=pointer]:
+        - /url: /anpr
+      - link "Analytics" [ref=f4e68] [cursor=pointer]:
+        - /url: /analytics
+      - link "Reports" [ref=f4e73] [cursor=pointer]:
+        - /url: /reports
+      - generic [ref=f4e79]: system
+      - link "Settings" [ref=f4e80] [cursor=pointer]:
+        - /url: /settings
+    - generic [ref=f4e87]:
+      - generic [ref=f4e88]: SYSTEM ONLINE
+      - generic [ref=f4e93]: v1.0.0
+  - generic [ref=f4e94]:
+    - banner [ref=f4e95]:
+      - button "Toggle sidebar" [ref=f4e96] [cursor=pointer]
+      - generic [ref=f4e99]: Home
+      - generic [ref=f4e100]:
+        - button "Toggle notifications panel" [ref=f4e101] [cursor=pointer]
+        - link [ref=f4e105] [cursor=pointer]:
+          - /url: /user/dashboard
+          - button "Driver Portal" [ref=f4e106]
+        - button "Toggle color theme" [ref=f4e111] [cursor=pointer]
+        - generic [ref=f4e114]: Admin System
+    - link "Skip to content" [ref=f4e121] [cursor=pointer]:
+      - /url: "#main-content"
+    - main [ref=f4e122]:
+      - status "Loading page" [ref=f4e124]
+      - generic [ref=f4e127]:
+        - generic [ref=f4e128]: © 2026 ParkTwin AI
+        - generic [ref=f4e129]: Smart Parking Intelligence Platform

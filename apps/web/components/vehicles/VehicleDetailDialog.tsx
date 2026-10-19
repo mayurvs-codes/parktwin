@@ -97,6 +97,7 @@ export function VehicleDetailDialog({ view, open, onOpenChange }: VehicleDetailD
                       <span>CAM-01 / CAM-02</span>
                     </div>
                     <div className="aspect-video relative bg-black/40 flex items-center justify-center overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={timelineData.evidence_car_crop}
                         alt="Vehicle CCTV crop"
@@ -114,6 +115,7 @@ export function VehicleDetailDialog({ view, open, onOpenChange }: VehicleDetailD
                       </span>
                     </div>
                     <div className="aspect-video relative bg-black/40 flex items-center justify-center p-2">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={timelineData.evidence_plate_crop}
                         alt="License plate OCR crop"

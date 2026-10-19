@@ -1,0 +1,478 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "AI Agent" [ref=e24] [cursor=pointer]
+        - button "Radar" [ref=e29] [cursor=pointer]
+        - button "Discover" [ref=e37] [cursor=pointer]
+        - button "Hackathons" [ref=e42] [cursor=pointer]
+        - button "Internships" [ref=e50] [cursor=pointer]
+        - button "Open Source" [ref=e55] [cursor=pointer]
+        - button "Competitions" [ref=e61] [cursor=pointer]
+        - button "Research" [ref=e66] [cursor=pointer]
+        - button "Saved" [ref=e70] [cursor=pointer]
+        - button "Tracker" [ref=e74] [cursor=pointer]
+        - button "Projects" [ref=e77] [cursor=pointer]
+        - button "Sources" [ref=e83] [cursor=pointer]
+      - generic [ref=e87]:
+        - button "6" [ref=e162]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e92]': LIVE
+        - button "Deep Discover" [ref=e95] [cursor=pointer]
+        - button "Student Profile" [ref=e100]
+  - main [ref=e105]:
+    - generic [ref=e1929]:
+      - generic [ref=e1930]:
+        - generic [ref=e1931]:
+          - generic [ref=e1932]:
+            - generic [ref=e1933]: Phase 7 Personal AI Agent
+            - heading "What Should I Do Today?" [level=1] [ref=e1937]
+            - paragraph [ref=e1938]: Ask your personal AI opportunity agent in plain English. Recommendations are grounded exclusively in verified live opportunities, tailored to your technical portfolio, and continuously refined by your actions.
+          - button "Refresh Intelligence Brief" [ref=e1939]
+        - generic [ref=e1945]:
+          - generic [ref=e1946]:
+            - textbox "Ask e.g. 'I have 10 hours this weekend, what hackathon should I do?'" [ref=e1948]: I have 10 hours this weekend, what hackathon should I do?
+            - button "Ask Agent" [ref=e1952]
+          - generic [ref=e1956]:
+            - generic [ref=e1957]: "Try asking:"
+            - button "I have 10 hours this weekend, what hackathon should I do?" [ref=e1958]
+            - button "Find open source Python projects with upcoming deadlines" [ref=e1959]
+            - button "What can I build leveraging my ParkTwin AI project?" [ref=e1960]
+            - button "What opportunities are closing in the next 7 days?" [ref=e1961]
+      - generic [ref=e2060]:
+        - generic [ref=e2061]:
+          - generic [ref=e2062]:
+            - generic [ref=e2063]: Grounded Agent Recommendations
+            - 'heading "Query: \"I have 10 hours this weekend, what hackathon should I do?\"" [level=2] [ref=e2066]'
+            - paragraph [ref=e2067]: Evaluated 21 opportunities. Identified 3 high-confidence actionable matches aligning with your profile and goal.
+          - generic [ref=e2068]:
+            - generic [ref=e2069]: "Confidence: 87%"
+            - generic [ref=e2070]: 21 Opportunities Scored
+        - generic [ref=e2071]:
+          - generic [ref=e2072]:
+            - generic [ref=e2073]:
+              - generic [ref=e2074]:
+                - generic [ref=e2075]: "Rank #1"
+                - generic [ref=e2076]: 87% Match
+              - heading "Synergy 2026" [level=3] [ref=e2077]
+              - generic [ref=e2078]: Fr. Conceicao Rodrigues College of Engineering (FRCRCE), Bandra
+              - generic [ref=e2079]: Closing in 24 days (Nov 01)
+              - generic [ref=e2082]:
+                - generic [ref=e2083]: "Strategy: ADAPT EXISTING_PROJECT"
+                - paragraph [ref=e2084]: "Rank #1 match (87%). Matches your background in Python, JavaScript. Your 'ParkTwin AI' project has high reuse potential (ADAPT_EXISTING_PROJECT). Aligns with your interests in Engineering. Eligibility note: No restrictive eligibility criteria stated in source. Application closes in 24 days (OPEN). Strategy: ADAPT EXISTING PROJECT."
+              - generic [ref=e2085]: "Action: Step 1: Review requirements at https://unstop.com/hackathons/synergy-2026-crescendo-26-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1767480. Step 2: Start 7-day preparation sprint with 'ParkTwin AI'."
+            - generic [ref=e2086]:
+              - generic [ref=e2087]:
+                - link "Apply" [ref=e2088] [cursor=pointer]:
+                  - /url: https://unstop.com/hackathons/synergy-2026-crescendo-26-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1767480
+                - button "Details" [active] [ref=e2094]
+              - generic [ref=e2095]:
+                - generic [ref=e2096]: "Rate recommendation:"
+                - generic [ref=e2097]:
+                  - button "👍 Interested" [ref=e2098]
+                  - button "👎 Not for me" [ref=e2099]
+          - generic [ref=e2100]:
+            - generic [ref=e2101]:
+              - generic [ref=e2102]:
+                - generic [ref=e2103]: "Rank #2"
+                - generic [ref=e2104]: 87% Match
+              - heading "HerHack" [level=3] [ref=e2105]
+              - generic [ref=e2106]: ECHELON INSTITUTE OF TECHNOLOGY
+              - generic [ref=e2107]: Closing in 33 days (Nov 10)
+              - generic [ref=e2110]:
+                - generic [ref=e2111]: "Strategy: ADAPT EXISTING_PROJECT"
+                - paragraph [ref=e2112]: "Rank #2 match (87%). Matches your background in Python, JavaScript. Your 'ParkTwin AI' project has high reuse potential (ADAPT_EXISTING_PROJECT). Aligns with your interests in Engineering. Eligibility note: No restrictive eligibility criteria stated in source. Application closes in 33 days (UPCOMING). Strategy: ADAPT EXISTING PROJECT."
+              - generic [ref=e2113]: "Action: Step 1: Review requirements at https://unstop.com/hackathons/herhack-echelon-institute-of-technology-1767590. Step 2: Start 7-day preparation sprint with 'ParkTwin AI'."
+            - generic [ref=e2114]:
+              - generic [ref=e2115]:
+                - link "Apply" [ref=e2116] [cursor=pointer]:
+                  - /url: https://unstop.com/hackathons/herhack-echelon-institute-of-technology-1767590
+                - button "Details" [ref=e2122]
+              - generic [ref=e2123]:
+                - generic [ref=e2124]: "Rate recommendation:"
+                - generic [ref=e2125]:
+                  - button "👍 Interested" [ref=e2126]
+                  - button "👎 Not for me" [ref=e2127]
+          - generic [ref=e2128]:
+            - generic [ref=e2129]:
+              - generic [ref=e2130]:
+                - generic [ref=e2131]: "Rank #3"
+                - generic [ref=e2132]: 86% Match
+              - heading "HACK WITH GDG S4" [level=3] [ref=e2133]
+              - generic [ref=e2134]: HACK
+              - generic [ref=e2135]: Closing in 107 days (Jan 24)
+              - generic [ref=e2138]:
+                - generic [ref=e2139]: "Strategy: ADAPT EXISTING_PROJECT"
+                - paragraph [ref=e2140]: "Rank #3 match (86%). Matches your background in Python, JavaScript, React. Your 'ParkTwin AI' project has high reuse potential (ADAPT_EXISTING_PROJECT). Aligns with your interests in Open Source. Eligibility note: No restrictive eligibility criteria stated in source. Application closes in 107 days (UPCOMING). Strategy: ADAPT EXISTING PROJECT."
+              - generic [ref=e2141]: "Action: Step 1: Review requirements at https://hack-with-gdg-s4.devfolio.co/. Step 2: Start 7-day preparation sprint with 'ParkTwin AI'."
+            - generic [ref=e2142]:
+              - generic [ref=e2143]:
+                - link "Apply" [ref=e2144] [cursor=pointer]:
+                  - /url: https://hack-with-gdg-s4.devfolio.co/
+                - button "Details" [ref=e2150]
+              - generic [ref=e2151]:
+                - generic [ref=e2152]: "Rate recommendation:"
+                - generic [ref=e2153]:
+                  - button "👍 Interested" [ref=e2154]
+                  - button "👎 Not for me" [ref=e2155]
+      - generic [ref=e1962]:
+        - generic [ref=e1963]:
+          - generic [ref=e1969]:
+            - heading "Daily Intelligence Brief" [level=3] [ref=e1970]
+            - generic [ref=e1971]: "Date: 2026-10-08"
+          - generic [ref=e1972]:
+            - generic [ref=e1973]: "Today's Focus: Urgent: 'BlockHunt'26' closes in 2 days! Prepare submission using strategy 'ADAPT EXISTING PROJECT'."
+            - generic [ref=e1974]:
+              - generic [ref=e1975]:
+                - generic [ref=e1976]: "3"
+                - generic [ref=e1977]: Urgent (<7d)
+              - generic [ref=e1978]:
+                - generic [ref=e1979]: "4"
+                - generic [ref=e1980]: Prime Match
+              - generic [ref=e1981]:
+                - generic [ref=e1982]: "16"
+                - generic [ref=e1983]: Ready to Act
+            - generic [ref=e1984]:
+              - generic [ref=e1985]: Urgent Closing Opportunities
+              - generic [ref=e1986]:
+                - generic [ref=e1987]:
+                  - generic [ref=e1988]:
+                    - generic [ref=e1989]: BlockHunt'26
+                    - generic [ref=e1990]: Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad • 2d remaining
+                  - link "Act →" [ref=e1991] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/blockhunt26-indian-institute-of-technology-indian-school-of-mines-iit-ism-dhanbad-1764178
+                - generic [ref=e1992]:
+                  - generic [ref=e1993]:
+                    - generic [ref=e1994]: Code The Cosmos '26
+                    - generic [ref=e1995]: Indian Institute of Technology, Indian School of Mines (IIT ISM), Dhanbad • 0d remaining
+                  - link "Act →" [ref=e1996] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/code-the-cosmos-indian-institute-of-technology-indian-school-of-mines-iit-ism-dhanbad-1767675
+                - generic [ref=e1997]:
+                  - generic [ref=e1998]:
+                    - generic [ref=e1999]: MindTech Arena 2026 – National Hackathon
+                    - generic [ref=e2000]: Indian Institute of Information Technology (IIIT), Kottayam • 2d remaining
+                  - link "Act →" [ref=e2001] [cursor=pointer]:
+                    - /url: https://unstop.com/hackathons/mindtech-arena-2026-national-hackathon-iiit-kottayam-1767173
+        - generic [ref=e2002]:
+          - generic [ref=e2007]:
+            - heading "Weekly Strategic Focus" [level=3] [ref=e2008]
+            - generic [ref=e2009]: "Week: 2026-10-05"
+          - generic [ref=e2010]:
+            - generic [ref=e2011]:
+              - generic [ref=e2012]: Strategic Priorities
+              - generic [ref=e2013]:
+                - generic [ref=e2014]: "Accelerate submissions in preferred domains: Computer Science, Software Engineering."
+                - generic [ref=e2018]: Monitor 5 opportunities closing within the next 14 days.
+                - generic [ref=e2161]: "Close high-yield portfolio skill gap: Computer Science (demanded across 7 targets)."
+            - generic [ref=e2022]:
+              - generic [ref=e2023]: Portfolio Asset Adaptations
+              - generic [ref=e2024]:
+                - generic [ref=e2025]: Repurpose 'ParkTwin AI' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+                - generic [ref=e2031]: Repurpose 'ANPR System' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+                - generic [ref=e2037]: Repurpose 'StaticsLab' for upcoming Tech Mafia - Trust No One. Debug Everyone., Sync or Sink | The Ultimate 3 Player Tech & Communication Challenge.
+      - generic [ref=e2043]:
+        - generic [ref=e2044]:
+          - generic [ref=e2045]:
+            - heading "Learned User Preferences & Behavioral Profile" [level=3] [ref=e2046]
+            - paragraph [ref=e2048]: Continuously updated from your saves, feedback, and applications with gradual decay (60-day half-life).
+          - generic [ref=e2049]:
+            - generic [ref=e2050]:
+              - text: "Interactions Logged:"
+              - strong [ref=e2051]: "2"
+            - button "Reset Preferences" [ref=e2052]
+        - generic [ref=e2056]:
+          - generic [ref=e2165]:
+            - generic [ref=e2166]:
+              - generic [ref=e2167]: Top Technologies
+              - generic [ref=e2168]:
+                - generic [ref=e2169]: Computer Science
+                - generic [ref=e2170]: Software Engineering
+                - generic [ref=e2171]: Python
+                - generic [ref=e2172]: Javascript
+                - generic [ref=e2173]: Cloud
+            - generic [ref=e2174]:
+              - generic [ref=e2175]: Preferred Categories
+              - generic [ref=e2176]: HACKATHON
+            - generic [ref=e2178]:
+              - generic [ref=e2179]: Avoided Topics
+              - generic [ref=e2180]: None marked irrelevant or dismissed
+          - table [ref=e2183]:
+            - rowgroup [ref=e2184]:
+              - row [ref=e2185]:
+                - columnheader "Dimension" [ref=e2186]
+                - columnheader "Value" [ref=e2187]
+                - columnheader "Net Score" [ref=e2188]
+                - columnheader "Confidence" [ref=e2189]
+                - columnheader "Signals" [ref=e2190]
+                - columnheader "Last Interaction" [ref=e2191]
+            - rowgroup [ref=e2192]:
+              - row [ref=e2193]:
+                - cell "TECHNOLOGY" [ref=e2194]
+                - cell "computer science" [ref=e2195]
+                - cell "+0.80" [ref=e2196]
+                - cell "9%" [ref=e2197]
+                - cell "1 evidence items" [ref=e2198]
+                - cell "10/8/2026" [ref=e2199]
+              - row [ref=e2200]:
+                - cell "TECHNOLOGY" [ref=e2201]
+                - cell "software engineering" [ref=e2202]
+                - cell "+0.80" [ref=e2203]
+                - cell "9%" [ref=e2204]
+                - cell "1 evidence items" [ref=e2205]
+                - cell "10/8/2026" [ref=e2206]
+              - row [ref=e2207]:
+                - cell "TECHNOLOGY" [ref=e2208]
+                - cell "python" [ref=e2209]
+                - cell "+0.80" [ref=e2210]
+                - cell "9%" [ref=e2211]
+                - cell "1 evidence items" [ref=e2212]
+                - cell "10/8/2026" [ref=e2213]
+              - row [ref=e2214]:
+                - cell "TECHNOLOGY" [ref=e2215]
+                - cell "javascript" [ref=e2216]
+                - cell "+0.80" [ref=e2217]
+                - cell "9%" [ref=e2218]
+                - cell "1 evidence items" [ref=e2219]
+                - cell "10/8/2026" [ref=e2220]
+              - row [ref=e2221]:
+                - cell "TECHNOLOGY" [ref=e2222]
+                - cell "cloud" [ref=e2223]
+                - cell "+0.80" [ref=e2224]
+                - cell "9%" [ref=e2225]
+                - cell "1 evidence items" [ref=e2226]
+                - cell "10/8/2026" [ref=e2227]
+              - row [ref=e2228]:
+                - cell "CATEGORY" [ref=e2229]
+                - cell "HACKATHON" [ref=e2230]
+                - cell "+0.80" [ref=e2231]
+                - cell "9%" [ref=e2232]
+                - cell "1 evidence items" [ref=e2233]
+                - cell "10/8/2026" [ref=e2234]
+              - row [ref=e2235]:
+                - cell "DOMAIN" [ref=e2236]
+                - cell "engineering" [ref=e2237]
+                - cell "+0.80" [ref=e2238]
+                - cell "9%" [ref=e2239]
+                - cell "1 evidence items" [ref=e2240]
+                - cell "10/8/2026" [ref=e2241]
+              - row [ref=e2242]:
+                - cell "DOMAIN" [ref=e2243]
+                - cell "hackathons" [ref=e2244]
+                - cell "+0.80" [ref=e2245]
+                - cell "9%" [ref=e2246]
+                - cell "1 evidence items" [ref=e2247]
+                - cell "10/8/2026" [ref=e2248]
+  - generic [ref=e2250]:
+    - generic [ref=e2251]:
+      - generic [ref=e2252]:
+        - generic [ref=e2253]:
+          - generic [ref=e2254]: HACKATHON
+          - generic [ref=e2255]: Unstop
+          - generic [ref=e2256]: PARTIALLY_VERIFIED
+          - generic [ref=e2260]: LIVE INTERNET
+          - generic [ref=e2262]: PRIMARY
+        - heading "Synergy 2026" [level=2] [ref=e2263]
+        - paragraph [ref=e2264]:
+          - generic [ref=e2268]: Fr. Conceicao Rodrigues College of Engineering (FRCRCE), Bandra
+      - button [ref=e2269]
+    - generic [ref=e2273]:
+      - generic [ref=e2274]:
+        - generic [ref=e2275]:
+          - generic [ref=e2276]: Deadline
+          - generic [ref=e2279]: 11/1/2026
+          - generic [ref=e2280]: "TZ: UTC"
+        - generic [ref=e2281]:
+          - generic [ref=e2282]: Location
+          - generic [ref=e2286]: Remote / Online
+        - generic [ref=e2287]:
+          - generic [ref=e2288]: Prize / Stipend
+          - generic [ref=e2295]: "First Prize (Winner - Electronics Track): INR 12000, Second Prize (Runner-Up - Electronics Track): I ... [TRUNCATED_UNTRUSTED_CONTENT]"
+        - generic [ref=e2296]:
+          - generic [ref=e2297]: Scores (Match / Quality)
+          - generic [ref=e2301]: 65% / 100%
+      - generic [ref=e2302]:
+        - generic [ref=e2303]:
+          - heading "Opportunity Truth & Actionability" [level=4] [ref=e2304]
+          - generic [ref=e2308]:
+            - generic [ref=e2309]: VERIFIED_OPPORTUNITY
+            - generic [ref=e2310]: "Truth Score: 100%"
+        - generic [ref=e2311]:
+          - generic [ref=e2312]:
+            - generic [ref=e2313]: "Participation Type:"
+            - generic [ref=e2314]: REGISTRATION
+            - paragraph [ref=e2315]: Actionable registration opportunity with verified register path.
+          - generic [ref=e2316]:
+            - generic [ref=e2317]: "Action URL Status:"
+            - generic [ref=e2318]: VALID
+            - link "https://unstop.com/hackathons/synergy-2026-crescendo-26-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1767480" [ref=e2320] [cursor=pointer]:
+              - /url: https://unstop.com/hackathons/synergy-2026-crescendo-26-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1767480
+        - generic [ref=e2326]:
+          - generic [ref=e2327]: "Source Evidence for Actionability:"
+          - paragraph [ref=e2328]: "\"SYNERGY 2026: SYNERGY 2026 is an 8-Hour Hardware Simulation Hackathon organized by the Students' Council and Institution's Innovation Council (IIC) at Fr\""
+      - generic [ref=e2329]:
+        - generic [ref=e2330]:
+          - heading "Match Intelligence Indicators" [level=4] [ref=e2331]
+          - generic [ref=e2335]: "Strategy: ADAPT EXISTING PROJECT"
+        - generic [ref=e2336]:
+          - generic [ref=e2338]:
+            - generic [ref=e2339]: Skills Match
+            - generic [ref=e2340]: 40%
+          - generic [ref=e2344]:
+            - generic [ref=e2345]: Project Overlap
+            - generic [ref=e2346]: 100%
+          - generic [ref=e2350]:
+            - generic [ref=e2351]: Domain Fit
+            - generic [ref=e2352]: 33%
+          - generic [ref=e2356]:
+            - generic [ref=e2357]: Eligibility Match
+            - generic [ref=e2358]: 75%
+          - generic [ref=e2362]:
+            - generic [ref=e2363]: Location Match
+            - generic [ref=e2364]: 100%
+          - generic [ref=e2368]:
+            - generic [ref=e2369]: Deadline Feasibility
+            - generic [ref=e2370]: 100%
+        - generic [ref=e2373]:
+          - generic [ref=e2374]: "Why this matches you:"
+          - paragraph [ref=e2375]: "Matches your background in Python, JavaScript. Your 'ParkTwin AI' project has high reuse potential (ADAPT_EXISTING_PROJECT). Aligns with your interests in Engineering. Eligibility note: No restrictive eligibility criteria stated in source. Application closes in 24 days (OPEN)."
+        - generic [ref=e2376]:
+          - generic [ref=e2377]: "Skill Gap & Capability Breakdown:"
+          - generic [ref=e2378]:
+            - generic [ref=e2379]:
+              - generic [ref=e2380]: "✓ YOU HAVE:"
+              - generic [ref=e2381]:
+                - generic [ref=e2382]: Python
+                - generic [ref=e2383]: JavaScript
+            - generic [ref=e2384]:
+              - generic [ref=e2385]: "? NOT LISTED:"
+              - generic [ref=e2386]:
+                - generic [ref=e2387]: Computer Science
+                - generic [ref=e2388]: Software Engineering
+                - generic [ref=e2389]: Cloud
+            - generic [ref=e2390]:
+              - generic [ref=e2391]: "+ NICE TO HAVE:"
+              - generic [ref=e2392]: Cloud
+        - generic [ref=e2394]:
+          - generic [ref=e2395]:
+            - generic [ref=e2396]: "Personal AI Strategy: ADAPT EXISTING_PROJECT"
+            - generic [ref=e2399]:
+              - generic [ref=e2400]:
+                - text: "Reuse ROI:"
+                - generic [ref=e2401]: 12%
+              - generic [ref=e2402]:
+                - text: "Est. Effort:"
+                - generic [ref=e2403]: 12h
+          - paragraph [ref=e2404]: "\"Strategy: ADAPT EXISTING PROJECT (ROI 12%). Leverages 'ParkTwin AI' with 12h estimated implementation effort.\""
+          - generic [ref=e2405]:
+            - generic [ref=e2406]:
+              - generic [ref=e2407]: Reusable Portfolio Assets
+              - list [ref=e2411]:
+                - listitem [ref=e2412]:
+                  - generic [ref=e2413]: ✓
+                  - text: Python architecture (ParkTwin AI)
+                - listitem [ref=e2414]:
+                  - generic [ref=e2415]: ✓
+                  - text: Real-time CCTV stream inference (ParkTwin AI)
+                - listitem [ref=e2416]:
+                  - generic [ref=e2417]: ✓
+                  - text: 99.2% vehicle tracking accuracy (ParkTwin AI)
+            - generic [ref=e2418]:
+              - generic [ref=e2419]: New Work Needed
+              - list [ref=e2423]:
+                - listitem [ref=e2424]:
+                  - generic [ref=e2425]: •
+                  - text: Master Computer Science integration & API endpoints
+                - listitem [ref=e2426]:
+                  - generic [ref=e2427]: •
+                  - text: Master Software Engineering integration & API endpoints
+                - listitem [ref=e2428]:
+                  - generic [ref=e2429]: •
+                  - text: Implement specific problem-domain logic for 'Synergy 2026'
+                - listitem [ref=e2430]:
+                  - generic [ref=e2431]: •
+                  - text: Compile benchmarks and submission presentation deck
+          - generic [ref=e2432]:
+            - generic [ref=e2433]: Personalized 7-Day Sprint Plan
+            - generic [ref=e2436]:
+              - generic [ref=e2437]:
+                - generic [ref=e2438]: Day 1
+                - generic [ref=e2439]:
+                  - generic [ref=e2440]:
+                    - text: Problem Brief & Environment Initialization
+                    - generic [ref=e2441]: (Environment Setup)
+                  - paragraph [ref=e2442]: Deep-dive into 'Synergy 2026' requirements, verify eligibility, and set up Git repository with virtual environment.
+              - generic [ref=e2443]:
+                - generic [ref=e2444]: Day 2
+                - generic [ref=e2445]:
+                  - generic [ref=e2446]:
+                    - text: Asset Import & Architecture Scaffolding
+                    - generic [ref=e2447]: (Software Architecture)
+                  - paragraph [ref=e2448]: Import reusable modules from 'ParkTwin AI' (python).
+              - generic [ref=e2449]:
+                - generic [ref=e2450]: Day 3
+                - generic [ref=e2451]:
+                  - generic [ref=e2452]:
+                    - text: "Target Skill Sprint: Computer Science"
+                    - generic [ref=e2453]: (Computer Science)
+                  - paragraph [ref=e2454]: Address key technical prerequisite 'Computer Science' using hands-on tutorial and minimal prototype.
+              - generic [ref=e2455]:
+                - generic [ref=e2456]: Day 4
+                - generic [ref=e2457]:
+                  - generic [ref=e2458]:
+                    - text: Core Feature & Pipeline Implementation
+                    - generic [ref=e2459]: (Core Implementation)
+                  - paragraph [ref=e2460]: Build primary domain logic, data processing flow, and test initial input/output contract.
+              - generic [ref=e2461]:
+                - generic [ref=e2462]: Day 5
+                - generic [ref=e2463]:
+                  - generic [ref=e2464]:
+                    - text: Testing, Metrics & Edge Case Hardening
+                    - generic [ref=e2465]: (Quality Assurance)
+                  - paragraph [ref=e2466]: Run automated test suite, benchmark performance metrics, and handle unexpected edge cases.
+              - generic [ref=e2467]:
+                - generic [ref=e2468]: Day 6
+                - generic [ref=e2469]:
+                  - generic [ref=e2470]:
+                    - text: Documentation, Demo Video & Architecture Diagrams
+                    - generic [ref=e2471]: (Technical Communication)
+                  - paragraph [ref=e2472]: Produce professional README, system architecture diagram, and record a 2-minute clear walkthrough.
+              - generic [ref=e2473]:
+                - generic [ref=e2474]: Day 7
+                - generic [ref=e2475]:
+                  - generic [ref=e2476]:
+                    - text: Final Polish & Formal Submission
+                    - generic [ref=e2477]: (Delivery)
+                  - paragraph [ref=e2478]: "Perform final code review, confirm all deliverable criteria, and submit via official action portal: https://unstop.com/hackathons/synergy-2026-crescendo-26-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1767480."
+      - generic [ref=e2480]:
+        - generic [ref=e2481]: Legitimacy & Verification Analysis
+        - button "Run \"Is this legit?\" Check" [ref=e2485]
+      - generic [ref=e2486]:
+        - heading "Opportunity Description" [level=4] [ref=e2487]
+        - generic [ref=e2488]: "SYNERGY 2026: SYNERGY 2026 is an 8-Hour Hardware Simulation Hackathon organized by the Students' Council and Institution's Innovation Council (IIC) at Fr. Conceicao Rodrigues College of Engineering (Fr. CRCE), Bandra, Mumbai. The event brings together engineers, tinkerers, and creators to redefine sustainable product design through advanced hardware simulations. Participants will build eco-conscious, virtual prototypes without generating physical hardware waste. Tracks & Focus Areas: Electronics Domain: Design sustainable hardware solutions using virtual simulation tools such as Tinkercad, Proteus, ModelSim, or Vivado. Systems should be built around Arduino, ESP32, Raspberry Pi, or FPGA platforms, focusing on energy efficiency, minimal material use, and renewable logic. Mechanical Domain: Advance sustainable mechanical design by building CAD models and conducting simulations. Validate and optimize eco-friendly solutions using Multibody Dynamics, Motion Analysis, Finite Element Analysis (FEA), or Computational Fluid Dynamics (CFD). Eligibility Criteria: Open to undergraduate students pursuing B.E./B.Tech, Technical Diploma, or any other UG degree. Team Size: 2 to 4 members per team. Selection & Event Timeline (1st November 2026): Screening & Allotment: Domain and problem statement lists will be provided 1 day prior to the event following registration and screening. Pre-selection: Teams can choose their preferred problem statement on October 31st (12 hours prior to the event). 08:00 AM: Reporting Time and Registrations. 09:00 AM: Hackathon Commences. 01:00 PM: Lunch Break. 02:00 PM: Judging Round 1 (Panel A). 05:00 PM: Judging Round 2 (Panel B). 07:30 PM - 08:00 PM: Results & Closing Ceremony. Evaluation & Format: Two-Tier Independent Evaluation: Every team is evaluated by two separate judging panels to ensure an unbiased assessment. Round 1 is judged by Panel A, and Round 2 is independently judged by Panel B without influence from earlier scores. Aggregate Scoring: The combined score across both rounds determines final standings. Awards: Each track (Electronics and Mechanical) will have one Winner and one Runner-Up. There are no separate winners for individual problem statements. Registration Fee: Rs. 300 per team. Note: Payment is required ONLY after selection for the final offline round. Rules & Code Of Conduct: Internet access is provided at the venue; participants may refer to online resources. Mandatory carrying and displaying of official College Photo ID cards at all times on campus. Attendance is mandatory on campus for the entire 8-hour duration. Entry security screening and frisking will take place at the campus entrance. Decisions made by the judges and managing committee are final and binding. Prizes: Total Cash Prize Pool: Rs. 40,000 + Goodies."
+      - generic [ref=e2489]:
+        - generic [ref=e2490]:
+          - heading "Required Skills & Topics" [level=4] [ref=e2491]
+          - generic [ref=e2496]:
+            - generic [ref=e2497]: Computer Science
+            - generic [ref=e2498]: Software Engineering
+        - generic [ref=e2499]:
+          - heading "Target Domains" [level=4] [ref=e2500]
+          - generic [ref=e2505]:
+            - generic [ref=e2506]: Engineering
+            - generic [ref=e2507]: Hackathons
+            - generic [ref=e2508]: Software
+    - generic [ref=e2509]:
+      - generic [ref=e2510]:
+        - generic [ref=e2511]: "Feedback:"
+        - button "Recommend more opportunities like this" [ref=e2512]
+        - button "Recommend fewer opportunities like this" [ref=e2515]
+        - button "Report suspicious or spam" [ref=e2518]
+      - generic [ref=e2521]:
+        - button "Bookmark / Save" [ref=e2522]
+        - link "Register on Platform" [ref=e2523] [cursor=pointer]:
+          - /url: https://unstop.com/hackathons/synergy-2026-crescendo-26-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1767480

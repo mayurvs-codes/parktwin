@@ -1,0 +1,135 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Decisions" [ref=e24] [cursor=pointer]
+        - button "AI Agent" [ref=e30] [cursor=pointer]
+        - button "Radar" [ref=e35] [cursor=pointer]
+        - button "Discover" [ref=e43] [cursor=pointer]
+        - button "Hackathons" [ref=e48] [cursor=pointer]
+        - button "Internships" [ref=e56] [cursor=pointer]
+        - button "Open Source" [ref=e61] [cursor=pointer]
+        - button "Competitions" [ref=e67] [cursor=pointer]
+        - button "Research" [ref=e72] [cursor=pointer]
+        - button "Saved" [ref=e76] [cursor=pointer]
+        - button "Tracker" [ref=e80] [cursor=pointer]
+        - button "Projects" [ref=e83] [cursor=pointer]
+        - button "Sources" [ref=e89] [cursor=pointer]
+      - generic [ref=e93]:
+        - button "6" [ref=e168]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e98]': LIVE
+        - button "Deep Discover" [ref=e101] [cursor=pointer]
+        - button "Student Profile" [ref=e106]
+  - main [ref=e111]:
+    - generic [ref=e1935]:
+      - generic [ref=e1936]:
+        - generic [ref=e1937]:
+          - generic [ref=e1938]:
+            - generic [ref=e1939]:
+              - generic [ref=e1940]: Phase 8 Personal Decision Engine
+              - generic [ref=e1941]: 2026-10-12
+            - heading "Strategic Prioritization & Action Planning" [level=1] [ref=e1942]
+            - paragraph [ref=e1943]: "\"Focused Execution: Drive forward 'This Week in Open Source for October 2, ' with high-impact project reuse.\""
+          - button "Refresh Decision Engine" [ref=e1945]
+        - generic [ref=e1952]:
+          - generic [ref=e1953]:
+            - generic [ref=e1954]: "Tracked Opportunities:"
+            - generic [ref=e1955]: "0"
+          - generic [ref=e1956]:
+            - generic [ref=e1957]: "In Progress:"
+            - generic [ref=e1958]: "0"
+          - generic [ref=e1959]:
+            - generic [ref=e1960]: "Applied / Submitted:"
+            - generic [ref=e1961]: "0"
+          - generic [ref=e1962]:
+            - generic [ref=e1963]: "Shortlist → Applied Conversion:"
+            - generic [ref=e1964]: 0%
+      - generic [ref=e1965]:
+        - button "Today's Actions (5)" [ref=e1966]
+        - button "2x2 Value Matrix" [ref=e1970]
+        - button "Opportunity Comparison (2)" [ref=e1974]
+        - button "Personal Queue (0)" [ref=e1980]
+        - button "Conversion Funnel" [ref=e1985]
+      - generic [ref=e2520]:
+        - generic [ref=e2521]:
+          - generic [ref=e2522]:
+            - heading "Opportunity Comparison Matrix" [level=2] [ref=e2523]
+            - paragraph [ref=e2528]: Evaluating 2 candidates across 6 decision dimensions.
+          - button "Run Analysis" [ref=e2529]
+        - generic [ref=e2536]:
+          - generic [ref=e2542]:
+            - generic [ref=e2543]:
+              - generic [ref=e2544]: BEST OVERALL
+              - generic [ref=e2545]: This Week in Open Source for October 2, 2026
+              - paragraph [ref=e2546]: Highest holistic score (77.5/100) balancing technical fit, portfolio lift, and feasible pacing.
+            - generic [ref=e2547]:
+              - generic [ref=e2548]: BEST QUICK WIN
+              - generic [ref=e2549]: This Week in Open Source for October 2, 2026
+              - paragraph [ref=e2550]: Lowest barrier to entry (~11.0h effort) with VERY_HIGH feasibility.
+            - generic [ref=e2551]:
+              - generic [ref=e2552]: BEST PORTFOLIO BUILDER
+              - generic [ref=e2553]: This Week in Open Source for October 2, 2026
+              - paragraph [ref=e2554]: Highest long-term career capital (92.0/100 portfolio score) and resume strength.
+            - generic [ref=e2555]:
+              - generic [ref=e2556]: BEST SKILL BUILDER
+              - generic [ref=e2557]: This Week in Open Source for October 2, 2026
+              - paragraph [ref=e2558]: Optimal balance of core skill reinforcement and stretch learning for career progression.
+            - generic [ref=e2559]:
+              - generic [ref=e2560]: BEST LONG TERM BET
+              - generic [ref=e2561]: This Week in Open Source for October 2, 2026
+              - paragraph [ref=e2562]: Provides sufficient runway to deliver a polished, differentiated submission.
+          - table [ref=e2564]:
+            - rowgroup [ref=e2565]:
+              - row [ref=e2566]:
+                - columnheader "Decision Dimension" [ref=e2567]
+                - columnheader "[aphelion-engine/aphelion-editor] Improve object tracking accuracy and stability 75.5/100" [ref=e2568]:
+                  - generic [ref=e2569]: "[aphelion-engine/aphelion-editor] Improve object tracking accuracy and stability"
+                  - generic [ref=e2570]: 75.5/100
+                - columnheader "This Week in Open Source for October 2, 2026 77.5/100" [ref=e2571]:
+                  - generic [ref=e2572]: This Week in Open Source for October 2, 2026
+                  - generic [ref=e2573]: 77.5/100
+                - columnheader "Dimension Winner" [ref=e2574]
+            - rowgroup [ref=e2575]:
+              - row [ref=e2576]:
+                - cell "Overall Priority Score" [ref=e2577]
+                - cell "75.5" [ref=e2578]
+                - cell "77.5" [ref=e2579]
+                - cell "This Week in Open Sour" [ref=e2580]
+              - row [ref=e2581]:
+                - cell "Technical Match Alignment" [ref=e2582]
+                - cell "77.0" [ref=e2583]
+                - cell "68.0" [ref=e2584]
+                - cell "[aphelion-engine/aphel" [ref=e2585]
+              - row [ref=e2586]:
+                - cell "Strategic Portfolio Value" [ref=e2587]
+                - cell "76.0" [ref=e2588]
+                - cell "92.0" [ref=e2589]
+                - cell "This Week in Open Sour" [ref=e2590]
+              - row [ref=e2591]:
+                - cell "Execution Feasibility" [ref=e2592]
+                - cell "100.0" [ref=e2593]
+                - cell "93.7" [ref=e2594]
+                - cell "[aphelion-engine/aphel" [ref=e2595]
+              - row [ref=e2596]:
+                - cell "Time & Urgency Fit" [ref=e2597]
+                - cell "60.0" [ref=e2598]
+                - cell "60.0" [ref=e2599]
+                - cell "TIE" [ref=e2600]
+              - row [ref=e2601]:
+                - cell "Effort ROI (Value / Hour)" [ref=e2602]
+                - cell "89.4" [ref=e2603]
+                - cell "83.6" [ref=e2604]
+                - cell "[aphelion-engine/aphel" [ref=e2605]
+          - generic [ref=e2606]:
+            - generic [ref=e2607]:
+              - heading "Agent Recommendation" [level=4] [ref=e2608]
+              - paragraph [ref=e2609]: "Top Recommendation: **This Week in Open Source for October 2, 2026** (RECOMMEND). It achieves a priority score of 77.5/100. If short on time, select **This Week in Open Source for October 2, 2026** as a high-leverage quick win."
+            - generic [ref=e2610]:
+              - heading "Strategic Tradeoffs" [level=4] [ref=e2611]
+              - paragraph [ref=e2612]: Choosing 'This Week in Open Source for October 2, 2026' prioritizes overall expected value. In contrast, 'This Week in Open Source for October 2, 2026' yields strategic portfolio lift (92.0/100), while 'This Week in Open Source for October 2, 2026' saves hours at ~11.0h effort.

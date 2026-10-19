@@ -1,0 +1,105 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e5]:
+    - banner [ref=f4e6]:
+      - generic [ref=f4e8]:
+        - generic [ref=f4e9]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=f4e10] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f4e15]:
+              - generic [ref=f4e16]:
+                - generic [ref=f4e17]: PARKTWIN AI
+                - generic [ref=f4e18]: Driver
+              - generic [ref=f4e19]: Smart Journey Guidance
+          - navigation [ref=f4e20]:
+            - link "Dashboard" [ref=f4e21] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [ref=f4e28] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=f4e33] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=f4e38] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=f4e44] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=f4e48]:
+          - generic [ref=f4e49]:
+            - generic [ref=f4e51]: VEH-002
+            - generic [ref=f4e52]: CAM-01
+          - button "CCTV Evidence" [ref=f4e53] [cursor=pointer]
+          - link [ref=f4e58] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=f4e59]
+          - button "Toggle color theme" [ref=f4e65] [cursor=pointer]
+      - generic [ref=f4e70]:
+        - generic [ref=f4e71]:
+          - generic [ref=f4e72]:
+            - button "DEMO MODE" [ref=f4e73] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=f4e79] [cursor=pointer]
+          - generic [ref=f4e85]:
+            - generic [ref=f4e86]:
+              - strong [ref=f4e88]: KA05BZ2700
+              - generic [ref=f4e89]: (98% paddleocr)
+              - generic [ref=f4e90]: "Track #10"
+            - generic [ref=f4e91]: 6. Parked Successfully
+        - generic [ref=f4e93]:
+          - generic [ref=f4e94]:
+            - generic [ref=f4e95]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=f4e100] [cursor=pointer]:
+              - generic [ref=f4e101]: VEH-001
+              - generic "Reserved" [ref=f4e102]
+            - button "VEH-002 Reserved" [ref=f4e103] [cursor=pointer]:
+              - generic [ref=f4e104]: VEH-002
+              - generic "Reserved" [ref=f4e105]
+            - button "VEH-003 No Reservation" [ref=f4e106] [cursor=pointer]:
+              - generic [ref=f4e107]: VEH-003
+              - generic "No Reservation" [ref=f4e108]
+            - button "VEH-004 No Reservation" [ref=f4e109] [cursor=pointer]:
+              - generic [ref=f4e110]: VEH-004
+              - generic "No Reservation" [ref=f4e111]
+            - button "VEH-005 No Reservation" [ref=f4e112] [cursor=pointer]:
+              - generic [ref=f4e113]: VEH-005
+              - generic "No Reservation" [ref=f4e114]
+          - generic [ref=f4e115]:
+            - button "Next Event" [ref=f4e116] [cursor=pointer]
+            - button "Reset Vehicle" [ref=f4e120] [cursor=pointer]
+            - button "Reset Demo" [ref=f4e125] [cursor=pointer]
+    - main [ref=f4e127]:
+      - generic [ref=f4e393]:
+        - generic [ref=f4e394]:
+          - generic [ref=f4e395]:
+            - generic [ref=f4e396]: Live Parking Session
+            - heading "PARKING SESSION" [level=1] [ref=f4e399]
+            - paragraph [ref=f4e400]: Vehicle actively parked in facility bay. Live duration and gateway tracking active.
+          - generic [ref=f4e401]: ● APPLICATION-ONLY
+        - generic [ref=f4e402]:
+          - generic [ref=f4e404]:
+            - generic [ref=f4e405]:
+              - generic [ref=f4e406]: ● PARKED · SESSION ACTIVE
+              - generic [ref=f4e407]: Entry Gateway Session (ACCESS_POINT_B2)
+            - heading "Space SP-14" [level=3] [ref=f4e408]
+            - paragraph [ref=f4e409]: Zone B (Upper Island) · Level B2
+          - generic [ref=f4e410]:
+            - generic [ref=f4e411]:
+              - generic [ref=f4e412]: ELAPSED PARKING DURATION
+              - generic [ref=f4e413]: 00:00:00
+              - generic [ref=f4e414]: Live counter synchronized with demo state
+            - generic [ref=f4e415]:
+              - generic [ref=f4e416]:
+                - generic [ref=f4e417]: VEHICLE
+                - generic [ref=f4e418]: VEH-002
+                - text: Compact Hybrid
+              - generic [ref=f4e419]:
+                - generic [ref=f4e420]: ENTRY TIME
+                - generic [ref=f4e421]: 2026-08-31T11:28:08.752141+00:00
+                - text: ACCESS_POINT_B2
+              - generic [ref=f4e422]:
+                - generic [ref=f4e423]: PARKED TIME
+                - generic [ref=f4e424]: 6:42 PM
+                - text: SP-14
+            - generic [ref=f4e425]:
+              - button "EXIT PARKING" [ref=f4e426] [cursor=pointer]
+              - button "View CAM-02 Bay Evidence" [ref=f4e432] [cursor=pointer]
+              - generic [ref=f4e437]: Reroutes destination to ACCESS_POINT_B2 on Digital Twin. Bay maneuver is governed by application state (NOT OBSERVED in CAM-02 CCTV clip).
+    - contentinfo [ref=f4e438]: ParkTwin AI Driver Portal · Verified Facility Geometry & Real CCTV Physical Evidence
+  - button "Open Next.js Dev Tools" [ref=f4e388] [cursor=pointer]
+  - alert [ref=f4e392]: Parking Session · ParkTwin AI · ParkTwin AI

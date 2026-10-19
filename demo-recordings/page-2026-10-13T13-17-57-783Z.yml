@@ -1,0 +1,198 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Decisions" [ref=e24] [cursor=pointer]
+        - button "AI Agent" [ref=e30] [cursor=pointer]
+        - button "Radar" [ref=e35] [cursor=pointer]
+        - button "Discover" [ref=e43] [cursor=pointer]
+        - button "Hackathons" [ref=e48] [cursor=pointer]
+        - button "Internships" [ref=e56] [cursor=pointer]
+        - button "Open Source" [ref=e61] [cursor=pointer]
+        - button "Competitions" [ref=e67] [cursor=pointer]
+        - button "Research" [ref=e72] [cursor=pointer]
+        - button "Saved 1" [ref=e168] [cursor=pointer]:
+          - generic [ref=e79]: Saved
+          - generic [ref=e169]: "1"
+        - button "Tracker" [ref=e80] [cursor=pointer]
+        - button "Projects" [ref=e83] [cursor=pointer]
+        - button "Sources" [ref=e89] [cursor=pointer]
+      - generic [ref=e93]:
+        - button "9" [ref=e170]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e98]': LIVE
+        - button "Deep Discover" [ref=e101] [cursor=pointer]
+        - button "Student Profile" [ref=e106]
+  - main [ref=e111]:
+    - generic [ref=e1839]:
+      - generic [ref=e1840]:
+        - generic [ref=e1841]:
+          - heading "Autonomous Discovery Intelligence & Observability" [level=2] [ref=e1842]
+          - paragraph [ref=e1845]: Coverage mapping, candidate registry, yield-optimized scheduling, and connector health.
+        - generic [ref=e1846]:
+          - button "Deep Discovery Mode" [ref=e1847] [cursor=pointer]
+          - button "Standard Discovery" [ref=e1852] [cursor=pointer]
+      - generic [ref=e1859]:
+        - button "Active Connectors (10)" [ref=e1860] [cursor=pointer]
+        - button "Coverage Map & Gaps (28)" [ref=e1864] [cursor=pointer]
+        - button "Candidate Source Registry (10)" [active] [ref=e1869] [cursor=pointer]
+        - button "Dynamic Scheduling (20)" [ref=e1875] [cursor=pointer]
+      - generic [ref=e2701]:
+        - generic [ref=e2702]:
+          - generic [ref=e2703]:
+            - generic [ref=e2704]:
+              - heading "Candidate Source Probing & SSRF Defense" [level=4] [ref=e2705]
+              - paragraph [ref=e2710]: Inspect new domains across the internet with multi-hop SSRF validation and plausibility scoring.
+            - button "Seed Curated Directory" [ref=e2711] [cursor=pointer]
+          - generic [ref=e2718]:
+            - textbox "Enter candidate URL to probe (e.g., https://mlh.io/seasons/2026/events)" [ref=e2719]
+            - button "Probe & Validate" [ref=e2720] [cursor=pointer]
+        - generic [ref=e2725]:
+          - heading "Discovered Candidate Sources (10)" [level=4] [ref=e2726]
+          - table [ref=e2728]:
+            - rowgroup [ref=e2729]:
+              - row [ref=e2730]:
+                - columnheader "Source Name" [ref=e2731]
+                - columnheader "Domain" [ref=e2732]
+                - columnheader "Lifecycle Status" [ref=e2733]
+                - columnheader "Authority Tier" [ref=e2734]
+                - columnheader "Quality Score" [ref=e2735]
+                - columnheader "Target Categories" [ref=e2736]
+                - columnheader "Verified Yield" [ref=e2737]
+                - columnheader "Validation Notes" [ref=e2738]
+            - rowgroup [ref=e2739]:
+              - row [ref=e2740]:
+                - cell "Major League Hacking Official Events" [ref=e2741]:
+                  - generic [ref=e2742]:
+                    - generic [ref=e2743]: Major League Hacking Official Events
+                    - link [ref=e2744] [cursor=pointer]:
+                      - /url: https://mlh.io/seasons/2026/events
+                - cell "mlh.io" [ref=e2749]
+                - cell "VALIDATED" [ref=e2750]
+                - cell "PRIMARY" [ref=e2751]
+                - cell "85/100" [ref=e2752]
+                - cell "HACKATHON, OPEN_SOURCE_PROGRAM" [ref=e2753]
+                - cell "0" [ref=e2754]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2755]
+              - row [ref=e2756]:
+                - cell "Unstop Engineering Challenges & Hackathons" [ref=e2757]:
+                  - generic [ref=e2758]:
+                    - generic [ref=e2759]: Unstop Engineering Challenges & Hackathons
+                    - link [ref=e2760] [cursor=pointer]:
+                      - /url: https://unstop.com/api/public/opportunity/search-result
+                - cell "unstop.com" [ref=e2765]
+                - cell "VALIDATED" [ref=e2766]
+                - cell "PRIMARY" [ref=e2767]
+                - cell "85/100" [ref=e2768]
+                - cell "COMPETITION, HACKATHON, INTERNSHIP, SCHOLARSHIP, ROBOTICS_PROGRAM, ENGINEERING_CHALLENGE" [ref=e2769]
+                - cell "0" [ref=e2770]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2771]
+              - row [ref=e2772]:
+                - cell "Devpost Software Competitions" [ref=e2773]:
+                  - generic [ref=e2774]:
+                    - generic [ref=e2775]: Devpost Software Competitions
+                    - link [ref=e2776] [cursor=pointer]:
+                      - /url: https://devpost.com/hackathons
+                - cell "devpost.com" [ref=e2781]
+                - cell "VALIDATED" [ref=e2782]
+                - cell "PRIMARY" [ref=e2783]
+                - cell "85/100" [ref=e2784]
+                - cell "HACKATHON, AI_CHALLENGE" [ref=e2785]
+                - cell "0" [ref=e2786]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2787]
+              - row [ref=e2788]:
+                - cell "Devfolio Hackathons & Sprints" [ref=e2789]:
+                  - generic [ref=e2790]:
+                    - generic [ref=e2791]: Devfolio Hackathons & Sprints
+                    - link [ref=e2792] [cursor=pointer]:
+                      - /url: https://devfolio.co/hackathons
+                - cell "devfolio.co" [ref=e2797]
+                - cell "VALIDATED" [ref=e2798]
+                - cell "PRIMARY" [ref=e2799]
+                - cell "85/100" [ref=e2800]
+                - cell "HACKATHON, OPEN_SOURCE" [ref=e2801]
+                - cell "0" [ref=e2802]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2803]
+              - row [ref=e2804]:
+                - cell "Linux Foundation LFX Mentorship" [ref=e2805]:
+                  - generic [ref=e2806]:
+                    - generic [ref=e2807]: Linux Foundation LFX Mentorship
+                    - link [ref=e2808] [cursor=pointer]:
+                      - /url: https://lfx.linuxfoundation.org/tools/mentorship/
+                - cell "lfx.linuxfoundation.org" [ref=e2813]
+                - cell "VALIDATED" [ref=e2814]
+                - cell "OFFICIAL" [ref=e2815]
+                - cell "85/100" [ref=e2816]
+                - cell "STUDENT_PROGRAM, OPEN_SOURCE_PROGRAM" [ref=e2817]
+                - cell "0" [ref=e2818]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2819]
+              - row [ref=e2820]:
+                - cell "Google Summer of Code Official" [ref=e2821]:
+                  - generic [ref=e2822]:
+                    - generic [ref=e2823]: Google Summer of Code Official
+                    - link [ref=e2824] [cursor=pointer]:
+                      - /url: https://summerofcode.withgoogle.com/api/archive/programs/
+                - cell "summerofcode.withgoogle.com" [ref=e2829]
+                - cell "VALIDATED" [ref=e2830]
+                - cell "OFFICIAL" [ref=e2831]
+                - cell "85/100" [ref=e2832]
+                - cell "STUDENT_PROGRAM, OPEN_SOURCE" [ref=e2833]
+                - cell "0" [ref=e2834]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2835]
+              - row [ref=e2836]:
+                - cell "Kaggle Machine Learning Benchmarks" [ref=e2837]:
+                  - generic [ref=e2838]:
+                    - generic [ref=e2839]: Kaggle Machine Learning Benchmarks
+                    - link [ref=e2840] [cursor=pointer]:
+                      - /url: https://www.kaggle.com/competitions
+                - cell "kaggle.com" [ref=e2845]
+                - cell "NEEDS REVIEW" [ref=e2846]
+                - cell "PRIMARY" [ref=e2847]
+                - cell "85/100" [ref=e2848]
+                - cell "DATA_SCIENCE_COMPETITION, AI_CHALLENGE, COMPETITION" [ref=e2849]
+                - cell "0" [ref=e2850]
+                - cell "Reachable but contains minimal opportunity indicators." [ref=e2851]
+              - row [ref=e2852]:
+                - cell "GitHub Open Source Good First Issues" [ref=e2853]:
+                  - generic [ref=e2854]:
+                    - generic [ref=e2855]: GitHub Open Source Good First Issues
+                    - link [ref=e2856] [cursor=pointer]:
+                      - /url: https://api.github.com/search/issues
+                - cell "github.com" [ref=e2861]
+                - cell "VALIDATED" [ref=e2862]
+                - cell "PRIMARY" [ref=e2863]
+                - cell "70/100" [ref=e2864]
+                - cell "BEGINNER_ISSUE, OPEN_SOURCE" [ref=e2865]
+                - cell "0" [ref=e2866]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2867]
+              - row [ref=e2868]:
+                - cell "IEEE Robotics and Automation Society" [ref=e2869]:
+                  - generic [ref=e2870]:
+                    - generic [ref=e2871]: IEEE Robotics and Automation Society
+                    - link [ref=e2872] [cursor=pointer]:
+                      - /url: https://www.ieee-ras.org/conferences-workshops/fully-sponsored
+                - cell "ieee-ras.org" [ref=e2877]
+                - cell "VALIDATED" [ref=e2878]
+                - cell "OFFICIAL" [ref=e2879]
+                - cell "70/100" [ref=e2880]
+                - cell "ROBOTICS_PROGRAM, ACADEMIC_CONFERENCE, CALL_FOR_PAPERS" [ref=e2881]
+                - cell "0" [ref=e2882]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2883]
+              - row [ref=e2884]:
+                - cell "IIT Bombay Techfest & Competitions Portal" [ref=e2885]:
+                  - generic [ref=e2886]:
+                    - generic [ref=e2887]: IIT Bombay Techfest & Competitions Portal
+                    - link [ref=e2888] [cursor=pointer]:
+                      - /url: https://techfest.org/competitions
+                - cell "techfest.org" [ref=e2893]
+                - cell "VALIDATED" [ref=e2894]
+                - cell "OFFICIAL" [ref=e2895]
+                - cell "70/100" [ref=e2896]
+                - cell "ROBOTICS_PROGRAM, ENGINEERING_CHALLENGE, COMPETITION" [ref=e2897]
+                - cell "0" [ref=e2898]
+                - cell "Pre-validated verified discovery portal from known directory." [ref=e2899]

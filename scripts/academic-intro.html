@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ParkTwin AI — Academic Project Introduction</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background-color: #060913;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #F8FAFC;
+      position: relative;
+    }
+
+    /* Sophisticated Dark Ambient Background */
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 45%, #0f1a30 0%, #090e1c 55%, #04060c 100%);
+      z-index: 1;
+    }
+
+    /* Ambient Tech Glow Spheres */
+    .glow-sphere-1 {
+      position: absolute;
+      width: 900px;
+      height: 550px;
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse at center, rgba(14, 165, 233, 0.08) 0%, rgba(30, 58, 138, 0.04) 50%, transparent 75%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .glow-sphere-2 {
+      position: absolute;
+      width: 600px;
+      height: 350px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Subtle Digital Grid */
+    .grid-layer {
+      position: absolute;
+      inset: 0;
+      background-size: 64px 64px;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
+      z-index: 3;
+      mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.2) 75%, transparent 95%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.2) 75%, transparent 95%);
+    }
+
+    /* Tech Corner Reticles and Metadata Frame */
+    .tech-frame {
+      position: absolute;
+      inset: 48px 64px;
+      z-index: 4;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .frame-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: rgba(148, 163, 184, 0.45);
+      text-transform: uppercase;
+    }
+
+    .reticle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .reticle-cross {
+      color: rgba(56, 189, 248, 0.5);
+      font-size: 13px;
+    }
+
+    .reticle-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #38BDF8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+    }
+
+    /* Main Container for Presentation Scenes */
+    .viewport {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scene {
+      position: absolute;
+      width: 100%;
+      max-width: 1500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(12px) scale(0.995);
+      pointer-events: none;
+      will-change: opacity, transform;
+    }
+
+    /* Badge / Categorical Superheader */
+    .category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      background: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      font-family: 'JetBrains Mono', 'Inter', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: #38BDF8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #38BDF8;
+      box-shadow: 0 0 6px #38BDF8;
+    }
+
+    /* Primary Names */
+    .hero-name {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+      line-height: 1.15;
+    }
+
+    /* Secondary Department / Roles */
+    .primary-meta {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: #E2E8F0;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .secondary-meta {
+      font-size: 19px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      color: #94A3B8;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    .tertiary-meta {
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #94A3B8;
+      line-height: 1.45;
+      max-width: 1000px;
+    }
+
+    /* Sub-rule divider */
+    .accent-rule {
+      width: 56px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #38BDF8, transparent);
+      margin: 16px auto;
+      border-radius: 1px;
+    }
+
+    /* ─── SCENE 1 SPECIFICS: PARKTWIN AI TITLE & DIGITAL TWIN GRAPHIC ─── */
+    .scene-1-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Subtle wireframe digital twin parking bay visual */
+    .twin-visual-backdrop {
+      width: 540px;
+      height: 220px;
+      margin-bottom: 28px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .svg-twin {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .title-parktwin {
+      font-size: 68px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      background: linear-gradient(180deg, #FFFFFF 30%, #CBD5E1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 35px rgba(56, 189, 248, 0.2);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .title-tag {
+      font-size: 20px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: rgba(14, 165, 233, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38BDF8;
+      letter-spacing: 0.12em;
+      vertical-align: middle;
+      -webkit-text-fill-color: #38BDF8;
+    }
+
+    .subtitle-parktwin {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      color: #38BDF8;
+      text-transform: uppercase;
+      text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    /* ─── SCENE 4: MASTER MENTOR MULTI-LINE REFINEMENT ─── */
+    .mentor-lines {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .mentor-role-1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #F1F5F9;
+      letter-spacing: 0.08em;
+    }
+
+    .mentor-role-2 {
+      font-size: 19px;
+      font-weight: 400;
+      color: #CBD5E1;
+      letter-spacing: 0.04em;
+    }
+
+    .mentor-role-3 {
+      font-size: 18px;
+      font-weight: 400;
+      color: #94A3B8;
+      letter-spacing: 0.03em;
+    }
+
+    /* Bottom Status Bar */
+    .footer-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background gradient & atmospheric lighting -->
+  <div class="bg-gradient"></div>
+  <div class="glow-sphere-1" id="glowSphere"></div>
+  <div class="glow-sphere-2"></div>
+
+  <!-- Geometric grid overlay -->
+  <div class="grid-layer" id="gridLayer"></div>
+
+  <!-- Tech Frame & Metadata Perimeter -->
+  <div class="tech-frame">
+    <div class="frame-row">
+      <div class="reticle">
+        <span class="reticle-cross">+</span>
+        <span>ACADEMIC PROJECT EVALUATION</span>
+      </div>
+      <div class="reticle">
+        <span>FACILITY B2 · CANONICAL SPATIAL MODEL</span>
+        <span class="reticle-cross">+</span>
+      </div>
+    </div>
+    <div class="frame-row">
+      <div class="reticle">
+        <span class="reticle-dot"></span>
+        <span>DIGITAL TWIN ARCHITECTURE</span>
+      </div>
+      <div class="reticle footer-status">
+        <span id="timecodeDisplay">00:00.00</span>
+        <span class="reticle-cross">+</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Presentation Scenes Container -->
+  <div class="viewport">
+    
+    <!-- ═══════════════════════════════════════════════════════════
+         SCENE 1: PARKTWIN AI (0:00 – 0:02)
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="scene" id="scene1">
+      <div class="scene-1-layout">
+        <!-- Subtle Digital Twin / Smart Parking Visual -->
+        <div class="twin-visual-backdrop">
+          <svg class="svg-twin" viewBox="0 0 540 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#0284C7" stop-opacity="0.1"/>
+              </linearGradient>
+              <radialGradient id="sensorGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- Abstract Ground Plane Perspective Grid -->
+            <path d="M 70 190 L 220 30 L 320 30 L 470 190 Z" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1.2" stroke-dasharray="4 4"/>
+            <path d="M 120 190 L 240 30" stroke="rgba(56, 189, 248, 0.08)" stroke-width="1"/>
+            <path d="M 420 190 L 300 30" stroke="rgba(56, 189, 248, 0.08)" stroke-width="1"/>
+            
+            <!-- Canonical Parking Bay Wireframe SP-24 -->
+            <rect x="205" y="45" width="130" height="135" rx="8" stroke="url(#bayGrad)" stroke-width="1.8" fill="rgba(14, 165, 233, 0.03)"/>
+            
+            <!-- Corner Brackets -->
+            <path d="M 197 57 L 197 45 L 217 45" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 343 57 L 343 45 L 323 45" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 197 168 L 197 180 L 217 180" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 343 168 L 343 180 L 323 180" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+            
+            <!-- Central Sensor Node -->
+            <circle cx="270" cy="112" r="18" fill="url(#sensorGlow)"/>
+            <circle cx="270" cy="112" r="5" fill="#38BDF8"/>
+            
+            <!-- Subtle Vehicle Contour Silhouette -->
+            <rect x="235" y="72" width="70" height="80" rx="14" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            
+            <!-- Coordinates & Space Label -->
+            <text x="270" y="146" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#38BDF8" letter-spacing="0.18em">SP-24 · LEVEL B2</text>
+            
+            <!-- Telemetry Accent Lines -->
+            <line x1="80" y1="112" x2="190" y2="112" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1" stroke-dasharray="2 4"/>
+            <circle cx="80" cy="112" r="2.5" fill="#38BDF8"/>
+            <text x="70" y="116" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="rgba(148, 163, 184, 0.6)" letter-spacing="0.1em">WAYPOINT_06</text>
+            
+            <line x1="350" y1="112" x2="460" y2="112" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1" stroke-dasharray="2 4"/>
+            <circle cx="460" cy="112" r="2.5" fill="#38BDF8"/>
+            <text x="470" y="116" text-anchor="start" font-family="'JetBrains Mono', monospace" font-size="9" fill="rgba(148, 163, 184, 0.6)" letter-spacing="0.1em">CAMERA_02_FOV</text>
+          </svg>
+        </div>
+
+        <!-- Project Title -->
+        <h1 class="title-parktwin">
+          PARKTWIN AI
+        </h1>
+        <p class="subtitle-parktwin">
+          SMART PARKING DIGITAL TWIN
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SCENE 2: PROJECT BY MAYUR VS (0:02 – 0:05)
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="scene" id="scene2">
+      <div class="category-badge">
+        <span class="badge-dot"></span>
+        <span>PROJECT BY</span>
+      </div>
+      <h2 class="hero-name">MAYUR VS</h2>
+      <div class="accent-rule"></div>
+      <p class="primary-meta">MECHANICAL ENGINEERING</p>
+      <p class="secondary-meta">PES UNIVERSITY</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SCENE 3: PROJECT GUIDE SINDHU R PAI (0:05 – 0:07.5)
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="scene" id="scene3">
+      <div class="category-badge">
+        <span class="badge-dot"></span>
+        <span>PROJECT GUIDE</span>
+      </div>
+      <h2 class="hero-name">SINDHU R PAI</h2>
+      <div class="accent-rule"></div>
+      <p class="primary-meta" style="font-weight: 400; font-size: 24px; color: #CBD5E1; text-transform: none; letter-spacing: 0.04em;">
+        Assistant Professor
+      </p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SCENE 4: MASTER MENTOR DR. SHYLAJA S S (0:07.5 – 0:10)
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="scene" id="scene4">
+      <div class="category-badge">
+        <span class="badge-dot"></span>
+        <span>MASTER MENTOR</span>
+      </div>
+      <h2 class="hero-name" style="font-size: 50px; margin-bottom: 16px;">DR. SHYLAJA S S</h2>
+      <div class="accent-rule" style="margin: 12px auto 18px auto;"></div>
+      <div class="mentor-lines">
+        <p class="mentor-role-1">Chairperson</p>
+        <p class="mentor-role-2">Director of Cloud Computing & Big Data (CCBD)</p>
+        <p class="mentor-role-3">Centre for Data Sciences & Applied Machine Learning (CDSAML)</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Smoothstep easing function: S-curve transition
+    function smoothstep(min, max, value) {
+      const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
+      return x * x * (3 - 2 * x);
+    }
+
+    const scene1 = document.getElementById('scene1');
+    const scene2 = document.getElementById('scene2');
+    const scene3 = document.getElementById('scene3');
+    const scene4 = document.getElementById('scene4');
+    const timecode = document.getElementById('timecodeDisplay');
+    const gridLayer = document.getElementById('gridLayer');
+    const glowSphere = document.getElementById('glowSphere');
+
+    /**
+     * Set exact frame time (0.000 to 10.000 seconds)
+     */
+    window.setFrameTime = function(t) {
+      // Clamp between 0 and 10
+      t = Math.max(0, Math.min(10, t));
+
+      // Update timecode display
+      const totalSeconds = Math.floor(t);
+      const centis = Math.floor((t - totalSeconds) * 100);
+      const mins = Math.floor(totalSeconds / 60);
+      const secs = totalSeconds % 60;
+      timecode.textContent = 
+        String(mins).padStart(2, '0') + ':' + 
+        String(secs).padStart(2, '0') + '.' + 
+        String(centis).padStart(2, '0');
+
+      // Subtle dynamic grid drift (imperceptible, continuous cinematic feel)
+      const gridOffset = (t * 4) % 64;
+      gridLayer.style.backgroundPosition = `0px ${gridOffset}px`;
+
+      // ─── SCENE 1: 0.00s – 2.00s (PARKTWIN AI) ───
+      let s1_op = 0;
+      let s1_ty = 12;
+      let s1_sc = 0.99;
+      if (t < 2.00) {
+        // Fade in: 0.00 to 0.38s
+        const fadeIn = smoothstep(0.0, 0.38, t);
+        // Fade out: 1.65 to 2.00s
+        const fadeOut = 1.0 - smoothstep(1.65, 2.00, t);
+        s1_op = fadeIn * fadeOut;
+        s1_ty = 10 * (1 - fadeIn) - 6 * (1 - fadeOut);
+        s1_sc = 0.99 + 0.015 * smoothstep(0.0, 2.0, t);
+      }
+      scene1.style.opacity = s1_op.toFixed(4);
+      scene1.style.transform = `translateY(${s1_ty.toFixed(2)}px) scale(${s1_sc.toFixed(4)})`;
+
+      // ─── SCENE 2: 2.00s – 5.00s (PROJECT BY MAYUR VS) ───
+      let s2_op = 0;
+      let s2_ty = 12;
+      let s2_sc = 0.99;
+      if (t >= 1.95 && t < 5.00) {
+        // Fade in: 2.00 to 2.45s
+        const fadeIn = smoothstep(2.00, 2.42, t);
+        // Fade out: 4.60 to 5.00s
+        const fadeOut = 1.0 - smoothstep(4.60, 5.00, t);
+        s2_op = fadeIn * fadeOut;
+        s2_ty = 10 * (1 - fadeIn) - 6 * (1 - fadeOut);
+        s2_sc = 0.99 + 0.015 * smoothstep(2.0, 5.0, t);
+      }
+      scene2.style.opacity = s2_op.toFixed(4);
+      scene2.style.transform = `translateY(${s2_ty.toFixed(2)}px) scale(${s2_sc.toFixed(4)})`;
+
+      // ─── SCENE 3: 5.00s – 7.50s (PROJECT GUIDE SINDHU R PAI) ───
+      let s3_op = 0;
+      let s3_ty = 12;
+      let s3_sc = 0.99;
+      if (t >= 4.95 && t < 7.50) {
+        // Fade in: 5.00 to 5.42s
+        const fadeIn = smoothstep(5.00, 5.40, t);
+        // Fade out: 7.15 to 7.50s
+        const fadeOut = 1.0 - smoothstep(7.15, 7.50, t);
+        s3_op = fadeIn * fadeOut;
+        s3_ty = 10 * (1 - fadeIn) - 6 * (1 - fadeOut);
+        s3_sc = 0.99 + 0.015 * smoothstep(5.0, 7.5, t);
+      }
+      scene3.style.opacity = s3_op.toFixed(4);
+      scene3.style.transform = `translateY(${s3_ty.toFixed(2)}px) scale(${s3_sc.toFixed(4)})`;
+
+      // ─── SCENE 4: 7.50s – 10.00s (MASTER MENTOR DR. SHYLAJA S S) ───
+      let s4_op = 0;
+      let s4_ty = 12;
+      let s4_sc = 0.99;
+      if (t >= 7.45) {
+        // Fade in: 7.50 to 7.95s
+        const fadeIn = smoothstep(7.50, 7.92, t);
+        // Held cleanly through 10.00s! Zero fade-out for seamless cut
+        s4_op = fadeIn;
+        s4_ty = 10 * (1 - fadeIn);
+        s4_sc = 0.99 + 0.012 * smoothstep(7.5, 10.0, t);
+      }
+      scene4.style.opacity = s4_op.toFixed(4);
+      scene4.style.transform = `translateY(${s4_ty.toFixed(2)}px) scale(${s4_sc.toFixed(4)})`;
+    };
+
+    // Initialize at frame 0
+    window.setFrameTime(0);
+  </script>
+</body>
+</html>

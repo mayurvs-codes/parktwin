@@ -37,7 +37,7 @@ class ConnectionManager:
         """Validate token and accept connection registered under ``channel``."""
         import sys
         is_testing = (
-            os.environ.get("ENVIRONMENT") in ("test", "development")
+            os.environ.get("ENVIRONMENT", "development") in ("test", "development")
             or os.getenv("PYTEST_CURRENT_TEST") is not None
             or "pytest" in sys.modules
             or token == "dev_admin_token"

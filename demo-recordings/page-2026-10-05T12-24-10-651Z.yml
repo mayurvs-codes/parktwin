@@ -1,0 +1,131 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e5]:
+    - banner [ref=f4e6]:
+      - generic [ref=f4e8]:
+        - generic [ref=f4e9]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=f4e10] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=f4e15]:
+              - generic [ref=f4e16]:
+                - generic [ref=f4e17]: PARKTWIN AI
+                - generic [ref=f4e18]: Driver
+              - generic [ref=f4e19]: Smart Journey Guidance
+          - navigation [ref=f4e20]:
+            - link "Dashboard" [ref=f4e21] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [ref=f4e28] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=f4e33] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=f4e38] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=f4e44] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=f4e48]:
+          - generic [ref=f4e49]:
+            - generic [ref=f4e51]: VEH-002
+            - generic [ref=f4e52]: CAM-01
+          - button "CCTV Evidence" [ref=f4e53] [cursor=pointer]
+          - link [ref=f4e58] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=f4e59]
+          - button "Toggle color theme" [ref=f4e65] [cursor=pointer]
+      - generic [ref=f4e70]:
+        - generic [ref=f4e71]:
+          - generic [ref=f4e72]:
+            - button "DEMO MODE" [ref=f4e73] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=f4e79] [cursor=pointer]
+          - generic [ref=f4e85]:
+            - generic [ref=f4e86]:
+              - strong [ref=f4e88]: KA05BZ2700
+              - generic [ref=f4e89]: (98% paddleocr)
+              - generic [ref=f4e90]: "Track #10"
+            - generic [ref=f4e91]: 1. Entry Detected
+        - generic [ref=f4e93]:
+          - generic [ref=f4e94]:
+            - generic [ref=f4e95]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=f4e100] [cursor=pointer]:
+              - generic [ref=f4e101]: VEH-001
+              - generic "Reserved" [ref=f4e102]
+            - button "VEH-002 Reserved" [ref=f4e103] [cursor=pointer]:
+              - generic [ref=f4e104]: VEH-002
+              - generic "Reserved" [ref=f4e105]
+            - button "VEH-003 No Reservation" [ref=f4e106] [cursor=pointer]:
+              - generic [ref=f4e107]: VEH-003
+              - generic "No Reservation" [ref=f4e108]
+            - button "VEH-004 No Reservation" [ref=f4e109] [cursor=pointer]:
+              - generic [ref=f4e110]: VEH-004
+              - generic "No Reservation" [ref=f4e111]
+            - button "VEH-005 No Reservation" [ref=f4e112] [cursor=pointer]:
+              - generic [ref=f4e113]: VEH-005
+              - generic "No Reservation" [ref=f4e114]
+          - generic [ref=f4e115]:
+            - button "Next Event" [ref=f4e116] [cursor=pointer]
+            - button "Reset Vehicle" [ref=f4e120] [cursor=pointer]
+            - button "Reset Demo" [ref=f4e125] [cursor=pointer]
+    - main [ref=f4e127]:
+      - generic [ref=f4e590]:
+        - generic [ref=f4e591]:
+          - generic [ref=f4e592]: Drive-In Allocation
+          - heading "NO RESERVATION FOUND" [level=1] [ref=f4e595]
+          - paragraph [ref=f4e596]:
+            - text: You can still park. Real-time facility monitoring detects
+            - strong [ref=f4e597]: "4"
+            - text: parking spaces currently available.
+        - generic [ref=f4e598]:
+          - generic [ref=f4e600]:
+            - generic [ref=f4e601]:
+              - generic [ref=f4e602]: "[ RECOMMENDED SPACE ]"
+              - generic [ref=f4e605]: NEAREST TO ENTRANCE
+            - generic [ref=f4e606]:
+              - heading "SP-14" [level=3] [ref=f4e607]
+              - paragraph [ref=f4e608]: Zone B (Upper Island) · Level B2
+          - generic [ref=f4e609]:
+            - paragraph [ref=f4e610]: Optimal driving path from ACCESS_POINT_B2 with minimal aisle traversal.
+            - link [ref=f4e611] [cursor=pointer]:
+              - /url: /user/navigation
+              - button "SELECT & START NAVIGATION" [ref=f4e612]
+        - generic [ref=f4e616]:
+          - generic [ref=f4e617]:
+            - heading "AVAILABLE PARKING (4 BAYS ONLINE)" [level=2] [ref=f4e618]
+            - generic [ref=f4e622]: Synchronized with Admin Twin
+          - generic [ref=f4e623]:
+            - generic [ref=f4e624]:
+              - generic [ref=f4e625]:
+                - generic [ref=f4e626]:
+                  - generic [ref=f4e627]: SP-11
+                  - generic [ref=f4e628]: FREE
+                - paragraph [ref=f4e629]: Zone B (Upper Island) · Level B2
+              - link [ref=f4e631] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Reserve & Navigate" [ref=f4e632]
+            - generic [ref=f4e634]:
+              - generic [ref=f4e635]:
+                - generic [ref=f4e636]:
+                  - generic [ref=f4e637]: SP-14
+                  - generic [ref=f4e638]: FREE
+                - paragraph [ref=f4e639]: Zone B (Upper Island) · Level B2
+              - link [ref=f4e641] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Reserve & Navigate" [ref=f4e642]
+            - generic [ref=f4e644]:
+              - generic [ref=f4e645]:
+                - generic [ref=f4e646]:
+                  - generic [ref=f4e647]: SP-17
+                  - generic [ref=f4e648]: FREE
+                - paragraph [ref=f4e649]: Zone B (Upper Island) · Level B2
+              - link [ref=f4e651] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Reserve & Navigate" [ref=f4e652]
+            - generic [ref=f4e654]:
+              - generic [ref=f4e655]:
+                - generic [ref=f4e656]:
+                  - generic [ref=f4e657]: SP-19
+                  - generic [ref=f4e658]: FREE
+                - paragraph [ref=f4e659]: Zone B (Upper Island) · Level B2
+              - link [ref=f4e661] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Reserve & Navigate" [ref=f4e662]
+    - contentinfo [ref=f4e579]: ParkTwin AI Driver Portal · Verified Facility Geometry & Real CCTV Physical Evidence
+  - button "Open Next.js Dev Tools" [ref=f4e585] [cursor=pointer]
+  - alert [ref=f4e589]: Find Parking · ParkTwin AI · ParkTwin AI

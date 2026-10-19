@@ -1,0 +1,261 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Decisions" [ref=e24] [cursor=pointer]
+        - button "AI Agent" [ref=e30] [cursor=pointer]
+        - button "Radar" [ref=e35] [cursor=pointer]
+        - button "Discover" [ref=e43] [cursor=pointer]
+        - button "Hackathons" [ref=e48] [cursor=pointer]
+        - button "Internships" [ref=e56] [cursor=pointer]
+        - button "Open Source" [ref=e61] [cursor=pointer]
+        - button "Competitions" [ref=e67] [cursor=pointer]
+        - button "Research" [ref=e72] [cursor=pointer]
+        - button "Saved 1" [ref=e168] [cursor=pointer]:
+          - generic [ref=e79]: Saved
+          - generic [ref=e169]: "1"
+        - button "Tracker" [ref=e80] [cursor=pointer]
+        - button "Projects" [ref=e83] [cursor=pointer]
+        - button "Sources" [ref=e89] [cursor=pointer]
+      - generic [ref=e93]:
+        - button "9" [ref=e170]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e98]': LIVE
+        - button "Deep Discover" [ref=e101] [cursor=pointer]
+        - button "Student Profile" [ref=e106]
+  - main [ref=e111]:
+    - generic [ref=e1839]:
+      - generic [ref=e1840]:
+        - generic [ref=e1841]:
+          - heading "Autonomous Discovery Intelligence & Observability" [level=2] [ref=e1842]
+          - paragraph [ref=e1845]: Coverage mapping, candidate registry, yield-optimized scheduling, and connector health.
+        - generic [ref=e1846]:
+          - button "Deep Discovery Mode" [ref=e1847] [cursor=pointer]
+          - button "Standard Discovery" [ref=e1852] [cursor=pointer]
+      - generic [ref=e1859]:
+        - button "Active Connectors (10)" [ref=e1860] [cursor=pointer]
+        - button "Coverage Map & Gaps (28)" [ref=e1864] [cursor=pointer]
+        - button "Candidate Source Registry (10)" [ref=e1869] [cursor=pointer]
+        - button "Dynamic Scheduling (20)" [active] [ref=e1875] [cursor=pointer]
+      - generic [ref=e2900]:
+        - generic [ref=e2901]:
+          - generic [ref=e2902]:
+            - heading "Yield-Optimized Crawl Frequencies" [level=4] [ref=e2903]
+            - paragraph [ref=e2906]: Discovery schedules adapt based on empirical verified yields, duplicate suppression, and category gaps.
+          - generic [ref=e2907]: "Generated: 6:47:09 PM"
+        - table [ref=e2909]:
+          - rowgroup [ref=e2910]:
+            - row [ref=e2911]:
+              - columnheader "Source Name" [ref=e2912]
+              - columnheader "Category / Tier" [ref=e2913]
+              - columnheader "Interval" [ref=e2914]
+              - columnheader "Priority Weight" [ref=e2915]
+              - columnheader "Status" [ref=e2916]
+              - columnheader "Next Due" [ref=e2917]
+              - columnheader "Adaptive Rationale" [ref=e2918]
+          - rowgroup [ref=e2919]:
+            - row [ref=e2920]:
+              - cell "GitHub" [ref=e2921]
+              - cell "OpenSource REGISTERED_CONNECTOR" [ref=e2922]:
+                - generic [ref=e2923]: OpenSource
+                - text: REGISTERED_CONNECTOR
+              - cell "6h" [ref=e2924]
+              - cell "0.9" [ref=e2925]
+              - cell "ACTIVE" [ref=e2926]
+              - cell "12:23:43 AM" [ref=e2927]
+              - 'cell "High-yield quality source (score: 96.7, verified: 0). Priority crawl." [ref=e2928]'
+            - row [ref=e2929]:
+              - cell "Devfolio" [ref=e2930]
+              - cell "Hackathons REGISTERED_CONNECTOR" [ref=e2931]:
+                - generic [ref=e2932]: Hackathons
+                - text: REGISTERED_CONNECTOR
+              - cell "6h" [ref=e2933]
+              - cell "0.9" [ref=e2934]
+              - cell "ACTIVE" [ref=e2935]
+              - cell "12:25:38 AM" [ref=e2936]
+              - 'cell "High-yield quality source (score: 93.3, verified: 0). Priority crawl." [ref=e2937]'
+            - row [ref=e2938]:
+              - cell "StudentPrograms" [ref=e2939]
+              - cell "OpenSource REGISTERED_CONNECTOR" [ref=e2940]:
+                - generic [ref=e2941]: OpenSource
+                - text: REGISTERED_CONNECTOR
+              - cell "6h" [ref=e2942]
+              - cell "0.9" [ref=e2943]
+              - cell "ACTIVE" [ref=e2944]
+              - cell "12:25:51 AM" [ref=e2945]
+              - 'cell "High-yield quality source (score: 93.3, verified: 0). Priority crawl." [ref=e2946]'
+            - row [ref=e2947]:
+              - cell "Unstop" [ref=e2948]
+              - cell "Competitions REGISTERED_CONNECTOR" [ref=e2949]:
+                - generic [ref=e2950]: Competitions
+                - text: REGISTERED_CONNECTOR
+              - cell "6h" [ref=e2951]
+              - cell "0.9" [ref=e2952]
+              - cell "ACTIVE" [ref=e2953]
+              - cell "12:26:03 AM" [ref=e2954]
+              - 'cell "High-yield quality source (score: 87.7, verified: 8). Priority crawl." [ref=e2955]'
+            - row [ref=e2956]:
+              - cell "Unstop Engineering Challenges & Hackathons" [ref=e2957]
+              - cell "COMPETITION / HACKATHON CANDIDATE_PRIMARY" [ref=e2958]:
+                - generic [ref=e2959]: COMPETITION / HACKATHON
+                - text: CANDIDATE_PRIMARY
+              - cell "12h" [ref=e2960]
+              - cell "0.9" [ref=e2961]
+              - cell "VALIDATED" [ref=e2962]
+              - cell "6:47:09 PM" [ref=e2963]
+              - 'cell "Validated reachable candidate source. Probed and ready for discovery harvest. [BOOSTED: Covers critical category gap]" [ref=e2964]'
+            - row [ref=e2965]:
+              - cell "Devpost Software Competitions" [ref=e2966]
+              - cell "HACKATHON / AI_CHALLENGE CANDIDATE_PRIMARY" [ref=e2967]:
+                - generic [ref=e2968]: HACKATHON / AI_CHALLENGE
+                - text: CANDIDATE_PRIMARY
+              - cell "12h" [ref=e2969]
+              - cell "0.9" [ref=e2970]
+              - cell "VALIDATED" [ref=e2971]
+              - cell "6:47:09 PM" [ref=e2972]
+              - 'cell "Validated reachable candidate source. Probed and ready for discovery harvest. [BOOSTED: Covers critical category gap]" [ref=e2973]'
+            - row [ref=e2974]:
+              - cell "IIT Bombay Techfest & Competitions Portal" [ref=e2975]
+              - cell "ROBOTICS_PROGRAM / ENGINEERING_CHALLENGE CANDIDATE_OFFICIAL" [ref=e2976]:
+                - generic [ref=e2977]: ROBOTICS_PROGRAM / ENGINEERING_CHALLENGE
+                - text: CANDIDATE_OFFICIAL
+              - cell "12h" [ref=e2978]
+              - cell "0.9" [ref=e2979]
+              - cell "VALIDATED" [ref=e2980]
+              - cell "6:47:09 PM" [ref=e2981]
+              - 'cell "Validated reachable candidate source. Probed and ready for discovery harvest. [BOOSTED: Covers critical category gap]" [ref=e2982]'
+            - row [ref=e2983]:
+              - cell "Major League Hacking Official Events" [ref=e2984]
+              - cell "HACKATHON / OPEN_SOURCE_PROGRAM CANDIDATE_PRIMARY" [ref=e2985]:
+                - generic [ref=e2986]: HACKATHON / OPEN_SOURCE_PROGRAM
+                - text: CANDIDATE_PRIMARY
+              - cell "24h" [ref=e2987]
+              - cell "0.7" [ref=e2988]
+              - cell "VALIDATED" [ref=e2989]
+              - cell "6:47:09 PM" [ref=e2990]
+              - cell "Validated reachable candidate source. Probed and ready for discovery harvest." [ref=e2991]
+            - row [ref=e2992]:
+              - cell "Devfolio Hackathons & Sprints" [ref=e2993]
+              - cell "HACKATHON / OPEN_SOURCE CANDIDATE_PRIMARY" [ref=e2994]:
+                - generic [ref=e2995]: HACKATHON / OPEN_SOURCE
+                - text: CANDIDATE_PRIMARY
+              - cell "24h" [ref=e2996]
+              - cell "0.7" [ref=e2997]
+              - cell "VALIDATED" [ref=e2998]
+              - cell "6:47:09 PM" [ref=e2999]
+              - cell "Validated reachable candidate source. Probed and ready for discovery harvest." [ref=e3000]
+            - row [ref=e3001]:
+              - cell "Linux Foundation LFX Mentorship" [ref=e3002]
+              - cell "STUDENT_PROGRAM / OPEN_SOURCE_PROGRAM CANDIDATE_OFFICIAL" [ref=e3003]:
+                - generic [ref=e3004]: STUDENT_PROGRAM / OPEN_SOURCE_PROGRAM
+                - text: CANDIDATE_OFFICIAL
+              - cell "24h" [ref=e3005]
+              - cell "0.7" [ref=e3006]
+              - cell "VALIDATED" [ref=e3007]
+              - cell "6:47:09 PM" [ref=e3008]
+              - cell "Validated reachable candidate source. Probed and ready for discovery harvest." [ref=e3009]
+            - row [ref=e3010]:
+              - cell "Google Summer of Code Official" [ref=e3011]
+              - cell "STUDENT_PROGRAM / OPEN_SOURCE CANDIDATE_OFFICIAL" [ref=e3012]:
+                - generic [ref=e3013]: STUDENT_PROGRAM / OPEN_SOURCE
+                - text: CANDIDATE_OFFICIAL
+              - cell "24h" [ref=e3014]
+              - cell "0.7" [ref=e3015]
+              - cell "VALIDATED" [ref=e3016]
+              - cell "6:47:09 PM" [ref=e3017]
+              - cell "Validated reachable candidate source. Probed and ready for discovery harvest." [ref=e3018]
+            - row [ref=e3019]:
+              - cell "GitHub Open Source Good First Issues" [ref=e3020]
+              - cell "BEGINNER_ISSUE / OPEN_SOURCE CANDIDATE_PRIMARY" [ref=e3021]:
+                - generic [ref=e3022]: BEGINNER_ISSUE / OPEN_SOURCE
+                - text: CANDIDATE_PRIMARY
+              - cell "24h" [ref=e3023]
+              - cell "0.7" [ref=e3024]
+              - cell "VALIDATED" [ref=e3025]
+              - cell "6:47:09 PM" [ref=e3026]
+              - cell "Validated reachable candidate source. Probed and ready for discovery harvest." [ref=e3027]
+            - row [ref=e3028]:
+              - cell "IEEE Robotics and Automation Society" [ref=e3029]
+              - cell "ROBOTICS_PROGRAM / ACADEMIC_CONFERENCE CANDIDATE_OFFICIAL" [ref=e3030]:
+                - generic [ref=e3031]: ROBOTICS_PROGRAM / ACADEMIC_CONFERENCE
+                - text: CANDIDATE_OFFICIAL
+              - cell "24h" [ref=e3032]
+              - cell "0.7" [ref=e3033]
+              - cell "VALIDATED" [ref=e3034]
+              - cell "6:47:09 PM" [ref=e3035]
+              - cell "Validated reachable candidate source. Probed and ready for discovery harvest." [ref=e3036]
+            - row [ref=e3037]:
+              - cell "Reddit" [ref=e3038]
+              - cell "Community REGISTERED_CONNECTOR" [ref=e3039]:
+                - generic [ref=e3040]: Community
+                - text: REGISTERED_CONNECTOR
+              - cell "24h" [ref=e3041]
+              - cell "0.5" [ref=e3042]
+              - cell "ACTIVE" [ref=e3043]
+              - cell "6:23:47 PM" [ref=e3044]
+              - cell "Standard baseline discovery interval (24h)." [ref=e3045]
+            - row [ref=e3046]:
+              - cell "Devpost" [ref=e3047]
+              - cell "Hackathons REGISTERED_CONNECTOR" [ref=e3048]:
+                - generic [ref=e3049]: Hackathons
+                - text: REGISTERED_CONNECTOR
+              - cell "24h" [ref=e3050]
+              - cell "0.5" [ref=e3051]
+              - cell "ACTIVE" [ref=e3052]
+              - cell "6:24:05 PM" [ref=e3053]
+              - cell "Standard baseline discovery interval (24h)." [ref=e3054]
+            - row [ref=e3055]:
+              - cell "MLH" [ref=e3056]
+              - cell "Hackathons REGISTERED_CONNECTOR" [ref=e3057]:
+                - generic [ref=e3058]: Hackathons
+                - text: REGISTERED_CONNECTOR
+              - cell "24h" [ref=e3059]
+              - cell "0.5" [ref=e3060]
+              - cell "ACTIVE" [ref=e3061]
+              - cell "6:47:09 PM" [ref=e3062]
+              - cell "No historical logs; standard baseline discovery interval." [ref=e3063]
+            - row [ref=e3064]:
+              - cell "RSSFeed" [ref=e3065]
+              - cell "Feeds REGISTERED_CONNECTOR" [ref=e3066]:
+                - generic [ref=e3067]: Feeds
+                - text: REGISTERED_CONNECTOR
+              - cell "24h" [ref=e3068]
+              - cell "0.5" [ref=e3069]
+              - cell "ACTIVE" [ref=e3070]
+              - cell "6:25:48 PM" [ref=e3071]
+              - cell "Standard baseline discovery interval (24h)." [ref=e3072]
+            - row [ref=e3073]:
+              - cell "Kaggle" [ref=e3074]
+              - cell "Competitions REGISTERED_CONNECTOR" [ref=e3075]:
+                - generic [ref=e3076]: Competitions
+                - text: REGISTERED_CONNECTOR
+              - cell "24h" [ref=e3077]
+              - cell "0.5" [ref=e3078]
+              - cell "ACTIVE" [ref=e3079]
+              - cell "6:25:56 PM" [ref=e3080]
+              - cell "Standard baseline discovery interval (24h)." [ref=e3081]
+            - row [ref=e3082]:
+              - cell "WebSearch" [ref=e3083]
+              - cell "Search Engine Index REGISTERED_CONNECTOR" [ref=e3084]:
+                - generic [ref=e3085]: Search Engine Index
+                - text: REGISTERED_CONNECTOR
+              - cell "24h" [ref=e3086]
+              - cell "0.5" [ref=e3087]
+              - cell "ACTIVE" [ref=e3088]
+              - cell "6:26:04 PM" [ref=e3089]
+              - cell "Standard baseline discovery interval (24h)." [ref=e3090]
+            - row [ref=e3091]:
+              - cell "Kaggle Machine Learning Benchmarks" [ref=e3092]
+              - cell "DATA_SCIENCE_COMPETITION / AI_CHALLENGE CANDIDATE_PRIMARY" [ref=e3093]:
+                - generic [ref=e3094]: DATA_SCIENCE_COMPETITION / AI_CHALLENGE
+                - text: CANDIDATE_PRIMARY
+              - cell "24h" [ref=e3095]
+              - cell "0.5" [ref=e3096]
+              - cell "NEEDS_REVIEW" [ref=e3097]
+              - cell "4:39:13 PM" [ref=e3098]
+              - 'cell "Candidate source pending review or low signal strength. [BOOSTED: Covers critical category gap]" [ref=e3099]'

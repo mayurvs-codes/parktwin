@@ -11,7 +11,7 @@ registering it — generators, templates, the service, and the API are untouched
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Dict, List, Type
+from typing import Any, Dict, List, Type
 
 from ..models import ReportView
 from ..types import EXPORT_FORMATS

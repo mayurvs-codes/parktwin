@@ -1,0 +1,2162 @@
+[
+  {
+    "filename": "test_video.mp4",
+    "rel_path": "test_video.mp4",
+    "size_mb": 18.72,
+    "resolution": "848x480",
+    "fps": 59.9,
+    "frames": 5522,
+    "duration_sec": 92.2
+  },
+  {
+    "filename": "10A-IP Camera16_Carparking-01_Carparking-01_20260827154459_20260827160125_771251.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\10A-IP Camera16_Carparking-01_Carparking-01_20260827154459_20260827160125_771251.mp4",
+    "size_mb": 218.38,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 24641,
+    "duration_sec": 985.6
+  },
+  {
+    "filename": "10B-IP Camera16_Carparking-01_Carparking-01_20260827160125_20260827165959_1085547.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\10B-IP Camera16_Carparking-01_Carparking-01_20260827160125_20260827165959_1085547.mp4",
+    "size_mb": 734.74,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 87867,
+    "duration_sec": 3514.7
+  },
+  {
+    "filename": "11A-IP Camera19_Carparking-01_Carparking-01_20260827154500_20260827165230_2794841.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\11A-IP Camera19_Carparking-01_Carparking-01_20260827154500_20260827165230_2794841.mp4",
+    "size_mb": 962.16,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 101262,
+    "duration_sec": 4050.5
+  },
+  {
+    "filename": "11B-IP Camera19_Carparking-01_Carparking-01_20260827165230_20260827170000_3469577.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\11B-IP Camera19_Carparking-01_Carparking-01_20260827165230_20260827170000_3469577.mp4",
+    "size_mb": 93.52,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 11246,
+    "duration_sec": 449.8
+  },
+  {
+    "filename": "12A-IP Camera20_Carparking-01_Carparking-01_20260827154459_20260827165749_2794842.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\12A-IP Camera20_Carparking-01_Carparking-01_20260827154459_20260827165749_2794842.mp4",
+    "size_mb": 490.97,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 109260,
+    "duration_sec": 4370.4
+  },
+  {
+    "filename": "12B-IP Camera20_Carparking-01_Carparking-01_20260827165749_20260827165959_3301036.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\12B-IP Camera20_Carparking-01_Carparking-01_20260827165749_20260827165959_3301036.mp4",
+    "size_mb": 10.43,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 3249,
+    "duration_sec": 130.0
+  },
+  {
+    "filename": "13A-IP Camera24_Carparking-01_Carparking-01_20260827154459_20260827165959_2794845.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\13A-IP Camera24_Carparking-01_Carparking-01_20260827154459_20260827165959_2794845.mp4",
+    "size_mb": 655.41,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112508,
+    "duration_sec": 4500.3
+  },
+  {
+    "filename": "14A-IP Camera21_Carparking-01_Carparking-01_20260827154500_20260827163326_2794843.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\14A-IP Camera21_Carparking-01_Carparking-01_20260827154500_20260827163326_2794843.mp4",
+    "size_mb": 689.91,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 72673,
+    "duration_sec": 2906.9
+  },
+  {
+    "filename": "14B-IP Camera21_Carparking-01_Carparking-01_20260827163326_20260827170000_3290573.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\14B-IP Camera21_Carparking-01_Carparking-01_20260827163326_20260827170000_3290573.mp4",
+    "size_mb": 327.49,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 39835,
+    "duration_sec": 1593.4
+  },
+  {
+    "filename": "15A-IP Camera22_Carparking-01_Carparking-01_20260827154500_20260827165959_2794844.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\15A-IP Camera22_Carparking-01_Carparking-01_20260827154500_20260827165959_2794844.mp4",
+    "size_mb": 607.5,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112477,
+    "duration_sec": 4499.1
+  },
+  {
+    "filename": "16A-IP Camera5_Carparking-01_Carparking-01_20260827154500_20260827164501_771244.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\16A-IP Camera5_Carparking-01_Carparking-01_20260827154500_20260827164501_771244.mp4",
+    "size_mb": 764.03,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 90016,
+    "duration_sec": 3600.6
+  },
+  {
+    "filename": "16B-IP Camera5_Carparking-01_Carparking-01_20260827164501_20260827170000_1714396.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\16B-IP Camera5_Carparking-01_Carparking-01_20260827164501_20260827170000_1714396.mp4",
+    "size_mb": 169.82,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 22492,
+    "duration_sec": 899.7
+  },
+  {
+    "filename": "1A-IP Camera3_Carparking-01_Carparking-01_20260827154459_20260827164058_770771.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\1A-IP Camera3_Carparking-01_Carparking-01_20260827154459_20260827164058_770771.mp4",
+    "size_mb": 696.42,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 83969,
+    "duration_sec": 3358.8
+  },
+  {
+    "filename": "1B-IP Camera3_Carparking-01_Carparking-01_20260827164058_20260827165959_1723375.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\1B-IP Camera3_Carparking-01_Carparking-01_20260827164058_20260827165959_1723375.mp4",
+    "size_mb": 219.57,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 28539,
+    "duration_sec": 1141.6
+  },
+  {
+    "filename": "2A-IP Camera6_Carparking-01_Carparking-01_20260827154459_20260827161616_771246.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\2A-IP Camera6_Carparking-01_Carparking-01_20260827154459_20260827161616_771246.mp4",
+    "size_mb": 382.22,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 46932,
+    "duration_sec": 1877.3
+  },
+  {
+    "filename": "2B-IP Camera6_Carparking-01_Carparking-01_20260827161616_20260827165959_1187821.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\2B-IP Camera6_Carparking-01_Carparking-01_20260827161616_20260827165959_1187821.mp4",
+    "size_mb": 500.86,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 65575,
+    "duration_sec": 2623.0
+  },
+  {
+    "filename": "3A-IP Camera8_Carparking-01_Carparking-01_20260827154459_20260827154651_771248.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\3A-IP Camera8_Carparking-01_Carparking-01_20260827154459_20260827154651_771248.mp4",
+    "size_mb": 19.75,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 2799,
+    "duration_sec": 112.0
+  },
+  {
+    "filename": "3B-IP Camera8_Carparking-01_Carparking-01_20260827154651_20260827165959_822595.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\3B-IP Camera8_Carparking-01_Carparking-01_20260827154651_20260827165959_822595.mp4",
+    "size_mb": 1012.29,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 109709,
+    "duration_sec": 4388.4
+  },
+  {
+    "filename": "4A-IP Camera7_Carparking-01_Carparking-01_20260827154500_20260827164604_771247.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\4A-IP Camera7_Carparking-01_Carparking-01_20260827154500_20260827164604_771247.mp4",
+    "size_mb": 795.98,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 91615,
+    "duration_sec": 3664.6
+  },
+  {
+    "filename": "4B-IP Camera7_Carparking-01_Carparking-01_20260827164604_20260827170000_1734480.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\4B-IP Camera7_Carparking-01_Carparking-01_20260827164604_20260827170000_1734480.mp4",
+    "size_mb": 183.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 20892,
+    "duration_sec": 835.7
+  },
+  {
+    "filename": "5A-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_771248.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\5A-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_771248.mp4",
+    "size_mb": 45.7,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 7497,
+    "duration_sec": 299.9
+  },
+  {
+    "filename": "5B-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_2794840.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\5B-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_2794840.mp4",
+    "size_mb": 45.7,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 7497,
+    "duration_sec": 299.9
+  },
+  {
+    "filename": "5C-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827165520_823164.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\5C-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827165520_823164.mp4",
+    "size_mb": 618.91,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 98014,
+    "duration_sec": 3920.6
+  },
+  {
+    "filename": "5D-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827170000_2837255.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\5D-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827170000_2837255.mp4",
+    "size_mb": 661.57,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 105011,
+    "duration_sec": 4200.4
+  },
+  {
+    "filename": "6A-IP Camera10_Carparking-01_Carparking-01_20260827154500_20260827165948_771249.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\6A-IP Camera10_Carparking-01_Carparking-01_20260827154500_20260827165948_771249.mp4",
+    "size_mb": 624.77,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112209,
+    "duration_sec": 4488.4
+  },
+  {
+    "filename": "6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4",
+    "size_mb": 1.52,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 300,
+    "duration_sec": 12.0
+  },
+  {
+    "filename": "7A-IP Camera11_Carparking-01_Carparking-01_20260827154459_20260827165958_771249.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\7A-IP Camera11_Carparking-01_Carparking-01_20260827154459_20260827165958_771249.mp4",
+    "size_mb": 666.22,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112485,
+    "duration_sec": 4499.4
+  },
+  {
+    "filename": "8A-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_771250.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\8A-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_771250.mp4",
+    "size_mb": 467.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 47082,
+    "duration_sec": 1883.3
+  },
+  {
+    "filename": "8B-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_2794841.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\8B-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_2794841.mp4",
+    "size_mb": 467.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 47082,
+    "duration_sec": 1883.3
+  },
+  {
+    "filename": "8C-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827162251_1367031.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\8C-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827162251_1367031.mp4",
+    "size_mb": 89.87,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 9697,
+    "duration_sec": 387.9
+  },
+  {
+    "filename": "8D-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827165959_3125148.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\8D-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827165959_3125148.mp4",
+    "size_mb": 561.6,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 65426,
+    "duration_sec": 2617.0
+  },
+  {
+    "filename": "9A-IP Camera15_Carparking-01_Carparking-01_20260827154459_20260827163014_771250.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\9A-IP Camera15_Carparking-01_Carparking-01_20260827154459_20260827163014_771250.mp4",
+    "size_mb": 302.54,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 67875,
+    "duration_sec": 2715.0
+  },
+  {
+    "filename": "9B-IP Camera15_Carparking-01_Carparking-01_20260827163014_20260827165959_1141120.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_3-55 to 5-05 pm\\20260827154500-20260827170000\\9B-IP Camera15_Carparking-01_Carparking-01_20260827163014_20260827165959_1141120.mp4",
+    "size_mb": 180.08,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 44633,
+    "duration_sec": 1785.3
+  },
+  {
+    "filename": "10A-IP Camera16_Carparking-01_Carparking-01_20260827075000_20260827075010_2094521.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\10A-IP Camera16_Carparking-01_Carparking-01_20260827075000_20260827075010_2094521.mp4",
+    "size_mb": 3.06,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 251,
+    "duration_sec": 10.0
+  },
+  {
+    "filename": "10B-IP Camera16_Carparking-01_Carparking-01_20260827075000_20260827081000_335604.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\10B-IP Camera16_Carparking-01_Carparking-01_20260827075000_20260827081000_335604.mp4",
+    "size_mb": 286.16,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 29989,
+    "duration_sec": 1199.6
+  },
+  {
+    "filename": "10C-IP Camera16_Carparking-01_Carparking-01_20260827075000_20260827081000_3714465.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\10C-IP Camera16_Carparking-01_Carparking-01_20260827075000_20260827081000_3714465.mp4",
+    "size_mb": 286.16,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 29989,
+    "duration_sec": 1199.6
+  },
+  {
+    "filename": "10D-IP Camera16_Carparking-01_Carparking-01_20260827081000_20260827082430_768769.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\10D-IP Camera16_Carparking-01_Carparking-01_20260827081000_20260827082430_768769.mp4",
+    "size_mb": 191.83,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 21753,
+    "duration_sec": 870.1
+  },
+  {
+    "filename": "10E-IP Camera16_Carparking-01_Carparking-01_20260827081000_20260827083543_2495835.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\10E-IP Camera16_Carparking-01_Carparking-01_20260827081000_20260827083543_2495835.mp4",
+    "size_mb": 358.93,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 38587,
+    "duration_sec": 1543.5
+  },
+  {
+    "filename": "10F-IP Camera16_Carparking-01_Carparking-01_20260827081000_20260827092250_3980915.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\10F-IP Camera16_Carparking-01_Carparking-01_20260827081000_20260827092250_3980915.mp4",
+    "size_mb": 1014.87,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 109259,
+    "duration_sec": 4370.4
+  },
+  {
+    "filename": "10G-IP Camera16_Carparking-01_Carparking-01_20260827092250_20260827093000_4507365.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\10G-IP Camera16_Carparking-01_Carparking-01_20260827092250_20260827093000_4507365.mp4",
+    "size_mb": 104.67,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 10746,
+    "duration_sec": 429.8
+  },
+  {
+    "filename": "11A-IP Camera19_Carparking-01_Carparking-01_20260827074959_20260827075022_2094521.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\11A-IP Camera19_Carparking-01_Carparking-01_20260827074959_20260827075022_2094521.mp4",
+    "size_mb": 5.37,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 597,
+    "duration_sec": 23.9
+  },
+  {
+    "filename": "11B-IP Camera19_Carparking-01_Carparking-01_20260827074959_20260827081112_3714466.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\11B-IP Camera19_Carparking-01_Carparking-01_20260827074959_20260827081112_3714466.mp4",
+    "size_mb": 313.5,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 31838,
+    "duration_sec": 1273.5
+  },
+  {
+    "filename": "11C-IP Camera19_Carparking-01_Carparking-01_20260827081112_20260827092512_2495753.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\11C-IP Camera19_Carparking-01_Carparking-01_20260827081112_20260827092512_2495753.mp4",
+    "size_mb": 1015.03,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 111008,
+    "duration_sec": 4440.3
+  },
+  {
+    "filename": "11D-IP Camera19_Carparking-01_Carparking-01_20260827081112_20260827092512_3967339.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\11D-IP Camera19_Carparking-01_Carparking-01_20260827081112_20260827092512_3967339.mp4",
+    "size_mb": 1015.03,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 111008,
+    "duration_sec": 4440.3
+  },
+  {
+    "filename": "11E-IP Camera19_Carparking-01_Carparking-01_20260827092512_20260827093000_3362521.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\11E-IP Camera19_Carparking-01_Carparking-01_20260827092512_20260827093000_3362521.mp4",
+    "size_mb": 66.55,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 7197,
+    "duration_sec": 287.9
+  },
+  {
+    "filename": "11F-IP Camera19_Carparking-01_Carparking-01_20260827092512_20260827093000_4405699.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\11F-IP Camera19_Carparking-01_Carparking-01_20260827092512_20260827093000_4405699.mp4",
+    "size_mb": 66.55,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 7197,
+    "duration_sec": 287.9
+  },
+  {
+    "filename": "12A-IP Camera20_Carparking-01_Carparking-01_20260827075000_20260827075022_2094522.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\12A-IP Camera20_Carparking-01_Carparking-01_20260827075000_20260827075022_2094522.mp4",
+    "size_mb": 2.14,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 551,
+    "duration_sec": 22.0
+  },
+  {
+    "filename": "12B-IP Camera20_Carparking-01_Carparking-01_20260827075000_20260827090422_3714466.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\12B-IP Camera20_Carparking-01_Carparking-01_20260827075000_20260827090422_3714466.mp4",
+    "size_mb": 510.84,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 111559,
+    "duration_sec": 4462.4
+  },
+  {
+    "filename": "12C-IP Camera20_Carparking-01_Carparking-01_20260827090422_20260827092959_2981637.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\12C-IP Camera20_Carparking-01_Carparking-01_20260827090422_20260827092959_2981637.mp4",
+    "size_mb": 172.45,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 38436,
+    "duration_sec": 1537.4
+  },
+  {
+    "filename": "12D-IP Camera20_Carparking-01_Carparking-01_20260827090422_20260827092959_3938514.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\12D-IP Camera20_Carparking-01_Carparking-01_20260827090422_20260827092959_3938514.mp4",
+    "size_mb": 172.45,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 38436,
+    "duration_sec": 1537.4
+  },
+  {
+    "filename": "13A-IP Camera24_Carparking-01_Carparking-01_20260827075000_20260827093000_3714953.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\13A-IP Camera24_Carparking-01_Carparking-01_20260827075000_20260827093000_3714953.mp4",
+    "size_mb": 767.95,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 149994,
+    "duration_sec": 5999.8
+  },
+  {
+    "filename": "14A-IP Camera21_Carparking-01_Carparking-01_20260827074958_20260827082943_3714952.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\14A-IP Camera21_Carparking-01_Carparking-01_20260827074958_20260827082943_3714952.mp4",
+    "size_mb": 579.14,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 59628,
+    "duration_sec": 2385.1
+  },
+  {
+    "filename": "14B-IP Camera21_Carparking-01_Carparking-01_20260827082944_20260827083301_3311020.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\14B-IP Camera21_Carparking-01_Carparking-01_20260827082944_20260827083301_3311020.mp4",
+    "size_mb": 49.7,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 4949,
+    "duration_sec": 198.0
+  },
+  {
+    "filename": "14C-IP Camera21_Carparking-01_Carparking-01_20260827082944_20260827093000_4149193.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\14C-IP Camera21_Carparking-01_Carparking-01_20260827082944_20260827093000_4149193.mp4",
+    "size_mb": 850.77,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 90416,
+    "duration_sec": 3616.6
+  },
+  {
+    "filename": "15A-IP Camera22_Carparking-01_Carparking-01_20260827074959_20260827085310_3714952.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\15A-IP Camera22_Carparking-01_Carparking-01_20260827074959_20260827085310_3714952.mp4",
+    "size_mb": 505.7,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 94765,
+    "duration_sec": 3790.6
+  },
+  {
+    "filename": "15B-IP Camera22_Carparking-01_Carparking-01_20260827085310_20260827090711_2642328.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\15B-IP Camera22_Carparking-01_Carparking-01_20260827085310_20260827090711_2642328.mp4",
+    "size_mb": 113.54,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 21043,
+    "duration_sec": 841.7
+  },
+  {
+    "filename": "15C-IP Camera22_Carparking-01_Carparking-01_20260827085310_20260827092959_4081273.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\15C-IP Camera22_Carparking-01_Carparking-01_20260827085310_20260827092959_4081273.mp4",
+    "size_mb": 302.57,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 55245,
+    "duration_sec": 2209.8
+  },
+  {
+    "filename": "16A-IP Camera5_Carparking-01_Carparking-01_20260827074959_20260827081446_335596.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\16A-IP Camera5_Carparking-01_Carparking-01_20260827074959_20260827081446_335596.mp4",
+    "size_mb": 254.38,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 37186,
+    "duration_sec": 1487.4
+  },
+  {
+    "filename": "16B-IP Camera5_Carparking-01_Carparking-01_20260827081447_20260827092959_763355.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\16B-IP Camera5_Carparking-01_Carparking-01_20260827081447_20260827092959_763355.mp4",
+    "size_mb": 826.96,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112808,
+    "duration_sec": 4512.3
+  },
+  {
+    "filename": "1A-IP Camera3_Carparking-01_Carparking-01_20260827075000_20260827084533_335233.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\1A-IP Camera3_Carparking-01_Carparking-01_20260827075000_20260827084533_335233.mp4",
+    "size_mb": 843.61,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 83319,
+    "duration_sec": 3332.8
+  },
+  {
+    "filename": "1B-IP Camera3_Carparking-01_Carparking-01_20260827084533_20260827092959_1369277.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\1B-IP Camera3_Carparking-01_Carparking-01_20260827084533_20260827092959_1369277.mp4",
+    "size_mb": 527.53,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 66675,
+    "duration_sec": 2667.0
+  },
+  {
+    "filename": "2A-IP Camera6_Carparking-01_Carparking-01_20260827074958_20260827082606_335598.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\2A-IP Camera6_Carparking-01_Carparking-01_20260827074958_20260827082606_335598.mp4",
+    "size_mb": 519.02,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 54180,
+    "duration_sec": 2167.2
+  },
+  {
+    "filename": "2B-IP Camera6_Carparking-01_Carparking-01_20260827082605_20260827093000_1172744.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\2B-IP Camera6_Carparking-01_Carparking-01_20260827082605_20260827093000_1172744.mp4",
+    "size_mb": 1004.25,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 95864,
+    "duration_sec": 3834.6
+  },
+  {
+    "filename": "3A-IP Camera8_Carparking-01_Carparking-01_20260827075000_20260827083329_335599.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\3A-IP Camera8_Carparking-01_Carparking-01_20260827075000_20260827083329_335599.mp4",
+    "size_mb": 637.89,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 65226,
+    "duration_sec": 2609.0
+  },
+  {
+    "filename": "3B-IP Camera8_Carparking-01_Carparking-01_20260827083329_20260827092959_1381736.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\3B-IP Camera8_Carparking-01_Carparking-01_20260827083329_20260827092959_1381736.mp4",
+    "size_mb": 684.79,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 84769,
+    "duration_sec": 3390.8
+  },
+  {
+    "filename": "4A-IP Camera7_Carparking-01_Carparking-01_20260827074959_20260827085831_335598.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\4A-IP Camera7_Carparking-01_Carparking-01_20260827074959_20260827085831_335598.mp4",
+    "size_mb": 749.39,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 102811,
+    "duration_sec": 4112.4
+  },
+  {
+    "filename": "4B-IP Camera7_Carparking-01_Carparking-01_20260827085831_20260827093000_1437728.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\4B-IP Camera7_Carparking-01_Carparking-01_20260827085831_20260827093000_1437728.mp4",
+    "size_mb": 303.72,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 47232,
+    "duration_sec": 1889.3
+  },
+  {
+    "filename": "5A-IP Camera9_Carparking-01_Carparking-01_20260827075000_20260827075051_335600.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\5A-IP Camera9_Carparking-01_Carparking-01_20260827075000_20260827075051_335600.mp4",
+    "size_mb": 6.55,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 1300,
+    "duration_sec": 52.0
+  },
+  {
+    "filename": "5B-IP Camera9_Carparking-01_Carparking-01_20260827075051_20260827092959_371167.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\5B-IP Camera9_Carparking-01_Carparking-01_20260827075051_20260827092959_371167.mp4",
+    "size_mb": 974.67,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 148694,
+    "duration_sec": 5947.8
+  },
+  {
+    "filename": "6A-IP Camera10_Carparking-01_Carparking-01_20260827075000_20260827082208_335601.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\6A-IP Camera10_Carparking-01_Carparking-01_20260827075000_20260827082208_335601.mp4",
+    "size_mb": 227.88,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 48182,
+    "duration_sec": 1927.3
+  },
+  {
+    "filename": "6B-IP Camera10_Carparking-01_Carparking-01_20260827082208_20260827093000_677676.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\6B-IP Camera10_Carparking-01_Carparking-01_20260827082208_20260827093000_677676.mp4",
+    "size_mb": 666.42,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 101815,
+    "duration_sec": 4072.6
+  },
+  {
+    "filename": "7A-IP Camera11_Carparking-01_Carparking-01_20260827075000_20260827075646_335602.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\7A-IP Camera11_Carparking-01_Carparking-01_20260827075000_20260827075646_335602.mp4",
+    "size_mb": 58.09,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 10146,
+    "duration_sec": 405.8
+  },
+  {
+    "filename": "7B-IP Camera11_Carparking-01_Carparking-01_20260827075646_20260827093000_424793.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\7B-IP Camera11_Carparking-01_Carparking-01_20260827075646_20260827093000_424793.mp4",
+    "size_mb": 795.74,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 139852,
+    "duration_sec": 5594.1
+  },
+  {
+    "filename": "8A-IP Camera14_Carparking-01_Carparking-01_20260827074959_20260827083620_335603.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\8A-IP Camera14_Carparking-01_Carparking-01_20260827074959_20260827083620_335603.mp4",
+    "size_mb": 858.61,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 69524,
+    "duration_sec": 2781.0
+  },
+  {
+    "filename": "8B-IP Camera14_Carparking-01_Carparking-01_20260827083620_20260827093000_1346881.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\8B-IP Camera14_Carparking-01_Carparking-01_20260827083620_20260827093000_1346881.mp4",
+    "size_mb": 966.57,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 80520,
+    "duration_sec": 3220.8
+  },
+  {
+    "filename": "9A-IP Camera15_Carparking-01_Carparking-01_20260827075000_20260827091746_335603.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\9A-IP Camera15_Carparking-01_Carparking-01_20260827075000_20260827091746_335603.mp4",
+    "size_mb": 655.73,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 131651,
+    "duration_sec": 5266.0
+  },
+  {
+    "filename": "9B-IP Camera15_Carparking-01_Carparking-01_20260827091746_20260827092959_1262267.mp4",
+    "rel_path": "27-Aug-2026\\27-Aug_7-50 to 9-30 AM\\20260827075000-20260827093000\\9B-IP Camera15_Carparking-01_Carparking-01_20260827091746_20260827092959_1262267.mp4",
+    "size_mb": 87.53,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 18343,
+    "duration_sec": 733.7
+  },
+  {
+    "filename": "test_video.mp4",
+    "rel_path": "apps\\web\\public\\test_video.mp4",
+    "size_mb": 18.72,
+    "resolution": "848x480",
+    "fps": 59.9,
+    "frames": 5522,
+    "duration_sec": 92.2
+  },
+  {
+    "filename": "ai-generated-parking-lot.mp4",
+    "rel_path": "apps\\web\\public\\demo\\ai-generated-parking-lot.mp4",
+    "size_mb": 6.33,
+    "resolution": "1280x720",
+    "fps": 30.0,
+    "frames": 450,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "car-detection.mp4",
+    "rel_path": "apps\\web\\public\\demo\\car-detection.mp4",
+    "size_mb": 2.68,
+    "resolution": "768x432",
+    "fps": 12.5,
+    "frames": 377,
+    "duration_sec": 30.2
+  },
+  {
+    "filename": "car-entering-parking.mp4",
+    "rel_path": "apps\\web\\public\\demo\\car-entering-parking.mp4",
+    "size_mb": 2.33,
+    "resolution": "1280x720",
+    "fps": 30.0,
+    "frames": 180,
+    "duration_sec": 6.0
+  },
+  {
+    "filename": "car-exiting-parking.mp4",
+    "rel_path": "apps\\web\\public\\demo\\car-exiting-parking.mp4",
+    "size_mb": 2.86,
+    "resolution": "1280x720",
+    "fps": 30.0,
+    "frames": 180,
+    "duration_sec": 6.0
+  },
+  {
+    "filename": "parking-demo.mp4",
+    "rel_path": "apps\\web\\public\\demo\\parking-demo.mp4",
+    "size_mb": 6.33,
+    "resolution": "1280x720",
+    "fps": 30.0,
+    "frames": 450,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "Traffic.mp4",
+    "rel_path": "apps\\web\\public\\demo\\Traffic.mp4",
+    "size_mb": 1.88,
+    "resolution": "960x540",
+    "fps": 30.0,
+    "frames": 335,
+    "duration_sec": 11.2
+  },
+  {
+    "filename": "10A-IP Camera16_Carparking-01_Carparking-01_20260827154459_20260827160125_771251.mp4",
+    "rel_path": "apps\\web\\public\\videos\\10A-IP Camera16_Carparking-01_Carparking-01_20260827154459_20260827160125_771251.mp4",
+    "size_mb": 218.38,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 24641,
+    "duration_sec": 985.6
+  },
+  {
+    "filename": "10B-IP Camera16_Carparking-01_Carparking-01_20260827160125_20260827165959_1085547.mp4",
+    "rel_path": "apps\\web\\public\\videos\\10B-IP Camera16_Carparking-01_Carparking-01_20260827160125_20260827165959_1085547.mp4",
+    "size_mb": 734.74,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 87867,
+    "duration_sec": 3514.7
+  },
+  {
+    "filename": "11A-IP Camera19_Carparking-01_Carparking-01_20260827154500_20260827165230_2794841.mp4",
+    "rel_path": "apps\\web\\public\\videos\\11A-IP Camera19_Carparking-01_Carparking-01_20260827154500_20260827165230_2794841.mp4",
+    "size_mb": 962.16,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 101262,
+    "duration_sec": 4050.5
+  },
+  {
+    "filename": "11B-IP Camera19_Carparking-01_Carparking-01_20260827165230_20260827170000_3469577.mp4",
+    "rel_path": "apps\\web\\public\\videos\\11B-IP Camera19_Carparking-01_Carparking-01_20260827165230_20260827170000_3469577.mp4",
+    "size_mb": 93.52,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 11246,
+    "duration_sec": 449.8
+  },
+  {
+    "filename": "12A-IP Camera20_Carparking-01_Carparking-01_20260827154459_20260827165749_2794842.mp4",
+    "rel_path": "apps\\web\\public\\videos\\12A-IP Camera20_Carparking-01_Carparking-01_20260827154459_20260827165749_2794842.mp4",
+    "size_mb": 490.97,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 109260,
+    "duration_sec": 4370.4
+  },
+  {
+    "filename": "12B-IP Camera20_Carparking-01_Carparking-01_20260827165749_20260827165959_3301036.mp4",
+    "rel_path": "apps\\web\\public\\videos\\12B-IP Camera20_Carparking-01_Carparking-01_20260827165749_20260827165959_3301036.mp4",
+    "size_mb": 10.43,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 3249,
+    "duration_sec": 130.0
+  },
+  {
+    "filename": "13A-IP Camera24_Carparking-01_Carparking-01_20260827154459_20260827165959_2794845.mp4",
+    "rel_path": "apps\\web\\public\\videos\\13A-IP Camera24_Carparking-01_Carparking-01_20260827154459_20260827165959_2794845.mp4",
+    "size_mb": 655.41,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112508,
+    "duration_sec": 4500.3
+  },
+  {
+    "filename": "14A-IP Camera21_Carparking-01_Carparking-01_20260827154500_20260827163326_2794843.mp4",
+    "rel_path": "apps\\web\\public\\videos\\14A-IP Camera21_Carparking-01_Carparking-01_20260827154500_20260827163326_2794843.mp4",
+    "size_mb": 689.91,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 72673,
+    "duration_sec": 2906.9
+  },
+  {
+    "filename": "14B-IP Camera21_Carparking-01_Carparking-01_20260827163326_20260827170000_3290573.mp4",
+    "rel_path": "apps\\web\\public\\videos\\14B-IP Camera21_Carparking-01_Carparking-01_20260827163326_20260827170000_3290573.mp4",
+    "size_mb": 327.49,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 39835,
+    "duration_sec": 1593.4
+  },
+  {
+    "filename": "15A-IP Camera22_Carparking-01_Carparking-01_20260827154500_20260827165959_2794844.mp4",
+    "rel_path": "apps\\web\\public\\videos\\15A-IP Camera22_Carparking-01_Carparking-01_20260827154500_20260827165959_2794844.mp4",
+    "size_mb": 607.5,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112477,
+    "duration_sec": 4499.1
+  },
+  {
+    "filename": "16A-IP Camera5_Carparking-01_Carparking-01_20260827154500_20260827164501_771244.mp4",
+    "rel_path": "apps\\web\\public\\videos\\16A-IP Camera5_Carparking-01_Carparking-01_20260827154500_20260827164501_771244.mp4",
+    "size_mb": 764.03,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 90016,
+    "duration_sec": 3600.6
+  },
+  {
+    "filename": "16B-IP Camera5_Carparking-01_Carparking-01_20260827164501_20260827170000_1714396.mp4",
+    "rel_path": "apps\\web\\public\\videos\\16B-IP Camera5_Carparking-01_Carparking-01_20260827164501_20260827170000_1714396.mp4",
+    "size_mb": 169.82,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 22492,
+    "duration_sec": 899.7
+  },
+  {
+    "filename": "1A-IP Camera3_Carparking-01_Carparking-01_20260827154459_20260827164058_770771.mp4",
+    "rel_path": "apps\\web\\public\\videos\\1A-IP Camera3_Carparking-01_Carparking-01_20260827154459_20260827164058_770771.mp4",
+    "size_mb": 696.42,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 83969,
+    "duration_sec": 3358.8
+  },
+  {
+    "filename": "1B-IP Camera3_Carparking-01_Carparking-01_20260827164058_20260827165959_1723375.mp4",
+    "rel_path": "apps\\web\\public\\videos\\1B-IP Camera3_Carparking-01_Carparking-01_20260827164058_20260827165959_1723375.mp4",
+    "size_mb": 219.57,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 28539,
+    "duration_sec": 1141.6
+  },
+  {
+    "filename": "2A-IP Camera6_Carparking-01_Carparking-01_20260827154459_20260827161616_771246.mp4",
+    "rel_path": "apps\\web\\public\\videos\\2A-IP Camera6_Carparking-01_Carparking-01_20260827154459_20260827161616_771246.mp4",
+    "size_mb": 382.22,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 46932,
+    "duration_sec": 1877.3
+  },
+  {
+    "filename": "2B-IP Camera6_Carparking-01_Carparking-01_20260827161616_20260827165959_1187821.mp4",
+    "rel_path": "apps\\web\\public\\videos\\2B-IP Camera6_Carparking-01_Carparking-01_20260827161616_20260827165959_1187821.mp4",
+    "size_mb": 500.86,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 65575,
+    "duration_sec": 2623.0
+  },
+  {
+    "filename": "3A-IP Camera8_Carparking-01_Carparking-01_20260827154459_20260827154651_771248.mp4",
+    "rel_path": "apps\\web\\public\\videos\\3A-IP Camera8_Carparking-01_Carparking-01_20260827154459_20260827154651_771248.mp4",
+    "size_mb": 19.75,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 2799,
+    "duration_sec": 112.0
+  },
+  {
+    "filename": "3B-IP Camera8_Carparking-01_Carparking-01_20260827154651_20260827165959_822595.mp4",
+    "rel_path": "apps\\web\\public\\videos\\3B-IP Camera8_Carparking-01_Carparking-01_20260827154651_20260827165959_822595.mp4",
+    "size_mb": 1012.29,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 109709,
+    "duration_sec": 4388.4
+  },
+  {
+    "filename": "4A-IP Camera7_Carparking-01_Carparking-01_20260827154500_20260827164604_771247.mp4",
+    "rel_path": "apps\\web\\public\\videos\\4A-IP Camera7_Carparking-01_Carparking-01_20260827154500_20260827164604_771247.mp4",
+    "size_mb": 795.98,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 91615,
+    "duration_sec": 3664.6
+  },
+  {
+    "filename": "4B-IP Camera7_Carparking-01_Carparking-01_20260827164604_20260827170000_1734480.mp4",
+    "rel_path": "apps\\web\\public\\videos\\4B-IP Camera7_Carparking-01_Carparking-01_20260827164604_20260827170000_1734480.mp4",
+    "size_mb": 183.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 20892,
+    "duration_sec": 835.7
+  },
+  {
+    "filename": "5A-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_771248.mp4",
+    "rel_path": "apps\\web\\public\\videos\\5A-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_771248.mp4",
+    "size_mb": 45.7,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 7497,
+    "duration_sec": 299.9
+  },
+  {
+    "filename": "5B-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_2794840.mp4",
+    "rel_path": "apps\\web\\public\\videos\\5B-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_2794840.mp4",
+    "size_mb": 45.7,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 7497,
+    "duration_sec": 299.9
+  },
+  {
+    "filename": "5C-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827165520_823164.mp4",
+    "rel_path": "apps\\web\\public\\videos\\5C-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827165520_823164.mp4",
+    "size_mb": 618.91,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 98014,
+    "duration_sec": 3920.6
+  },
+  {
+    "filename": "5D-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827170000_2837255.mp4",
+    "rel_path": "apps\\web\\public\\videos\\5D-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827170000_2837255.mp4",
+    "size_mb": 661.57,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 105011,
+    "duration_sec": 4200.4
+  },
+  {
+    "filename": "6A-IP Camera10_Carparking-01_Carparking-01_20260827154500_20260827165948_771249.mp4",
+    "rel_path": "apps\\web\\public\\videos\\6A-IP Camera10_Carparking-01_Carparking-01_20260827154500_20260827165948_771249.mp4",
+    "size_mb": 624.77,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112209,
+    "duration_sec": 4488.4
+  },
+  {
+    "filename": "6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4",
+    "rel_path": "apps\\web\\public\\videos\\6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4",
+    "size_mb": 1.52,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 300,
+    "duration_sec": 12.0
+  },
+  {
+    "filename": "7A-IP Camera11_Carparking-01_Carparking-01_20260827154459_20260827165958_771249.mp4",
+    "rel_path": "apps\\web\\public\\videos\\7A-IP Camera11_Carparking-01_Carparking-01_20260827154459_20260827165958_771249.mp4",
+    "size_mb": 666.22,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112485,
+    "duration_sec": 4499.4
+  },
+  {
+    "filename": "8A-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_771250.mp4",
+    "rel_path": "apps\\web\\public\\videos\\8A-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_771250.mp4",
+    "size_mb": 467.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 47082,
+    "duration_sec": 1883.3
+  },
+  {
+    "filename": "8B-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_2794841.mp4",
+    "rel_path": "apps\\web\\public\\videos\\8B-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_2794841.mp4",
+    "size_mb": 467.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 47082,
+    "duration_sec": 1883.3
+  },
+  {
+    "filename": "8C-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827162251_1367031.mp4",
+    "rel_path": "apps\\web\\public\\videos\\8C-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827162251_1367031.mp4",
+    "size_mb": 89.87,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 9697,
+    "duration_sec": 387.9
+  },
+  {
+    "filename": "8D-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827165959_3125148.mp4",
+    "rel_path": "apps\\web\\public\\videos\\8D-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827165959_3125148.mp4",
+    "size_mb": 561.6,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 65426,
+    "duration_sec": 2617.0
+  },
+  {
+    "filename": "9A-IP Camera15_Carparking-01_Carparking-01_20260827154459_20260827163014_771250.mp4",
+    "rel_path": "apps\\web\\public\\videos\\9A-IP Camera15_Carparking-01_Carparking-01_20260827154459_20260827163014_771250.mp4",
+    "size_mb": 302.54,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 67875,
+    "duration_sec": 2715.0
+  },
+  {
+    "filename": "9B-IP Camera15_Carparking-01_Carparking-01_20260827163014_20260827165959_1141120.mp4",
+    "rel_path": "apps\\web\\public\\videos\\9B-IP Camera15_Carparking-01_Carparking-01_20260827163014_20260827165959_1141120.mp4",
+    "size_mb": 180.08,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 44633,
+    "duration_sec": 1785.3
+  },
+  {
+    "filename": "cam1_entry_gate.mp4",
+    "rel_path": "apps\\web\\public\\videos\\cam1_entry_gate.mp4",
+    "size_mb": 2.16,
+    "resolution": "1280x720",
+    "fps": 25.0,
+    "frames": 374,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "cam2_parking_bay.mp4",
+    "rel_path": "apps\\web\\public\\videos\\cam2_parking_bay.mp4",
+    "size_mb": 2.11,
+    "resolution": "1280x720",
+    "fps": 25.0,
+    "frames": 374,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "cam3_exit_ramp.mp4",
+    "rel_path": "apps\\web\\public\\videos\\cam3_exit_ramp.mp4",
+    "size_mb": 1.58,
+    "resolution": "1280x720",
+    "fps": 25.0,
+    "frames": 374,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "annotated_08bffdaf129b.mp4",
+    "rel_path": "backend\\outputs\\annotated_08bffdaf129b.mp4",
+    "size_mb": 13.09,
+    "resolution": "848x480",
+    "fps": 6.7,
+    "frames": 614,
+    "duration_sec": 92.2
+  },
+  {
+    "filename": "annotated_4486a8ed15c6.mp4",
+    "rel_path": "backend\\outputs\\annotated_4486a8ed15c6.mp4",
+    "size_mb": 13.37,
+    "resolution": "848x480",
+    "fps": 6.7,
+    "frames": 614,
+    "duration_sec": 92.2
+  },
+  {
+    "filename": "annotated_4bec1d7be429.mp4",
+    "rel_path": "backend\\outputs\\annotated_4bec1d7be429.mp4",
+    "size_mb": 13.37,
+    "resolution": "848x480",
+    "fps": 6.7,
+    "frames": 614,
+    "duration_sec": 92.2
+  },
+  {
+    "filename": "annotated_6f8b0b9c6afd.mp4",
+    "rel_path": "backend\\outputs\\annotated_6f8b0b9c6afd.mp4",
+    "size_mb": 13.09,
+    "resolution": "848x480",
+    "fps": 6.7,
+    "frames": 614,
+    "duration_sec": 92.2
+  },
+  {
+    "filename": "annotated_846cb79aa5c8.mp4",
+    "rel_path": "backend\\outputs\\annotated_846cb79aa5c8.mp4",
+    "size_mb": 0.0,
+    "resolution": "0x0",
+    "fps": 0.0,
+    "frames": 0,
+    "duration_sec": 0
+  },
+  {
+    "filename": "annotated_88a052e1bad6.mp4",
+    "rel_path": "backend\\outputs\\annotated_88a052e1bad6.mp4",
+    "size_mb": 11.44,
+    "resolution": "848x480",
+    "fps": 4.3,
+    "frames": 395,
+    "duration_sec": 92.3
+  },
+  {
+    "filename": "annotated_bb1b96c2dac5.mp4",
+    "rel_path": "backend\\outputs\\annotated_bb1b96c2dac5.mp4",
+    "size_mb": 10.75,
+    "resolution": "0x0",
+    "fps": 0.0,
+    "frames": 0,
+    "duration_sec": 0
+  },
+  {
+    "filename": "annotated_bdfc66d14528.mp4",
+    "rel_path": "backend\\outputs\\annotated_bdfc66d14528.mp4",
+    "size_mb": 0.0,
+    "resolution": "0x0",
+    "fps": 0.0,
+    "frames": 0,
+    "duration_sec": 0
+  },
+  {
+    "filename": "annotated_e168622e00fd.mp4",
+    "rel_path": "backend\\outputs\\annotated_e168622e00fd.mp4",
+    "size_mb": 0.0,
+    "resolution": "0x0",
+    "fps": 0.0,
+    "frames": 0,
+    "duration_sec": 0
+  },
+  {
+    "filename": "annotated_e2826bcb2b54.mp4",
+    "rel_path": "backend\\outputs\\annotated_e2826bcb2b54.mp4",
+    "size_mb": 13.09,
+    "resolution": "848x480",
+    "fps": 6.7,
+    "frames": 614,
+    "duration_sec": 92.2
+  },
+  {
+    "filename": "annotated_fc6ac8d7f804.mp4",
+    "rel_path": "backend\\outputs\\annotated_fc6ac8d7f804.mp4",
+    "size_mb": 1.25,
+    "resolution": "0x0",
+    "fps": 0.0,
+    "frames": 0,
+    "duration_sec": 0
+  },
+  {
+    "filename": "annotated_fd3b28581430.mp4",
+    "rel_path": "backend\\outputs\\annotated_fd3b28581430.mp4",
+    "size_mb": 5.96,
+    "resolution": "848x480",
+    "fps": 2.1,
+    "frames": 191,
+    "duration_sec": 92.4
+  },
+  {
+    "filename": "13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785135140339_test_video_1.mp4",
+    "rel_path": "backend\\uploads\\1785135140339_test_video_1.mp4",
+    "size_mb": 1.23,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785135191247_test_video_2.avi",
+    "rel_path": "backend\\uploads\\1785135191247_test_video_2.avi",
+    "size_mb": 1.34,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 241,
+    "duration_sec": 8.0
+  },
+  {
+    "filename": "1785135235319_test_video_3.mov",
+    "rel_path": "backend\\uploads\\1785135235319_test_video_3.mov",
+    "size_mb": 1.37,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785135519719_test_video_1.mp4",
+    "rel_path": "backend\\uploads\\1785135519719_test_video_1.mp4",
+    "size_mb": 12.57,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785135565610_test_video_1.mp4",
+    "rel_path": "backend\\uploads\\1785135565610_test_video_1.mp4",
+    "size_mb": 0.0,
+    "resolution": "0x0",
+    "fps": 0.0,
+    "frames": 0,
+    "duration_sec": 0
+  },
+  {
+    "filename": "1785135733131_test_video_1.mp4",
+    "rel_path": "backend\\uploads\\1785135733131_test_video_1.mp4",
+    "size_mb": 12.57,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785136087464_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785136087464_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785136359555_test_video_1.mp4",
+    "rel_path": "backend\\uploads\\1785136359555_test_video_1.mp4",
+    "size_mb": 12.57,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785137399288_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785137399288_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785138384492_test_video.mp4",
+    "rel_path": "backend\\uploads\\1785138384492_test_video.mp4",
+    "size_mb": 12.57,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785138473341_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785138473341_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785138749293_test.mp4",
+    "rel_path": "backend\\uploads\\1785138749293_test.mp4",
+    "size_mb": 0.1,
+    "resolution": "1920x1080",
+    "fps": 5.0,
+    "frames": 5,
+    "duration_sec": 1.0
+  },
+  {
+    "filename": "1785138768763_test.mp4",
+    "rel_path": "backend\\uploads\\1785138768763_test.mp4",
+    "size_mb": 12.57,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785138880909_test_video_1.mp4",
+    "rel_path": "backend\\uploads\\1785138880909_test_video_1.mp4",
+    "size_mb": 12.57,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785139393742_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785139393742_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785139909612_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785139909612_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785140730459_test.mp4",
+    "rel_path": "backend\\uploads\\1785140730459_test.mp4",
+    "size_mb": 0.1,
+    "resolution": "1920x1080",
+    "fps": 5.0,
+    "frames": 5,
+    "duration_sec": 1.0
+  },
+  {
+    "filename": "1785140813570_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785140813570_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785140980602_my_parking_video.mp4",
+    "rel_path": "backend\\uploads\\1785140980602_my_parking_video.mp4",
+    "size_mb": 12.57,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785141079375_my_uploaded_video.mp4",
+    "rel_path": "backend\\uploads\\1785141079375_my_uploaded_video.mp4",
+    "size_mb": 12.57,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "1785141352307_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785141352307_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785146577192_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785146577192_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785146673376_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785146673376_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785147535579_13020022_3840_2160_30fps.mp4",
+    "rel_path": "backend\\uploads\\1785147535579_13020022_3840_2160_30fps.mp4",
+    "size_mb": 98.1,
+    "resolution": "3840x2160",
+    "fps": 30.0,
+    "frames": 624,
+    "duration_sec": 20.8
+  },
+  {
+    "filename": "1785757763507_ai-generated-parking-lot.mp4",
+    "rel_path": "backend\\uploads\\1785757763507_ai-generated-parking-lot.mp4",
+    "size_mb": 6.33,
+    "resolution": "1280x720",
+    "fps": 30.0,
+    "frames": 450,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "1786281465014_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786281465014_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786281601018_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786281601018_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786287241258_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786287241258_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786291005543_istockphoto-866517852-640_adpp_is.mp4",
+    "rel_path": "backend\\uploads\\1786291005543_istockphoto-866517852-640_adpp_is.mp4",
+    "size_mb": 3.99,
+    "resolution": "768x432",
+    "fps": 30.0,
+    "frames": 298,
+    "duration_sec": 9.9
+  },
+  {
+    "filename": "1786336961691_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786336961691_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786346474607_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786346474607_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786358148717_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786358148717_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786368347284_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786368347284_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786369717776_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786369717776_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786370382072_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786370382072_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786370402723_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786370402723_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786370427499_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\1786370427499_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "1786617749667_istockphoto-866517852-640_adpp_is.mp4",
+    "rel_path": "backend\\uploads\\1786617749667_istockphoto-866517852-640_adpp_is.mp4",
+    "size_mb": 3.99,
+    "resolution": "768x432",
+    "fps": 30.0,
+    "frames": 298,
+    "duration_sec": 9.9
+  },
+  {
+    "filename": "1786618182660_plate_test.mp4",
+    "rel_path": "backend\\uploads\\1786618182660_plate_test.mp4",
+    "size_mb": 0.06,
+    "resolution": "1280x720",
+    "fps": 10.0,
+    "frames": 20,
+    "duration_sec": 2.0
+  },
+  {
+    "filename": "1786618200017_uploads\uf05cjourney_parking_1786337039364_WhatsApp Video 2026-08-09 .mp4",
+    "rel_path": "backend\\uploads\\1786618200017_uploads\uf05cjourney_parking_1786337039364_WhatsApp Video 2026-08-09 .mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "car_with_plate_bbox.mp4",
+    "rel_path": "backend\\uploads\\car_with_plate_bbox.mp4",
+    "size_mb": 0.1,
+    "resolution": "1920x1080",
+    "fps": 5.0,
+    "frames": 5,
+    "duration_sec": 1.0
+  },
+  {
+    "filename": "cctv_entrance_clip.mp4",
+    "rel_path": "backend\\uploads\\cctv_entrance_clip.mp4",
+    "size_mb": 0.65,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 50,
+    "duration_sec": 0.8
+  },
+  {
+    "filename": "journey_entry_1786337034799_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\journey_entry_1786337034799_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "journey_entry_1786337150276_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\journey_entry_1786337150276_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "journey_entry_1786358288671_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\journey_entry_1786358288671_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "journey_exit_1786337049731_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\journey_exit_1786337049731_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "journey_exit_1786337077936_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\journey_exit_1786337077936_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "journey_exit_1786337098480_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\journey_exit_1786337098480_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "journey_parking_1786337039364_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "rel_path": "backend\\uploads\\journey_parking_1786337039364_WhatsApp Video 2026-08-09 at 11.22.23 AM.mp4",
+    "size_mb": 2.44,
+    "resolution": "848x480",
+    "fps": 60.0,
+    "frames": 661,
+    "duration_sec": 11.0
+  },
+  {
+    "filename": "plate_test.mp4",
+    "rel_path": "backend\\uploads\\plate_test.mp4",
+    "size_mb": 0.06,
+    "resolution": "1280x720",
+    "fps": 10.0,
+    "frames": 20,
+    "duration_sec": 2.0
+  },
+  {
+    "filename": "quick_test.mp4",
+    "rel_path": "backend\\uploads\\quick_test.mp4",
+    "size_mb": 0.01,
+    "resolution": "640x480",
+    "fps": 10.0,
+    "frames": 10,
+    "duration_sec": 1.0
+  },
+  {
+    "filename": "real_car_plate.mp4",
+    "rel_path": "backend\\uploads\\real_car_plate.mp4",
+    "size_mb": 0.1,
+    "resolution": "1920x1080",
+    "fps": 5.0,
+    "frames": 5,
+    "duration_sec": 1.0
+  },
+  {
+    "filename": "parking_lot.mp4",
+    "rel_path": "datasets\\test_videos\\parking_lot.mp4",
+    "size_mb": 14.52,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 635,
+    "duration_sec": 21.2
+  },
+  {
+    "filename": "test_parking.mp4",
+    "rel_path": "datasets\\test_videos\\test_parking.mp4",
+    "size_mb": 0.02,
+    "resolution": "640x480",
+    "fps": 10.0,
+    "frames": 30,
+    "duration_sec": 3.0
+  },
+  {
+    "filename": "test_video_1.mp4",
+    "rel_path": "datasets\\test_videos\\test_video_1.mp4",
+    "size_mb": 1.23,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "test_video_2.avi",
+    "rel_path": "datasets\\test_videos\\test_video_2.avi",
+    "size_mb": 1.34,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 241,
+    "duration_sec": 8.0
+  },
+  {
+    "filename": "test_video_3.mov",
+    "rel_path": "datasets\\test_videos\\test_video_3.mov",
+    "size_mb": 1.37,
+    "resolution": "1920x1080",
+    "fps": 30.0,
+    "frames": 210,
+    "duration_sec": 7.0
+  },
+  {
+    "filename": "10A-IP Camera16_Carparking-01_Carparking-01_20260827154459_20260827160125_771251.mp4",
+    "rel_path": "videos\\10A-IP Camera16_Carparking-01_Carparking-01_20260827154459_20260827160125_771251.mp4",
+    "size_mb": 218.38,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 24641,
+    "duration_sec": 985.6
+  },
+  {
+    "filename": "10B-IP Camera16_Carparking-01_Carparking-01_20260827160125_20260827165959_1085547.mp4",
+    "rel_path": "videos\\10B-IP Camera16_Carparking-01_Carparking-01_20260827160125_20260827165959_1085547.mp4",
+    "size_mb": 734.74,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 87867,
+    "duration_sec": 3514.7
+  },
+  {
+    "filename": "11A-IP Camera19_Carparking-01_Carparking-01_20260827154500_20260827165230_2794841.mp4",
+    "rel_path": "videos\\11A-IP Camera19_Carparking-01_Carparking-01_20260827154500_20260827165230_2794841.mp4",
+    "size_mb": 962.16,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 101262,
+    "duration_sec": 4050.5
+  },
+  {
+    "filename": "11B-IP Camera19_Carparking-01_Carparking-01_20260827165230_20260827170000_3469577.mp4",
+    "rel_path": "videos\\11B-IP Camera19_Carparking-01_Carparking-01_20260827165230_20260827170000_3469577.mp4",
+    "size_mb": 93.52,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 11246,
+    "duration_sec": 449.8
+  },
+  {
+    "filename": "12A-IP Camera20_Carparking-01_Carparking-01_20260827154459_20260827165749_2794842.mp4",
+    "rel_path": "videos\\12A-IP Camera20_Carparking-01_Carparking-01_20260827154459_20260827165749_2794842.mp4",
+    "size_mb": 490.97,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 109260,
+    "duration_sec": 4370.4
+  },
+  {
+    "filename": "12B-IP Camera20_Carparking-01_Carparking-01_20260827165749_20260827165959_3301036.mp4",
+    "rel_path": "videos\\12B-IP Camera20_Carparking-01_Carparking-01_20260827165749_20260827165959_3301036.mp4",
+    "size_mb": 10.43,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 3249,
+    "duration_sec": 130.0
+  },
+  {
+    "filename": "13A-IP Camera24_Carparking-01_Carparking-01_20260827154459_20260827165959_2794845.mp4",
+    "rel_path": "videos\\13A-IP Camera24_Carparking-01_Carparking-01_20260827154459_20260827165959_2794845.mp4",
+    "size_mb": 655.41,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112508,
+    "duration_sec": 4500.3
+  },
+  {
+    "filename": "14A-IP Camera21_Carparking-01_Carparking-01_20260827154500_20260827163326_2794843.mp4",
+    "rel_path": "videos\\14A-IP Camera21_Carparking-01_Carparking-01_20260827154500_20260827163326_2794843.mp4",
+    "size_mb": 689.91,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 72673,
+    "duration_sec": 2906.9
+  },
+  {
+    "filename": "14B-IP Camera21_Carparking-01_Carparking-01_20260827163326_20260827170000_3290573.mp4",
+    "rel_path": "videos\\14B-IP Camera21_Carparking-01_Carparking-01_20260827163326_20260827170000_3290573.mp4",
+    "size_mb": 327.49,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 39835,
+    "duration_sec": 1593.4
+  },
+  {
+    "filename": "15A-IP Camera22_Carparking-01_Carparking-01_20260827154500_20260827165959_2794844.mp4",
+    "rel_path": "videos\\15A-IP Camera22_Carparking-01_Carparking-01_20260827154500_20260827165959_2794844.mp4",
+    "size_mb": 607.5,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112477,
+    "duration_sec": 4499.1
+  },
+  {
+    "filename": "16A-IP Camera5_Carparking-01_Carparking-01_20260827154500_20260827164501_771244.mp4",
+    "rel_path": "videos\\16A-IP Camera5_Carparking-01_Carparking-01_20260827154500_20260827164501_771244.mp4",
+    "size_mb": 764.03,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 90016,
+    "duration_sec": 3600.6
+  },
+  {
+    "filename": "16B-IP Camera5_Carparking-01_Carparking-01_20260827164501_20260827170000_1714396.mp4",
+    "rel_path": "videos\\16B-IP Camera5_Carparking-01_Carparking-01_20260827164501_20260827170000_1714396.mp4",
+    "size_mb": 169.82,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 22492,
+    "duration_sec": 899.7
+  },
+  {
+    "filename": "1A-IP Camera3_Carparking-01_Carparking-01_20260827154459_20260827164058_770771.mp4",
+    "rel_path": "videos\\1A-IP Camera3_Carparking-01_Carparking-01_20260827154459_20260827164058_770771.mp4",
+    "size_mb": 696.42,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 83969,
+    "duration_sec": 3358.8
+  },
+  {
+    "filename": "1B-IP Camera3_Carparking-01_Carparking-01_20260827164058_20260827165959_1723375.mp4",
+    "rel_path": "videos\\1B-IP Camera3_Carparking-01_Carparking-01_20260827164058_20260827165959_1723375.mp4",
+    "size_mb": 219.57,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 28539,
+    "duration_sec": 1141.6
+  },
+  {
+    "filename": "2A-IP Camera6_Carparking-01_Carparking-01_20260827154459_20260827161616_771246.mp4",
+    "rel_path": "videos\\2A-IP Camera6_Carparking-01_Carparking-01_20260827154459_20260827161616_771246.mp4",
+    "size_mb": 382.22,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 46932,
+    "duration_sec": 1877.3
+  },
+  {
+    "filename": "2B-IP Camera6_Carparking-01_Carparking-01_20260827161616_20260827165959_1187821.mp4",
+    "rel_path": "videos\\2B-IP Camera6_Carparking-01_Carparking-01_20260827161616_20260827165959_1187821.mp4",
+    "size_mb": 500.86,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 65575,
+    "duration_sec": 2623.0
+  },
+  {
+    "filename": "3A-IP Camera8_Carparking-01_Carparking-01_20260827154459_20260827154651_771248.mp4",
+    "rel_path": "videos\\3A-IP Camera8_Carparking-01_Carparking-01_20260827154459_20260827154651_771248.mp4",
+    "size_mb": 19.75,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 2799,
+    "duration_sec": 112.0
+  },
+  {
+    "filename": "3B-IP Camera8_Carparking-01_Carparking-01_20260827154651_20260827165959_822595.mp4",
+    "rel_path": "videos\\3B-IP Camera8_Carparking-01_Carparking-01_20260827154651_20260827165959_822595.mp4",
+    "size_mb": 1012.29,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 109709,
+    "duration_sec": 4388.4
+  },
+  {
+    "filename": "4A-IP Camera7_Carparking-01_Carparking-01_20260827154500_20260827164604_771247.mp4",
+    "rel_path": "videos\\4A-IP Camera7_Carparking-01_Carparking-01_20260827154500_20260827164604_771247.mp4",
+    "size_mb": 795.98,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 91615,
+    "duration_sec": 3664.6
+  },
+  {
+    "filename": "4B-IP Camera7_Carparking-01_Carparking-01_20260827164604_20260827170000_1734480.mp4",
+    "rel_path": "videos\\4B-IP Camera7_Carparking-01_Carparking-01_20260827164604_20260827170000_1734480.mp4",
+    "size_mb": 183.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 20892,
+    "duration_sec": 835.7
+  },
+  {
+    "filename": "5A-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_771248.mp4",
+    "rel_path": "videos\\5A-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_771248.mp4",
+    "size_mb": 45.7,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 7497,
+    "duration_sec": 299.9
+  },
+  {
+    "filename": "5B-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_2794840.mp4",
+    "rel_path": "videos\\5B-IP Camera9_Carparking-01_Carparking-01_20260827154500_20260827154959_2794840.mp4",
+    "size_mb": 45.7,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 7497,
+    "duration_sec": 299.9
+  },
+  {
+    "filename": "5C-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827165520_823164.mp4",
+    "rel_path": "videos\\5C-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827165520_823164.mp4",
+    "size_mb": 618.91,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 98014,
+    "duration_sec": 3920.6
+  },
+  {
+    "filename": "5D-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827170000_2837255.mp4",
+    "rel_path": "videos\\5D-IP Camera9_Carparking-01_Carparking-01_20260827155000_20260827170000_2837255.mp4",
+    "size_mb": 661.57,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 105011,
+    "duration_sec": 4200.4
+  },
+  {
+    "filename": "6A-IP Camera10_Carparking-01_Carparking-01_20260827154500_20260827165948_771249.mp4",
+    "rel_path": "videos\\6A-IP Camera10_Carparking-01_Carparking-01_20260827154500_20260827165948_771249.mp4",
+    "size_mb": 624.77,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112209,
+    "duration_sec": 4488.4
+  },
+  {
+    "filename": "6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4",
+    "rel_path": "videos\\6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4",
+    "size_mb": 1.52,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 300,
+    "duration_sec": 12.0
+  },
+  {
+    "filename": "7A-IP Camera11_Carparking-01_Carparking-01_20260827154459_20260827165958_771249.mp4",
+    "rel_path": "videos\\7A-IP Camera11_Carparking-01_Carparking-01_20260827154459_20260827165958_771249.mp4",
+    "size_mb": 666.22,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 112485,
+    "duration_sec": 4499.4
+  },
+  {
+    "filename": "8A-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_771250.mp4",
+    "rel_path": "videos\\8A-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_771250.mp4",
+    "size_mb": 467.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 47082,
+    "duration_sec": 1883.3
+  },
+  {
+    "filename": "8B-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_2794841.mp4",
+    "rel_path": "videos\\8B-IP Camera14_Carparking-01_Carparking-01_20260827154500_20260827161622_2794841.mp4",
+    "size_mb": 467.35,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 47082,
+    "duration_sec": 1883.3
+  },
+  {
+    "filename": "8C-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827162251_1367031.mp4",
+    "rel_path": "videos\\8C-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827162251_1367031.mp4",
+    "size_mb": 89.87,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 9697,
+    "duration_sec": 387.9
+  },
+  {
+    "filename": "8D-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827165959_3125148.mp4",
+    "rel_path": "videos\\8D-IP Camera14_Carparking-01_Carparking-01_20260827161623_20260827165959_3125148.mp4",
+    "size_mb": 561.6,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 65426,
+    "duration_sec": 2617.0
+  },
+  {
+    "filename": "9A-IP Camera15_Carparking-01_Carparking-01_20260827154459_20260827163014_771250.mp4",
+    "rel_path": "videos\\9A-IP Camera15_Carparking-01_Carparking-01_20260827154459_20260827163014_771250.mp4",
+    "size_mb": 302.54,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 67875,
+    "duration_sec": 2715.0
+  },
+  {
+    "filename": "9B-IP Camera15_Carparking-01_Carparking-01_20260827163014_20260827165959_1141120.mp4",
+    "rel_path": "videos\\9B-IP Camera15_Carparking-01_Carparking-01_20260827163014_20260827165959_1141120.mp4",
+    "size_mb": 180.08,
+    "resolution": "2688x1520",
+    "fps": 25.0,
+    "frames": 44633,
+    "duration_sec": 1785.3
+  },
+  {
+    "filename": "ai_generated_parking_lot.mp4",
+    "rel_path": "videos\\ai_generated_parking_lot.mp4",
+    "size_mb": 6.33,
+    "resolution": "1280x720",
+    "fps": 30.0,
+    "frames": 450,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "cam1_entry_gate.mp4",
+    "rel_path": "videos\\cam1_entry_gate.mp4",
+    "size_mb": 2.16,
+    "resolution": "1280x720",
+    "fps": 25.0,
+    "frames": 374,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "cam2_parking_bay.mp4",
+    "rel_path": "videos\\cam2_parking_bay.mp4",
+    "size_mb": 2.11,
+    "resolution": "1280x720",
+    "fps": 25.0,
+    "frames": 374,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "cam3_exit_ramp.mp4",
+    "rel_path": "videos\\cam3_exit_ramp.mp4",
+    "size_mb": 1.58,
+    "resolution": "1280x720",
+    "fps": 25.0,
+    "frames": 374,
+    "duration_sec": 15.0
+  },
+  {
+    "filename": "car-detection.mp4",
+    "rel_path": "videos\\car-detection.mp4",
+    "size_mb": 2.68,
+    "resolution": "768x432",
+    "fps": 12.5,
+    "frames": 377,
+    "duration_sec": 30.2
+  },
+  {
+    "filename": "car_detection_sample.mp4",
+    "rel_path": "videos\\car_detection_sample.mp4",
+    "size_mb": 2.68,
+    "resolution": "768x432",
+    "fps": 12.5,
+    "frames": 377,
+    "duration_sec": 30.2
+  },
+  {
+    "filename": "car_entering_parking.mp4",
+    "rel_path": "videos\\car_entering_parking.mp4",
+    "size_mb": 2.33,
+    "resolution": "1280x720",
+    "fps": 30.0,
+    "frames": 180,
+    "duration_sec": 6.0
+  },
+  {
+    "filename": "car_exiting_parking.mp4",
+    "rel_path": "videos\\car_exiting_parking.mp4",
+    "size_mb": 2.86,
+    "resolution": "1280x720",
+    "fps": 30.0,
+    "frames": 180,
+    "duration_sec": 6.0
+  },
+  {
+    "filename": "intel_car_detection.mp4",
+    "rel_path": "videos\\intel_car_detection.mp4",
+    "size_mb": 2.68,
+    "resolution": "768x432",
+    "fps": 12.5,
+    "frames": 377,
+    "duration_sec": 30.2
+  },
+  {
+    "filename": "parking_overview.mp4",
+    "rel_path": "videos\\parking_overview.mp4",
+    "size_mb": 2.68,
+    "resolution": "768x432",
+    "fps": 12.5,
+    "frames": 377,
+    "duration_sec": 30.2
+  },
+  {
+    "filename": "test_video.mp4",
+    "rel_path": "videos\\test_video.mp4",
+    "size_mb": 18.72,
+    "resolution": "848x480",
+    "fps": 59.9,
+    "frames": 5522,
+    "duration_sec": 92.2
+  },
+  {
+    "filename": "Traffic.mp4",
+    "rel_path": "videos\\Traffic.mp4",
+    "size_mb": 1.88,
+    "resolution": "960x540",
+    "fps": 30.0,
+    "frames": 335,
+    "duration_sec": 11.2
+  },
+  {
+    "filename": "traffic_sample.mp4",
+    "rel_path": "videos\\traffic_sample.mp4",
+    "size_mb": 1.88,
+    "resolution": "960x540",
+    "fps": 30.0,
+    "frames": 335,
+    "duration_sec": 11.2
+  },
+  {
+    "filename": "video_1_car_entry.mp4",
+    "rel_path": "videos\\video_1_car_entry.mp4",
+    "size_mb": 2.68,
+    "resolution": "768x432",
+    "fps": 12.5,
+    "frames": 377,
+    "duration_sec": 30.2
+  },
+  {
+    "filename": "video_2_car_exit.mp4",
+    "rel_path": "videos\\video_2_car_exit.mp4",
+    "size_mb": 1.88,
+    "resolution": "960x540",
+    "fps": 30.0,
+    "frames": 335,
+    "duration_sec": 11.2
+  },
+  {
+    "filename": "video_3_parking_overview.mp4",
+    "rel_path": "videos\\video_3_parking_overview.mp4",
+    "size_mb": 10.12,
+    "resolution": "1100x720",
+    "fps": 24.0,
+    "frames": 679,
+    "duration_sec": 28.3
+  }
+]

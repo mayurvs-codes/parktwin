@@ -1,0 +1,295 @@
+- generic [ref=e1]:
+  - generic [ref=e911]:
+    - banner [ref=e912]:
+      - generic [ref=e914]:
+        - generic [ref=e915]:
+          - link "PARKTWIN AI Driver Smart Journey Guidance" [ref=e916] [cursor=pointer]:
+            - /url: /user/dashboard
+            - generic [ref=e921]:
+              - generic [ref=e922]:
+                - generic [ref=e923]: PARKTWIN AI
+                - generic [ref=e924]: Driver
+              - generic [ref=e925]: Smart Journey Guidance
+          - navigation [ref=e926]:
+            - link "Dashboard" [ref=e927] [cursor=pointer]:
+              - /url: /user/dashboard
+            - link "Parking" [ref=e934] [cursor=pointer]:
+              - /url: /user/parking
+            - link "Navigation" [ref=e939] [cursor=pointer]:
+              - /url: /user/navigation
+            - link "My Vehicles" [ref=e944] [cursor=pointer]:
+              - /url: /user/vehicles
+            - link "Analytics" [ref=e950] [cursor=pointer]:
+              - /url: /user/analytics
+        - generic [ref=e954]:
+          - generic [ref=e955]:
+            - generic [ref=e957]: VEH-001
+            - generic [ref=e958]: CAM-01
+          - button "CCTV Evidence" [ref=e959] [cursor=pointer]
+          - link [ref=e964] [cursor=pointer]:
+            - /url: /dashboard
+            - button "Admin System" [ref=e965]
+          - button "Toggle color theme" [ref=e971] [cursor=pointer]
+      - generic [ref=e976]:
+        - generic [ref=e977]:
+          - generic [ref=e978]:
+            - button "DEMO MODE" [ref=e979] [cursor=pointer]
+            - button "EVIDENCE MODE" [ref=e985] [cursor=pointer]
+          - generic [ref=e991]:
+            - generic [ref=e992]:
+              - strong [ref=e994]: KA04MN8049
+              - generic [ref=e995]: (98% paddleocr)
+              - generic [ref=e996]: "Track #6"
+            - generic [ref=e997]: 4. Space Assigned
+        - generic [ref=e999]:
+          - generic [ref=e1000]:
+            - generic [ref=e1001]: "Vehicle:"
+            - button "VEH-001 Reserved" [ref=e1006] [cursor=pointer]:
+              - generic [ref=e1007]: VEH-001
+              - generic "Reserved" [ref=e1008]
+            - button "VEH-002 Reserved" [ref=e1009] [cursor=pointer]:
+              - generic [ref=e1010]: VEH-002
+              - generic "Reserved" [ref=e1011]
+            - button "VEH-003 No Reservation" [ref=e1012] [cursor=pointer]:
+              - generic [ref=e1013]: VEH-003
+              - generic "No Reservation" [ref=e1014]
+            - button "VEH-004 No Reservation" [ref=e1015] [cursor=pointer]:
+              - generic [ref=e1016]: VEH-004
+              - generic "No Reservation" [ref=e1017]
+            - button "VEH-005 No Reservation" [ref=e1018] [cursor=pointer]:
+              - generic [ref=e1019]: VEH-005
+              - generic "No Reservation" [ref=e1020]
+          - generic [ref=e1021]:
+            - button "Next Event" [ref=e1022] [cursor=pointer]
+            - button "Reset Vehicle" [ref=e1026] [cursor=pointer]
+            - button "Reset Demo" [ref=e1031] [cursor=pointer]
+    - main [ref=e1033]:
+      - generic [ref=e1034]:
+        - generic [ref=e1035]:
+          - generic [ref=e1041]:
+            - generic [ref=e1042]:
+              - generic [ref=e1043]: PARKTWIN
+              - generic [ref=e1045]: Carparking-01 · Level B2
+            - generic [ref=e1047]:
+              - text: REGISTERED DRIVER ·
+              - strong [ref=e1048]: USER A
+              - text: (VEH-001)
+          - generic [ref=e1049]:
+            - generic [ref=e1050]:
+              - button "USER A" [active] [ref=e1051] [cursor=pointer]
+              - button "USER B" [ref=e1052] [cursor=pointer]
+              - button "GUEST" [ref=e1053] [cursor=pointer]
+            - generic [ref=e1054]:
+              - button "Clear Violation" [ref=e1055] [cursor=pointer]
+              - button "Reset" [ref=e1056] [cursor=pointer]
+        - generic [ref=e1061]:
+          - generic [ref=e1062]:
+            - generic [ref=e1063]:
+              - generic [ref=e1064]:
+                - generic [ref=e1065]: FACILITY DIGITAL TWIN
+                - generic [ref=e1066]: · Island 1 (SP-01 to SP-20)
+              - link [ref=e1067] [cursor=pointer]:
+                - /url: /user/navigation
+                - button "Full GPS View" [ref=e1068]
+            - generic [ref=e1073]:
+              - generic [ref=e1075]:
+                - button "Zoom In (+)" [ref=e1076] [cursor=pointer]
+                - button "Zoom Out (−)" [ref=e1080] [cursor=pointer]
+                - button "Focus Demo Zone (Home)" [ref=e1084] [cursor=pointer]
+                - button "FIT" [ref=e1088] [cursor=pointer]
+                - button "Center on Selected Item" [ref=e1095] [cursor=pointer]
+                - generic [ref=e1100]: 155%
+              - generic:
+                - generic: ACCESS_POINT_B2
+                - generic: Single Physical Gateway (Entry & Exit)
+              - img [ref=e1101]:
+                - generic:
+                  - generic:
+                    - generic: LIFT
+                    - generic: STAIR & LIFT CORE 01
+                  - generic: ◄ ENTRY RAMP
+                  - generic:
+                    - generic: LIFT
+                    - generic: STAIR & LIFT CORE 02
+                  - generic:
+                    - generic:
+                      - generic: LOBBY
+                      - generic: 2.8M WIDE
+                    - generic: SERVICES / STORAGE
+                    - generic:
+                      - generic: LOBBY
+                      - generic: 3.0M WIDE
+                - generic:
+                  - generic: FOCUSED DEMO ZONE · ISLAND 1 (20 SPACES)
+                  - generic: NORTH ROW · 8 STALLS (SP-01 – SP-08)
+                  - generic: SOUTH ROW · 8 STALLS (SP-09 – SP-16)
+                  - generic: WEST END · 4 STALLS (SP-17 – SP-20)
+                  - generic: OCC 19 · AVAIL 1 · DESIG 0 · ⚠ VIOLATION
+                - generic [ref=e1115]:
+                  - generic [ref=e1116] [cursor=pointer]: P01
+                  - generic [ref=e1118] [cursor=pointer]: P02
+                  - generic [ref=e1120] [cursor=pointer]: P03
+                  - generic [ref=e1122] [cursor=pointer]: P04
+                  - generic [ref=e1124] [cursor=pointer]: P05
+                  - generic [ref=e1126] [cursor=pointer]: P06
+                  - generic [ref=e1128] [cursor=pointer]: P07
+                  - generic [ref=e1130] [cursor=pointer]: P08
+                  - generic [ref=e1132] [cursor=pointer]: P09
+                  - generic [ref=e1134] [cursor=pointer]: P10
+                  - generic [ref=e1136] [cursor=pointer]: VIOLATION
+                  - generic [ref=e1138] [cursor=pointer]: P12
+                  - generic [ref=e1140] [cursor=pointer]: P13
+                  - generic [ref=e1142] [cursor=pointer]: P14
+                  - generic [ref=e1144] [cursor=pointer]: P15
+                  - generic [ref=e1146] [cursor=pointer]: P16
+                  - generic [ref=e1148] [cursor=pointer]: P17
+                  - generic [ref=e1150] [cursor=pointer]: P18
+                  - generic [ref=e1152] [cursor=pointer]: P19
+                  - generic [ref=e1154] [cursor=pointer]: P20
+                  - generic [ref=e1156] [cursor=pointer]: P21
+                  - generic [ref=e1158] [cursor=pointer]: P22
+                  - generic [ref=e1160] [cursor=pointer]: P23
+                  - generic [ref=e1162] [cursor=pointer]: P24
+                  - generic [ref=e1164] [cursor=pointer]: P25
+                  - generic [ref=e1166] [cursor=pointer]: P26
+                  - generic [ref=e1168] [cursor=pointer]: P27
+                  - generic [ref=e1170] [cursor=pointer]: P28
+                  - generic [ref=e1172] [cursor=pointer]: P29
+                  - generic [ref=e1174] [cursor=pointer]: P30
+                  - generic [ref=e1176] [cursor=pointer]: P31
+                  - generic [ref=e1178] [cursor=pointer]: P32
+                  - generic [ref=e1180] [cursor=pointer]: P33
+                  - generic [ref=e1182] [cursor=pointer]: P34
+                  - generic [ref=e1184] [cursor=pointer]: P35
+                  - generic [ref=e1186] [cursor=pointer]: P36
+                  - generic [ref=e1188] [cursor=pointer]: P37
+                  - generic [ref=e1190] [cursor=pointer]: P38
+                  - generic [ref=e1192] [cursor=pointer]: P39
+                  - generic [ref=e1194] [cursor=pointer]: P40
+                  - generic [ref=e1196] [cursor=pointer]: P41
+                  - generic [ref=e1198] [cursor=pointer]: P42
+                  - generic [ref=e1200] [cursor=pointer]: P43
+                  - generic [ref=e1202] [cursor=pointer]: P44
+                  - generic [ref=e1204] [cursor=pointer]: P45
+                  - generic [ref=e1206] [cursor=pointer]: P46
+                  - generic [ref=e1208] [cursor=pointer]: P47
+                  - generic [ref=e1210] [cursor=pointer]: P48
+                  - generic [ref=e1212] [cursor=pointer]: P49
+                  - generic [ref=e1214] [cursor=pointer]: P50
+                  - generic [ref=e1216] [cursor=pointer]: P51
+                  - generic [ref=e1218] [cursor=pointer]: P52
+                  - generic [ref=e1220] [cursor=pointer]: P53
+                  - generic [ref=e1222] [cursor=pointer]: P54
+                  - generic [ref=e1224] [cursor=pointer]: P55
+                  - generic [ref=e1226] [cursor=pointer]: P56
+                  - generic [ref=e1228] [cursor=pointer]: P57
+                  - generic [ref=e1230] [cursor=pointer]: P58
+                  - generic [ref=e1232] [cursor=pointer]: P59
+                  - generic [ref=e1234] [cursor=pointer]: P60
+                - generic [ref=e1236]:
+                  - generic [ref=e1237] [cursor=pointer]
+                  - generic [ref=e1238] [cursor=pointer]
+                  - generic [ref=e1239] [cursor=pointer]
+                  - generic [ref=e1240] [cursor=pointer]
+                  - generic [ref=e1241] [cursor=pointer]
+                  - generic [ref=e1242] [cursor=pointer]
+                  - generic [ref=e1243] [cursor=pointer]: VEH-001
+                  - generic [ref=e1244] [cursor=pointer]
+                  - generic [ref=e1245] [cursor=pointer]
+                  - generic [ref=e1246] [cursor=pointer]
+                  - generic [ref=e1247] [cursor=pointer]: VEH-001 [VIOL]
+                  - generic [ref=e1251] [cursor=pointer]
+                  - generic [ref=e1252] [cursor=pointer]
+                  - generic [ref=e1253] [cursor=pointer]
+                  - generic [ref=e1254] [cursor=pointer]
+                  - generic [ref=e1255] [cursor=pointer]
+                  - generic [ref=e1256] [cursor=pointer]
+                  - generic [ref=e1257] [cursor=pointer]
+                  - generic [ref=e1258] [cursor=pointer]
+                  - generic [ref=e1259] [cursor=pointer]
+                  - generic [ref=e1260] [cursor=pointer]
+                  - generic [ref=e1261] [cursor=pointer]
+                  - generic [ref=e1262] [cursor=pointer]
+                  - generic [ref=e1263] [cursor=pointer]
+                  - generic [ref=e1264] [cursor=pointer]
+                  - generic [ref=e1265] [cursor=pointer]
+                  - generic [ref=e1266] [cursor=pointer]
+                  - generic [ref=e1267] [cursor=pointer]
+                  - generic [ref=e1268] [cursor=pointer]
+                  - generic [ref=e1269] [cursor=pointer]
+                  - generic [ref=e1270] [cursor=pointer]
+                  - generic [ref=e1271] [cursor=pointer]
+                  - generic [ref=e1272] [cursor=pointer]
+                  - generic [ref=e1273] [cursor=pointer]
+                  - generic [ref=e1274] [cursor=pointer]
+                  - generic [ref=e1275] [cursor=pointer]
+                  - generic [ref=e1276] [cursor=pointer]
+                  - generic [ref=e1277] [cursor=pointer]
+                  - generic [ref=e1278] [cursor=pointer]
+                  - generic [ref=e1279] [cursor=pointer]
+                  - generic [ref=e1280] [cursor=pointer]
+                  - generic [ref=e1281] [cursor=pointer]
+                  - generic [ref=e1282] [cursor=pointer]
+                  - generic [ref=e1283] [cursor=pointer]
+                  - generic [ref=e1284] [cursor=pointer]
+                  - generic [ref=e1285] [cursor=pointer]
+                  - generic [ref=e1286] [cursor=pointer]
+                  - generic [ref=e1287] [cursor=pointer]
+                  - generic [ref=e1288] [cursor=pointer]
+                  - generic [ref=e1289] [cursor=pointer]
+                  - generic [ref=e1290] [cursor=pointer]
+                  - generic [ref=e1291] [cursor=pointer]
+                  - generic [ref=e1292] [cursor=pointer]
+                  - generic [ref=e1293] [cursor=pointer]
+                  - generic [ref=e1294] [cursor=pointer]
+                  - generic [ref=e1295] [cursor=pointer]
+                  - generic [ref=e1296] [cursor=pointer]
+                  - generic [ref=e1297] [cursor=pointer]
+                  - generic [ref=e1298] [cursor=pointer]
+                - generic [ref=e1299]: ACCESS_POINT_B2
+                - generic: ★ SP-07
+              - generic:
+                - generic: Available
+                - generic: Occupied
+                - generic: Reserved
+                - generic: Selected
+          - generic [ref=e1306]:
+            - generic [ref=e1309]:
+              - generic [ref=e1310]: DRIVER ACTION PANEL
+              - generic [ref=e1311]: 1 spaces free
+            - generic [ref=e1313]:
+              - generic [ref=e1314]:
+                - generic [ref=e1315]: Parking Violation Detected
+                - generic [ref=e1319]: HIGH SEVERITY
+              - paragraph [ref=e1320]: Vehicle is parked in an unauthorized space. Designated allocation not matching.
+              - generic [ref=e1321]:
+                - generic [ref=e1322]:
+                  - generic [ref=e1323]: Expected Space
+                  - text: SP-07
+                - generic [ref=e1324]:
+                  - generic [ref=e1325]: Actual Space
+                  - text: SP-11
+              - generic [ref=e1326]:
+                - generic [ref=e1327]: Violation Duration
+                - generic [ref=e1332]: 00:00:00
+              - generic [ref=e1333]:
+                - generic [ref=e1334]:
+                  - generic [ref=e1335]: VIOLATION TIME CONTROLS
+                  - generic [ref=e1336]: "Policy: 10 min"
+                - generic [ref=e1337]:
+                  - button "5m" [ref=e1338] [cursor=pointer]
+                  - button "8m (Warn)" [ref=e1339] [cursor=pointer]
+                  - button "10m (Alert)" [ref=e1340] [cursor=pointer]
+                  - button "Reset 0m" [ref=e1341] [cursor=pointer]
+              - paragraph [ref=e1342]:
+                - text: Please relocate your vehicle to designated bay
+                - strong [ref=e1343]: SP-07
+                - text: .
+              - button "RELOCATE TO SP-07" [ref=e1344] [cursor=pointer]
+        - group [ref=e1348]:
+          - generic "TECHNICAL AUDIT & PHYSICAL EVIDENCE PROVENANCE [ DIAGNOSTICS ]" [ref=e1349] [cursor=pointer]:
+            - generic [ref=e1350]: TECHNICAL AUDIT & PHYSICAL EVIDENCE PROVENANCE
+            - generic [ref=e1355]: "[ DIAGNOSTICS ]"
+    - contentinfo [ref=e1359]: ParkTwin AI Driver Portal · Verified Facility Geometry & Real CCTV Physical Evidence
+  - button "Open Next.js Dev Tools" [ref=e443] [cursor=pointer]
+  - alert [ref=e447]

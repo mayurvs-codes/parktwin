@@ -1,0 +1,132 @@
+{
+  "": "https://json-schema.org/draft/2020-12/schema",
+  "facility": "ParkTwin AI - Level B2 Smart Parking Facility",
+  "generated_at": "2026-09-10T06:30:00Z",
+  "audit_version": "2.0.0",
+  "inventory_summary": {
+    "total_videos_cataloged": 240,
+    "raw_cctv_dvr_recordings": 33,
+    "active_portal_clips": 3,
+    "target_recording_date": "2026-08-27",
+    "target_recording_window": "15:45:00 - 17:00:00"
+  },
+  "cameras": [
+    {
+      "camera_id": "CAM-01",
+      "name": "B2 Entrance Gate (Barricade)",
+      "hardware_source": "IP Camera 3 / Carparking-01",
+      "clip_path": "apps/web/public/videos/cam1_entry_gate.mp4",
+      "resolution": "1280x720",
+      "fps": 25.0,
+      "duration_sec": 15.0,
+      "frame_count": 375,
+      "role": "ENTRY_GATEWAY",
+      "observed_ground_truth": {
+        "infrastructure": "Boom barrier, access card scanner, single entry aisle",
+        "dynamic_events": "Vehicle approach, barrier arm opening, vehicle passage through gate",
+        "visible_vehicle": {
+          "model": "Toyota Glanza/Yaris",
+          "color": "Maroon",
+          "plate": "KA05ML7220",
+          "provenance": "CCTV VISUALLY VERIFIED, OCR UNVERIFIED"
+        },
+        "anpr_benchmark_reference": {
+          "plate": "KA04MN8049",
+          "track_id": 6,
+          "confidence": 0.98,
+          "source_video": "videos/test_video.mp4 (Pipeline Run fd3b28581430)",
+          "provenance": "RAW ANPR DATA (BENCHMARK PIPELINE)",
+          "identity_linkage": "UNVERIFIED / INDEPENDENT BENCHMARK"
+        }
+      },
+      "extracted_frames": [
+        { "file": "evidence/entry/cam1_entry_gate_f30.png", "frame_number": 30, "time_sec": 1.2, "description": "Vehicle approaching entry barrier" },
+        { "file": "evidence/entry/cam1_entry_gate_f75.png", "frame_number": 75, "time_sec": 3.0, "description": "Barrier lifted, vehicle entering gate lane" },
+        { "file": "evidence/entry/cam1_entry_gate_f150.png", "frame_number": 150, "time_sec": 6.0, "description": "Mid-passage past camera view" },
+        { "file": "evidence/entry/cam1_entry_gate_f250.png", "frame_number": 250, "time_sec": 10.0, "description": "Clearance of gate threshold" },
+        { "file": "evidence/entry/cam1_entry_gate_f350.png", "frame_number": 350, "time_sec": 14.0, "description": "Gateway returning to standby" }
+      ]
+    },
+    {
+      "camera_id": "CAM-02",
+      "name": "B2 Parking Bay Cluster (Zone A)",
+      "hardware_source": "IP Camera 16 (B2-Cam 11) / Carparking-01",
+      "clip_path": "apps/web/public/videos/cam2_parking_bay.mp4",
+      "resolution": "1280x720",
+      "fps": 25.0,
+      "duration_sec": 15.0,
+      "frame_count": 375,
+      "role": "PARKING_BAY_SURVEILLANCE",
+      "observed_ground_truth": {
+        "infrastructure": "Marked perpendicular parking stalls with painted white boundary lines",
+        "visible_parked_vehicles": [
+          { "plate": "KA05ND1565", "type": "Tata Punch", "color": "Dark Grey", "status": "PARKED_STATIONARY", "provenance": "VISUALLY CONFIRMED IN VIDEO" },
+          { "plate": "KA03NY0035", "type": "Hyundai Venue", "color": "White", "status": "PARKED_STATIONARY", "provenance": "VISUALLY CONFIRMED IN VIDEO (manifest typo: KA03MY0035)" },
+          { "plate": "KA41MG7586", "type": "Baleno", "color": "Dark Metallic", "status": "PARKED_STATIONARY", "provenance": "UNREADABLE IN 720p (SCENARIO METADATA)" }
+        ],
+        "limitation_statement": "PARKED OCCUPANCY OBSERVED. Stationary vehicle occupancy verified in marked bays (average frame difference 2.24). The active reversing/parking maneuver into the stall is NOT captured in this 15-second window."
+      },
+      "extracted_frames": [
+        { "file": "evidence/parking/cam2_parking_bay_f30.png", "frame_number": 30, "time_sec": 1.2, "description": "Bay overview with KA05ND1565 and KA03NY0035 parked" },
+        { "file": "evidence/parking/cam2_parking_bay_f75.png", "frame_number": 75, "time_sec": 3.0, "description": "Stationary dwell observation (t=3.0s)" },
+        { "file": "evidence/parking/cam2_parking_bay_f150.png", "frame_number": 150, "time_sec": 6.0, "description": "Stationary dwell observation (t=6.0s)" },
+        { "file": "evidence/parking/cam2_parking_bay_f250.png", "frame_number": 250, "time_sec": 10.0, "description": "Stationary dwell observation (t=10.0s)" },
+        { "file": "evidence/parking/cam2_parking_bay_f350.png", "frame_number": 350, "time_sec": 14.0, "description": "Persistent occupancy confirmed" }
+      ]
+    },
+    {
+      "camera_id": "CAM-03",
+      "name": "B2 Exit Ramp & Barrier (ACCESS_POINT_B2)",
+      "hardware_source": "IP Camera 5 (B2-Baricade Exit Cam 2) / Carparking-01",
+      "clip_path": "apps/web/public/videos/cam3_exit_ramp.mp4",
+      "resolution": "1280x720",
+      "fps": 25.0,
+      "duration_sec": 15.0,
+      "frame_count": 375,
+      "role": "EXIT_GATEWAY",
+      "observed_ground_truth": {
+        "infrastructure": "Exit boom barrier, driver scanner pedestal, speed bumps, exit roadway",
+        "dynamic_events": "Standby surveillance of exit threshold (NO VEHICLE ACTIVITY)",
+        "limitation_statement": "EXIT INFRASTRUCTURE ONLY. Proves physical exit barrier geometry and facility egress point. No vehicle egresses through the barrier in this 15-second clip; session completion is executed by application logic (APP_DECISION)."
+      },
+      "extracted_frames": [
+        { "file": "evidence/exit/cam3_exit_ramp_f30.png", "frame_number": 30, "time_sec": 1.2, "description": "Exit roadway, speed bumps, and barrier pedestal" },
+        { "file": "evidence/exit/cam3_exit_ramp_f75.png", "frame_number": 75, "time_sec": 3.0, "description": "Exit gate lane observation (t=3.0s)" },
+        { "file": "evidence/exit/cam3_exit_ramp_f150.png", "frame_number": 150, "time_sec": 6.0, "description": "Exit gate lane observation (t=6.0s)" },
+        { "file": "evidence/exit/cam3_exit_ramp_f250.png", "frame_number": 250, "time_sec": 10.0, "description": "Exit gate lane observation (t=10.0s)" },
+        { "file": "evidence/exit/cam3_exit_ramp_f350.png", "frame_number": 350, "time_sec": 14.0, "description": "Exit threshold clear" }
+      ]
+    }
+  ],
+  "evidence_matrix": {
+    "Level_1_CCTV_Ground_Truth": {
+      "verified_elements": [
+        "Physical entrance barrier and vehicle entry at CAM-01 (Toyota Glanza/Yaris with plate KA05ML7220 visually observed; ANPR pipeline benchmark Track #6 KA04MN8049 independently derived from test_video.mp4; identity linkage: UNVERIFIED)",
+        "Physical parking bays and stationary parked vehicles at CAM-02 (KA05ND1565, KA03MY0035, KA41MG7586)",
+        "Physical exit barrier, card scanner pole, and speed bumps at CAM-03",
+        "Camera hardware IDs: IP Camera 3, IP Camera 16, IP Camera 5"
+      ],
+      "declared_gaps": [
+        "Continuous multi-camera tracking of a single vehicle from entrance to bay to exit does not exist in available clips (clips are non-overlapping independent recordings from 2026-08-27)",
+        "Dynamic parking maneuver (pulling into stall) is not recorded in the 15s CAM-02 clip",
+        "Dynamic barrier lifting on exit is not recorded in the 15s CAM-03 clip"
+      ]
+    },
+    "Level_2_Application_Decisions": {
+      "verified_elements": [
+        "Reservation status checks and drive-in allocation algorithms",
+        "Route calculation via navigation router using A* graph",
+        "Session creation, dwell time tracking, and tariff calculation",
+        "Synchronized occupancy state updates across Admin and User portals via crossTabSyncService"
+      ]
+    },
+    "Level_3_Digital_Twin_Model": {
+      "verified_elements": [
+        "Canonical 1472x1508 SVG geometry representing Level B2 floorplan",
+        "60 canonical parking bays (SP-01 to SP-60)",
+        "16 canonical CCTV camera coordinate placements",
+        "ACCESS_POINT_B2 single entry/exit gateway coordinates (100, 720)"
+      ]
+    }
+  }
+}

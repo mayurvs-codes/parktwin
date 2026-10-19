@@ -1,0 +1,338 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e14] [cursor=pointer]:
+        - heading "OPPORTUNITY RADAR AI" [level=1] [ref=e15]:
+          - text: OPPORTUNITY RADAR
+          - generic [ref=e16]: AI
+        - paragraph [ref=e17]: Personal Opportunity Intelligence
+      - navigation [ref=e18]:
+        - button "Dashboard" [ref=e19] [cursor=pointer]
+        - button "Decisions" [ref=e24] [cursor=pointer]
+        - button "AI Agent" [ref=e30] [cursor=pointer]
+        - button "Radar" [ref=e35] [cursor=pointer]
+        - button "Discover" [ref=e43] [cursor=pointer]
+        - button "Hackathons" [ref=e48] [cursor=pointer]
+        - button "Internships" [ref=e56] [cursor=pointer]
+        - button "Open Source" [ref=e61] [cursor=pointer]
+        - button "Competitions" [ref=e67] [cursor=pointer]
+        - button "Research" [ref=e72] [cursor=pointer]
+        - button "Saved 1" [ref=e168] [cursor=pointer]:
+          - generic [ref=e79]: Saved
+          - generic [ref=e169]: "1"
+        - button "Tracker" [ref=e80] [cursor=pointer]
+        - button "Projects" [ref=e83] [cursor=pointer]
+        - button "Sources" [ref=e89] [cursor=pointer]
+      - generic [ref=e93]:
+        - button "9" [ref=e170]
+        - 'generic "Live Mode: Connected to real internet search and active connectors" [ref=e98]': LIVE
+        - button "Deep Discover" [ref=e101] [cursor=pointer]
+        - button "Student Profile" [ref=e106]
+  - main [ref=e111]:
+    - generic [ref=e1839]:
+      - generic [ref=e1840]:
+        - generic [ref=e1841]:
+          - heading "Autonomous Discovery Intelligence & Observability" [level=2] [ref=e1842]
+          - paragraph [ref=e1845]: Coverage mapping, candidate registry, yield-optimized scheduling, and connector health.
+        - generic [ref=e1846]:
+          - button "Deep Discovery Mode" [ref=e1847] [cursor=pointer]
+          - button "Standard Discovery" [ref=e1852] [cursor=pointer]
+      - generic [ref=e1859]:
+        - button "Active Connectors (10)" [ref=e1860] [cursor=pointer]
+        - button "Coverage Map & Gaps (28)" [active] [ref=e1864] [cursor=pointer]
+        - button "Candidate Source Registry (10)" [ref=e1869] [cursor=pointer]
+        - button "Dynamic Scheduling (20)" [ref=e1875] [cursor=pointer]
+      - generic [ref=e2405]:
+        - generic [ref=e2406]:
+          - generic [ref=e2407]:
+            - text: Total Tracked Opportunities
+            - generic [ref=e2408]: "23"
+            - text: 100% Real Live Production
+          - generic [ref=e2409]:
+            - text: Actionable Opportunities
+            - generic [ref=e2410]: "18"
+            - generic [ref=e2411]: 78% Actionability Rate
+          - generic [ref=e2412]:
+            - text: Active Sources Active
+            - generic [ref=e2413]: "5"
+            - text: Yielding Live Data
+          - generic [ref=e2414]:
+            - text: Category Coverage Pct
+            - generic [ref=e2415]: 19.6%
+            - generic [ref=e2416]: 20 Coverage Gaps Identified
+        - generic [ref=e2417]:
+          - generic [ref=e2418]:
+            - heading "Delivery Mode Breakdown" [level=4] [ref=e2419]
+            - generic [ref=e2423]:
+              - generic [ref=e2424]:
+                - generic [ref=e2425]: Remote
+                - text: "18"
+              - generic [ref=e2426]:
+                - generic [ref=e2427]: On-Site
+                - text: "0"
+              - generic [ref=e2428]:
+                - generic [ref=e2429]: Hybrid
+                - text: "5"
+          - generic [ref=e2430]:
+            - heading "Geographic Distribution" [level=4] [ref=e2431]
+            - generic [ref=e2435]:
+              - generic [ref=e2436]:
+                - generic [ref=e2437]: India
+                - text: "11"
+              - generic [ref=e2438]:
+                - generic [ref=e2439]: International
+                - text: "0"
+              - generic [ref=e2440]:
+                - generic [ref=e2441]: Global / Other
+                - text: "12"
+        - generic [ref=e2442]:
+          - heading "Technical Domains Tracked" [level=4] [ref=e2443]
+          - generic [ref=e2448]:
+            - generic [ref=e2449]:
+              - generic [ref=e2450]:
+                - generic [ref=e2451]: Robotics & Automation
+                - generic [ref=e2452]: "11"
+              - generic [ref=e2453]: Python, JavaScript, Cloud, Git
+            - generic [ref=e2454]:
+              - generic [ref=e2455]:
+                - generic [ref=e2456]: Computer Vision
+                - generic [ref=e2457]: "7"
+              - generic [ref=e2458]: Python, Git, JavaScript, task
+            - generic [ref=e2459]:
+              - generic [ref=e2460]:
+                - generic [ref=e2461]: AI & Machine Learning
+                - generic [ref=e2462]: "21"
+              - generic [ref=e2463]: Python, JavaScript, Cloud, React
+            - generic [ref=e2464]:
+              - generic [ref=e2465]:
+                - generic [ref=e2466]: Mechanical & CAD/FEA
+                - generic [ref=e2467]: "8"
+              - generic [ref=e2468]: Python, JavaScript, Cloud, Git
+            - generic [ref=e2469]:
+              - generic [ref=e2470]:
+                - generic [ref=e2471]: Embedded Systems & IoT
+                - generic [ref=e2472]: "3"
+              - generic [ref=e2473]: Python, JavaScript, Cloud, React
+            - generic [ref=e2474]:
+              - generic [ref=e2475]:
+                - generic [ref=e2476]: Smart Cities & Mobility
+                - generic [ref=e2477]: "0"
+              - generic [ref=e2478]: General
+            - generic [ref=e2479]:
+              - generic [ref=e2480]:
+                - generic [ref=e2481]: Software Engineering
+                - generic [ref=e2482]: "23"
+              - generic [ref=e2483]: Python, JavaScript, Cloud, Git
+            - generic [ref=e2484]:
+              - generic [ref=e2485]:
+                - generic [ref=e2486]: Data Science & Analytics
+                - generic [ref=e2487]: "1"
+              - generic [ref=e2488]: Python, JavaScript, React, AI/ML
+        - generic [ref=e2489]:
+          - heading "Tracked Categories & Coverage Gaps" [level=4] [ref=e2490]
+          - table [ref=e2495]:
+            - rowgroup [ref=e2496]:
+              - row [ref=e2497]:
+                - columnheader "Category" [ref=e2498]
+                - columnheader "Coverage Status" [ref=e2499]
+                - columnheader "Tracked in DB" [ref=e2500]
+                - columnheader "Actionable" [ref=e2501]
+                - columnheader "Active Sources" [ref=e2502]
+                - columnheader "Sample Evidence" [ref=e2503]
+            - rowgroup [ref=e2504]:
+              - row [ref=e2505]:
+                - cell "Hackathon" [ref=e2506]
+                - cell "ACTIVE_COVERAGE" [ref=e2507]
+                - cell "8" [ref=e2508]
+                - cell "7" [ref=e2509]
+                - cell "Devpost, Devfolio, MLH" [ref=e2510]
+                - cell "HACK WITH GDG S4, Convergence" [ref=e2511]
+              - row [ref=e2512]:
+                - cell "Internship" [ref=e2513]
+                - cell "UNCOVERED_GAP" [ref=e2514]
+                - cell "0" [ref=e2515]
+                - cell "0" [ref=e2516]
+                - cell "None" [ref=e2517]
+                - cell "No records yet" [ref=e2518]
+              - row [ref=e2519]:
+                - cell "Apprenticeship" [ref=e2520]
+                - cell "UNCOVERED_GAP" [ref=e2521]
+                - cell "0" [ref=e2522]
+                - cell "0" [ref=e2523]
+                - cell "None" [ref=e2524]
+                - cell "No records yet" [ref=e2525]
+              - row [ref=e2526]:
+                - cell "Placement" [ref=e2527]
+                - cell "UNCOVERED_GAP" [ref=e2528]
+                - cell "0" [ref=e2529]
+                - cell "0" [ref=e2530]
+                - cell "None" [ref=e2531]
+                - cell "No records yet" [ref=e2532]
+              - row [ref=e2533]:
+                - cell "Open Source" [ref=e2534]
+                - cell "ACTIVE_COVERAGE" [ref=e2535]
+                - cell "5" [ref=e2536]
+                - cell "5" [ref=e2537]
+                - cell "GitHub, StudentPrograms" [ref=e2538]
+                - cell "[pyronear/vision-rd] How much calibration errors change the position, [aphelion-engine/aphelion-editor] Improve object tracking accuracy and stability" [ref=e2539]
+              - row [ref=e2540]:
+                - cell "Open Source Program" [ref=e2541]
+                - cell "PARTIAL_COVERAGE" [ref=e2542]
+                - cell "0" [ref=e2543]
+                - cell "0" [ref=e2544]
+                - cell "GitHub, StudentPrograms" [ref=e2545]
+                - cell "No records yet" [ref=e2546]
+              - row [ref=e2547]:
+                - cell "Beginner Issue" [ref=e2548]
+                - cell "PARTIAL_COVERAGE" [ref=e2549]
+                - cell "1" [ref=e2550]
+                - cell "1" [ref=e2551]
+                - cell "None" [ref=e2552]
+                - cell "[slyyr/awesome-robotics] Add Learning Resources" [ref=e2553]
+              - row [ref=e2554]:
+                - cell "Competition" [ref=e2555]
+                - cell "ACTIVE_COVERAGE" [ref=e2556]
+                - cell "7" [ref=e2557]
+                - cell "5" [ref=e2558]
+                - cell "Kaggle, Unstop" [ref=e2559]
+                - cell "BlockHunt'26, Code The Cosmos '26" [ref=e2560]
+              - row [ref=e2561]:
+                - cell "Innovation Competition" [ref=e2562]
+                - cell "PARTIAL_COVERAGE" [ref=e2563]
+                - cell "0" [ref=e2564]
+                - cell "0" [ref=e2565]
+                - cell "Kaggle, Unstop" [ref=e2566]
+                - cell "No records yet" [ref=e2567]
+              - row [ref=e2568]:
+                - cell "Research" [ref=e2569]
+                - cell "PARTIAL_COVERAGE" [ref=e2570]
+                - cell "2" [ref=e2571]
+                - cell "0" [ref=e2572]
+                - cell "None" [ref=e2573]
+                - 'cell "Science One Framework: A verifiable autonomous research framework via Chain-of-Evidence, Research into how AI can help users understand skin conditions" [ref=e2574]'
+              - row [ref=e2575]:
+                - cell "Research Internship" [ref=e2576]
+                - cell "UNCOVERED_GAP" [ref=e2577]
+                - cell "0" [ref=e2578]
+                - cell "0" [ref=e2579]
+                - cell "None" [ref=e2580]
+                - cell "No records yet" [ref=e2581]
+              - row [ref=e2582]:
+                - cell "Undergraduate Research" [ref=e2583]
+                - cell "UNCOVERED_GAP" [ref=e2584]
+                - cell "0" [ref=e2585]
+                - cell "0" [ref=e2586]
+                - cell "None" [ref=e2587]
+                - cell "No records yet" [ref=e2588]
+              - row [ref=e2589]:
+                - cell "Fellowship" [ref=e2590]
+                - cell "UNCOVERED_GAP" [ref=e2591]
+                - cell "0" [ref=e2592]
+                - cell "0" [ref=e2593]
+                - cell "None" [ref=e2594]
+                - cell "No records yet" [ref=e2595]
+              - row [ref=e2596]:
+                - cell "Scholarship" [ref=e2597]
+                - cell "UNCOVERED_GAP" [ref=e2598]
+                - cell "0" [ref=e2599]
+                - cell "0" [ref=e2600]
+                - cell "None" [ref=e2601]
+                - cell "No records yet" [ref=e2602]
+              - row [ref=e2603]:
+                - cell "Grant" [ref=e2604]
+                - cell "UNCOVERED_GAP" [ref=e2605]
+                - cell "0" [ref=e2606]
+                - cell "0" [ref=e2607]
+                - cell "None" [ref=e2608]
+                - cell "No records yet" [ref=e2609]
+              - row [ref=e2610]:
+                - cell "Education Funding" [ref=e2611]
+                - cell "UNCOVERED_GAP" [ref=e2612]
+                - cell "0" [ref=e2613]
+                - cell "0" [ref=e2614]
+                - cell "None" [ref=e2615]
+                - cell "No records yet" [ref=e2616]
+              - row [ref=e2617]:
+                - cell "Engineering Challenge" [ref=e2618]
+                - cell "UNCOVERED_GAP" [ref=e2619]
+                - cell "0" [ref=e2620]
+                - cell "0" [ref=e2621]
+                - cell "None" [ref=e2622]
+                - cell "No records yet" [ref=e2623]
+              - row [ref=e2624]:
+                - cell "Manufacturing Challenge" [ref=e2625]
+                - cell "UNCOVERED_GAP" [ref=e2626]
+                - cell "0" [ref=e2627]
+                - cell "0" [ref=e2628]
+                - cell "None" [ref=e2629]
+                - cell "No records yet" [ref=e2630]
+              - row [ref=e2631]:
+                - cell "Robotics Program" [ref=e2632]
+                - cell "UNCOVERED_GAP" [ref=e2633]
+                - cell "0" [ref=e2634]
+                - cell "0" [ref=e2635]
+                - cell "None" [ref=e2636]
+                - cell "No records yet" [ref=e2637]
+              - row [ref=e2638]:
+                - cell "Hardware Challenge" [ref=e2639]
+                - cell "UNCOVERED_GAP" [ref=e2640]
+                - cell "0" [ref=e2641]
+                - cell "0" [ref=e2642]
+                - cell "None" [ref=e2643]
+                - cell "No records yet" [ref=e2644]
+              - row [ref=e2645]:
+                - cell "Ai Challenge" [ref=e2646]
+                - cell "UNCOVERED_GAP" [ref=e2647]
+                - cell "0" [ref=e2648]
+                - cell "0" [ref=e2649]
+                - cell "None" [ref=e2650]
+                - cell "No records yet" [ref=e2651]
+              - row [ref=e2652]:
+                - cell "Data Science Competition" [ref=e2653]
+                - cell "PARTIAL_COVERAGE" [ref=e2654]
+                - cell "0" [ref=e2655]
+                - cell "0" [ref=e2656]
+                - cell "Kaggle, Unstop" [ref=e2657]
+                - cell "No records yet" [ref=e2658]
+              - row [ref=e2659]:
+                - cell "Startup Incubator" [ref=e2660]
+                - cell "UNCOVERED_GAP" [ref=e2661]
+                - cell "0" [ref=e2662]
+                - cell "0" [ref=e2663]
+                - cell "None" [ref=e2664]
+                - cell "No records yet" [ref=e2665]
+              - row [ref=e2666]:
+                - cell "Entrepreneurship Program" [ref=e2667]
+                - cell "UNCOVERED_GAP" [ref=e2668]
+                - cell "0" [ref=e2669]
+                - cell "0" [ref=e2670]
+                - cell "None" [ref=e2671]
+                - cell "No records yet" [ref=e2672]
+              - row [ref=e2673]:
+                - cell "Call For Papers" [ref=e2674]
+                - cell "UNCOVERED_GAP" [ref=e2675]
+                - cell "0" [ref=e2676]
+                - cell "0" [ref=e2677]
+                - cell "None" [ref=e2678]
+                - cell "No records yet" [ref=e2679]
+              - row [ref=e2680]:
+                - cell "Academic Conference" [ref=e2681]
+                - cell "UNCOVERED_GAP" [ref=e2682]
+                - cell "0" [ref=e2683]
+                - cell "0" [ref=e2684]
+                - cell "None" [ref=e2685]
+                - cell "No records yet" [ref=e2686]
+              - row [ref=e2687]:
+                - cell "Student Program" [ref=e2688]
+                - cell "UNCOVERED_GAP" [ref=e2689]
+                - cell "0" [ref=e2690]
+                - cell "0" [ref=e2691]
+                - cell "None" [ref=e2692]
+                - cell "No records yet" [ref=e2693]
+              - row [ref=e2694]:
+                - cell "Workshop" [ref=e2695]
+                - cell "UNCOVERED_GAP" [ref=e2696]
+                - cell "0" [ref=e2697]
+                - cell "0" [ref=e2698]
+                - cell "None" [ref=e2699]
+                - cell "No records yet" [ref=e2700]

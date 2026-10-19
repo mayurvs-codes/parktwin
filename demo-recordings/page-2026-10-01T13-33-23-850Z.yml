@@ -1,0 +1,18 @@
+- generic [active] [ref=f9e1]:
+  - generic [ref=f9e7]:
+    - generic:
+      - generic [ref=f9e10]:
+        - link "Dashboard" [ref=f9e11] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=f9e15]: PARKTWIN AI · 3D PARKING LOT
+        - generic [ref=f9e21]:
+          - generic [ref=f9e22]: 20 TOTAL
+          - generic [ref=f9e23]: ● 12 OCCUPIED
+          - generic [ref=f9e24]: ● 8 AVAILABLE
+      - generic [ref=f9e25]:
+        - button "TOP VIEW" [ref=f9e26] [cursor=pointer]
+        - button "PERSPECTIVE" [ref=f9e31] [cursor=pointer]
+        - button "RESET" [ref=f9e38] [cursor=pointer]
+    - generic: Click space to inspect · Drag to rotate · Scroll to zoom
+  - button "Open Next.js Dev Tools" [ref=f9e48] [cursor=pointer]
+  - alert [ref=f9e52]

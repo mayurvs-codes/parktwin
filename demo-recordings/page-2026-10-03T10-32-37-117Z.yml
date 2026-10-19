@@ -1,0 +1,58 @@
+- generic [ref=f48e2]:
+  - complementary "Primary" [ref=f48e3]:
+    - link "ParkTwin AI" [ref=f48e8] [cursor=pointer]:
+      - /url: /
+    - navigation "Primary" [ref=f48e10]:
+      - generic [ref=f48e11]: overview
+      - link "Dashboard" [ref=f48e12] [cursor=pointer]:
+        - /url: /dashboard
+      - generic [ref=f48e20]: operations
+      - link "Live Parking" [ref=f48e21] [cursor=pointer]:
+        - /url: /parking
+      - link "Digital Twin" [ref=f48e30] [cursor=pointer]:
+        - /url: /digital-twin
+      - link "Vehicles" [ref=f48e37] [cursor=pointer]:
+        - /url: /vehicles
+      - link "Video" [ref=f48e44] [cursor=pointer]:
+        - /url: /video-library
+      - link "CCTV" [ref=f48e49] [cursor=pointer]:
+        - /url: /video-processing
+      - generic [ref=f48e59]: intelligence
+      - link "ANPR" [ref=f48e60] [cursor=pointer]:
+        - /url: /anpr
+      - link "Analytics" [ref=f48e68] [cursor=pointer]:
+        - /url: /analytics
+      - link "Reports" [ref=f48e73] [cursor=pointer]:
+        - /url: /reports
+      - generic [ref=f48e79]: system
+      - link "Settings" [ref=f48e80] [cursor=pointer]:
+        - /url: /settings
+    - generic [ref=f48e87]:
+      - generic [ref=f48e88]: SYSTEM ONLINE
+      - generic [ref=f48e93]: v1.0.0
+  - generic [ref=f48e94]:
+    - banner [ref=f48e95]:
+      - button "Toggle sidebar" [ref=f48e96] [cursor=pointer]
+      - navigation "Breadcrumb" [ref=f48e99]:
+        - link "Home" [ref=f48e101] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f48e106]: Driver-portal
+      - generic [ref=f48e110]:
+        - button "Toggle notifications panel" [ref=f48e111] [cursor=pointer]
+        - link [ref=f48e115] [cursor=pointer]:
+          - /url: /user/dashboard
+          - button "Driver Portal" [ref=f48e116]
+        - button "Toggle color theme" [ref=f48e121] [cursor=pointer]
+        - generic [ref=f48e124]: Admin System
+    - link "Skip to content" [ref=f48e131] [cursor=pointer]:
+      - /url: "#main-content"
+    - main [ref=f48e132]:
+      - generic [ref=f48e134]:
+        - generic [ref=f48e138]:
+          - heading "Page not found" [level=3] [ref=f48e139]
+          - paragraph [ref=f48e140]: The page you are looking for doesn’t exist or may have been moved.
+        - link "Back to Dashboard" [ref=f48e141] [cursor=pointer]:
+          - /url: /dashboard
+      - generic [ref=f48e142]:
+        - generic [ref=f48e143]: © 2026 ParkTwin AI
+        - generic [ref=f48e144]: Smart Parking Intelligence Platform
