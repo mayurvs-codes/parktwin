@@ -38,10 +38,26 @@ class VehicleTrack:
 
     @classmethod
     def from_record(cls, record) -> Optional["VehicleTrack"]:
-        """Adapt a Module 1 ``VehicleRecord`` (duck-typed) to a VehicleTrack.
+        """Adapt a Module 1 ``VehicleRecord`` (duck-typed or dict) to a VehicleTrack.
 
         Returns None when the record has no usable track id (cannot be mapped).
         """
+        if isinstance(record, dict):
+            track_id = record.get("tracking_id", record.get("track_id"))
+            if track_id is None:
+                return None
+            bbox = record.get("bbox") or []
+            if len(bbox) != 4:
+                return None
+            return cls(
+                track_id=int(track_id),
+                bbox=list(bbox),
+                class_name=record.get("vehicle_type", record.get("class_name", "car")) or "car",
+                confidence=float(record.get("detection_confidence", record.get("confidence", 0.0)) or 0.0),
+                license_plate=record.get("license_plate"),
+                vehicle_id=record.get("vehicle_id"),
+            )
+
         track_id = getattr(record, "tracking_id", None)
         if track_id is None:
             track_id = getattr(record, "track_id", None)
@@ -58,6 +74,7 @@ class VehicleTrack:
             license_plate=getattr(record, "license_plate", None),
             vehicle_id=getattr(record, "vehicle_id", None),
         )
+
 
 
 @dataclass

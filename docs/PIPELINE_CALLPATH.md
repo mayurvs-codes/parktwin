@@ -99,14 +99,13 @@ flowchart TD
 
 ---
 
-## 3. Fallback Mode for Unconfigured CCTV Footage
+## 3. Fallback Mode for Unconfigured CCTV Footage (Implemented)
 
 For CCTV camera clips where physical survey reference points are absent:
-- Camera status in `configs/camera_calibration.yaml` is `unconfigured`.
-- `BayEntryDetector` uses registered 2D image-space polygons for the camera's parking bays (`detector.register_bay(...)`).
-- Detections evaluate bounding box overlap directly against image-space polygons.
-- Every event produced via this fallback is tagged with:
-  ```json
-  "source": "replay"
-  ```
-  Strictly distinguishing it from surveyed `live` homography projection.
+- Camera status in `configs/camera_calibration.yaml` remains `unconfigured` (`homography: None`).
+- In `configs/replay_bay_polygons.yaml`, image-space bay polygons (pixel coordinates) are defined derived from visible floor lines in CCTV video (evidence saved at `configs/cam10_bay_polygons_evidence.jpg`).
+- In `BayEntryDetector`:
+  - When `source == "replay"`: the detector uses image-space bay polygons from `configs/replay_bay_polygons.yaml` with the vehicle footprint constructed strictly from the bounding box bottom edge (`fh = max(10.0, (bx[3] - bx[1]) * 0.20)`). All emitted events carry `source="replay"`.
+  - When `source == "live"`: image-space polygons are **never** used. Uncalibrated/unconfigured cameras emit **zero** events at runtime, preventing fabricated coordinates.
+- Validated via automated test `tests/integration/test_replay_bay_entry_real_tracks.py` using real extracted CCTV tracks (`data/annotations/real_cctv_tracks_camera10.json`) with pixel bboxes only and no floor coordinates.
+

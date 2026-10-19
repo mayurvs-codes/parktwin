@@ -1,0 +1,50 @@
+# ParkTwin AI — Replay Mode Image-Space Bay Polygons
+# ===================================================
+# Used ONLY when source="replay" as an image-space fallback for uncalibrated cameras.
+# NEVER used when source="live".
+#
+# Derived from physical visible bay lines in CCTV footage.
+# Annotated evidence image: configs/cam10_bay_polygons_evidence.jpg
+
+cameras:
+  CAM-10:
+    image_width: 2688
+    image_height: 1520
+    video_source: "videos/6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4"
+    evidence_image: "configs/cam10_bay_polygons_evidence.jpg"
+    bays:
+      BAY-CAM10-01:
+        description: "Empty parking bay left of red SUV, adjacent to column"
+        polygon_pixels:
+          - [755, 360]
+          - [1040, 355]
+          - [980, 580]
+          - [535, 620]
+      BAY-CAM10-02:
+        description: "Parking bay occupied by Track 3 (Red SUV UP16BU7218)"
+        polygon_pixels:
+          - [1040, 355]
+          - [1400, 355]
+          - [1470, 575]
+          - [980, 580]
+      BAY-CAM10-03:
+        description: "Parking bay occupied by Track 5/6 (Black Van KA05NJ7181)"
+        polygon_pixels:
+          - [1400, 355]
+          - [1770, 355]
+          - [1820, 575]
+          - [1470, 575]
+      BAY-CAM10-04:
+        description: "Parking bay occupied by Track 2 (Dark Red Sedan KA02HU7264)"
+        polygon_pixels:
+          - [1770, 355]
+          - [2240, 355]
+          - [2310, 570]
+          - [1820, 575]
+      BAY-CAM10-05:
+        description: "Parking bay occupied by Track 1 (Dark Blue Hatchback)"
+        polygon_pixels:
+          - [2240, 355]
+          - [2680, 355]
+          - [2688, 570]
+          - [2310, 570]

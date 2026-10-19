@@ -53,7 +53,23 @@ def _log():
     return logger
 
 
+def _get_field(rec: Any, *keys: str, default: Any = None) -> Any:
+    """Retrieve field from dict or object across varying naming conventions."""
+    if rec is None:
+        return default
+    if isinstance(rec, dict):
+        for k in keys:
+            if k in rec and rec[k] is not None:
+                return rec[k]
+        return default
+    for k in keys:
+        if hasattr(rec, k) and getattr(rec, k) is not None:
+            return getattr(rec, k)
+    return default
+
+
 class ParkingIntelligenceEngine:
+
     """Stateful orchestrator for one deployment's parking intelligence."""
 
     def __init__(self) -> None:
@@ -138,21 +154,19 @@ class ParkingIntelligenceEngine:
         # 0. Bay Entry Detection & Kinematics (Wire tracker -> BayEntryDetector -> ViolationEngine)
         det_inputs = []
         for r in records:
-            tid = getattr(r, "tracking_id", getattr(r, "track_id", None))
+            tid = _get_field(r, "tracking_id", "track_id")
             if tid is None:
                 continue
             det_entry: Dict[str, Any] = {
                 "track_id": int(tid),
                 "camera_id": camera_id,
             }
-            if hasattr(r, "floor_coords") and r.floor_coords:
-                det_entry["floor_coords"] = r.floor_coords
-            elif isinstance(r, dict) and "floor_coords" in r:
-                det_entry["floor_coords"] = r["floor_coords"]
-            elif hasattr(r, "bbox") and r.bbox:
-                det_entry["bbox"] = r.bbox
-            elif isinstance(r, dict) and "bbox" in r:
-                det_entry["bbox"] = r["bbox"]
+            fc = _get_field(r, "floor_coords")
+            if fc:
+                det_entry["floor_coords"] = fc
+            bx = _get_field(r, "bbox")
+            if bx:
+                det_entry["bbox"] = bx
             det_inputs.append(det_entry)
 
         bay_events = self._bay_entry_detector.update(
@@ -162,10 +176,11 @@ class ParkingIntelligenceEngine:
         )
 
         for be in bay_events:
-            rec = next((r for r in records if getattr(r, "tracking_id", getattr(r, "track_id", None)) == be.track_id), None)
-            plate = getattr(rec, "license_plate", None) if rec else None
-            veh_id = getattr(rec, "vehicle_id", getattr(rec, "prototype_id", None)) if rec else (plate or f"TRACK-{be.track_id}")
-            assigned = getattr(rec, "assigned_bay", getattr(rec, "designated_space", getattr(rec, "designated_slot", None))) if rec else None
+            rec = next((r for r in records if _get_field(r, "tracking_id", "track_id") == be.track_id), None)
+            plate = _get_field(rec, "license_plate")
+            veh_id = _get_field(rec, "vehicle_id", "prototype_id") or plate or f"TRACK-{be.track_id}"
+            assigned = _get_field(rec, "assigned_bay", "designated_space", "designated_slot")
+
 
             if not assigned and plate:
                 for s_id, (is_res, res_for) in slot_lookup.items():

@@ -49,8 +49,15 @@ class BayEntryDetector:
         self.bay_polygons: Dict[str, Polygon] = {}
         self.bay_centers: Dict[str, Tuple[float, float]] = {}
 
+        # Replay image-space polygon fallback (used strictly when source="replay")
+        self.replay_camera_polygons: Dict[str, Dict[str, Polygon]] = {}
+        self.replay_camera_dims: Dict[str, Tuple[int, int]] = {}
+        self.replay_bay_centers: Dict[str, Dict[str, Tuple[float, float]]] = {}
+
         self._load_calibrations(self.config.calibration_file)
         self._load_facility_geometry(facility_geometry_path)
+        self._load_replay_bay_polygons()
+
 
         # Track history: track_id -> deque of (timestamp, x, y)
         self._track_history: Dict[int, deque] = defaultdict(lambda: deque(maxlen=30))
@@ -141,7 +148,42 @@ class BayEntryDetector:
         except Exception:
             pass
 
+    def _load_replay_bay_polygons(self, replay_cfg_path: Optional[str] = None) -> None:
+        """Load image-space bay polygons used exclusively for source='replay'."""
+        base_dir = Path(__file__).resolve().parents[3]
+        if not replay_cfg_path:
+            cfg_path = base_dir / "configs" / "replay_bay_polygons.yaml"
+        else:
+            cfg_path = Path(replay_cfg_path)
+            if not cfg_path.is_absolute():
+                cfg_path = base_dir / cfg_path
+
+        if not cfg_path.exists():
+            return
+
+        try:
+            with open(cfg_path, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+            cameras = data.get("cameras", {})
+            for cam_id, cam_data in cameras.items():
+                w = int(cam_data.get("image_width", 2688))
+                h = int(cam_data.get("image_height", 1520))
+                self.replay_camera_dims[cam_id] = (w, h)
+                self.replay_camera_polygons[cam_id] = {}
+                self.replay_bay_centers[cam_id] = {}
+
+                for bay_id, bay_info in cam_data.get("bays", {}).items():
+                    pts = bay_info.get("polygon_pixels", [])
+                    if len(pts) >= 3:
+                        poly = Polygon(pts)
+                        self.replay_camera_polygons[cam_id][bay_id] = poly
+                        c = poly.centroid
+                        self.replay_bay_centers[cam_id][bay_id] = (float(c.x), float(c.y))
+        except Exception:
+            pass
+
     def register_bay(self, bay_id: str, polygon: Polygon, center: Optional[Tuple[float, float]] = None) -> None:
+
         """Manually register or override a bay polygon."""
         self.bay_polygons[bay_id] = polygon
         if center:
@@ -269,132 +311,242 @@ class BayEntryDetector:
             camera_id = det.get("camera_id", "CAM-01")
             seen_tracks.add(track_id)
 
-            # Check camera calibration status: unconfigured cameras never emit events
-            cam_status = self.get_camera_status(camera_id)
-            if cam_status != "calibrated" and "floor_coords" not in det:
-                continue
-
-            # Determine floor position
-            if "floor_coords" in det and det["floor_coords"] is not None:
-                fx, fy = det["floor_coords"]
-            else:
+            # Check if using image-space replay fallback (STRICTLY allowed ONLY when source == "replay")
+            if source == "replay" and camera_id in self.replay_camera_polygons:
                 bbox = det.get("bbox")
                 if not bbox or len(bbox) < 4:
                     continue
-                # Reference point: bottom center of bbox
-                u = (bbox[0] + bbox[2]) / 2.0
-                v = float(bbox[3])
-                proj = self.project_to_floor(camera_id, u, v)
-                if proj is None:
-                    continue
-                fx, fy = proj
+                w_img, h_img = self.replay_camera_dims.get(camera_id, (2688, 1520))
+                if bbox[2] <= 1.0 and bbox[3] <= 1.0:
+                    bx = [bbox[0] * w_img, bbox[1] * h_img, bbox[2] * w_img, bbox[3] * h_img]
+                else:
+                    bx = [float(b) for b in bbox]
 
-            # Update track history
-            self._track_history[track_id].append((ts, fx, fy))
-            self._track_last_seen[track_id] = ts
-            vx, vy, speed = self._calculate_velocity(track_id)
+                # Vehicle footprint taken strictly from bbox bottom edge
+                fh = max(10.0, (bx[3] - bx[1]) * 0.20)
+                footprint = box(bx[0], bx[3] - fh, bx[2], bx[3])
+                footprint_area = footprint.area
 
-            # Footprint polygon
-            footprint = self._build_footprint(fx, fy)
-            footprint_area = footprint.area
+                # Position tracking in pixel space
+                cx = (bx[0] + bx[2]) / 2.0
+                cy = bx[3] - fh / 2.0
+                self._track_history[track_id].append((ts, cx, cy))
+                self._track_last_seen[track_id] = ts
+                vx, vy, speed = self._calculate_velocity(track_id)
 
-            # Evaluate against all bays
-            for bay_id, bay_poly in self.bay_polygons.items():
-                st = self._bay_states[(track_id, bay_id)]
+                target_bays = self.replay_camera_polygons[camera_id]
+                target_centers = self.replay_bay_centers[camera_id]
 
-                # Intersect
-                try:
-                    intersection = footprint.intersection(bay_poly)
-                    overlap = (
-                        intersection.area / footprint_area if footprint_area > 0 else 0.0
-                    )
-                except Exception:
-                    overlap = 0.0
-
-                st["overlap_ratio"] = overlap
-                bx, by = self.bay_centers.get(bay_id, (bay_poly.centroid.x, bay_poly.centroid.y))
-
-                # Direction check: is vehicle moving toward bay center?
-                dx, dy = bx - fx, by - fy
-                dist_to_bay = math.hypot(dx, dy)
-                dot_product = vx * dx + vy * dy
-
-                # If speed is near zero (< 0.3 m/s) or distance is very small, orientation check is satisfied
-                oriented_toward_bay = (dot_product > 0) or (speed < 0.3) or (dist_to_bay < 1.0)
-
-                # ── State Machine: ENTRY ────────────────────────────────────
-                if not st["entry_confirmed"]:
-                    is_entering_candidate = (
-                        overlap >= self.config.entry_overlap_min
-                        and oriented_toward_bay
-                        and speed <= self.config.entry_max_speed
-                    )
-
-                    if is_entering_candidate:
-                        if st["first_overlap_ts"] is None:
-                            st["first_overlap_ts"] = ts
-                            st["state"] = BayEntryState.APPROACHING
-
-                        duration_ms = (ts - st["first_overlap_ts"]) * 1000.0
-                        if duration_ms >= self.config.entry_confirm_ms:
-                            st["state"] = BayEntryState.ENTERING
-                            st["entry_confirmed"] = True
-                            st["first_leave_ts"] = None
-
-                            event = BayEntryEvent(
-                                track_id=track_id,
-                                bay_id=bay_id,
-                                episode_n=st["episode_n"],
-                                event_type=BAY_ENTRY_CONFIRMED,
-                                source=source,
-                                overlap_ratio=overlap,
-                                speed_mps=speed,
-                                camera_id=camera_id,
-                                timestamp=datetime.fromtimestamp(ts, tz=timezone.utc),
-                            )
-                            events.append(event)
-                    else:
-                        # Reset confirmation timer if condition fails before confirmation
-                        st["first_overlap_ts"] = None
-                        if st["state"] != BayEntryState.OUTSIDE:
-                            st["state"] = BayEntryState.OUTSIDE
-
-                # ── State Machine: OCCUPIED ─────────────────────────────────
-                elif st["entry_confirmed"] and not st["occupied_confirmed"]:
-                    if overlap >= 0.70 or (overlap >= 0.50 and speed < 0.3):
-                        st["state"] = BayEntryState.INSIDE
-                        st["occupied_confirmed"] = True
-
-                        event = BayEntryEvent(
-                            track_id=track_id,
-                            bay_id=bay_id,
-                            episode_n=st["episode_n"],
-                            event_type=BAY_OCCUPIED,
-                            source=source,
-                            overlap_ratio=overlap,
-                            speed_mps=speed,
-                            camera_id=camera_id,
-                            timestamp=datetime.fromtimestamp(ts, tz=timezone.utc),
+                for bay_id, bay_poly in target_bays.items():
+                    st = self._bay_states[(track_id, bay_id)]
+                    try:
+                        intersection = footprint.intersection(bay_poly)
+                        overlap = (
+                            intersection.area / footprint_area if footprint_area > 0 else 0.0
                         )
-                        events.append(event)
+                    except Exception:
+                        overlap = 0.0
 
-                # ── State Machine: EXIT (Hysteresis) ─────────────────────────
-                if st["entry_confirmed"]:
-                    if overlap <= self.config.leave_overlap_max:
-                        if st["first_leave_ts"] is None:
-                            st["first_leave_ts"] = ts
-                            st["state"] = BayEntryState.LEAVING
+                    st["overlap_ratio"] = overlap
+                    bx_c, by_c = target_centers.get(bay_id, (bay_poly.centroid.x, bay_poly.centroid.y))
+                    dx, dy = bx_c - cx, by_c - cy
+                    dist_to_bay = math.hypot(dx, dy)
+                    dot_product = vx * dx + vy * dy
+                    oriented_toward_bay = (dot_product > 0) or (speed < 20.0) or (dist_to_bay < 50.0)
 
-                        leave_dur_ms = (ts - st["first_leave_ts"]) * 1000.0
-                        if leave_dur_ms >= self.config.leave_confirm_ms:
-                            st["state"] = BayEntryState.OUTSIDE
-                            st["exit_confirmed"] = True
+                    # State Machine: ENTRY
+                    if not st["entry_confirmed"]:
+                        is_entering_candidate = (
+                            overlap >= self.config.entry_overlap_min
+                            and oriented_toward_bay
+                        )
+                        if is_entering_candidate:
+                            if st["first_overlap_ts"] is None:
+                                st["first_overlap_ts"] = ts
+                                st["state"] = BayEntryState.APPROACHING
+
+                            duration_ms = (ts - st["first_overlap_ts"]) * 1000.0
+                            if duration_ms >= self.config.entry_confirm_ms:
+                                st["state"] = BayEntryState.ENTERING
+                                st["entry_confirmed"] = True
+                                st["first_leave_ts"] = None
+
+                                event = BayEntryEvent(
+                                    track_id=track_id,
+                                    bay_id=bay_id,
+                                    episode_n=st["episode_n"],
+                                    event_type=BAY_ENTRY_CONFIRMED,
+                                    source="replay",
+                                    overlap_ratio=overlap,
+                                    speed_mps=speed,
+                                    camera_id=camera_id,
+                                    timestamp=datetime.fromtimestamp(ts, tz=timezone.utc),
+                                )
+                                events.append(event)
+                        else:
+                            st["first_overlap_ts"] = None
+                            if st["state"] != BayEntryState.OUTSIDE:
+                                st["state"] = BayEntryState.OUTSIDE
+
+                    # State Machine: OCCUPIED
+                    elif st["entry_confirmed"] and not st["occupied_confirmed"]:
+                        if overlap >= 0.70 or (overlap >= 0.50 and speed < 20.0):
+                            st["state"] = BayEntryState.INSIDE
+                            st["occupied_confirmed"] = True
 
                             event = BayEntryEvent(
                                 track_id=track_id,
                                 bay_id=bay_id,
                                 episode_n=st["episode_n"],
-                                event_type=BAY_EXIT_CONFIRMED,
+                                event_type=BAY_OCCUPIED,
+                                source="replay",
+                                overlap_ratio=overlap,
+                                speed_mps=speed,
+                                camera_id=camera_id,
+                                timestamp=datetime.fromtimestamp(ts, tz=timezone.utc),
+                            )
+                            events.append(event)
+
+                    # State Machine: EXIT (Hysteresis)
+                    if st["entry_confirmed"]:
+                        if overlap <= self.config.leave_overlap_max:
+                            if st["first_leave_ts"] is None:
+                                st["first_leave_ts"] = ts
+                                st["state"] = BayEntryState.LEAVING
+
+                            leave_dur_ms = (ts - st["first_leave_ts"]) * 1000.0
+                            if leave_dur_ms >= self.config.leave_confirm_ms:
+                                st["state"] = BayEntryState.OUTSIDE
+                                st["exit_confirmed"] = True
+
+                                event = BayEntryEvent(
+                                    track_id=track_id,
+                                    bay_id=bay_id,
+                                    episode_n=st["episode_n"],
+                                    event_type=BAY_EXIT_CONFIRMED,
+                                    source="replay",
+                                    overlap_ratio=overlap,
+                                    speed_mps=speed,
+                                    camera_id=camera_id,
+                                    timestamp=datetime.fromtimestamp(ts, tz=timezone.utc),
+                                )
+                                events.append(event)
+
+                                # Reset state for future episodes of this track & bay
+                                st["episode_n"] += 1
+                                st["entry_confirmed"] = False
+                                st["occupied_confirmed"] = False
+                                st["exit_confirmed"] = False
+                                st["first_overlap_ts"] = None
+                                st["first_leave_ts"] = None
+                        else:
+                            st["first_leave_ts"] = None
+                            if st["occupied_confirmed"]:
+                                st["state"] = BayEntryState.INSIDE
+
+            else:
+                # Standard floor-space mode: ONLY when calibrated or pre-projected floor_coords
+                # Check camera calibration status: unconfigured cameras never emit events
+                cam_status = self.get_camera_status(camera_id)
+                if cam_status != "calibrated" and "floor_coords" not in det:
+                    continue
+
+                # Determine floor position
+                if "floor_coords" in det and det["floor_coords"] is not None:
+                    fx, fy = det["floor_coords"]
+                else:
+                    bbox = det.get("bbox")
+                    if not bbox or len(bbox) < 4:
+                        continue
+                    # Reference point: bottom center of bbox
+                    u = (bbox[0] + bbox[2]) / 2.0
+                    v = float(bbox[3])
+                    proj = self.project_to_floor(camera_id, u, v)
+                    if proj is None:
+                        continue
+                    fx, fy = proj
+
+                # Update track history
+                self._track_history[track_id].append((ts, fx, fy))
+                self._track_last_seen[track_id] = ts
+                vx, vy, speed = self._calculate_velocity(track_id)
+
+                # Footprint polygon
+                footprint = self._build_footprint(fx, fy)
+                footprint_area = footprint.area
+
+                # Evaluate against all bays
+                for bay_id, bay_poly in self.bay_polygons.items():
+                    st = self._bay_states[(track_id, bay_id)]
+
+                    # Intersect
+                    try:
+                        intersection = footprint.intersection(bay_poly)
+                        overlap = (
+                            intersection.area / footprint_area if footprint_area > 0 else 0.0
+                        )
+                    except Exception:
+                        overlap = 0.0
+
+                    st["overlap_ratio"] = overlap
+                    bx, by = self.bay_centers.get(bay_id, (bay_poly.centroid.x, bay_poly.centroid.y))
+
+                    # Direction check: is vehicle moving toward bay center?
+                    dx, dy = bx - fx, by - fy
+                    dist_to_bay = math.hypot(dx, dy)
+                    dot_product = vx * dx + vy * dy
+
+                    # If speed is near zero (< 0.3 m/s) or distance is very small, orientation check is satisfied
+                    oriented_toward_bay = (dot_product > 0) or (speed < 0.3) or (dist_to_bay < 1.0)
+
+                    # ── State Machine: ENTRY ────────────────────────────────────
+                    if not st["entry_confirmed"]:
+                        is_entering_candidate = (
+                            overlap >= self.config.entry_overlap_min
+                            and oriented_toward_bay
+                            and speed <= self.config.entry_max_speed
+                        )
+
+                        if is_entering_candidate:
+                            if st["first_overlap_ts"] is None:
+                                st["first_overlap_ts"] = ts
+                                st["state"] = BayEntryState.APPROACHING
+
+                            duration_ms = (ts - st["first_overlap_ts"]) * 1000.0
+                            if duration_ms >= self.config.entry_confirm_ms:
+                                st["state"] = BayEntryState.ENTERING
+                                st["entry_confirmed"] = True
+                                st["first_leave_ts"] = None
+
+                                event = BayEntryEvent(
+                                    track_id=track_id,
+                                    bay_id=bay_id,
+                                    episode_n=st["episode_n"],
+                                    event_type=BAY_ENTRY_CONFIRMED,
+                                    source=source,
+                                    overlap_ratio=overlap,
+                                    speed_mps=speed,
+                                    camera_id=camera_id,
+                                    timestamp=datetime.fromtimestamp(ts, tz=timezone.utc),
+                                )
+                                events.append(event)
+                        else:
+                            # Reset confirmation timer if condition fails before confirmation
+                            st["first_overlap_ts"] = None
+                            if st["state"] != BayEntryState.OUTSIDE:
+                                st["state"] = BayEntryState.OUTSIDE
+
+                    # ── State Machine: OCCUPIED ─────────────────────────────────
+                    elif st["entry_confirmed"] and not st["occupied_confirmed"]:
+                        if overlap >= 0.70 or (overlap >= 0.50 and speed < 0.3):
+                            st["state"] = BayEntryState.INSIDE
+                            st["occupied_confirmed"] = True
+
+                            event = BayEntryEvent(
+                                track_id=track_id,
+                                bay_id=bay_id,
+                                episode_n=st["episode_n"],
+                                event_type=BAY_OCCUPIED,
                                 source=source,
                                 overlap_ratio=overlap,
                                 speed_mps=speed,
@@ -403,18 +555,44 @@ class BayEntryDetector:
                             )
                             events.append(event)
 
-                            # Reset state for future episodes of this track & bay
-                            st["episode_n"] += 1
-                            st["entry_confirmed"] = False
-                            st["occupied_confirmed"] = False
-                            st["exit_confirmed"] = False
-                            st["first_overlap_ts"] = None
+                    # ── State Machine: EXIT (Hysteresis) ─────────────────────────
+                    if st["entry_confirmed"]:
+                        if overlap <= self.config.leave_overlap_max:
+                            if st["first_leave_ts"] is None:
+                                st["first_leave_ts"] = ts
+                                st["state"] = BayEntryState.LEAVING
+
+                            leave_dur_ms = (ts - st["first_leave_ts"]) * 1000.0
+                            if leave_dur_ms >= self.config.leave_confirm_ms:
+                                st["state"] = BayEntryState.OUTSIDE
+                                st["exit_confirmed"] = True
+
+                                event = BayEntryEvent(
+                                    track_id=track_id,
+                                    bay_id=bay_id,
+                                    episode_n=st["episode_n"],
+                                    event_type=BAY_EXIT_CONFIRMED,
+                                    source=source,
+                                    overlap_ratio=overlap,
+                                    speed_mps=speed,
+                                    camera_id=camera_id,
+                                    timestamp=datetime.fromtimestamp(ts, tz=timezone.utc),
+                                )
+                                events.append(event)
+
+                                # Reset state for future episodes of this track & bay
+                                st["episode_n"] += 1
+                                st["entry_confirmed"] = False
+                                st["occupied_confirmed"] = False
+                                st["exit_confirmed"] = False
+                                st["first_overlap_ts"] = None
+                                st["first_leave_ts"] = None
+                        else:
+                            # Overlap above exit threshold: clear exit timer
                             st["first_leave_ts"] = None
-                    else:
-                        # Overlap above exit threshold: clear exit timer
-                        st["first_leave_ts"] = None
-                        if st["occupied_confirmed"]:
-                            st["state"] = BayEntryState.INSIDE
+                            if st["occupied_confirmed"]:
+                                st["state"] = BayEntryState.INSIDE
+
 
         # ── Track Dropout / Loss ─────────────────────────────────────────────
         for track_id, last_seen in list(self._track_last_seen.items()):
