@@ -17,7 +17,7 @@
 > Wrong-bay detection and voice escalation behaviour are strictly demonstrated on:
 > 1. **Synthetic tracks:** Unit and integration pipelines with known floor coordinates ([`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py)).
 > 2. **Scripted interactive demo:** Deterministic simulation timeline driven by backend API and WebSocket events ([`run_demo.py --scenario wrong-bay`](file:///run_demo.py), [`apps/web/e2e/parktwin-3d-voice-violation.spec.ts`](file:///apps/web/e2e/parktwin-3d-voice-violation.spec.ts)).
-> 3. **Offline CCTV replay mode:** Image-space bay polygon intersections using bottom-edge pixel footings for real CCTV tracks ([`configs/replay_bay_polygons.yaml`](file:///configs/replay_bay_polygons.yaml), [`tests/integration/test_replay_bay_entry.py`](file:///tests/integration/test_replay_bay_entry.py)). Events in this mode strictly carry `source="replay"`.
+> 3. **Offline CCTV replay mode:** Image-space bay polygon intersections using bottom-edge pixel footings for real CCTV tracks ([`configs/replay_bay_polygons.yaml`](file:///configs/replay_bay_polygons.yaml), [`tests/integration/test_replay_bay_entry_real_tracks.py`](file:///tests/integration/test_replay_bay_entry_real_tracks.py)). Events in this mode strictly carry `source="replay"`.
 
 ---
 
@@ -52,6 +52,10 @@ Every feature in the ParkTwin stack explicitly operates and labels its provenanc
 
 ## 4. Bay Entry Detection: Precision & Recall Status
 
+> [!WARNING]
+> **No human-labelled accuracy measurement exists yet.**  
+> Real CCTV replay test assertions in [`tests/integration/test_replay_bay_entry_real_tracks.py`](file:///tests/integration/test_replay_bay_entry_real_tracks.py) are strictly regression snapshots of current detector output to verify pipeline execution consistency across refactors. They do NOT grade physical detection accuracy or represent ground truth. Precision and recall metrics for real CCTV footage remain BLOCKED until verified operator ground-truth annotations are provided.
+
 - **Synthetic Trajectory Benchmark:**
   - **Tool:** `python scripts/eval_bay_entry.py --mode synthetic`
   - **Status:** **PASS** (100% precision, 100% recall, 100% F1).
@@ -77,17 +81,34 @@ Every feature in the ParkTwin stack explicitly operates and labels its provenanc
 
 ---
 
-## 6. Summary Matrix
+## 6. Summary Matrix (Three Explicit Honesty Groups)
 
-| Milestone Component | Verified & Tested | Mode | Status / Dependency |
+### Group 1: Proven by Automated Tests
+| Milestone Component | Verified & Tested | Mode | Status / Evidence |
 | :--- | :--- | :--- | :--- |
-| **Slot ID Canonicalization** | SP-XX canonical across 2D, 3D, DB, Nav Graph | Live / Replay / Demo | **DONE** (`tests/unit/test_slot_id_consistency.py`) |
-| **Pipeline End-to-End Wiring**| Tracker $\rightarrow$ BayEntry $\rightarrow$ Violations $\rightarrow$ Voice $\rightarrow$ WS | Live / Replay / Demo | **DONE** (`tests/integration/test_pipeline_voice_violation.py`) |
-| **Replay Image-Space Fallback**| Footprint bottom edge $\cap$ pixel polygons (`configs/replay_bay_polygons.yaml`) | Replay (`source="replay"`) | **DONE** (`tests/integration/test_replay_bay_entry.py`) |
-| **10-Min Escalation & 8-Min Warning**| Injectable clock tests (480s warning, 600s escalation, early departure resolution) | Backend Unit/Integration | **DONE** (`tests/unit/test_violations.py`) |
-| **Voice Announcement Dedup** | Route assignment + Wrong-bay warning + Pre-emption + Dedup | Live / Replay / Demo | **DONE** (`docs/evidence/3d-voice-violation/announcement_log.json`) |
-| **Playwright E2E Suite** | 8 Scenarios (Backend-driven WS, strict assertions, speech dedup) | E2E Browser | **DONE** (`docs/evidence/3d-voice-violation/e2e/report/`) |
-| **Bay Count Reconciliation** | 24 runtime vs 52 architectural vs 58 candidates, unverified styling | 2D/3D Twin + Docs | **DONE** (`docs/baseline/BAY_COUNT_RECONCILIATION.md`) |
-| **Camera Registry Audit** | Single gateway ACCESS_POINT_B2, CAM-03 path/parking, CAM-16 exit | Architecture + Test | **DONE** (`docs/CAMERA_REGISTRY_AUDIT.md`, `tests/unit/test_camera_registry.py`) |
-| **CCTV Ground-Truth Eval** | Extractor (`real_cctv_tracks_camera10.json`) + Labeller script | Real CCTV | **BLOCKED** on human labels from operator |
-| **Camera Survey Calibration**| Calibration request doc + unconfigured status enforcement | Physical Camera | **BLOCKED** on physical survey coordinates |
+| **Slot ID Canonicalization** | SP-XX canonical across 2D, 3D, DB, Nav Graph | Live / Replay / Demo | **DONE** (`tests/unit/test_slot_id_consistency.py` 5 passed) |
+| **Single Vehicle Gateway & Invariants** | ACCESS_POINT_B2 (CAM-01 entry, CAM-16 exit), CAM-03 path/parking | Architecture | **DONE** (`tests/unit/test_camera_registry.py` 6 passed) |
+| **Pipeline End-to-End Wiring** | Tracker $\rightarrow$ BayEntry $\rightarrow$ Violations $\rightarrow$ Voice $\rightarrow$ WS | Live / Replay / Demo | **DONE** (`tests/integration/test_pipeline_voice_violation.py`) |
+| **Bay Entry Logic & Drive-Past Suppression** | Footprint overlap with bay geometry; drive-past along aisle produces 0 events | Synthetic Floor | **DONE** (`tests/unit/test_bay_entry.py` 10 passed) |
+| **Wrong-Bay Immediate Warning & Dedup** | Spoken warning emitted immediately on bay entry; duplicate frames deduped | Voice Engine | **DONE** (`tests/unit/test_voice_service.py`, `announcement_log.json`) |
+| **10-Min Escalation & 8-Min Warning Stage** | Injectable clock: 480s visual/admin warning (speech off by default), 599s clean, 601s single WRONG_BAY_ESCALATED | Backend Core | **DONE** (`tests/unit/test_violations.py`, `tests/unit/test_voice_service.py`) |
+| **Playwright E2E Suite** | 8 Scenarios (Backend-driven WS, strict assertions, speech dedup, 3D fallback) | E2E Browser | **DONE** (`docs/evidence/3d-voice-violation/e2e/report/`) |
+| **Frontend Unit Test Suite** | All stores, hooks, 2D/3D components, error boundaries | Vitest Unit | **DONE** (33 test files, 258 passed) |
+
+### Group 2: Proven on Recorded Footage Only
+| Milestone Component | Verified & Tested | Mode | Status / Evidence |
+| :--- | :--- | :--- | :--- |
+| **Replay Image-Space Fallback** | Footprint bottom edge $\cap$ pixel polygons (`configs/replay_bay_polygons.yaml`) | Replay (`source="replay"`) | **DONE** (`tests/integration/test_replay_bay_entry_real_tracks.py`) |
+| **Real CCTV Track Ingestion** | 150 frames extracted via YOLOv8m + ByteTrack into `real_cctv_tracks_camera10.json` | Replay Extraction | **DONE** (5 vehicle tracks parsed) |
+| **Visible Bay Markings Polygons** | Bounded by painted floor dividers and yellow aisle boundary (`configs/cam10_bay_polygons_evidence.jpg`) | Image-Space Config | **DONE** (`BAY-CAM10-01` to `BAY-CAM10-05`) |
+| **Scope: Single Unregistered Clip Only** | Recorded clip `6B-IP Camera10...mp4` (overlay `B2-Cam 5`), not verified CAD CAM-10 | Recorded Replay | **DONE** (`docs/CAMERA_REGISTRY_AUDIT.md`) |
+| **Accuracy Measurement** | **No human-labelled accuracy measurement exists yet.** Assertions in tests are regression snapshots of current output. | Regression Snapshot | **NO GROUND TRUTH ACCURACY YET** |
+
+### Group 3: Not Demonstrated
+| Milestone Component | Verification Barrier | Operating Mode | Blocking Dependency |
+| :--- | :--- | :--- | :--- |
+| **Live Real-Video Detection** | Live streams cannot compute floor coordinates without guessing; all 16 cameras unconfigured | Live Video | **BLOCKED** on physical surveying |
+| **Calibrated Floor Positions** | 0 physical point correspondences exist; no metric homography matrices in repo | Live Runtime | **BLOCKED** on survey data (`docs/CALIBRATION_REQUEST.md`) |
+| **Measured Real CCTV Accuracy** | Precision, recall, and F1 metrics for real footage cannot be scored without ground truth | Real Footage Eval | **BLOCKED** on operator labels (`scripts/eval_bay_entry.py --mode real`) |
+| **CAM-16 Physical Exit Footage** | Physical archive contains no video footage for egress gateway camera CAM-16 | Egress Gateway | **NO PHYSICAL VIDEO IN REPO** |
+

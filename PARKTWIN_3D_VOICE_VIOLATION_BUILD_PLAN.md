@@ -207,35 +207,34 @@ Tests:
 
 ---
 
-## 9. Acceptance checklist (tick each with evidence link)
+## 9. Acceptance checklist (Three Explicit Honesty Groups)
 
-**Twin**
-- [x] **[PASS]** One geometry source feeds 2D, 3D and the nav graph; ids match — [`docs/SLOT_ID_MAP.md`](file:///docs/SLOT_ID_MAP.md), [`tests/unit/test_slot_id_consistency.py`](file:///tests/unit/test_slot_id_consistency.py) (5/5 passed)
-- [x] **[PASS]** Same slot ids/occupancy/selection in 2D and 3D — [`apps/web/e2e/parktwin-3d-voice-violation.spec.ts`](file:///apps/web/e2e/parktwin-3d-voice-violation.spec.ts) (Scenario 4)
-- [x] **[PASS]** Unknown geometry/cameras shown as unconfigured, not invented — [`configs/camera_calibration.yaml`](file:///configs/camera_calibration.yaml), [`docs/CALIBRATION_REQUEST.md`](file:///docs/CALIBRATION_REQUEST.md), [`tests/unit/test_bay_entry.py`](file:///tests/unit/test_bay_entry.py)
-- [x] **[PASS]** 3D failure → usable 2D — [`apps/web/components/digital-twin/Twin3DErrorBoundary.tsx`](file:///apps/web/components/digital-twin/Twin3DErrorBoundary.tsx), [`apps/web/e2e/parktwin-3d-voice-violation.spec.ts`](file:///apps/web/e2e/parktwin-3d-voice-violation.spec.ts) (Scenario 5)
+### Group 1: Proven by Automated Tests
+- [x] **[PASS] Slot ID Canonicalization:** SP-XX canonical across 2D, 3D, DB, Nav Graph; IDs and coordinates match without alias tables — [`docs/SLOT_ID_MAP.md`](file:///docs/SLOT_ID_MAP.md), [`tests/unit/test_slot_id_consistency.py`](file:///tests/unit/test_slot_id_consistency.py) (5/5 passed).
+- [x] **[PASS] Single Vehicle Gateway & Camera Invariants:** Facility geometry has exactly 1 vehicle gateway (`ACCESS_POINT_B2` with entry `CAM-01` and exit `CAM-16`), `CAM-03` role is strictly `PATH/PARKING`, `CAM-16` role is strictly `EXIT`, and all 16 cameras are `status: "unconfigured"` at runtime — [`tests/unit/test_camera_registry.py`](file:///tests/unit/test_camera_registry.py) (6/6 passed).
+- [x] **[PASS] Twin Selection & Occupancy Parity:** 2D and 3D scenes share identical slot IDs, selection states, and occupancy statuses — [`apps/web/e2e/parktwin-3d-voice-violation.spec.ts`](file:///apps/web/e2e/parktwin-3d-voice-violation.spec.ts) (Scenario 4).
+- [x] **[PASS] 3D Fallback to 2D:** Simulated WebGL context crash renders user-friendly fallback banner and restores usable 2D vector twin — [`apps/web/components/digital-twin/Twin3DErrorBoundary.tsx`](file:///apps/web/components/digital-twin/Twin3DErrorBoundary.tsx), Playwright Scenario 5.
+- [x] **[PASS] Pipeline End-to-End Wiring:** Backend authoritative event bus forwards tracker output -> BayEntryDetector -> ViolationEngine -> VoiceService -> WebSocket manager -> UI voice queue — [`docs/PIPELINE_CALLPATH.md`](file:///docs/PIPELINE_CALLPATH.md), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py).
+- [x] **[PASS] Voice Assignment Announcement:** ANPR vehicle ingress triggers route computation and spoken turn-by-turn guidance containing assigned bay ID — [`modules/integration_layer/services/integration_service.py`](file:///modules/integration_layer/services/integration_service.py), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py), Playwright Scenario 1.
+- [x] **[PASS] Wrong-Bay Immediate Spoken Warning:** Entering an unassigned bay triggers immediate `WRONG_BAY_ENTRY_WARNING` with spoken audio; dedup ensures speech occurs exactly once — [`modules/integration_layer/voice/service.py`](file:///modules/integration_layer/voice/service.py), [`docs/evidence/3d-voice-violation/announcement_log.json`](file:///docs/evidence/3d-voice-violation/announcement_log.json), Playwright Scenario 2.
+- [x] **[PASS] Drive-Past & Adjacent Lane Suppression:** Aisle transit past bays produces 0 false-alarm violation events — [`tests/unit/test_bay_entry.py`](file:///tests/unit/test_bay_entry.py) (`test_drive_past_along_aisle_produces_no_event`).
+- [x] **[PASS] Correct Bay Entry Generates No Warning:** Parking in assigned bay emits entry confirmation without violation — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py), Playwright Scenario 1.
+- [x] **[PASS] 10-Minute Escalation & 8-Minute Duration Stage:** Injectable clock tests verify 480s visual/admin warning (speech suppressed by default per `voice.announce_duration_warning=False`), 599s no escalation, 601s single `WRONG_BAY_ESCALATED`, leave before 600s resolves without violation — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py), [`tests/unit/test_voice_service.py`](file:///tests/unit/test_voice_service.py), Playwright Scenario 3 (backend time-acceleration API hook).
+- [x] **[PASS] Relocation & Early Departure:** Relocation from Bay A to Bay B resets timer; early exit closes session cleanly — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py).
+- [x] **[PASS] Voice Failure Isolation:** Voice exceptions never interrupt parking state updates — [`tests/unit/test_voice_service.py`](file:///tests/unit/test_voice_service.py) (`test_voice_exception_never_raises`).
+- [x] **[PASS] Frontend Suite Regression:** All 33 Vitest test files pass (258 unit tests green).
 
-**Voice**
-- [x] **[PASS]** Assignment announcement built from real bay + route — [`modules/integration_layer/services/integration_service.py`](file:///modules/integration_layer/services/integration_service.py), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py)
-- [x] **[PASS]** Wrong-bay → exactly one spoken warning — [`docs/evidence/3d-voice-violation/announcement_log.json`](file:///docs/evidence/3d-voice-violation/announcement_log.json), [`modules/integration_layer/voice/service.py`](file:///modules/integration_layer/voice/service.py)
-- [x] **[PASS]** No repeats from duplicate frames; failure messages for unknown/unassigned/unavailable — [`scripts/record_voice_announcements.py`](file:///scripts/record_voice_announcements.py), [`docs/evidence/3d-voice-violation/announcement_log.json`](file:///docs/evidence/3d-voice-violation/announcement_log.json) (`DUPLICATE_SUPPRESSION_AUDIT`)
-- [x] **[PASS]** Voice failure does not alter parking state — [`tests/unit/test_voice_service.py`](file:///tests/unit/test_voice_service.py) (`test_voice_exception_never_raises`)
+### Group 2: Proven on Recorded Footage Only
+- [x] **[PASS] Replay Pipeline Execution on Real Tracker Output:** Real CCTV tracks (pixel bboxes, zero floor coordinates) fed through `modules/parking_intelligence/engine.py` using bottom-edge pixel footprint against image-space bay polygons — [`tests/integration/test_replay_bay_entry_real_tracks.py`](file:///tests/integration/test_replay_bay_entry_real_tracks.py).
+- [x] **[PASS] Evaluated on One Unregistered Clip Only:** Footage source is `videos/6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4` (on-screen overlay `B2-Cam 5`), extracted via YOLOv8m + ByteTrack into `data/annotations/real_cctv_tracks_camera10.json` (150 frames, 5 tracks).
+- [x] **[PASS] Replay Bay Polygons Defined from Visible Markings:** Polygons follow visible painted floor dividing lines and yellow transverse boundary (`configs/replay_bay_polygons.yaml`, evidence image `configs/cam10_bay_polygons_evidence.jpg`).
+- [!] **[REGRESSION SNAPSHOT ONLY]** Assertions in `test_replay_bay_entry_real_tracks.py` are strictly regression snapshots of current detector output to catch pipeline execution regressions. **No human-labelled accuracy measurement exists yet.**
 
-**Violations**
-- [x] **[PASS]** Wrong-bay detected before parking completes; passing-by doesn't trigger — [`tests/unit/test_bay_entry.py`](file:///tests/unit/test_bay_entry.py) (`test_drive_past_along_aisle_produces_no_event`), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py)
-- [x] **[PASS]** Correct bay → no warning — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_correct_bay_entry_generates_no_warning`), Playwright Scenario 1
-- [x] **[PASS]** 10-min escalation & 8-min warning preserved — injectable clock tests [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_clock_injection_10min_escalation_and_early_departure`: 480s grace warning, 599s no escalation, 601s single WRONG_BAY_ESCALATED, leave before 600s resolves); Playwright Scenario 3 backend time-acceleration endpoint verification
-- [x] **[PASS]** Relocation resets timer; early exit → no violation — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_relocation_a_to_b_resets_timer`, `test_leaves_at_5_min_resolved_no_escalation`)
-- [x] **[PASS]** `LONG_STAY_ALERT` distinct from wrong-bay — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_authorised_long_stay_separate_from_wrong_bay`)
-
-**Integration**
-- [x] **[PASS]** Backend authoritative; WS updates reach UI — [`docs/PIPELINE_CALLPATH.md`](file:///docs/PIPELINE_CALLPATH.md), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py), Playwright Scenarios 2 & 3
-- [x] **[PASS]** Live/replay/demo/unavailable/unconfigured labels everywhere — [`apps/web/components/digital-twin/DigitalTwinStatusBar.tsx`](file:///apps/web/components/digital-twin/DigitalTwinStatusBar.tsx), [`apps/web/components/user/UserDashboardView.tsx`](file:///apps/web/components/user/UserDashboardView.tsx)
-- [x] **[PASS]** Existing pages, `monday` scenario, reset behave as before — [`run_demo.py`](file:///run_demo.py), [`tests/unit/test_slot_id_consistency.py`](file:///tests/unit/test_slot_id_consistency.py), [`tests/unit/test_camera_registry.py`](file:///tests/unit/test_camera_registry.py)
-- [x] **[PASS]** Phase-0 baseline: no new failing tests — Pytest (all backend tests green), Vitest (33 files, 258 passed), Playwright (8 passed, 0 failures)
-
-**Real CCTV Evaluation**
-- [ ] **[BLOCKED]** Real CCTV precision/recall benchmark against human ground truth — [`scripts/eval_bay_entry.py --mode real`](file:///scripts/eval_bay_entry.py), [`docs/KNOWN_LIMITATIONS.md`](file:///docs/KNOWN_LIMITATIONS.md). Offline replay mode is fully implemented and tested ([`tests/integration/test_replay_bay_entry.py`](file:///tests/integration/test_replay_bay_entry.py), [`configs/replay_bay_polygons.yaml`](file:///configs/replay_bay_polygons.yaml)), and real tracker output (`data/annotations/real_cctv_tracks_camera10.json`) is extracted; full precision/recall benchmark is BLOCKED pending operator hand-labelling via [`scripts/label_bay_entries.py`](file:///scripts/label_bay_entries.py).
+### Group 3: Not Demonstrated
+- [ ] **[NOT DEMONSTRATED] Live Real-Video Detection:** Cannot compute floor coordinates from live video streams without guessing, as all 16 facility cameras lack surveyed physical calibration (`status: "unconfigured"` in `configs/camera_calibration.yaml`).
+- [ ] **[NOT DEMONSTRATED] Calibrated Floor Positions from Video:** Zero physical survey point correspondences exist in the repository; no metric homography matrices are available for runtime live cameras.
+- [ ] **[BLOCKED] Measured Real CCTV Accuracy (Precision / Recall / F1):** Real CCTV benchmark in `scripts/eval_bay_entry.py --mode real` is BLOCKED pending operator hand-labelling via `scripts/label_bay_entries.py` into `data/annotations/cctv_bay_entry_ground_truth.csv`.
+- [ ] **[NOT DEMONSTRATED] CAM-16 Physical Exit Footage:** No physical CCTV archive recording exists for the egress gateway camera `CAM-16` at `ACCESS_POINT_B2`.
 
 ---
 
