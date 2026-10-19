@@ -223,19 +223,19 @@ Tests:
 
 **Violations**
 - [x] **[PASS]** Wrong-bay detected before parking completes; passing-by doesn't trigger — [`tests/unit/test_bay_entry.py`](file:///tests/unit/test_bay_entry.py) (`test_drive_past_along_aisle_produces_no_event`), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py)
-- [x] **[PASS]** Correct bay → no warning — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_authorised_long_stay_separate_from_wrong_bay`)
-- [x] **[PASS]** 10-min escalation preserved (uses existing constant) — [`modules/parking_intelligence/violations/violation_engine.py`](file:///modules/parking_intelligence/violations/violation_engine.py) (`PARKING_DURATION_THRESHOLD_SECONDS = 600.0`)
+- [x] **[PASS]** Correct bay → no warning — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_correct_bay_entry_generates_no_warning`), Playwright Scenario 1
+- [x] **[PASS]** 10-min escalation & 8-min warning preserved — injectable clock tests [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_clock_injection_10min_escalation_and_early_departure`: 480s grace warning, 599s no escalation, 601s single WRONG_BAY_ESCALATED, leave before 600s resolves); Playwright Scenario 3 backend time-acceleration endpoint verification
 - [x] **[PASS]** Relocation resets timer; early exit → no violation — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_relocation_a_to_b_resets_timer`, `test_leaves_at_5_min_resolved_no_escalation`)
-- [x] **[PASS]** `LONG_STAY_ALERT` distinct from wrong-bay — [`modules/parking_intelligence/violations/violation_engine.py`](file:///modules/parking_intelligence/violations/violation_engine.py)
+- [x] **[PASS]** `LONG_STAY_ALERT` distinct from wrong-bay — [`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py) (`test_authorised_long_stay_separate_from_wrong_bay`)
 
 **Integration**
-- [x] **[PASS]** Backend authoritative; WS updates reach UI — [`docs/PIPELINE_CALLPATH.md`](file:///docs/PIPELINE_CALLPATH.md), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py), [`apps/web/hooks/useDigitalTwinSocket.ts`](file:///apps/web/hooks/useDigitalTwinSocket.ts)
+- [x] **[PASS]** Backend authoritative; WS updates reach UI — [`docs/PIPELINE_CALLPATH.md`](file:///docs/PIPELINE_CALLPATH.md), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py), Playwright Scenarios 2 & 3
 - [x] **[PASS]** Live/replay/demo/unavailable/unconfigured labels everywhere — [`apps/web/components/digital-twin/DigitalTwinStatusBar.tsx`](file:///apps/web/components/digital-twin/DigitalTwinStatusBar.tsx), [`apps/web/components/user/UserDashboardView.tsx`](file:///apps/web/components/user/UserDashboardView.tsx)
-- [x] **[PASS]** Existing pages, `monday` scenario, reset behave as before — [`run_demo.py`](file:///run_demo.py), [`tests/unit/test_slot_id_consistency.py`](file:///tests/unit/test_slot_id_consistency.py)
-- [x] **[PASS]** Phase-0 baseline: no new failing tests — Pytest (287 passed, 2 skipped), Vitest (258 passed), Playwright (7 passed)
+- [x] **[PASS]** Existing pages, `monday` scenario, reset behave as before — [`run_demo.py`](file:///run_demo.py), [`tests/unit/test_slot_id_consistency.py`](file:///tests/unit/test_slot_id_consistency.py), [`tests/unit/test_camera_registry.py`](file:///tests/unit/test_camera_registry.py)
+- [x] **[PASS]** Phase-0 baseline: no new failing tests — Pytest (all backend tests green), Vitest (33 files, 258 passed), Playwright (8 passed, 0 failures)
 
 **Real CCTV Evaluation**
-- [ ] **[BLOCKED]** Real CCTV precision/recall benchmark against human ground truth — [`scripts/eval_bay_entry.py --mode real`](file:///scripts/eval_bay_entry.py), [`docs/KNOWN_LIMITATIONS.md`](file:///docs/KNOWN_LIMITATIONS.md). Evaluator tool and tracker outputs (`data/annotations/real_cctv_tracks_camera10.json`) extracted, blocked pending operator annotations via [`scripts/label_bay_entries.py`](file:///scripts/label_bay_entries.py).
+- [ ] **[BLOCKED]** Real CCTV precision/recall benchmark against human ground truth — [`scripts/eval_bay_entry.py --mode real`](file:///scripts/eval_bay_entry.py), [`docs/KNOWN_LIMITATIONS.md`](file:///docs/KNOWN_LIMITATIONS.md). Offline replay mode is fully implemented and tested ([`tests/integration/test_replay_bay_entry.py`](file:///tests/integration/test_replay_bay_entry.py), [`configs/replay_bay_polygons.yaml`](file:///configs/replay_bay_polygons.yaml)), and real tracker output (`data/annotations/real_cctv_tracks_camera10.json`) is extracted; full precision/recall benchmark is BLOCKED pending operator hand-labelling via [`scripts/label_bay_entries.py`](file:///scripts/label_bay_entries.py).
 
 ---
 

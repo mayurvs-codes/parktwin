@@ -8,7 +8,20 @@
 
 ---
 
-## 1. Camera Calibration Coverage (Truthful Registry)
+## 1. Executive Limitations Statement
+
+> [!IMPORTANT]
+> **Live real-video detection is NOT demonstrated.**  
+> Because all 16 facility cameras lack physical surveying and floor homography calibration (`status: "unconfigured"`), runtime detection cannot compute metric floor coordinates from live video streams without guessing.
+>
+> Wrong-bay detection and voice escalation behaviour are strictly demonstrated on:
+> 1. **Synthetic tracks:** Unit and integration pipelines with known floor coordinates ([`tests/unit/test_violations.py`](file:///tests/unit/test_violations.py), [`tests/integration/test_pipeline_voice_violation.py`](file:///tests/integration/test_pipeline_voice_violation.py)).
+> 2. **Scripted interactive demo:** Deterministic simulation timeline driven by backend API and WebSocket events ([`run_demo.py --scenario wrong-bay`](file:///run_demo.py), [`apps/web/e2e/parktwin-3d-voice-violation.spec.ts`](file:///apps/web/e2e/parktwin-3d-voice-violation.spec.ts)).
+> 3. **Offline CCTV replay mode:** Image-space bay polygon intersections using bottom-edge pixel footings for real CCTV tracks ([`configs/replay_bay_polygons.yaml`](file:///configs/replay_bay_polygons.yaml), [`tests/integration/test_replay_bay_entry.py`](file:///tests/integration/test_replay_bay_entry.py)). Events in this mode strictly carry `source="replay"`.
+
+---
+
+## 2. Camera Calibration Coverage (Truthful Registry)
 
 In strict compliance with the project ground rules against fabricating surveyed data:
 - **Calibrated Cameras:** **0 / 16**
@@ -21,7 +34,7 @@ In strict compliance with the project ground rules against fabricating surveyed 
 
 ---
 
-## 2. Operating Modes & Feature Provenance Demarcation
+## 3. Operating Modes & Feature Provenance Demarcation
 
 Every feature in the ParkTwin stack explicitly operates and labels its provenance:
 
@@ -37,7 +50,7 @@ Every feature in the ParkTwin stack explicitly operates and labels its provenanc
 
 ---
 
-## 3. Bay Entry Detection: Precision & Recall Status
+## 4. Bay Entry Detection: Precision & Recall Status
 
 - **Synthetic Trajectory Benchmark:**
   - **Tool:** `python scripts/eval_bay_entry.py --mode synthetic`
@@ -53,7 +66,7 @@ Every feature in the ParkTwin stack explicitly operates and labels its provenanc
 
 ---
 
-## 4. Voice Audio & Browser Autoplay Constraints
+## 5. Voice Audio & Browser Autoplay Constraints
 
 - **Browser Audio Unlock:**
   - Modern browsers strictly disallow unprompted programmatic text-to-speech without prior user gesture.
@@ -64,13 +77,17 @@ Every feature in the ParkTwin stack explicitly operates and labels its provenanc
 
 ---
 
-## 5. Summary Matrix
+## 6. Summary Matrix
 
 | Milestone Component | Verified & Tested | Mode | Status / Dependency |
 | :--- | :--- | :--- | :--- |
 | **Slot ID Canonicalization** | SP-XX canonical across 2D, 3D, DB, Nav Graph | Live / Replay / Demo | **DONE** (`tests/unit/test_slot_id_consistency.py`) |
 | **Pipeline End-to-End Wiring**| Tracker $\rightarrow$ BayEntry $\rightarrow$ Violations $\rightarrow$ Voice $\rightarrow$ WS | Live / Replay / Demo | **DONE** (`tests/integration/test_pipeline_voice_violation.py`) |
+| **Replay Image-Space Fallback**| Footprint bottom edge $\cap$ pixel polygons (`configs/replay_bay_polygons.yaml`) | Replay (`source="replay"`) | **DONE** (`tests/integration/test_replay_bay_entry.py`) |
+| **10-Min Escalation & 8-Min Warning**| Injectable clock tests (480s warning, 600s escalation, early departure resolution) | Backend Unit/Integration | **DONE** (`tests/unit/test_violations.py`) |
 | **Voice Announcement Dedup** | Route assignment + Wrong-bay warning + Pre-emption + Dedup | Live / Replay / Demo | **DONE** (`docs/evidence/3d-voice-violation/announcement_log.json`) |
-| **Playwright E2E Suite** | 7 Scenarios (100% strict assertions, 0 conditionals) | E2E Browser | **DONE** (`docs/evidence/3d-voice-violation/e2e/report/`) |
+| **Playwright E2E Suite** | 8 Scenarios (Backend-driven WS, strict assertions, speech dedup) | E2E Browser | **DONE** (`docs/evidence/3d-voice-violation/e2e/report/`) |
+| **Bay Count Reconciliation** | 24 runtime vs 52 architectural vs 58 candidates, unverified styling | 2D/3D Twin + Docs | **DONE** (`docs/baseline/BAY_COUNT_RECONCILIATION.md`) |
+| **Camera Registry Audit** | Single gateway ACCESS_POINT_B2, CAM-03 path/parking, CAM-16 exit | Architecture + Test | **DONE** (`docs/CAMERA_REGISTRY_AUDIT.md`, `tests/unit/test_camera_registry.py`) |
 | **CCTV Ground-Truth Eval** | Extractor (`real_cctv_tracks_camera10.json`) + Labeller script | Real CCTV | **BLOCKED** on human labels from operator |
 | **Camera Survey Calibration**| Calibration request doc + unconfigured status enforcement | Physical Camera | **BLOCKED** on physical survey coordinates |
