@@ -808,6 +808,8 @@ export function FacilityMap({
                     fill={fillColor}
                     stroke={strokeColor}
                     strokeWidth={strokeWidth}
+                    strokeDasharray={!isFocused ? "4 4" : undefined}
+                    opacity={!isFocused ? 0.65 : 1.0}
                   />
 
                   {/* Space Identifier / Status Badge */}

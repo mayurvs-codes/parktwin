@@ -110,7 +110,7 @@ export function UnifiedTwinCanvas3D({ onSlotSelect, highlightSlotId }: UnifiedTw
     const bayMeshMap = new Map<string, ParkingBayMeshGroup>();
     const vehicleMeshMap = new Map<string, Vehicle3DGroup>();
 
-    const targetBays = CANONICAL_BAYS.slice(0, 20);
+    const targetBays = CANONICAL_BAYS;
     targetBays.forEach((bay) => {
       const bayData: ParkingBayData = {
         id: bay.id,
@@ -120,6 +120,8 @@ export function UnifiedTwinCanvas3D({ onSlotSelect, highlightSlotId }: UnifiedTw
         width: bay.dimensions_meters.width,
         length: bay.dimensions_meters.length,
         status: "AVAILABLE",
+        verified: bay.verified,
+        confidence: bay.confidence,
       };
 
       const bayGroup = createParkingBay3D(bayData);

@@ -26,6 +26,7 @@ export function createParkingBay3D(bay: ParkingBayData): ParkingBayMeshGroup {
   group.rotation.y = bay.rotationY;
 
   const isAvailable = bay.status === "AVAILABLE";
+  const isUnverified = bay.verified === false || bay.confidence === "UNVERIFIED" || bay.confidence === "MEDIUM_CONFIDENCE";
   const lineWidth = 0.12;
   const halfW = bay.width / 2;
   const halfL = bay.length / 2;
@@ -33,11 +34,13 @@ export function createParkingBay3D(bay: ParkingBayData): ParkingBayMeshGroup {
   let isSelected = false;
   let isHovered = false;
 
-  // 1. Painted White Boundary Lines (Thermoplastic Parking Paint)
+  // 1. Painted Boundary Lines (Thermoplastic Parking Paint)
   const defaultLineMat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color("#f8fafc"),
+    color: new THREE.Color(isUnverified ? "#94a3b8" : "#f8fafc"),
     roughness: 0.55,
     metalness: 0.08,
+    transparent: isUnverified,
+    opacity: isUnverified ? 0.6 : 1.0,
   });
 
   const selectedLineMat = new THREE.MeshStandardMaterial({
@@ -106,18 +109,19 @@ export function createParkingBay3D(bay: ParkingBayData): ParkingBayMeshGroup {
 
   group.add(bumperGroup);
 
-  // 3. Ground Bay Slot ID Stencil (e.g. SP-01, SP-13)
+  // 3. Ground Bay Slot ID Stencil (e.g. SP-01, SP-13, SP-21 [?])
   const textCanvas = document.createElement("canvas");
   textCanvas.width = 256;
   textCanvas.height = 128;
   const tctx = textCanvas.getContext("2d");
   const isRotated = Math.abs(bay.rotationY) > 0.1;
+  const stencilText = isUnverified ? `${bay.id} [?]` : bay.id;
 
   const renderStencil = (highlighted: boolean) => {
     if (!tctx) return;
     tctx.clearRect(0, 0, 256, 128);
-    tctx.fillStyle = highlighted ? "#38bdf8" : isAvailable ? "#f1f5f9" : "#cbd5e1";
-    tctx.font = "bold 64px monospace";
+    tctx.fillStyle = highlighted ? "#38bdf8" : isUnverified ? "#94a3b8" : isAvailable ? "#f1f5f9" : "#cbd5e1";
+    tctx.font = isUnverified ? "bold 44px monospace" : "bold 64px monospace";
     tctx.textAlign = "center";
     tctx.textBaseline = "middle";
 
@@ -125,10 +129,10 @@ export function createParkingBay3D(bay: ParkingBayData): ParkingBayMeshGroup {
       tctx.save();
       tctx.translate(128, 64);
       tctx.rotate(Math.PI);
-      tctx.fillText(bay.id, 0, 0);
+      tctx.fillText(stencilText, 0, 0);
       tctx.restore();
     } else {
-      tctx.fillText(bay.id, 128, 64);
+      tctx.fillText(stencilText, 128, 64);
     }
   };
   renderStencil(false);
@@ -139,7 +143,7 @@ export function createParkingBay3D(bay: ParkingBayData): ParkingBayMeshGroup {
   const textMat = new THREE.MeshBasicMaterial({
     map: textTex,
     transparent: true,
-    opacity: isAvailable ? 0.95 : 0.85,
+    opacity: isUnverified ? 0.65 : isAvailable ? 0.95 : 0.85,
     depthWrite: false,
   });
   const textPlane = new THREE.Mesh(textPlaneGeo, textMat);
@@ -204,13 +208,13 @@ export function createParkingBay3D(bay: ParkingBayData): ParkingBayMeshGroup {
   beaconGroup.add(collar);
 
   const ledGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.04, 16);
-  const defaultLedColor = isAvailable ? "#22c55e" : "#ef4444";
-  const defaultLedEmissive = isAvailable ? "#4ade80" : "#f87171";
+  const defaultLedColor = isUnverified ? "#64748b" : isAvailable ? "#22c55e" : "#ef4444";
+  const defaultLedEmissive = isUnverified ? "#334155" : isAvailable ? "#4ade80" : "#f87171";
 
   const ledMat = new THREE.MeshStandardMaterial({
     color: new THREE.Color(defaultLedColor),
     emissive: new THREE.Color(defaultLedEmissive),
-    emissiveIntensity: 0.85,
+    emissiveIntensity: isUnverified ? 0.2 : 0.85,
     roughness: 0.2,
   });
   const led = new THREE.Mesh(ledGeo, ledMat);

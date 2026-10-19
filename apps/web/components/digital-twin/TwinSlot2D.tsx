@@ -39,6 +39,12 @@ function TwinSlot2DComponent({
   const plate = slotState?.license_plate ?? null;
   const style = getStatusStyle(status);
 
+  const isUnverified =
+    slotState?.confidence === "UNVERIFIED" ||
+    slotState?.confidence === "MEDIUM_CONFIDENCE" ||
+    slotState?.vehicleAccessible === false ||
+    (slot_id.startsWith("SP-") && parseInt(slot_id.replace("SP-", ""), 10) > 20);
+
   const displayPlate = plate
     ? plate.length > 10
       ? plate.slice(0, 10)
@@ -67,12 +73,14 @@ function TwinSlot2DComponent({
         fill={style.fill}
         stroke={style.stroke}
         strokeWidth={isSelected ? 3 : 1.5}
+        dash={isUnverified ? [4, 4] : undefined}
+        opacity={isUnverified ? 0.75 : 1}
         shadowColor="rgba(0,0,0,0.2)"
         shadowBlur={isSelected ? 6 : 2}
         shadowOffset={{ x: 1, y: 1 }}
       />
       <Text
-        text={slot_id}
+        text={isUnverified ? `${slot_id} [?]` : slot_id}
         x={8}
         y={8}
         fontSize={12}
