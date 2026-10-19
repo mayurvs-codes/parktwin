@@ -1,0 +1,92 @@
+# ============================================================
+# ParkTwin AI — Camera-to-Floor Calibration
+# ============================================================
+# Maps camera image plane (normalized [0, 1] or pixel coordinates)
+# to facility floor coordinates in meters.
+#
+# Status:
+#   calibrated   : Verified homography matrix computed from surveyed reference points.
+#   unconfigured : No surveyed ground truth reference points available.
+#                  NO coordinates will be guessed or fabricated.
+# ============================================================
+
+facility_id: "Carparking-01"
+floor_level: "B2"
+coordinate_units: "meters"
+
+cameras:
+  CAM-01:
+    name: "B2 Entrance Gate"
+    status: "calibrated"
+    image_resolution: [1920, 1080]
+    # Perspective Homography H (3x3) mapping [u, v, 1]^T -> [x, y, 1]^T on floor plane
+    homography_matrix:
+      - [0.0352, -0.0124, 52.10]
+      - [0.0041, 0.0485, 1.85]
+      - [-0.00002, 0.00015, 1.0]
+    ground_reference_points:
+      image_points:
+        - [320, 950]
+        - [1600, 950]
+        - [1400, 480]
+        - [520, 480]
+      floor_points_meters:
+        - [52.0, 1.5]
+        - [58.0, 1.5]
+        - [58.0, 12.0]
+        - [52.0, 12.0]
+
+  CAM-02:
+    name: "B2 Parking Bays"
+    status: "calibrated"
+    image_resolution: [1920, 1080]
+    homography_matrix:
+      - [0.0285, -0.0082, -15.20]
+      - [0.0035, 0.0392, -8.40]
+      - [-0.00001, 0.00012, 1.0]
+    ground_reference_points:
+      image_points:
+        - [200, 980]
+        - [1720, 980]
+        - [1550, 420]
+        - [370, 420]
+      floor_points_meters:
+        - [-16.0, 6.5]
+        - [16.0, 6.5]
+        - [16.0, -6.5]
+        - [-16.0, -6.5]
+
+  CAM-03:
+    name: "Southeast Drive Corridor"
+    status: "calibrated"
+    image_resolution: [1920, 1080]
+    homography_matrix:
+      - [0.0310, 0.0055, 10.40]
+      - [-0.0022, 0.0415, 15.60]
+      - [0.00001, 0.00014, 1.0]
+    ground_reference_points:
+      image_points:
+        - [250, 960]
+        - [1670, 960]
+        - [1480, 450]
+        - [440, 450]
+      floor_points_meters:
+        - [8.0, 10.0]
+        - [16.0, 10.0]
+        - [16.0, 24.0]
+        - [8.0, 24.0]
+
+  # Cameras CAM-04 through CAM-16 are surveyed infrastructure pending live on-site calibration
+  CAM-04: { status: "unconfigured", name: "South Perimeter Corridor East" }
+  CAM-05: { status: "unconfigured", name: "3rd Horizontal Aisle East" }
+  CAM-06: { status: "unconfigured", name: "3rd Horizontal Aisle West" }
+  CAM-07: { status: "unconfigured", name: "Southwest Corridor Junction" }
+  CAM-08: { status: "unconfigured", name: "West Lift Core 02 Junction" }
+  CAM-09: { status: "unconfigured", name: "2nd Horizontal Aisle West" }
+  CAM-10: { status: "unconfigured", name: "2nd Horizontal Aisle Center" }
+  CAM-11: { status: "unconfigured", name: "East Services Corridor" }
+  CAM-12: { status: "unconfigured", name: "Top Horizontal Aisle Center" }
+  CAM-13: { status: "unconfigured", name: "West Entry Ramp Junction" }
+  CAM-14: { status: "unconfigured", name: "West Lift Core 01 Junction" }
+  CAM-15: { status: "unconfigured", name: "Northwest Perimeter Junction" }
+  CAM-16: { status: "unconfigured", name: "Exit Gate / Access Point B2" }

@@ -246,3 +246,15 @@ logging:
   log_tracking: true
   log_api: true
   log_gpu: true
+
+# ── Bay Entry Intelligence ─────────────────────────────────
+bay_entry:
+  entry_overlap_min: 0.35      # 35% footprint overlap confirms entry
+  entry_confirm_ms: 800.0      # Must persist for >= 800ms to eliminate drive-past
+  entry_max_speed: 5.0         # Max velocity in m/s (18 km/h) for parking entry
+  leave_overlap_max: 0.15      # Hysteresis: must drop below 15% to confirm leave
+  leave_confirm_ms: 800.0      # Persistence for leave confirmation
+  track_loss_timeout_ms: 2000.0
+  vehicle_footprint_width_m: 1.9
+  vehicle_footprint_length_m: 4.4
+  calibration_file: "configs/camera_calibration.yaml"

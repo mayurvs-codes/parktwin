@@ -1,0 +1,7 @@
+episode_id,track_id,bay_id,expected_event,start_ts,end_ts,notes
+EP-01,1001,SP-07,BAY_ENTRY_CONFIRMED,100.0,103.0,Straight entry into assigned bay SP-07
+EP-02,1002,SP-14,BAY_ENTRY_CONFIRMED,110.0,113.0,Straight entry into reserved bay SP-14
+EP-03,1003,SP-07,NONE,120.0,123.0,Aisle drive-past adjacent to SP-07
+EP-04,1004,SP-11,NONE,130.0,133.0,Aisle drive-past adjacent to SP-11
+EP-05,1005,SP-11,BAY_ENTRY_CONFIRMED,140.0,143.0,Entry into wrong bay SP-11
+EP-06,1006,SP-07,BAY_ENTRY_CONFIRMED,150.0,153.0,Entry into SP-07 followed by departure
