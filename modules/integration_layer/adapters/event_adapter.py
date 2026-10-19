@@ -25,8 +25,11 @@ _MODULE_TO_INTEGRATION: Dict[str, List[str]] = {
     "slot_released": ["SlotReleased"],
     "vehicle_reidentified": ["VehicleTracked"],
     "wrong_bay_entry_warning": ["WrongBayWarning"],
+    "wrong_bay_duration_warning": ["WrongBayDurationWarning"],
+    "wrong_bay_escalated": ["WrongBayEscalated"],
     "wrong_bay_resolved": ["WrongBayResolved"],
 }
+
 
 
 def translate(

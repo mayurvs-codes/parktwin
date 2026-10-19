@@ -35,6 +35,8 @@ class EventEngine:
     EVENT_SLOT_RELEASED = "slot_released"
     EVENT_VEHICLE_REIDENTIFIED = "vehicle_reidentified"
     EVENT_WRONG_BAY_ENTRY_WARNING = "wrong_bay_entry_warning"
+    EVENT_WRONG_BAY_DURATION_WARNING = "wrong_bay_duration_warning"
+    EVENT_WRONG_BAY_ESCALATED = "wrong_bay_escalated"
     EVENT_WRONG_BAY_RESOLVED = "wrong_bay_resolved"
 
     ALL_TYPES = (
@@ -45,8 +47,11 @@ class EventEngine:
         EVENT_SLOT_RELEASED,
         EVENT_VEHICLE_REIDENTIFIED,
         EVENT_WRONG_BAY_ENTRY_WARNING,
+        EVENT_WRONG_BAY_DURATION_WARNING,
+        EVENT_WRONG_BAY_ESCALATED,
         EVENT_WRONG_BAY_RESOLVED,
     )
+
 
     def __init__(self, max_buffer: int = 2000) -> None:
         self._buffer: RingBuffer[Dict[str, Any]] = RingBuffer(max_buffer)

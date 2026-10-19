@@ -45,8 +45,11 @@ INTEGRATION_EVENT_TYPES = (
     "VoiceAnnouncement",
     "VoiceCancel",
     "WrongBayWarning",
+    "WrongBayDurationWarning",
+    "WrongBayEscalated",
     "WrongBayResolved",
 )
+
 
 # Channels used by the WebSocket layer (one per live view).
 WS_CHANNELS = ("vehicles", "occupancy", "sessions", "events", "slots")

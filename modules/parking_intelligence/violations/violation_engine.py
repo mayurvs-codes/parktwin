@@ -26,6 +26,7 @@ from typing import Any, Dict, List, Optional
 
 from modules.parking_intelligence.duration.duration_tracker import (
     PARKING_DURATION_THRESHOLD_SECONDS,
+    PARKING_DURATION_WARNING_THRESHOLD_SECONDS,
     duration_seconds,
 )
 
@@ -39,16 +40,24 @@ class ViolationEngine:
 
     # Event constants
     EVENT_WRONG_BAY_ENTRY_WARNING = "WRONG_BAY_ENTRY_WARNING"
+    EVENT_WRONG_BAY_DURATION_WARNING = "WRONG_BAY_DURATION_WARNING"
     EVENT_WRONG_BAY_ESCALATED = "WRONG_BAY_ESCALATED"
     EVENT_WRONG_BAY_RESOLVED = "WRONG_BAY_RESOLVED"
     EVENT_UNASSIGNED_VEHICLE = "UNASSIGNED_VEHICLE_IN_BAY"
     EVENT_LONG_STAY_ALERT = "LONG_STAY_ALERT"
+
 
     def __init__(self, max_duration_hours: float = 24.0) -> None:
         self._max_seconds = max(0.0, float(max_duration_hours)) * 3600.0
         self._episodes: Dict[str, Dict[str, Any]] = {}
         self._active_by_vehicle: Dict[str, str] = {}
         self._active_by_bay: Dict[str, str] = {}
+
+    def reset(self) -> None:
+        """Clear all active and historical episodes."""
+        self._episodes.clear()
+        self._active_by_vehicle.clear()
+        self._active_by_bay.clear()
 
     # ── Original Session Evaluation (Preserved for compatibility) ─────────────
 
@@ -171,6 +180,7 @@ class ViolationEngine:
             "state": "WARNED",
             "resolution_reason": None,
             "duration_seconds": 0.0,
+            "warned_duration": False,
             "escalated": False,
             "source": source,
         }
@@ -194,9 +204,12 @@ class ViolationEngine:
 
     def evaluate_episodes(self, now: Optional[datetime] = None) -> List[Dict[str, Any]]:
         """
-        Evaluate active violation episodes for long-stay escalation (600s / 10 min).
+        Evaluate active violation episodes for duration milestones:
+          - 8 minutes (480s): WRONG_BAY_DURATION_WARNING -> state "WARNING_DURATION" ("grace period ending")
+          - 10 minutes (600s): WRONG_BAY_ESCALATED -> state "ESCALATED"
 
-        Uses existing PARKING_DURATION_THRESHOLD_SECONDS (600.0) without changing threshold.
+        Uses existing PARKING_DURATION_WARNING_THRESHOLD_SECONDS (480.0) and
+        PARKING_DURATION_THRESHOLD_SECONDS (600.0) from duration_tracker.
         """
         current_time = now or datetime.now(timezone.utc)
         if current_time.tzinfo is None:
@@ -205,11 +218,35 @@ class ViolationEngine:
         escalation_events: List[Dict[str, Any]] = []
 
         for ep in self._episodes.values():
-            if ep["state"] == "WARNED" and not ep["escalated"]:
+            if ep["state"] in ("WARNED", "WARNING_DURATION") and ep["state"] != "RESOLVED":
                 dur = (current_time - ep["started_at"]).total_seconds()
                 ep["duration_seconds"] = max(0.0, dur)
 
-                if dur >= PARKING_DURATION_THRESHOLD_SECONDS:
+                # 1. 8-minute warning stage (480.0s): grace period ending
+                if dur >= PARKING_DURATION_WARNING_THRESHOLD_SECONDS and not ep.get("warned_duration", False):
+                    ep["state"] = "WARNING_DURATION"
+                    ep["warned_duration"] = True
+
+                    ev = {
+                        "event_type": self.EVENT_WRONG_BAY_DURATION_WARNING,
+                        "episode_id": ep["episode_id"],
+                        "vehicle_id": ep["vehicle_id"],
+                        "license_plate": ep["license_plate"],
+                        "assigned_bay": ep["assigned_bay"],
+                        "actual_bay": ep["actual_bay"],
+                        "duration_seconds": round(dur, 1),
+                        "timestamp": current_time.isoformat(),
+                        "source": ep["source"],
+                        "status": "grace period ending",
+                        "message": (
+                            f"Wrong bay duration warning: Vehicle {ep['vehicle_id']} in unauthorized bay "
+                            f"{ep['actual_bay']} grace period ending ({round(dur, 1)}s)."
+                        ),
+                    }
+                    escalation_events.append(ev)
+
+                # 2. 10-minute escalation stage (600.0s): admin alert
+                if dur >= PARKING_DURATION_THRESHOLD_SECONDS and not ep.get("escalated", False):
                     ep["state"] = "ESCALATED"
                     ep["escalated"] = True
 
@@ -231,6 +268,7 @@ class ViolationEngine:
                     escalation_events.append(ev)
 
         return escalation_events
+
 
     def on_bay_exit(
         self,
