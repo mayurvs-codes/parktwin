@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { CheckCircle2, Radio } from "lucide-react";
+import { CheckCircle2, Radio, Volume2, VolumeX } from "lucide-react";
 import { useDemoMovieStore } from "@/store/useDemoMovieStore";
 import { ACCESS_POINT_B2, isSlotReserved } from "./demoScenarioData";
 import { useSharedDemoState } from "@/store/useSharedDemoState";
+import { useVoiceStore } from "@/store/useVoiceStore";
 
 export function DigitalTwinStatusBar() {
   const spaces = useDemoMovieStore((s) => s.spaces);
@@ -20,6 +21,10 @@ export function DigitalTwinStatusBar() {
   const focusedReserved = focusedList.filter((s) => s.status === "RESERVED").length;
   const focusedDesignated = focusedList.filter((s) => s.status === "DESIGNATED").length;
 
+  // Voice Assistant State
+  const voiceStatus = useVoiceStore((s) => s.status);
+  const enableVoice = useVoiceStore((s) => s.enableVoice);
+
   const totalSlots = spaces.length;
   const occupiedSlots = spaces.filter((s) => s.isOccupied).length;
   const reservedSlots = spaces.filter((s) => !s.isOccupied && isSlotReserved(s)).length;
@@ -33,13 +38,48 @@ export function DigitalTwinStatusBar() {
     <div className="flex w-full items-center justify-between text-xs font-mono select-none px-2 py-0.5">
       {/* Left: Live Status & Occupancy Breakdown */}
       <div className="flex items-center gap-3 sm:gap-4 overflow-x-auto py-0.5 scrollbar-none">
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2.5 w-2.5">
+        {/* Authoritative Source Badge */}
+        <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-500/40 text-[10px] font-extrabold text-emerald-400">
+          <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
-          <span className="font-extrabold text-emerald-400 uppercase tracking-widest text-[11px]">LIVE</span>
+          <span className="tracking-wider uppercase">DEMO / LIVE</span>
         </div>
+
+        {/* Voice Assistant Status Chip */}
+        <button
+          onClick={() => {
+            if (voiceStatus === "blocked") enableVoice();
+          }}
+          className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold transition-colors ${
+            voiceStatus === "enabled"
+              ? "bg-emerald-950/40 border border-emerald-500/30 text-emerald-300"
+              : voiceStatus === "blocked"
+              ? "bg-amber-950/60 border border-amber-500/50 text-amber-300 hover:bg-amber-900/60 cursor-pointer animate-pulse"
+              : voiceStatus === "muted"
+              ? "bg-slate-900 border border-slate-700 text-slate-400"
+              : "bg-slate-900 border border-slate-800 text-slate-500"
+          }`}
+          title={voiceStatus === "blocked" ? "Click to unlock voice audio in browser" : `Voice: ${voiceStatus}`}
+        >
+          {voiceStatus === "enabled" ? (
+            <>
+              <Volume2 className="h-3 w-3 text-emerald-400" />
+              <span>VOICE ON</span>
+            </>
+          ) : voiceStatus === "blocked" ? (
+            <>
+              <VolumeX className="h-3 w-3 text-amber-400" />
+              <span>ENABLE VOICE</span>
+            </>
+          ) : (
+            <>
+              <VolumeX className="h-3 w-3 text-slate-500" />
+              <span>VOICE: {voiceStatus.toUpperCase()}</span>
+            </>
+          )}
+        </button>
 
         {/* Focused Zone Canonical Strip */}
         <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-sky-950/50 border border-sky-500/30 text-[11px]">

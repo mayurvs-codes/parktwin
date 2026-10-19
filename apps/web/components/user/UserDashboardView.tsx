@@ -16,12 +16,15 @@ import {
   CornerUpLeft,
   CornerUpRight,
   Clock,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useSharedDemoState, FOCUSED_ZONE_SPACE_IDS } from "@/store/useSharedDemoState";
+import { useVoiceStore } from "@/store/useVoiceStore";
 import { DigitalTwinMap } from "./DigitalTwinMap";
 
 /**
@@ -76,6 +79,12 @@ export function UserDashboardView() {
 
   // Interactive bay selection
   const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
+
+  // Voice Assistant Hooks
+  const voiceStatus = useVoiceStore((s) => s.status);
+  const enableVoice = useVoiceStore((s) => s.enableVoice);
+  const currentVoiceAnnouncement = useVoiceStore((s) => s.currentAnnouncement);
+  const receiveAnnouncement = useVoiceStore((s) => s.receiveAnnouncement);
 
   // Live timer tick hook
   const [, setTick] = useState(0);
@@ -133,6 +142,44 @@ export function UserDashboardView() {
       longStayAlert?.vehicleId === activeVehicleId
     ) || (liveDurationSecs >= 600 && isStillInSameSpace);
   const isWarning = !isLongStay && liveDurationSecs >= 480;
+
+  // Trigger spoken voice guidance on key driver events
+  useEffect(() => {
+    if (isViolation && sharedViolation) {
+      const designated = sharedViolation.designatedSpaceId || "SP-07";
+      receiveAnnouncement({
+        message_id: `VM-WARN-${sharedViolation.vehicleId}-${sharedViolation.actualSpaceId}`,
+        event_id: `EV-WARN-${sharedViolation.vehicleId}-${sharedViolation.actualSpaceId}`,
+        kind: "WRONG_BAY_WARNING",
+        text: `Warning! This is not your designated parking space. Please move to space ${designated}.`,
+        priority: 100,
+        source: "demo",
+      });
+    } else if (
+      assignedSpaceId &&
+      (journeyStep === "SPACE_ASSIGNED" || journeyStep === "NAVIGATING_TO_SPACE")
+    ) {
+      const stepsText = currentRoute?.steps?.length
+        ? "Follow the driving aisle along the upper island to your bay."
+        : "Follow the driving aisle to your bay.";
+      receiveAnnouncement({
+        message_id: `VM-ASSIGN-${activeVehicleId}-${assignedSpaceId}`,
+        event_id: `EV-ASSIGN-${activeVehicleId}-${assignedSpaceId}`,
+        kind: "ASSIGNMENT",
+        text: `Vehicle recognised. Your designated parking space is ${assignedSpaceId}. ${stepsText}`,
+        priority: 50,
+        source: "demo",
+      });
+    }
+  }, [
+    isViolation,
+    sharedViolation,
+    assignedSpaceId,
+    journeyStep,
+    activeVehicleId,
+    currentRoute,
+    receiveAnnouncement,
+  ]);
 
   const isExitMode = navigationMode === "SPACE_TO_EXIT" || isNavigatingToExit || isAtGateway;
   const distance = currentRoute?.distanceRemainingMeters ?? (isExitMode ? 74 : 86);
@@ -398,6 +445,40 @@ export function UserDashboardView() {
             </CardHeader>
 
             <CardContent className="p-4 sm:p-5 space-y-4">
+              {/* ── AUDIO GUIDANCE & VOICE UNLOCK WIDGET ── */}
+              <div className="rounded-xl border border-sky-500/30 bg-sky-950/30 p-3 space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-sky-400">
+                    <Volume2 className="h-4 w-4 text-sky-400 animate-pulse" />
+                    <span>AUDIO GUIDANCE</span>
+                  </div>
+                  {voiceStatus === "blocked" ? (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => enableVoice()}
+                      className="h-6 text-[10px] font-mono font-bold border-amber-500/50 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20"
+                    >
+                      <VolumeX className="h-3 w-3 mr-1" />
+                      Enable Voice
+                    </Button>
+                  ) : (
+                    <Badge variant="outline" className="text-[9px] font-mono border-emerald-500/40 text-emerald-300 bg-emerald-950/40">
+                      VOICE ACTIVE
+                    </Badge>
+                  )}
+                </div>
+                {currentVoiceAnnouncement ? (
+                  <div className="text-xs font-mono text-slate-200 bg-slate-950/60 p-2 rounded border border-slate-800">
+                    &ldquo;{currentVoiceAnnouncement.text}&rdquo;
+                  </div>
+                ) : (
+                  <div className="text-[11px] font-mono text-slate-400">
+                    Spoken turn-by-turn guidance and space confirmation active.
+                  </div>
+                )}
+              </div>
+
               {/* ── SITUATION 1: WRONG SPACE / VIOLATION DETECTED ── */}
               {isViolation ? (
                 <div className="rounded-xl border border-rose-500/50 bg-rose-950/40 p-4 space-y-3">
