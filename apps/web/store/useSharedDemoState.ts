@@ -913,4 +913,6 @@ if (typeof window !== "undefined") {
       useSharedDemoState.getState().resetAll();
     }
   });
+
+  (window as any).__useSharedDemoState = useSharedDemoState;
 }

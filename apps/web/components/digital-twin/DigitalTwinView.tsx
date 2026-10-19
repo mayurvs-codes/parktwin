@@ -23,6 +23,7 @@ import { DigitalTwinMap } from "@/components/user/DigitalTwinMap";
 import { TwinIntelligenceRail } from "./TwinIntelligenceRail";
 import { DigitalTwinStatusBar } from "./DigitalTwinStatusBar";
 import { Twin3DErrorBoundary } from "./Twin3DErrorBoundary";
+import { useDigitalTwinSocket } from "@/hooks/useDigitalTwinSocket";
 
 const UnifiedTwinCanvas3D = dynamic(
   () => import("./UnifiedTwinCanvas3D").then((m) => m.UnifiedTwinCanvas3D),
@@ -46,7 +47,9 @@ function formatTime(secs: number): string {
 }
 
 export default function DigitalTwinView() {
+  useDigitalTwinSocket();
   const status = useDemoMovieStore((s) => s.status);
+
   const currentTime = useDemoMovieStore((s) => s.currentTime);
   const totalDuration = useDemoMovieStore((s) => s.totalDuration);
   const speed = useDemoMovieStore((s) => s.speed);

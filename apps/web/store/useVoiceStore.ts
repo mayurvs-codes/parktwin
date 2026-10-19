@@ -178,3 +178,7 @@ export const useVoiceStore = create<VoiceState>()(
     }
   )
 );
+
+if (typeof window !== "undefined") {
+  (window as any).__useVoiceStore = useVoiceStore;
+}

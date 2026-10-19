@@ -363,3 +363,7 @@ const store = create<DigitalTwinStore>()((set) => ({
 }));;
 
 export const useDigitalTwinStore = store;
+
+if (typeof window !== "undefined") {
+  (window as any).__useDigitalTwinStore = store;
+}

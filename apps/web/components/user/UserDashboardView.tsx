@@ -25,6 +25,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useSharedDemoState, FOCUSED_ZONE_SPACE_IDS } from "@/store/useSharedDemoState";
 import { useVoiceStore } from "@/store/useVoiceStore";
+import { useDigitalTwinSocket } from "@/hooks/useDigitalTwinSocket";
 import { DigitalTwinMap } from "./DigitalTwinMap";
 
 /**
@@ -38,9 +39,11 @@ import { DigitalTwinMap } from "./DigitalTwinMap";
  * 3. Collapsible Diagnostics Section (Preserves Provenance Audit for test demarcation)
  */
 export function UserDashboardView() {
+  useDigitalTwinSocket();
 
   // Driver Journey Store
   const activeVehicleId = useUserPortalStore((s) => s.activeVehicleId);
+
   const journeyStep = useUserPortalStore((s) => s.journeyStep);
   const rawAssignedSpaceId = useUserPortalStore((s) => s.assignedSpaceId);
   const assignedSpaceId = rawAssignedSpaceId || (activeVehicleId === "VEH-001" ? "SP-07" : null);
@@ -85,6 +88,7 @@ export function UserDashboardView() {
   const enableVoice = useVoiceStore((s) => s.enableVoice);
   const currentVoiceAnnouncement = useVoiceStore((s) => s.currentAnnouncement);
   const receiveAnnouncement = useVoiceStore((s) => s.receiveAnnouncement);
+  const announcementLog = useVoiceStore((s) => s.announcementLog);
 
   // Live timer tick hook
   const [, setTick] = useState(0);
@@ -140,8 +144,14 @@ export function UserDashboardView() {
       longStayAlert?.active &&
       longStayAlert?.spaceId === currentObservedBay &&
       longStayAlert?.vehicleId === activeVehicleId
-    ) || (liveDurationSecs >= 600 && isStillInSameSpace);
-  const isWarning = !isLongStay && liveDurationSecs >= 480;
+    ) ||
+    Boolean(sharedViolation?.adminAlertActive) ||
+    (sharedViolation?.durationSeconds != null && sharedViolation.durationSeconds >= 600) ||
+    (liveDurationSecs >= 600 && isStillInSameSpace);
+  const isWarning =
+    !isLongStay &&
+    ((liveDurationSecs >= 480 && isStillInSameSpace) ||
+      (sharedViolation?.durationSeconds != null && sharedViolation.durationSeconds >= 480));
 
   // Trigger spoken voice guidance on key driver events
   useEffect(() => {
@@ -477,6 +487,33 @@ export function UserDashboardView() {
                     Spoken turn-by-turn guidance and space confirmation active.
                   </div>
                 )}
+
+                {/* Announcement Log Panel */}
+                <div data-testid="announcement-log-panel" className="mt-2 space-y-1.5 border-t border-slate-800/80 pt-2">
+                  <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider flex items-center justify-between">
+                    <span>ANNOUNCEMENT LOG</span>
+                    <span className="text-[9px] text-slate-500">{announcementLog.length} events</span>
+                  </div>
+                  {announcementLog.length === 0 ? (
+                    <div className="text-[10px] font-mono text-slate-500 italic">No announcements recorded.</div>
+                  ) : (
+                    <div className="space-y-1 max-h-36 overflow-y-auto pr-1">
+                      {announcementLog.slice().reverse().map((entry) => (
+                        <div
+                          key={entry.message_id}
+                          data-testid="announcement-log-item"
+                          className="p-1.5 rounded bg-slate-950/70 border border-slate-800/80 text-[10px] font-mono space-y-0.5"
+                        >
+                          <div className="flex items-center justify-between text-slate-400">
+                            <span className="font-bold text-sky-400">{entry.kind}</span>
+                            <span className="text-[9px] text-slate-500">{entry.source}</span>
+                          </div>
+                          <div className="text-slate-200">{entry.text}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* ── SITUATION 1: WRONG SPACE / VIOLATION DETECTED ── */}
@@ -581,7 +618,10 @@ export function UserDashboardView() {
                     <Button
                       onClick={() => {
                         const targetSpace = sharedViolation?.designatedSpaceId || "SP-07";
-                        relocateVehicle(targetSpace);
+                        const ok = relocateVehicle(targetSpace);
+                        if (!ok) {
+                          clearViolation();
+                        }
                       }}
                       className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold h-10 gap-2 shadow-lg shadow-emerald-950"
                     >

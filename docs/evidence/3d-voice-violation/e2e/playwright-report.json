@@ -4,6 +4,7 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\ASUS\\Desktop\\parktwin\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
       "test",
+      "apps/web/e2e/parktwin-3d-voice-violation.spec.ts",
       "--config",
       "apps/web/playwright.config.ts"
     ],
@@ -141,12 +142,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1413,
+                      "duration": 1616,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-19T14:32:41.360Z",
+                      "startTime": "2026-10-19T16:15:37.039Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -162,11 +163,11 @@
               ],
               "id": "5b2068c70ab2042f23f8-a451d1999f3d60f792cf",
               "file": "parktwin-3d-voice-violation.spec.ts",
-              "line": 14,
+              "line": 16,
               "column": 7
             },
             {
-              "title": "Scenario 2: Wrong bay entry — warning logged, episode visible, departure resolves episode",
+              "title": "Scenario 2: Wrong bay entry — backend-driven WebSocket announcement with exact bay IDs and departure resolution",
               "ok": true,
               "tags": [],
               "tests": [
@@ -181,18 +182,18 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1849,
+                      "duration": 1675,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-19T14:32:42.887Z",
+                      "startTime": "2026-10-19T16:15:38.761Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-43a5f--departure-resolves-episode-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-35d7c-Ds-and-departure-resolution-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -200,13 +201,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b2068c70ab2042f23f8-b29ff821285dbaf2bf92",
+              "id": "5b2068c70ab2042f23f8-ebddeb3782d33b60f386",
               "file": "parktwin-3d-voice-violation.spec.ts",
-              "line": 27,
+              "line": 35,
               "column": 7
             },
             {
-              "title": "Scenario 3: 10-minute long-stay escalation triggers with preserved threshold",
+              "title": "Scenario 3: 10-minute long-stay escalation triggers from backend time-acceleration endpoint",
               "ok": true,
               "tags": [],
               "tests": [
@@ -221,18 +222,18 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1774,
+                      "duration": 2093,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-19T14:32:44.745Z",
+                      "startTime": "2026-10-19T16:15:40.448Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-f142a-rs-with-preserved-threshold-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-37096--time-acceleration-endpoint-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -240,9 +241,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b2068c70ab2042f23f8-251cbeb49318e61ddcaa",
+              "id": "5b2068c70ab2042f23f8-14aebd28332cc1187872",
               "file": "parktwin-3d-voice-violation.spec.ts",
-              "line": 48,
+              "line": 73,
               "column": 7
             },
             {
@@ -261,12 +262,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3378,
+                      "duration": 3297,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-19T14:32:46.529Z",
+                      "startTime": "2026-10-19T16:15:42.552Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -282,7 +283,7 @@
               ],
               "id": "5b2068c70ab2042f23f8-81be2fa7bd661934e09e",
               "file": "parktwin-3d-voice-violation.spec.ts",
-              "line": 57,
+              "line": 116,
               "column": 7
             },
             {
@@ -301,12 +302,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1851,
+                      "duration": 1942,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-19T14:32:49.916Z",
+                      "startTime": "2026-10-19T16:15:45.861Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -322,7 +323,7 @@
               ],
               "id": "5b2068c70ab2042f23f8-db3cadf4855938fed048",
               "file": "parktwin-3d-voice-violation.spec.ts",
-              "line": 82,
+              "line": 141,
               "column": 7
             },
             {
@@ -341,12 +342,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1798,
+                      "duration": 1844,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-19T14:32:51.779Z",
+                      "startTime": "2026-10-19T16:15:47.816Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -362,7 +363,7 @@
               ],
               "id": "5b2068c70ab2042f23f8-cfd6ca41738a86fcfe67",
               "file": "parktwin-3d-voice-violation.spec.ts",
-              "line": 102,
+              "line": 161,
               "column": 7
             },
             {
@@ -381,12 +382,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1797,
+                      "duration": 1833,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-19T14:32:53.590Z",
+                      "startTime": "2026-10-19T16:15:49.671Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -402,7 +403,47 @@
               ],
               "id": "5b2068c70ab2042f23f8-762ff01598dbe499ca40",
               "file": "parktwin-3d-voice-violation.spec.ts",
-              "line": 114,
+              "line": 173,
+              "column": 7
+            },
+            {
+              "title": "Scenario 8: Duplicate voice event suppression calls speechSynthesis.speak once",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2055,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-19T16:15:51.517Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS\\Desktop\\parktwin\\docs\\evidence\\3d-voice-violation\\e2e\\test-results\\parktwin-3d-voice-violatio-6ad19--speechSynthesis-speak-once-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b2068c70ab2042f23f8-29f9aad2bbbe8b5d0e7b",
+              "file": "parktwin-3d-voice-violation.spec.ts",
+              "line": 185,
               "column": 7
             }
           ]
@@ -412,9 +453,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-19T14:32:40.864Z",
-    "duration": 14612.438,
-    "expected": 7,
+    "startTime": "2026-10-19T16:15:36.638Z",
+    "duration": 17026.605,
+    "expected": 8,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

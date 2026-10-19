@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useDigitalTwinStore } from "@/store/useDigitalTwinStore";
 import { useVoiceStore } from "@/store/useVoiceStore";
+import { useSharedDemoState } from "@/store/useSharedDemoState";
 import { getEnv } from "@/utils/env";
 import type { CameraRole, VehicleStatus } from "@/types/digitalTwin";
 
@@ -24,6 +25,7 @@ export function useDigitalTwinSocket(): void {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (process.env.NODE_ENV === "test") return;
     isClosedRef.current = false;
 
     const connectEvents = () => {
@@ -69,6 +71,68 @@ export function useDigitalTwinSocket(): void {
               useVoiceStore.getState().cancelAnnouncement(msgId);
               return;
             }
+
+            // Wrong-Bay Warning and Escalations (Phase 3 & 4)
+            if (normalizedType === "WRONG_BAY_ENTRY_WARNING") {
+              const actual = payload.actual_bay || data.slot_id;
+              const assigned = payload.assigned_bay;
+              const vehId = payload.vehicle_id || data.vehicle_id;
+              const plate = payload.license_plate || data.license_plate;
+              useSharedDemoState.setState((s: any) => ({
+                violation: {
+                  active: true,
+                  vehicleId: vehId || "VEH-001",
+                  plate: plate || "KA04MH1234",
+                  designatedSpaceId: assigned || "SP-07",
+                  actualSpaceId: actual || "SP-11",
+                  severity: "HIGH",
+                  message: payload.message || `Wrong bay warning: Vehicle entered ${actual}`,
+                  detectedAt: new Date().toLocaleTimeString(),
+                  timestamp: Date.now(),
+                  adminAlertActive: false,
+                  durationSeconds: payload.duration_seconds || 0,
+                },
+              }));
+              return;
+            }
+
+            if (normalizedType === "WRONG_BAY_ESCALATED") {
+              useSharedDemoState.setState((s: any) => ({
+                violation: s.violation
+                  ? {
+                      ...s.violation,
+                      adminAlertActive: true,
+                      durationSeconds: payload.duration_seconds || 600,
+                    }
+                  : {
+                      active: true,
+                      vehicleId: payload.vehicle_id || "VEH-001",
+                      plate: payload.license_plate || "KA04MH1234",
+                      designatedSpaceId: payload.assigned_bay || "SP-07",
+                      actualSpaceId: payload.actual_bay || "SP-11",
+                      severity: "HIGH",
+                      message: payload.message || "Wrong bay escalated: 10 minutes exceeded",
+                      detectedAt: new Date().toLocaleTimeString(),
+                      timestamp: Date.now(),
+                      adminAlertActive: true,
+                      durationSeconds: payload.duration_seconds || 600,
+                    },
+              }));
+              return;
+            }
+
+            if (normalizedType === "WRONG_BAY_DURATION_WARNING") {
+              useSharedDemoState.setState((s: any) => ({
+                violation: s.violation
+                  ? {
+                      ...s.violation,
+                      durationSeconds: payload.duration_seconds || 480,
+                    }
+                  : null,
+              }));
+              return;
+            }
+
 
             // 1. Camera Designation
             if (normalizedType === "CAMERA_DESIGNATED") {
