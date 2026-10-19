@@ -162,6 +162,35 @@ class BayEntryDetector:
             "homography": homography,
         }
 
+    def load_synthetic_test_calibration(self, camera_id: str) -> bool:
+        """Load homography from _synthetic_test_only block for unit testing ONLY.
+
+        Strictly isolated from runtime execution.
+        """
+        base_dir = Path(__file__).resolve().parents[3]
+        calib_path = Path(self.config.calibration_file)
+        if not calib_path.is_absolute():
+            calib_path = base_dir / calib_path
+
+        if not calib_path.exists():
+            return False
+
+        try:
+            with open(calib_path, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+            cam_cfg = data.get("cameras", {}).get(camera_id, {})
+            synth = cam_cfg.get("_synthetic_test_only", {})
+            if "homography_matrix" in synth:
+                self.calibrations[camera_id] = {
+                    "status": "calibrated",
+                    "name": cam_cfg.get("name", camera_id),
+                    "homography": np.array(synth["homography_matrix"], dtype=np.float64),
+                }
+                return True
+        except Exception:
+            pass
+        return False
+
     def project_to_floor(
         self, camera_id: str, u: float, v: float
     ) -> Optional[Tuple[float, float]]:

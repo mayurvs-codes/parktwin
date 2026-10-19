@@ -202,3 +202,49 @@ def test_two_vehicles_adjacent_bays_independent_episodes(detector):
     assert bay_map[601] == "SP-07"
     assert bay_map[602] == "SP-08"
     assert entry_events[0].event_id != entry_events[1].event_id
+
+
+def test_unconfigured_cameras_from_yaml_emit_no_events_at_runtime():
+    """
+    Task 1 verification:
+    Cameras CAM-01, CAM-02, CAM-03 loaded from configs/camera_calibration.yaml
+    must report 'unconfigured' status at runtime, fail floor projection (returning None),
+    and emit ZERO bay entry events when tracking bounding boxes.
+    """
+    runtime_detector = BayEntryDetector()
+
+    # 1. Status checks
+    for cam_id in ["CAM-01", "CAM-02", "CAM-03", "CAM-04", "CAM-16"]:
+        assert runtime_detector.get_camera_status(cam_id) == "unconfigured", (
+            f"Expected {cam_id} to be 'unconfigured', got {runtime_detector.get_camera_status(cam_id)}"
+        )
+
+    # 2. Projection returns None
+    assert runtime_detector.project_to_floor("CAM-01", 960.0, 540.0) is None
+    assert runtime_detector.project_to_floor("CAM-02", 960.0, 540.0) is None
+    assert runtime_detector.project_to_floor("CAM-03", 960.0, 540.0) is None
+
+    # 3. Sustained tracking on unconfigured camera emits zero events
+    events = []
+    for step in range(20):
+        t = 700.0 + step * 0.1
+        frame_events = runtime_detector.update(
+            [
+                {"track_id": 701, "camera_id": "CAM-01", "bbox": [500, 400, 700, 600]},
+                {"track_id": 702, "camera_id": "CAM-02", "bbox": [200, 300, 400, 500]},
+                {"track_id": 703, "camera_id": "CAM-03", "bbox": [300, 300, 500, 500]},
+            ],
+            ts=t,
+            source="live",
+        )
+        events.extend(frame_events)
+
+    assert len(events) == 0, f"Expected 0 events from unconfigured cameras, got {len(events)}"
+
+    # 4. Explicit test opt-in verifies synthetic test matrix is intact under _synthetic_test_only
+    loaded = runtime_detector.load_synthetic_test_calibration("CAM-01")
+    assert loaded is True
+    assert runtime_detector.get_camera_status("CAM-01") == "calibrated"
+    proj = runtime_detector.project_to_floor("CAM-01", 960.0, 540.0)
+    assert proj is not None
+
