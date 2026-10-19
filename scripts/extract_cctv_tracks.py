@@ -86,6 +86,7 @@ def extract_tracks(video_path: Path, output_json: Path, camera_id: str = "CAM-10
     output_json.parent.mkdir(parents=True, exist_ok=True)
     with open(output_json, "w", encoding="utf-8") as f:
         json.dump({
+            "clip_label": "UNREGISTERED CLIP (file: Camera10 / overlay: B2-Cam 5)",
             "video_file": video_path.name,
             "camera_id": camera_id,
             "fps": fps,

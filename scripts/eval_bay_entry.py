@@ -185,6 +185,7 @@ def evaluate_real(tracker_output_path: str, ground_truth_path: str) -> None:
     print("\n" + "=" * 60)
     print("PARKTWIN BAY ENTRY EVALUATION REPORT [REAL CCTV FOOTAGE]")
     print("=" * 60)
+    print("Clip Identity:         UNREGISTERED CLIP (file: Camera10 / overlay: B2-Cam 5)")
     print(f"Tracker Output Source: {track_file}")
     print(f"Ground Truth File:     {gt_file}")
 

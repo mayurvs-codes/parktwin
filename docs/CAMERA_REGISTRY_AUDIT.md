@@ -52,13 +52,39 @@ There are **zero secondary vehicle entry/exit ramps** in the active facility mod
 
 An important distinction exists between the **CAD Registry Position `CAM-10`** and the **Physical CCTV Archive Clip**:
 
-- **Archive Clip:** `videos/6B-IP Camera10_Carparking-01_Carparking-01_20260827155000_20260827165520_823164.mp4` (and `data/annotations/real_cctv_tracks_camera10.json`).
+- **Archive Clip:** `videos/6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4` (and `data/annotations/real_cctv_tracks_camera10.json`).
 - **Nature:** This is an **unregistered source clip** extracted from the 27-Aug-2026 CCTV archive.
 - **Orientation & View:** The camera angle depicts a non-perpendicular parking bay row with unknown focal length, unknown sensor height, and no surveyed floor reference points.
 - **Handling in Pipeline:**
   1. Because floor calibration is unavailable (`status: "unconfigured"` in `configs/camera_calibration.yaml`), the pipeline **refuses to invent synthetic floor coordinates**.
   2. For replay evaluation, the clip uses **image-space bay polygons** (`configs/replay_bay_polygons.yaml`) strictly flagged with `source="replay"`.
   3. It is **never** presented as a calibrated live camera at the physical CAD coordinates of `CAM-10`.
+
+### 3.1 Clip Identity Unresolved
+
+A direct conflict exists between the archive video filename and its visual burnt-in overlay:
+1. **Filename Identity:** The file is named `6B-IP Camera10_...mp4` and `6A-IP Camera10_...mp4`.
+2. **On-Screen Burnt-In Overlay:** Direct visual inspection of the raw video frames (e.g., bottom-right corner of frame 0) reveals the burnt-in text:
+   ```
+   B2-Cam 5
+   ```
+3. **Registry Comparison:**
+   - Registry `CAM-10`: Canonical name `"2nd Horizontal Aisle Center"` (Role: `PATH/PARKING`, coordinates: x=30.0, y=14.0).
+   - Registry `CAM-05`: Canonical name `"3rd Horizontal Aisle East"` (Role: `PATH/PARKING`, coordinates: x=46.0, y=19.5).
+4. **What Was Checked:**
+   - Raw video frame decoded from `videos/6B-IP Camera10_...mp4` showing timestamp `2026-08-27 16:59:48` and camera overlay `B2-Cam 5`.
+   - File listing in archive folder `27-Aug-2026/27-Aug_3-55 to 5-05 pm/` where files are prefixed `6A-IP Camera10` and `6B-IP Camera10`.
+   - CAD facility specifications in `shared/facility_geometry.json` comparing aisle layouts against the visible parking bays.
+5. **Internal Identifier Retained for Lookup:**
+   - The string key `camera_id: "CAM-10"` is retained internally **solely as a dictionary key** for looking up image-space polygons in `detector.replay_camera_polygons["CAM-10"]`.
+   - The clip metadata, evaluation reports, and UI badges explicitly label the source as:
+     `UNREGISTERED CLIP (file: Camera10 / overlay: B2-Cam 5)`
+   - The camera remains strictly `status: "unconfigured"` with zero homography.
+
+> [!IMPORTANT]
+> **Open Question for Project Manager:**
+> *Which registry CAM-xx does the overlay `B2-Cam 5` correspond to?*  
+> (Specifically, should this footage be mapped to `CAM-05` ("3rd Horizontal Aisle East") or remain unassociated until physical survey/camera mapping is provided?)
 
 ---
 

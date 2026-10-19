@@ -550,6 +550,11 @@ export function VideoLibraryView() {
                     </div>
 
                     <div className="flex items-center gap-1.5">
+                      {activeSegment.physicalCameraNum === 10 && (
+                        <span className="px-2 py-0.5 rounded font-mono text-xs font-bold bg-purple-500/10 text-purple-400 border border-purple-500/30">
+                          UNREGISTERED CLIP (file: Camera10 / overlay: B2-Cam 5)
+                        </span>
+                      )}
                       <span className="px-2 py-0.5 rounded font-mono text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
                         PARKTWIN MAPPING: UNVERIFIED
                       </span>
