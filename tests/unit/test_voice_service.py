@@ -150,3 +150,40 @@ def test_voice_exception_never_raises(voice, monkeypatch):
         route_directions=["step 1"],
     )
     assert res is None  # Caught cleanly, no exception raised
+
+
+def test_duration_warning_speech_disabled_by_default(voice):
+    """By default, duration warning generates NO speech (announce_duration_warning=False)."""
+    assert voice.announce_duration_warning is False
+    res = voice.build_duration_warning_message(
+        event_id="EV-DUR-001",
+        vehicle_id="VEH-001",
+        assigned_bay="SP-07",
+        actual_bay="SP-11",
+    )
+    assert res is None  # No speech authorized
+
+
+def test_duration_warning_speech_when_explicitly_enabled():
+    """When announce_duration_warning is enabled, generates warning and deduplicates."""
+    svc = VoiceService(announce_duration_warning=True)
+    res = svc.build_duration_warning_message(
+        event_id="EV-DUR-002",
+        vehicle_id="VEH-001",
+        assigned_bay="SP-07",
+        actual_bay="SP-11",
+    )
+    assert res is not None
+    assert "Grace period ending in 2 minutes" in res.text
+    assert "SP-07" in res.text
+    assert res.kind == "WRONG_BAY_DURATION_WARNING"
+
+    # Duplicate call is deduplicated (emitted exactly once)
+    dup = svc.build_duration_warning_message(
+        event_id="EV-DUR-002",
+        vehicle_id="VEH-001",
+        assigned_bay="SP-07",
+        actual_bay="SP-11",
+    )
+    assert dup is None
+

@@ -35,9 +35,11 @@ class VoiceService:
         cooldown_seconds: float = 5.0,
         event_ttl_seconds: float = 300.0,
         max_log_size: int = 200,
+        announce_duration_warning: bool = False,
     ) -> None:
         self.cooldown_seconds = cooldown_seconds
         self.event_ttl_seconds = event_ttl_seconds
+        self.announce_duration_warning = announce_duration_warning
         self._seen_events: Dict[str, float] = {}
         self._vehicle_last_spoken: Dict[Tuple[str, str], float] = {}
         self._active_message: Optional[VoiceMessage] = None
@@ -150,6 +152,43 @@ class VoiceService:
             return self._record_and_dispatch(msg)
         except Exception as e:
             logger.error(f"VoiceService failed to build wrong bay warning: {e}", exc_info=True)
+            return None
+
+    def build_duration_warning_message(
+        self,
+        *,
+        event_id: str,
+        vehicle_id: str,
+        assigned_bay: str,
+        actual_bay: Optional[str] = None,
+        source: str = "live",
+    ) -> Optional[VoiceMessage]:
+        """
+        Build optional announcement when a vehicle is in duration warning state (8-min mark).
+        Disabled by default (announce_duration_warning=False) to avoid unauthorized driver speech.
+        """
+        if not self.announce_duration_warning:
+            return None
+
+        try:
+            if self._is_duplicate(event_id):
+                return None
+
+            if self._is_on_cooldown(vehicle_id, "WRONG_BAY_DURATION_WARNING"):
+                return None
+
+            text = f"Warning! Grace period ending in 2 minutes. Please relocate to space {assigned_bay}."
+            msg = VoiceMessage(
+                event_id=event_id,
+                kind="WRONG_BAY_DURATION_WARNING",
+                text=text,
+                priority=90,
+                vehicle_id=vehicle_id,
+                source=source,
+            )
+            return self._record_and_dispatch(msg)
+        except Exception as e:
+            logger.error(f"VoiceService failed to build duration warning message: {e}", exc_info=True)
             return None
 
     def build_failure_message(

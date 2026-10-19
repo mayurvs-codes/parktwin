@@ -278,6 +278,23 @@ class IntegrationService:
                     await self.bus.publish(ie_c)
                     await self.ws.broadcast("events", {"event_type": "VOICE_CANCEL", "payload": c_info})
 
+                # Process WrongBayDurationWarning -> VoiceService (only if enabled via config flag)
+                elif itype == "WrongBayDurationWarning":
+                    if get_voice_service().announce_duration_warning:
+                        meta = payload.get("meta", {}) or payload
+                        v_dur = get_voice_service().build_duration_warning_message(
+                            event_id=meta.get("episode_id", f"EV-{uuid.uuid4().hex[:8]}") + "-DUR",
+                            vehicle_id=meta.get("vehicle_id", payload.get("vehicle_id", "UNKNOWN")),
+                            assigned_bay=meta.get("assigned_bay", "UNKNOWN"),
+                            actual_bay=meta.get("actual_bay", payload.get("slot_id")),
+                            source=meta.get("source", "live"),
+                        )
+                        if v_dur:
+                            ie_v = self._make_event("VoiceAnnouncement", camera_id, v_dur.to_dict())
+                            integration_events.append(ie_v)
+                            await self.bus.publish(ie_v)
+                            await self.ws.broadcast("events", {"event_type": "VOICE_ANNOUNCEMENT", "payload": v_dur.to_dict()})
+
         # 3b. ANPR assignment -> compute route -> VoiceService announcement
         if assignment and getattr(assignment, "newly_assigned", None):
             from backend.services.navigation_service import compute_route
