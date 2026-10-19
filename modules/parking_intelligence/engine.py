@@ -21,6 +21,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
+import uuid
 
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -38,6 +39,8 @@ from .duration.duration_tracker import duration_seconds, format_duration
 from .sessions.session_manager import open_session_data
 from .violations.violation_engine import ViolationEngine
 from .events.event_engine import EventEngine
+from .bay_entry.detector import BayEntryDetector
+from .bay_entry.events import BAY_ENTRY_CONFIRMED, BAY_EXIT_CONFIRMED
 
 logger = None  # lazy import to avoid loguru config side-effects on import
 
@@ -63,6 +66,7 @@ class ParkingIntelligenceEngine:
         self._violations = ViolationEngine(
             max_duration_hours=float(settings.parking.max_duration_hours)
         )
+        self._bay_entry_detector = BayEntryDetector()
         self._initialized = False
         self._settings = settings
 
@@ -81,6 +85,10 @@ class ParkingIntelligenceEngine:
         return self._initialized
 
     @property
+    def bay_entry_detector(self) -> BayEntryDetector:
+        return self._bay_entry_detector
+
+    @property
     def violations(self) -> ViolationEngine:
         return self._violations
 
@@ -91,6 +99,8 @@ class ParkingIntelligenceEngine:
         db: AsyncSession,
         camera_id: str,
         records: List,
+        source: str = "live",
+        ts: Optional[float] = None,
     ) -> Dict:
         """
         Process one frame's Module-1 records and persist the resulting
@@ -100,13 +110,18 @@ class ParkingIntelligenceEngine:
             db: active async session (committed by the calling dependency).
             camera_id: source camera id.
             records: list of Module-1 ``VehicleRecord``-like objects.
+            source: provenance label ("live", "replay", or "demo").
+            ts: optional epoch timestamp in seconds (for replay/simulations).
 
         Returns a compact per-frame summary dict.
         """
         if not self._initialized:
             await self.init(db)
 
-        now = datetime.now(timezone.utc)
+        if ts is not None:
+            now = datetime.fromtimestamp(ts, tz=timezone.utc)
+        else:
+            now = datetime.now(timezone.utc)
 
         # Adapt Module 1 outputs into the mapper's neutral input.
         tracks = [VehicleTrack.from_record(r) for r in records]
@@ -120,6 +135,86 @@ class ParkingIntelligenceEngine:
             s.slot_id: (s.is_reserved, s.reserved_for) for s in slot_configs
         }
 
+        # 0. Bay Entry Detection & Kinematics (Wire tracker -> BayEntryDetector -> ViolationEngine)
+        det_inputs = []
+        for r in records:
+            tid = getattr(r, "tracking_id", getattr(r, "track_id", None))
+            if tid is None:
+                continue
+            det_entry: Dict[str, Any] = {
+                "track_id": int(tid),
+                "camera_id": camera_id,
+            }
+            if hasattr(r, "floor_coords") and r.floor_coords:
+                det_entry["floor_coords"] = r.floor_coords
+            elif isinstance(r, dict) and "floor_coords" in r:
+                det_entry["floor_coords"] = r["floor_coords"]
+            elif hasattr(r, "bbox") and r.bbox:
+                det_entry["bbox"] = r.bbox
+            elif isinstance(r, dict) and "bbox" in r:
+                det_entry["bbox"] = r["bbox"]
+            det_inputs.append(det_entry)
+
+        bay_events = self._bay_entry_detector.update(
+            det_inputs,
+            ts=now.timestamp(),
+            source=source,
+        )
+
+        for be in bay_events:
+            rec = next((r for r in records if getattr(r, "tracking_id", getattr(r, "track_id", None)) == be.track_id), None)
+            plate = getattr(rec, "license_plate", None) if rec else None
+            veh_id = getattr(rec, "vehicle_id", getattr(rec, "prototype_id", None)) if rec else (plate or f"TRACK-{be.track_id}")
+            assigned = getattr(rec, "assigned_bay", getattr(rec, "designated_space", getattr(rec, "designated_slot", None))) if rec else None
+
+            if not assigned and plate:
+                for s_id, (is_res, res_for) in slot_lookup.items():
+                    if is_res and res_for == plate:
+                        assigned = s_id
+                        break
+
+            if be.event_type == BAY_ENTRY_CONFIRMED:
+                v_events = self._violations.on_bay_entry(
+                    be.track_id,
+                    be.bay_id,
+                    vehicle_id=veh_id,
+                    assigned_bay=assigned,
+                    license_plate=plate,
+                    timestamp=be.timestamp,
+                    source=be.source,
+                )
+                for ve in v_events:
+                    if ve.get("event_type") == self._violations.EVENT_WRONG_BAY_ENTRY_WARNING:
+                        await self._emit(
+                            db,
+                            self._events.EVENT_WRONG_BAY_ENTRY_WARNING,
+                            camera_id,
+                            slot_id=be.bay_id,
+                            tracking_id=be.track_id,
+                            license_plate=plate,
+                            vehicle_id=veh_id,
+                            meta=ve,
+                        )
+            elif be.event_type == BAY_EXIT_CONFIRMED:
+                res_events = self._violations.on_bay_exit(
+                    be.track_id,
+                    be.bay_id,
+                    timestamp=be.timestamp,
+                    source=be.source,
+                )
+                for re in res_events:
+                    if re.get("event_type") == self._violations.EVENT_WRONG_BAY_RESOLVED:
+                        await self._emit(
+                            db,
+                            self._events.EVENT_WRONG_BAY_RESOLVED,
+                            camera_id,
+                            slot_id=be.bay_id,
+                            tracking_id=be.track_id,
+                            license_plate=plate,
+                            vehicle_id=veh_id,
+                            meta=re,
+                        )
+
         # 1. Stable mapping.
         result = self._mapper.update(camera_id, tracks, slot_configs)
         assignment = SlotAssignment(
@@ -132,12 +227,22 @@ class ParkingIntelligenceEngine:
         # 2. Newly assigned → open sessions + emit entry events.
         for track_id, slot_id in result.newly_assigned.items():
             rec = tracks_by_id[track_id]
+            sess_veh_uuid = None
+            if isinstance(rec.vehicle_id, uuid.UUID):
+                sess_veh_uuid = rec.vehicle_id
+            elif isinstance(rec.vehicle_id, str):
+                try:
+                    sess_veh_uuid = uuid.UUID(rec.vehicle_id)
+                except Exception:
+                    sess_veh_uuid = None
             sess_data = open_session_data(
                 camera_id, track_id, slot_id,
                 entry_time=now,
                 license_plate=rec.license_plate,
-                vehicle_id=rec.vehicle_id,
+                vehicle_id=sess_veh_uuid,
             )
+            if sess_veh_uuid is None and rec.vehicle_id:
+                sess_data["meta"]["vehicle_id"] = str(rec.vehicle_id)
             await crud.open_session(db, sess_data)
             await self._emit(
                 db, self._events.EVENT_VEHICLE_ENTERED, camera_id,
@@ -257,6 +362,19 @@ class ParkingIntelligenceEngine:
                     await db.flush()
 
     async def _emit(self, db, event_type, camera_id, **kw) -> None:
+        veh_id = kw.get("vehicle_id")
+        veh_uuid = None
+        if isinstance(veh_id, uuid.UUID):
+            veh_uuid = veh_id
+        elif isinstance(veh_id, str):
+            try:
+                veh_uuid = uuid.UUID(veh_id)
+            except Exception:
+                kw.setdefault("meta", {})
+                if isinstance(kw["meta"], dict):
+                    kw["meta"].setdefault("vehicle_id", veh_id)
+                veh_uuid = None
+        kw["vehicle_id"] = veh_uuid
         event = self._events.build(event_type, camera_id, **kw)
         self._events.record(event)
         await crud.create_event(db, event)

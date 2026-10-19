@@ -234,23 +234,29 @@ class ViolationEngine:
 
     def on_bay_exit(
         self,
-        bay_id: str,
-        *,
+        *args,
         vehicle_id: Optional[str] = None,
         timestamp: Optional[datetime] = None,
         source: str = "live",
+        reason: str = "left_bay",
     ) -> List[Dict[str, Any]]:
         """Resolve violation episode when vehicle departs the wrong bay."""
+        bay_id = None
+        if len(args) == 2:
+            _track_id, bay_id = args
+        elif len(args) == 1:
+            bay_id = args[0]
+
         ep_id = None
         if vehicle_id and vehicle_id in self._active_by_vehicle:
             ep_id = self._active_by_vehicle[vehicle_id]
-        elif bay_id in self._active_by_bay:
+        elif bay_id and bay_id in self._active_by_bay:
             ep_id = self._active_by_bay[bay_id]
 
         if not ep_id:
             return []
 
-        return self.resolve_episode(ep_id, reason="left_bay", timestamp=timestamp, source=source)
+        return self.resolve_episode(ep_id, reason=reason, timestamp=timestamp, source=source)
 
     def on_facility_exit(
         self,
@@ -338,6 +344,17 @@ class ViolationEngine:
                 "source": ep["source"],
             })
         return episodes
+
+    def get_episode(self, episode_id: str) -> Optional[Dict[str, Any]]:
+        """Return raw episode dict by ID."""
+        return self._episodes.get(episode_id)
+
+    def get_active_episode(self, vehicle_id: str) -> Optional[Dict[str, Any]]:
+        """Return active episode dict for vehicle if active."""
+        ep_id = self._active_by_vehicle.get(vehicle_id)
+        if ep_id:
+            return self._episodes.get(ep_id)
+        return None
 
     def reset(self) -> None:
         """Clear all violation episodes and tracking maps."""

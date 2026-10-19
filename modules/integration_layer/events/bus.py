@@ -42,6 +42,10 @@ INTEGRATION_EVENT_TYPES = (
     "SlotOccupied",
     "SlotReleased",
     "SlotStateChanged",
+    "VoiceAnnouncement",
+    "VoiceCancel",
+    "WrongBayWarning",
+    "WrongBayResolved",
 )
 
 # Channels used by the WebSocket layer (one per live view).

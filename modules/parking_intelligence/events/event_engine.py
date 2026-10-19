@@ -34,6 +34,8 @@ class EventEngine:
     EVENT_SLOT_OCCUPIED = "slot_occupied"
     EVENT_SLOT_RELEASED = "slot_released"
     EVENT_VEHICLE_REIDENTIFIED = "vehicle_reidentified"
+    EVENT_WRONG_BAY_ENTRY_WARNING = "wrong_bay_entry_warning"
+    EVENT_WRONG_BAY_RESOLVED = "wrong_bay_resolved"
 
     ALL_TYPES = (
         EVENT_VEHICLE_ENTERED,
@@ -42,6 +44,8 @@ class EventEngine:
         EVENT_SLOT_OCCUPIED,
         EVENT_SLOT_RELEASED,
         EVENT_VEHICLE_REIDENTIFIED,
+        EVENT_WRONG_BAY_ENTRY_WARNING,
+        EVENT_WRONG_BAY_RESOLVED,
     )
 
     def __init__(self, max_buffer: int = 2000) -> None:

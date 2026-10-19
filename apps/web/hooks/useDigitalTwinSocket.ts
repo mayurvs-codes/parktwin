@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useDigitalTwinStore } from "@/store/useDigitalTwinStore";
+import { useVoiceStore } from "@/store/useVoiceStore";
 import { getEnv } from "@/utils/env";
 import type { CameraRole, VehicleStatus } from "@/types/digitalTwin";
 
@@ -51,6 +52,21 @@ export function useDigitalTwinSocket(): void {
 
             if (normalizedType === "DIGITAL_TWIN_RESET") {
               useDigitalTwinStore.getState().resetDigitalTwin();
+              return;
+            }
+
+            // Voice Announcements & Cancellations (Phase 4 / Task 2)
+            if (normalizedType === "VOICE_ANNOUNCEMENT") {
+              const voiceMsg = payload.voice_message || payload;
+              if (voiceMsg && voiceMsg.text) {
+                void useVoiceStore.getState().receiveAnnouncement(voiceMsg);
+              }
+              return;
+            }
+
+            if (normalizedType === "VOICE_CANCEL") {
+              const msgId = payload.message_id || data.message_id;
+              useVoiceStore.getState().cancelAnnouncement(msgId);
               return;
             }
 

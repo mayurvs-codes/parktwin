@@ -24,6 +24,8 @@ _MODULE_TO_INTEGRATION: Dict[str, List[str]] = {
     "slot_occupied": ["SlotOccupied"],
     "slot_released": ["SlotReleased"],
     "vehicle_reidentified": ["VehicleTracked"],
+    "wrong_bay_entry_warning": ["WrongBayWarning"],
+    "wrong_bay_resolved": ["WrongBayResolved"],
 }
 
 

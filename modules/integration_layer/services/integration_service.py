@@ -56,6 +56,7 @@ from ..adapters import (
 from ..events.bus import EventBus, IntegrationEvent
 from ..sync import Synchronizer
 from ..websocket.manager import ConnectionManager
+from ..voice import get_voice_service
 
 
 class IntegrationService:
@@ -157,6 +158,8 @@ class IntegrationService:
         db: AsyncSession,
         camera_id: str,
         records: List[Any],
+        source: str = "live",
+        ts: Optional[float] = None,
     ) -> Dict[str, Any]:
         """Run the full Module 1 → Module 2 integration for one frame.
 
@@ -184,7 +187,10 @@ class IntegrationService:
         # 1. Module 2: ingest and capture *this frame's* events only.
         pre_count_raw = self.engine._events.count()
         pre_count = int(pre_count_raw) if isinstance(pre_count_raw, (int, float)) else 0
-        summary = await self.engine.ingest_frame(db, camera_id, records)
+        try:
+            summary = await self.engine.ingest_frame(db, camera_id, records, source=source, ts=ts)
+        except TypeError:
+            summary = await self.engine.ingest_frame(db, camera_id, records)
         frame_module_events = self.engine._events._buffer[pre_count:]
         assignment = summary.get("assignment")
 
@@ -243,6 +249,55 @@ class IntegrationService:
                 ie = self._make_event(itype, camera_id, payload)
                 integration_events.append(ie)
                 await self.bus.publish(ie)
+
+                # Process WrongBayWarning -> VoiceService
+                if itype == "WrongBayWarning":
+                    meta = payload.get("meta", {}) or payload
+                    v_warn = get_voice_service().build_wrong_bay_warning(
+                        event_id=meta.get("episode_id", f"EV-{uuid.uuid4().hex[:8]}"),
+                        vehicle_id=meta.get("vehicle_id", payload.get("vehicle_id", "UNKNOWN")),
+                        assigned_bay=meta.get("assigned_bay", "UNKNOWN"),
+                        actual_bay=meta.get("actual_bay", payload.get("slot_id")),
+                        source=meta.get("source", "live"),
+                    )
+                    if v_warn:
+                        ie_v = self._make_event("VoiceAnnouncement", camera_id, v_warn.to_dict())
+                        integration_events.append(ie_v)
+                        await self.bus.publish(ie_v)
+                        await self.ws.broadcast("events", {"event_type": "VOICE_ANNOUNCEMENT", "payload": v_warn.to_dict()})
+
+                # Process WrongBayResolved -> VoiceService
+                elif itype == "WrongBayResolved":
+                    meta = payload.get("meta", {}) or payload
+                    c_info = get_voice_service().cancel_message(
+                        meta.get("episode_id", ""),
+                        reason=meta.get("resolution_reason", "wrong_bay_resolved"),
+                    )
+                    ie_c = self._make_event("VoiceCancel", camera_id, c_info)
+                    integration_events.append(ie_c)
+                    await self.bus.publish(ie_c)
+                    await self.ws.broadcast("events", {"event_type": "VOICE_CANCEL", "payload": c_info})
+
+        # 3b. ANPR assignment -> compute route -> VoiceService announcement
+        if assignment and getattr(assignment, "newly_assigned", None):
+            from backend.services.navigation_service import compute_route
+            for trk_id, slt_id in assignment.newly_assigned.items():
+                v_record = next((r for r in records if getattr(r, "tracking_id", getattr(r, "track_id", None)) == trk_id), None)
+                v_id = getattr(v_record, "vehicle_id", getattr(v_record, "prototype_id", None)) if v_record else f"TRACK-{trk_id}"
+                route = compute_route("ACCESS_POINT_B2", slt_id)
+                route_steps = route.get("directions") if route else None
+                v_assign = get_voice_service().build_assignment_message(
+                    event_id=f"ASN-{trk_id}-{slt_id}",
+                    vehicle_id=v_id,
+                    assigned_bay=slt_id,
+                    route_directions=route_steps,
+                    source="live",
+                )
+                if v_assign:
+                    ie_asn = self._make_event("VoiceAnnouncement", camera_id, v_assign.to_dict())
+                    integration_events.append(ie_asn)
+                    await self.bus.publish(ie_asn)
+                    await self.ws.broadcast("events", {"event_type": "VOICE_ANNOUNCEMENT", "payload": v_assign.to_dict()})
 
         # 4. Cross-module consistency.
         sync_report = await self.sync.reconcile(db, camera_id=camera_id)
@@ -383,6 +438,32 @@ class IntegrationService:
             "websocket_subscribers": self.ws.channel_counts(),
             "occupancy": occ,
         }
+
+    async def process_anpr_assignment(
+        self,
+        camera_id: str,
+        vehicle_id: str,
+        assigned_bay: str,
+        source: str = "live",
+    ) -> Optional[Dict[str, Any]]:
+        """Wire ANPR assignment -> compute_vehicle_route -> VoiceService ASSIGNMENT announcement."""
+        from backend.services.navigation_service import compute_route
+        route = compute_route("ACCESS_POINT_B2", assigned_bay)
+        route_steps = route.get("directions") if route else None
+
+        voice_msg = get_voice_service().build_assignment_message(
+            event_id=f"ANPR-ASN-{vehicle_id}-{assigned_bay}",
+            vehicle_id=vehicle_id,
+            assigned_bay=assigned_bay,
+            route_directions=route_steps,
+            source=source,
+        )
+        if voice_msg:
+            ie = self._make_event("VoiceAnnouncement", camera_id, voice_msg.to_dict())
+            await self.bus.publish(ie)
+            await self.ws.broadcast("events", {"event_type": "VOICE_ANNOUNCEMENT", "payload": voice_msg.to_dict()})
+            return voice_msg.to_dict()
+        return None
 
     # ── Internal helpers ─────────────────────────────────────────────────────
 
