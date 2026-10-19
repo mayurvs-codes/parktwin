@@ -29,6 +29,27 @@ def main():
         (255, 255, 0),  # Cyan
     ]
 
+    # Draw header banner
+    cv2.rectangle(frame, (0, 0), (frame.shape[1], 80), (15, 23, 42), -1)
+    cv2.putText(
+        frame,
+        "APPROXIMATE IMAGE-SPACE REGIONS FOR REPLAY DEMONSTRATION ONLY - NOT SURVEYED BAY BOUNDARIES",
+        (40, 45),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.95,
+        (255, 255, 255),
+        2,
+    )
+    cv2.putText(
+        frame,
+        f"SOURCE: {cam10.get('clip_identity', 'UNREGISTERED CLIP')}",
+        (40, 72),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.65,
+        (148, 163, 184),
+        2,
+    )
+
     for idx, (bay_id, bay_info) in enumerate(cam10["bays"].items()):
         pts = np.array(bay_info["polygon_pixels"], dtype=np.int32)
         color = colors[idx % len(colors)]
@@ -38,8 +59,12 @@ def main():
         # Label position: near centroid
         cx = int(np.mean(pts[:, 0]))
         cy = int(np.mean(pts[:, 1]))
-        cv2.putText(frame, bay_id, (cx - 70, cy), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 0), 4)
-        cv2.putText(frame, bay_id, (cx - 70, cy), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 2)
+        conf = bay_info.get("confidence", "high").upper()
+        lbl_text = f"{bay_id} [{conf}]"
+        cv2.putText(frame, lbl_text, (cx - 90, cy), cv2.FONT_HERSHEY_SIMPLEX, 0.85, (0, 0, 0), 4)
+        cv2.putText(frame, lbl_text, (cx - 90, cy), cv2.FONT_HERSHEY_SIMPLEX, 0.85, (255, 255, 255), 2)
+        cv2.putText(frame, "(unregistered replay region)", (cx - 110, cy + 30), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 0), 3)
+        cv2.putText(frame, "(unregistered replay region)", (cx - 110, cy + 30), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (226, 232, 240), 1)
 
     cv2.addWeighted(overlay, 0.35, frame, 0.65, 0, frame)
     cv2.imwrite(str(evidence_path), frame)

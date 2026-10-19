@@ -1,50 +1,72 @@
-# ParkTwin AI — Replay Mode Image-Space Bay Polygons
-# ===================================================
+# approximate image-space regions for replay demonstration only; not surveyed bay boundaries
+# =========================================================================================
 # Used ONLY when source="replay" as an image-space fallback for uncalibrated cameras.
 # NEVER used when source="live".
 #
-# Derived from physical visible bay lines in CCTV footage.
+# These polygons follow visible painted lines in real CCTV footage as far as they can be seen.
+# Where boundaries are not visible or are truncated by camera FOV, confidence is marked low.
+# All bay identifiers here are unregistered replay regions and are NOT equivalent to canonical SP-xx bays.
+#
+# Left-hand diagonal white lines visible in the footage delineate a vehicle transit / circulation aisle
+# (where moving vehicles drive past) and are intentionally excluded from parking bay definitions.
+#
 # Annotated evidence image: configs/cam10_bay_polygons_evidence.jpg
 
 cameras:
   CAM-10:
+    clip_identity: "UNREGISTERED CLIP (file: Camera10 / overlay: B2-Cam 5)"
     image_width: 2688
     image_height: 1520
     video_source: "videos/6B-IP Camera10_Carparking-01_Carparking-01_20260827165948_20260827170000_1718912.mp4"
     evidence_image: "configs/cam10_bay_polygons_evidence.jpg"
     bays:
       BAY-CAM10-01:
-        description: "Empty parking bay left of red SUV, adjacent to column"
+        type: "unregistered_replay_region"
+        description: "Empty parking bay between pillar and Red SUV"
+        confidence: "medium"
+        comment: "Left boundary follows visible diagonal paint line from pillar to yellow aisle mark; right boundary follows visible dividing line; back wall visible."
         polygon_pixels:
-          - [755, 360]
-          - [1040, 355]
-          - [980, 580]
-          - [535, 620]
+          - [755, 365]
+          - [1025, 365]
+          - [960, 580]
+          - [535, 580]
       BAY-CAM10-02:
+        type: "unregistered_replay_region"
         description: "Parking bay occupied by Track 3 (Red SUV UP16BU7218)"
+        confidence: "high"
+        comment: "Boundaries follow visible painted dividing lines on both sides and yellow aisle threshold."
         polygon_pixels:
-          - [1040, 355]
-          - [1400, 355]
-          - [1470, 575]
-          - [980, 580]
+          - [1025, 365]
+          - [1395, 365]
+          - [1465, 580]
+          - [960, 580]
       BAY-CAM10-03:
+        type: "unregistered_replay_region"
         description: "Parking bay occupied by Track 5/6 (Black Van KA05NJ7181)"
+        confidence: "high"
+        comment: "Boundaries follow visible painted dividing lines on both sides and yellow aisle threshold."
         polygon_pixels:
-          - [1400, 355]
-          - [1770, 355]
-          - [1820, 575]
-          - [1470, 575]
+          - [1395, 365]
+          - [1775, 365]
+          - [1930, 580]
+          - [1465, 580]
       BAY-CAM10-04:
+        type: "unregistered_replay_region"
         description: "Parking bay occupied by Track 2 (Dark Red Sedan KA02HU7264)"
+        confidence: "high"
+        comment: "Boundaries follow visible painted dividing lines on both sides and yellow aisle threshold."
         polygon_pixels:
-          - [1770, 355]
-          - [2240, 355]
-          - [2310, 570]
-          - [1820, 575]
+          - [1775, 365]
+          - [2190, 365]
+          - [2300, 580]
+          - [1930, 580]
       BAY-CAM10-05:
+        type: "unregistered_replay_region"
         description: "Parking bay occupied by Track 1 (Dark Blue Hatchback)"
+        confidence: "low"
+        comment: "Left line follows visible painted dividing line; right boundary is not visible in camera FOV and is truncated at image border."
         polygon_pixels:
-          - [2240, 355]
-          - [2680, 355]
-          - [2688, 570]
-          - [2310, 570]
+          - [2190, 365]
+          - [2688, 365]
+          - [2688, 580]
+          - [2300, 580]
