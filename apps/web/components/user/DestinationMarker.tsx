@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { bayLabel } from "@/utils/bayLabel";
 
 interface DestinationMarkerProps {
   x: number;
@@ -65,7 +66,7 @@ export function DestinationMarker({
           fontWeight="bold"
           textAnchor="middle"
         >
-          ★ {label}
+          ★ {type === "parking_space" ? bayLabel(label) : label}
         </text>
       </g>
     </g>

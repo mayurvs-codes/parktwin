@@ -33,15 +33,15 @@ test.describe("B01 — Vehicle recognised -> assignment", () => {
     await expect(page.locator("body")).toContainText("SP-07");
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
     await expect(logPanel).toBeVisible({ timeout: 10000 });
-    await expect(logPanel).toContainText("B7");
+    await expect(logPanel).toContainText("C7");
     await expect(logPanel).toContainText("driving aisle");
     await ctx.takeScreenshot("assignment_announcement_received");
 
-    await page.waitForFunction(() => (window as any).__spokenUtterances?.some((u: any) => u.text.includes("B7")), { timeout: 5000 }).catch(() => {});
+    await page.waitForFunction(() => (window as any).__spokenUtterances?.some((u: any) => u.text.includes("C7")), { timeout: 5000 }).catch(() => {});
     const spoken = await getSpokenUtterances(page);
-    const spokenAssignment = spoken.find((u) => u.text.includes("B7"));
+    const spokenAssignment = spoken.find((u) => u.text.includes("C7"));
     expect(spokenAssignment).toBeDefined();
-    expect(spokenAssignment!.text).toContain("Vehicle recognised. Your designated parking space is B7.");
+    expect(spokenAssignment!.text).toContain("Vehicle recognised. Your designated parking space is C7.");
 
     // Backend state assertion: /violations/announcements matches UI text
     const logRes = await page.request.get(`${BACKEND_URL}/violations/announcements`);
@@ -51,7 +51,7 @@ test.describe("B01 — Vehicle recognised -> assignment", () => {
     const backendLogged = logData.announcements.find((a: any) => a.kind === "ASSIGNMENT" && a.vehicle_id === "VEH-001");
     expect(backendLogged).toBeDefined();
     // Backend keeps the internal id (SP-07); the spoken/UI text shows the row label (B7).
-    expect(backendLogged.text.replace("SP-07", "B7")).toBe(spokenAssignment!.text);
+    expect(backendLogged.text.replace("SP-07", "C7")).toBe(spokenAssignment!.text);
 
     await ctx.finish();
   });

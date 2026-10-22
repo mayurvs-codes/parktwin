@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Page, expect } from "@playwright/test";
 
-export const WRONG_BAY_TEXT = "Warning! This is not your designated parking space. Please move to space B7.";
+export const WRONG_BAY_TEXT = "Warning! This is not your designated parking space. Please move to space C7.";
 
 /** Driver VEH-001 (designated SP-07) — the same track id the driver-portal demo buttons use. */
 export const VEH = { vehicle_id: "VEH-001", track_id: 9001, assigned_bay: "SP-07" };

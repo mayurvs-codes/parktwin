@@ -26,7 +26,7 @@ test.describe("B14 — 3D failure fallback", () => {
 
       // The 2D twin underneath still works: select SP-01 by clicking it.
       await page.locator("[data-testid='twin-slot-SP-01']").first().dispatchEvent("click");
-      await expect(page.locator("main")).toContainText(/Assigned Space\s*B1/);
+      await expect(page.locator("main")).toContainText(/Assigned Space\s*C1/);
       await page.screenshot({ path: path.join(dir, "02_2d_twin_usable.png"), fullPage: true });
       expect(errors).toEqual([]);
     } finally {

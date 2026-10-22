@@ -1,3 +1,6 @@
+import { FLOOR_PLAN_AISLES, OPERATIONAL_STALLS, getPlanStall } from "./floorPlan";
+import { bayLabel } from "@/utils/bayLabel";
+
 /**
  * ParkTwin AI — Canonical Demo Scenario & Floor Plan Geometry
  * ==========================================================
@@ -225,113 +228,37 @@ export const CANONICAL_16_CAMERAS: DemoCamera[] = [
 ];
 
 // ─── 3. 60 UNIFIED OPERATIONAL PARKING SPACES ─────────────────────────────────
-export const CANONICAL_60_SPACES: DemoParkingSpace[] = [
-  // ─── FOCUSED DEMO ZONE: ISLAND 1 (SP-01 to SP-20) ──────────────────────────
-  // North Row (SP-01 to SP-08): 8 vertical stalls facing Top Horizontal Aisle (y=365)
-  ...Array.from({ length: 8 }, (_, i) => ({
-    id: `SP-${String(i + 1).padStart(2, "0")}`,
-    name: `P${String(i + 1).padStart(2, "0")}`,
-    x: Math.round(610 + i * 60),
-    y: 365,
-    width: 48,
-    height: 76,
-    zone: "Zone B (Upper Island)",
-    orientation: "vertical" as const,
-    coveringCamera: "CAM-12",
-  })),
-
-  // South Row (SP-09 to SP-16): 8 vertical stalls facing 2nd Horizontal Aisle (y=505)
-  ...Array.from({ length: 8 }, (_, i) => ({
-    id: `SP-${String(9 + i).padStart(2, "0")}`,
-    name: `P${String(9 + i).padStart(2, "0")}`,
-    x: Math.round(610 + i * 60),
-    y: 505,
-    width: 48,
-    height: 76,
-    zone: "Zone B (Upper Island)",
-    orientation: "vertical" as const,
-    coveringCamera: "CAM-12",
-  })),
-
-  // West End (SP-17 to SP-20): 4 horizontal stalls facing West Vertical Trunk (x=530)
-  ...Array.from({ length: 4 }, (_, i) => ({
-    id: `SP-${String(17 + i).padStart(2, "0")}`,
-    name: `P${String(17 + i).padStart(2, "0")}`,
-    x: 530,
-    y: Math.round(340 + i * 60),
-    width: 76,
-    height: 48,
-    zone: "Zone B (Upper Island)",
-    orientation: "horizontal" as const,
-    coveringCamera: "CAM-09",
-  })),
-
-  // ─── BACKGROUND FACILITY SPACES (SP-21 to SP-60) ──────────────────────────
-  // Zone A: North Perimeter Row A (13 spaces, SP-21 to SP-33)
-  ...Array.from({ length: 13 }, (_, i) => ({
-    id: `SP-${String(21 + i).padStart(2, "0")}`,
-    name: `P${String(21 + i).padStart(2, "0")}`,
-    x: Math.round(230 + i * 65),
-    y: 145,
-    width: 48,
-    height: 76,
-    zone: "Zone A (North Perimeter)",
-    orientation: "vertical" as const,
-    coveringCamera: i < 6 ? "CAM-15" : "CAM-01",
-  })),
-
-  // Zone C: Central Ramp Row (10 spaces, SP-34 to SP-43)
-  ...Array.from({ length: 10 }, (_, i) => ({
-    id: `SP-${String(34 + i).padStart(2, "0")}`,
-    name: `P${String(34 + i).padStart(2, "0")}`,
-    x: Math.round(520 + i * 58),
-    y: 718,
-    width: 46,
-    height: 76,
-    zone: "Zone C (Central Ramp Row)",
-    orientation: "vertical" as const,
-    coveringCamera: "CAM-10",
-  })),
-
-  // Zone D: Lower Island (8 spaces, SP-44 to SP-51)
-  ...Array.from({ length: 8 }, (_, i) => ({
-    id: `SP-${String(44 + i).padStart(2, "0")}`,
-    name: `P${String(44 + i).padStart(2, "0")}`,
-    x: Math.round(550 + i * 58),
-    y: 1065,
-    width: 46,
-    height: 76,
-    zone: "Zone D (Lower Island)",
-    orientation: "vertical" as const,
-    coveringCamera: "CAM-09",
-  })),
-
-  // Zone E: South Perimeter (5 spaces, SP-52 to SP-56)
-  ...Array.from({ length: 5 }, (_, i) => ({
-    id: `SP-${String(52 + i).padStart(2, "0")}`,
-    name: `P${String(52 + i).padStart(2, "0")}`,
-    x: Math.round(580 + i * 65),
-    y: 1425,
-    width: 48,
-    height: 76,
-    zone: "Zone E (South Perimeter)",
-    orientation: "vertical" as const,
-    coveringCamera: "CAM-06",
-  })),
-
-  // Zone F: West Wing (4 spaces, SP-57 to SP-60)
-  ...Array.from({ length: 4 }, (_, i) => ({
-    id: `SP-${String(57 + i).padStart(2, "0")}`,
-    name: `P${String(57 + i).padStart(2, "0")}`,
-    x: Math.round(85 + i * 65),
-    y: 608,
-    width: 50,
-    height: 74,
-    zone: "Zone F (West Wing)",
-    orientation: "vertical" as const,
-    coveringCamera: "CAM-08",
-  })),
-];
+export const CANONICAL_60_SPACES: DemoParkingSpace[] = OPERATIONAL_STALLS.map((stallId, i) => {
+  const n = i + 1;
+  const stall = getPlanStall(stallId);
+  // Zones keep the original numbering: A = SP-21..33, B = focused island (SP-01..20),
+  // C = SP-34..43, D = SP-44..51, E = SP-52..56, F = SP-57..60.
+  const zone =
+    n <= 20
+      ? "Zone B (Upper Island)"
+      : n <= 33
+      ? "Zone A (North Perimeter)"
+      : n <= 43
+      ? "Zone C (Central Ramp Row)"
+      : n <= 51
+      ? "Zone D (Lower Island)"
+      : n <= 56
+      ? "Zone E (South Perimeter)"
+      : "Zone F (West Wing)";
+  const coveringCamera =
+    n <= 16 ? "CAM-12" : n <= 20 ? "CAM-09" : n <= 26 ? "CAM-15" : n <= 33 ? "CAM-01" : n <= 43 ? "CAM-10" : n <= 51 ? "CAM-09" : n <= 56 ? "CAM-06" : "CAM-08";
+  return {
+    id: `SP-${String(n).padStart(2, "0")}`,
+    name: bayLabel(`SP-${String(n).padStart(2, "0")}`),
+    x: Math.round(stall.canvas.x),
+    y: Math.round(stall.canvas.y),
+    width: Math.round(stall.canvas.width),
+    height: Math.round(stall.canvas.height),
+    zone,
+    orientation: stall.orientation,
+    coveringCamera,
+  };
+});
 
 // ─── 4. VECTOR SVG FACILITY ARCHITECTURE GEOMETRY (MATCHING BLUEPRINT) ────────
 export const FACILITY_SVG_GEOMETRY = {
@@ -358,20 +285,14 @@ export const FACILITY_SVG_GEOMETRY = {
   driveAisles: [
     // Top-Right Ramp Gateway (ACCESS_POINT_B2)
     { id: "entry_ramp_top", d: "M 1161 0 L 1290 0 L 1290 200 L 1161 200 Z" },
-    // West Entry Ramp
+    // West entry ramp: runs out through the west wall, level with the west corridor
     { id: "entry_ramp_west", d: "M 0 674 L 345 674 L 345 776 L 0 776 Z" },
-    // East Vertical Drive Trunk
-    { id: "east_trunk", d: "M 1161 90 L 1290 90 L 1290 1370 L 1161 1370 Z" },
-    // West Vertical Drive Trunk
-    { id: "west_trunk", d: "M 345 200 L 478 200 L 478 1370 L 345 1370 Z" },
-    // Top Horizontal Drive Aisle
-    { id: "top_aisle", d: "M 45 200 L 1290 200 L 1290 303 L 45 303 Z" },
-    // 2nd Horizontal Drive Aisle
-    { id: "second_aisle", d: "M 345 565 L 1290 565 L 1290 657 L 345 657 Z" },
-    // 3rd Horizontal Drive Aisle
-    { id: "third_aisle", d: "M 345 913 L 1290 913 L 1290 1005 L 345 1005 Z" },
-    // Bottom Horizontal Drive Aisle
-    { id: "bottom_aisle", d: "M 45 1267 L 1290 1267 L 1290 1370 L 45 1370 Z" },
+    // Aisles measured from the reference floor plan (top aisle, west trunk, aisles B/C, bottom aisle,
+    // east trunk and the west entry corridor)
+    ...FLOOR_PLAN_AISLES.map(({ id, canvas: [x0, y0, x1, y1] }) => ({
+      id: `plan_${id}`,
+      d: `M ${x0} ${y0} L ${x1} ${y0} L ${x1} ${y1} L ${x0} ${y1} Z`,
+    })),
   ],
 
   // Structural & Architectural Cores matching the blueprint

@@ -17,7 +17,7 @@ import { useCctvEvidenceModalStore } from "@/store/useCctvEvidenceModalStore";
 import type { CctvCameraId } from "@/components/evidence/CctvEvidenceViewer";
 import { isSlotReserved } from "./demoScenarioData";
 import { useSharedDemoState } from "@/store/useSharedDemoState";
-import { bayLabel } from "@/utils/bayLabel";
+import { bayLabel, relabelBaysInText } from "@/utils/bayLabel";
 
 function getAlertContext(spaceId: string, vehicleId?: string | null): string {
   if (spaceId === "SP-07" || vehicleId === "VEH-001") {
@@ -310,7 +310,7 @@ export function TwinIntelligenceRail() {
                     )}
                   </div>
                   <div className="text-[10px] text-muted-foreground font-mono">
-                    Slot Identifier: {selectedSharedSpace.id} (Focused Demo Zone)
+                    Bay: {bayLabel(selectedSharedSpace.id)} · ID {selectedSharedSpace.id} (Focused Demo Zone)
                   </div>
                 </div>
                 <span
@@ -507,7 +507,7 @@ export function TwinIntelligenceRail() {
                   <div className="font-mono font-extrabold text-base text-foreground tracking-tight leading-tight">
                     Bay {selectedSlot.name}
                   </div>
-                  <div className="text-[10px] text-muted-foreground font-mono">Slot Identifier: {selectedSlot.id}</div>
+                  <div className="text-[10px] text-muted-foreground font-mono">Bay: {bayLabel(selectedSlot.id)} · ID {selectedSlot.id}</div>
                 </div>
                 <span
                   className={`font-mono text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
@@ -782,7 +782,7 @@ export function TwinIntelligenceRail() {
                   </span>
                   <span className="text-muted-foreground font-normal">{evt.timeLabel}</span>
                 </div>
-                <p className="text-[11px] text-foreground leading-snug">{evt.message}</p>
+                <p className="text-[11px] text-foreground leading-snug">{relabelBaysInText(evt.message)}</p>
               </div>
             ))
           )}

@@ -25,7 +25,7 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
     // Verify announcement log panel contains assigned bay id and route guidance
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
     await expect(logPanel).toBeVisible();
-    await expect(logPanel).toContainText("B7");
+    await expect(logPanel).toContainText("C7");
     await expect(logPanel).toContainText("driving aisle");
 
     // Verify no wrong bay warning or violation alert is active
@@ -59,7 +59,7 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
 
     // Assert announcement log panel displays exact warning text containing both bay IDs
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
-    await expect(logPanel).toContainText("Warning! This is not your designated parking space. Please move to space B7.");
+    await expect(logPanel).toContainText("Warning! This is not your designated parking space. Please move to space C7.");
 
     // Relocate / leave wrong bay via "MOVE TO SP-07"
     const relocateBtn = page.getByRole("button", { name: /MOVE TO SP-07/i });

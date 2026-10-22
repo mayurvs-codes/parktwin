@@ -35,7 +35,7 @@ test.describe("B15 — Voice blocked / unlock flow", () => {
     // Verify visible text fallback in announcement log panel
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
     await expect(logPanel).toBeVisible({ timeout: 10000 });
-    await expect(logPanel).toContainText("Vehicle recognised. Your designated parking space is B7.");
+    await expect(logPanel).toContainText("Vehicle recognised. Your designated parking space is C7.");
     await ctx.takeScreenshot("visual_fallback_announcement");
 
     // Speak count should be 0 before user gesture unlock
@@ -70,7 +70,7 @@ test.describe("B15 — Voice blocked / unlock flow", () => {
     const spoken = await getSpokenUtterances(page);
     const spokenWarning = spoken.find((u) => u.text.includes("designated parking space"));
     expect(spokenWarning).toBeDefined();
-    expect(spokenWarning!.text).toContain("Warning! This is not your designated parking space. Please move to space B7.");
+    expect(spokenWarning!.text).toContain("Warning! This is not your designated parking space. Please move to space C7.");
 
     const finalSpeaks = await getSpeakCallCount(page);
     expect(finalSpeaks).toBeGreaterThanOrEqual(1);
@@ -96,7 +96,7 @@ test.describe("B15b — Browser without speech support", () => {
       data: { camera_id: "CAM-01", vehicle_id: "VEH-NOSPEECH-01", assigned_bay: "SP-07", source: "demo" },
     });
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
-    await expect(logPanel).toContainText("Vehicle recognised. Your designated parking space is B7.", { timeout: 10000 });
+    await expect(logPanel).toContainText("Vehicle recognised. Your designated parking space is C7.", { timeout: 10000 });
     await expect(page.locator("main")).toContainText(/unavailable/i);
     await ctx.takeScreenshot("no_speech_support_text_fallback");
     await ctx.finish();

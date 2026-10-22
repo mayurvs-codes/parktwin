@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useDemoMovieStore } from "@/store/useDemoMovieStore";
-import { bayLabel } from "@/utils/bayLabel";
+import { bayLabel, relabelBaysInText } from "@/utils/bayLabel";
 
 export function RecentActivityPanel() {
   const events = useDemoMovieStore((s) => s.events);
@@ -52,7 +52,7 @@ export function RecentActivityPanel() {
                   </span>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium text-foreground truncate">
-                      {ev.message}
+                      {relabelBaysInText(ev.message)}
                     </p>
                     <p className="text-[10px] font-mono text-muted-foreground">
                       {ev.plate} · {bayLabel(ev.slotId)} · {ev.camera}

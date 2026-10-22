@@ -39,7 +39,7 @@ test.describe("B05 — Wrong-bay entry (early warning)", () => {
     const warnings = (await getAnnouncements(page.request)).filter((a) => a.kind === "WRONG_BAY_WARNING");
     expect(warnings).toHaveLength(1);
     // Backend text keeps the internal bay id; the UI/voice relabels it (SP-07 -> B7).
-    expect(warnings[0].text).toBe(WRONG_BAY_TEXT.replace("B7", "SP-07"));
+    expect(warnings[0].text).toBe(WRONG_BAY_TEXT.replace("C7", "SP-07"));
     await ctx.finish();
   });
 });
