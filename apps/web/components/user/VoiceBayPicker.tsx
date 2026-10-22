@@ -86,6 +86,14 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
   };
 
   const startListening = async () => {
+    // Brave ships the speech API disabled (no Google speech service), so it always reports "blocked".
+    const brave = (navigator as unknown as { brave?: { isBrave?: () => Promise<boolean> } }).brave;
+    if (brave?.isBrave && (await brave.isBrave())) {
+      setFeedback(
+        "Brave blocks browser voice recognition, even with the microphone allowed. Open this page in Chrome or Edge to speak, or type the bay."
+      );
+      return;
+    }
     const rec = createRecognition();
     if (!rec) {
       setFeedback("This browser has no voice recognition. Use Chrome or Edge, or type the bay.");
