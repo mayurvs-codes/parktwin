@@ -12,6 +12,7 @@ const LETTER_WORDS: Record<string, string> = {
   see: "c", sea: "c", si: "c", charlie: "c",
   dee: "d", de: "d", delta: "d",
   eee: "e", echo: "e",
+  pee: "p", tee: "t", vee: "v", zee: "z", zed: "z",
   eff: "f", ef: "f", foxtrot: "f",
   gee: "g", golf: "g",
   aitch: "h", hotel: "h",
@@ -29,9 +30,18 @@ const asNumber = (token: string | undefined): number | null => {
   return NUMBER_WORDS[token] ?? null;
 };
 
+// Letters a speech engine commonly confuses with each other ("bee" heard as "dee"/"pee"/"see"...).
+const SOUND_ALIKE: string[] = ["bcdegptvz", "ajk", "fsx", "mn", "iy"];
+const sameSound = (a: string, b: string): boolean =>
+  a === b || SOUND_ALIKE.some((g) => g.includes(a) && g.includes(b));
+
+const ORDINALS: Record<string, number> = {
+  first: 0, "1st": 0, second: 1, "2nd": 1, third: 2, "3rd": 2, fourth: 3, "4th": 3, fifth: 4, "5th": 4,
+};
+
 /**
- * Turn what the driver said ("bay C 7", "see seven", "SP-14") into one of the
- * currently available bay ids. Only labels that exist are ever returned.
+ * Turn what the driver said ("bay C 7", "see seven", "bravo one", "SP-14") into one of the
+ * currently available bay ids. Only available bays are ever returned as a match.
  */
 export function parseSpokenBay(transcript: string, availableIds: readonly string[]): SpokenBayResult {
   const text = transcript.toLowerCase().replace(/[.,!?]/g, " ");
@@ -45,20 +55,61 @@ export function parseSpokenBay(transcript: string, availableIds: readonly string
 
   // "c7" / "c-7" glued together, otherwise split to tokens.
   const tokens = text
-    .replace(/\b([a-i])[-\s]?(\d{1,2})\b/g, "$1 $2")
+    .replace(/\b([a-z])[-\s]?(\d{1,2})\b/g, "$1 $2")
     .split(/[\s-]+/)
     .filter(Boolean);
 
-  for (let i = 0; i < tokens.length - 1; i++) {
+  // Ordinal pick from the free bays: "first", "second bay"...
+  for (const t of tokens) {
+    const idx = ORDINALS[t];
+    const id = idx === undefined ? undefined : availableIds[idx];
+    if (id) return { kind: "match", id, label: bayLabel(id) };
+  }
+
+  let heardLetter: string | null = null;
+  let heardNumber: number | null = null;
+  for (let i = 0; i < tokens.length; i++) {
     const raw = tokens[i] as string;
-    const letter = /^[a-i]$/.test(raw) ? raw : LETTER_WORDS[raw];
-    if (!letter) continue;
+    const letter = /^[a-z]$/.test(raw) ? raw : LETTER_WORDS[raw];
     const number = asNumber(tokens[i + 1]);
-    if (number === null) continue;
-    const label = `${letter.toUpperCase()}${number}`;
+    if (letter && number !== null) {
+      heardLetter = letter;
+      heardNumber = number;
+      break;
+    }
+  }
+  if (heardNumber === null) {
+    // Only a number was understood ("bay one"): use it if exactly one free bay has that number.
+    for (const t of tokens) {
+      const n = asNumber(t);
+      if (n !== null) {
+        heardNumber = n;
+        break;
+      }
+    }
+  }
+  if (heardNumber === null) return { kind: "none" };
+
+  if (heardLetter) {
+    const label = `${heardLetter.toUpperCase()}${heardNumber}`;
     const id = bayIdFromLabel(label);
-    if (!id) continue;
-    return availableIds.includes(id) ? { kind: "match", id, label } : { kind: "unavailable", label };
+    if (id && availableIds.includes(id)) return { kind: "match", id, label };
+  }
+
+  // Fuzzy: same number, and (when a letter was heard) a sound-alike row letter; must be unambiguous.
+  const candidates = availableIds.filter((id) => {
+    const label = bayLabel(id);
+    if (Number(label.slice(1)) !== heardNumber) return false;
+    return heardLetter ? sameSound(label.charAt(0).toLowerCase(), heardLetter) : true;
+  });
+  if (candidates.length === 1) {
+    const id = candidates[0] as string;
+    return { kind: "match", id, label: bayLabel(id) };
+  }
+
+  if (heardLetter) {
+    const label = `${heardLetter.toUpperCase()}${heardNumber}`;
+    if (bayIdFromLabel(label)) return { kind: "unavailable", label };
   }
   return { kind: "none" };
 }

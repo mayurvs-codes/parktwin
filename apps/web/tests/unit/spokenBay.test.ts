@@ -24,3 +24,27 @@ describe("parseSpokenBay", () => {
     expect(parseSpokenBay("hello there", FREE)).toEqual({ kind: "none" });
   });
 });
+
+describe("parseSpokenBay: speech-engine mistakes", () => {
+  const FREE2 = ["SP-11", "SP-14", "SP-17", "SP-19"]; // D3, D6, B1, B3
+
+  it("understands phonetic words", () => {
+    expect(parseSpokenBay("bravo one", FREE2)).toMatchObject({ kind: "match", id: "SP-17" });
+    expect(parseSpokenBay("delta six", FREE2)).toMatchObject({ kind: "match", id: "SP-14" });
+  });
+
+  it("resolves sound-alike letters when only one free bay fits", () => {
+    expect(parseSpokenBay("pee one", FREE2)).toMatchObject({ kind: "match", id: "SP-17" }); // B1
+    expect(parseSpokenBay("t 6", FREE2)).toMatchObject({ kind: "match", id: "SP-14" }); // D6
+  });
+
+  it("does not guess when sound-alikes are ambiguous", () => {
+    // B3 and D3 are both free and sound alike -> "see three" must not silently pick one.
+    expect(parseSpokenBay("see three", FREE2).kind).not.toBe("match");
+  });
+
+  it("accepts a bare number when unique, and ordinals", () => {
+    expect(parseSpokenBay("bay six", FREE2)).toMatchObject({ kind: "match", id: "SP-14" });
+    expect(parseSpokenBay("the first bay", FREE2)).toMatchObject({ kind: "match", id: "SP-11" });
+  });
+});

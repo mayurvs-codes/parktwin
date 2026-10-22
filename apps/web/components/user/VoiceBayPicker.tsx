@@ -58,7 +58,7 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
       } else if (result.kind === "unavailable") {
         setFeedback(`Bay ${result.label} is not available. Pick a free bay.`);
       } else {
-        setFeedback(`Could not catch a bay. Say a letter and number, like "${bayLabel(availableIds[0] ?? "SP-01")}".`);
+        setFeedback(`Could not catch a bay. Say a letter and number (use Bravo, Charlie, Delta for clearer letters), like "${bayLabel(availableIds[0] ?? "SP-01")}".`);
       }
     },
     [availableIds, onPick]
@@ -73,7 +73,7 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
       case "service-not-allowed":
         return "Microphone blocked. Click the lock icon in the address bar, allow the microphone, then try again.";
       case "no-speech":
-        return "No speech heard. Tap the mic and say a bay, like \"D 6\".";
+        return "No speech heard. Tap the mic and say \"Bravo 1\", \"Delta 6\" or \"first bay\".";
       case "audio-capture":
         return "No microphone found. Plug one in or choose another input, or type the bay.";
       case "network":
@@ -121,7 +121,7 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
       r.lang = "en-US";
       r.continuous = true;
       r.interimResults = true;
-      r.maxAlternatives = 3;
+      r.maxAlternatives = 5;
       r.onresult = (e) => {
         const result = e.results[e.results.length - 1];
         if (!result) return;
@@ -167,7 +167,7 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
     };
 
     begin(rec);
-    setFeedback("Listening… say a bay, like \"D 6\".");
+    setFeedback("Listening… say \"Bravo 1\", \"Delta 6\" or \"first bay\".");
     setHeard("");
     setListening(true);
     try {
