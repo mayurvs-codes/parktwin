@@ -16,7 +16,7 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
 
   test("Scenario 1: Correct vehicle — assignment announcement appears and no wrong-bay warning occurs", async ({ page }) => {
     // Persona User A is active by default; designated space is SP-07
-    await expect(page.locator("body")).toContainText("SP-07");
+    await expect(page.locator("body")).toContainText("C7");
 
     // Check Audio Guidance card displays
     const guidanceHeader = page.locator("text=AUDIO GUIDANCE");
@@ -54,15 +54,15 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
 
     // Verify warning is displayed with actual bay SP-11 vs assigned SP-07 received over WebSocket
     await expect(page.locator("text=Wrong Space Warning")).toBeVisible({ timeout: 10000 });
-    await expect(page.getByText("SP-11", { exact: true }).first()).toBeVisible();
-    await expect(page.locator("body")).toContainText("SP-07");
+    await expect(page.getByText("D3", { exact: true }).first()).toBeVisible();
+    await expect(page.locator("body")).toContainText("C7");
 
     // Assert announcement log panel displays exact warning text containing both bay IDs
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
     await expect(logPanel).toContainText("Warning! This is not your designated parking space. Please move to space C7.");
 
     // Relocate / leave wrong bay via "MOVE TO SP-07"
-    const relocateBtn = page.getByRole("button", { name: /MOVE TO SP-07/i });
+    const relocateBtn = page.getByRole("button", { name: /MOVE TO C7/i });
     await expect(relocateBtn).toBeVisible();
     await relocateBtn.click();
 
@@ -109,8 +109,8 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
     const alertCard = page.locator("[data-testid='admin-operational-alerts']");
     await expect(alertCard).toBeVisible({ timeout: 10000 });
     await expect(alertCard).toContainText("PARKING VIOLATION");
-    await expect(alertCard).toContainText("SP-11");
-    await expect(alertCard).toContainText("SP-07");
+    await expect(alertCard).toContainText("D3");
+    await expect(alertCard).toContainText("C7");
     await expect(alertCard).toContainText("10:00+");
   });
 

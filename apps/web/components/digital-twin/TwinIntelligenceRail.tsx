@@ -137,7 +137,7 @@ export function TwinIntelligenceRail() {
                   GRACE PERIOD ENDING (8:00+)
                 </div>
                 <div className="text-[11px] text-amber-100/90 font-mono">
-                  {sharedViolation.vehicleId} in {sharedViolation.actualSpaceId} (expected {sharedViolation.designatedSpaceId}) · escalates to admin at 10:00
+                  {sharedViolation.vehicleId} in {bayLabel(sharedViolation.actualSpaceId)} (expected {bayLabel(sharedViolation.designatedSpaceId)}) · escalates to admin at 10:00
                 </div>
               </div>
             )}
@@ -161,11 +161,11 @@ export function TwinIntelligenceRail() {
                   </div>
                   <div className="flex justify-between border-b border-red-500/20 pb-0.5">
                     <span className="text-muted-foreground">Expected Space:</span>
-                    <strong className="text-sky-400 font-mono">{sharedViolation.designatedSpaceId}</strong>
+                    <strong className="text-sky-400 font-mono">{bayLabel(sharedViolation.designatedSpaceId)}</strong>
                   </div>
                   <div className="flex justify-between border-b border-red-500/20 pb-0.5">
                     <span className="text-muted-foreground">Actual Space:</span>
-                    <strong className="text-red-400 font-mono">{sharedViolation.actualSpaceId}</strong>
+                    <strong className="text-red-400 font-mono">{bayLabel(sharedViolation.actualSpaceId)}</strong>
                   </div>
                   <div className="flex justify-between border-b border-red-500/20 pb-0.5">
                     <span className="text-muted-foreground">Duration:</span>
@@ -350,7 +350,7 @@ export function TwinIntelligenceRail() {
                       </div>
                       <div className="flex justify-between border-b border-red-500/20 pb-1">
                         <span className="text-muted-foreground">Expected Space:</span>
-                        <strong className="text-sky-400 font-mono">{sharedViolation?.designatedSpaceId ?? "SP-07"}</strong>
+                        <strong className="text-sky-400 font-mono">{bayLabel(sharedViolation?.designatedSpaceId ?? "SP-07")}</strong>
                       </div>
                       <div className="flex justify-between border-b border-red-500/20 pb-1">
                         <span className="text-muted-foreground">Actual Space:</span>
@@ -386,7 +386,7 @@ export function TwinIntelligenceRail() {
                       </div>
                       <div className="flex justify-between border-b border-amber-500/20 pb-1">
                         <span className="text-muted-foreground">Expected Space:</span>
-                        <strong className="text-sky-400 font-mono">{sharedViolation?.designatedSpaceId ?? "SP-07"}</strong>
+                        <strong className="text-sky-400 font-mono">{bayLabel(sharedViolation?.designatedSpaceId ?? "SP-07")}</strong>
                       </div>
                       <div className="flex justify-between border-b border-amber-500/20 pb-1">
                         <span className="text-muted-foreground">Actual Space:</span>
@@ -695,7 +695,7 @@ export function TwinIntelligenceRail() {
                     </span>
                     <span className="text-[10px] font-mono text-sky-600">bays</span>
                   </div>
-                  <div className="text-[9px] text-sky-400/70 mt-0.5">★ SP-07 · User A</div>
+                  <div className="text-[9px] text-sky-400/70 mt-0.5">★ {bayLabel("SP-07")} · User A</div>
                 </div>
 
                 {/* Reserved / Cameras KPI */}
@@ -710,7 +710,7 @@ export function TwinIntelligenceRail() {
                       </span>
                       <span className="text-[10px] font-mono text-amber-600">bays</span>
                     </div>
-                    <div className="text-[9px] text-amber-400/70 mt-0.5">SP-14 · User B</div>
+                    <div className="text-[9px] text-amber-400/70 mt-0.5">{bayLabel("SP-14")} · User B</div>
                   </div>
                 ) : (
                   <div className="rounded-xl border border-sky-900/30 bg-sky-950/10 p-2.5 shadow-sm">

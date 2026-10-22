@@ -30,7 +30,7 @@ test.describe("B01 — Vehicle recognised -> assignment", () => {
     expect(backendAnnouncement.vehicle_id).toBe("VEH-001");
 
     // UI assertions: browser shows assigned bay ID SP-07 and route in announcement panel
-    await expect(page.locator("body")).toContainText("SP-07");
+    await expect(page.locator("body")).toContainText("C7");
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
     await expect(logPanel).toBeVisible({ timeout: 10000 });
     await expect(logPanel).toContainText("C7");

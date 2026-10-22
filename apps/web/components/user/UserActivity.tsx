@@ -13,6 +13,7 @@ import {
   Cell,
 } from "recharts";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
+import { bayLabel } from "@/utils/bayLabel";
 
 const WEEKLY_DATA = [
   { day: "Mon", hours: 0.8 },
@@ -180,7 +181,7 @@ export function UserActivity() {
                 🅿️
               </div>
               <div>
-                <span className="text-white font-bold block">Space SP-07 · Zone B</span>
+                <span className="text-white font-bold block">Space {bayLabel("SP-07")} · Zone B</span>
                 <span className="text-slate-400 text-[11px]">Today · 14:15 - 14:48</span>
               </div>
             </div>
@@ -196,7 +197,7 @@ export function UserActivity() {
                 🅿️
               </div>
               <div>
-                <span className="text-white font-bold block">Space SP-14 · Zone B</span>
+                <span className="text-white font-bold block">Space {bayLabel("SP-14")} · Zone B</span>
                 <span className="text-slate-400 text-[11px]">Yesterday · 09:30 - 10:15</span>
               </div>
             </div>

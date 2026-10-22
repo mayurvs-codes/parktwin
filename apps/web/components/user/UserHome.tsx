@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useSharedDemoState } from "@/store/useSharedDemoState";
 import { UserParkingCard } from "./UserParkingCard";
+import { bayLabel } from "@/utils/bayLabel";
 
 /**
  * UserHome:
@@ -82,7 +83,7 @@ export function UserHome() {
             PARKTWIN AI
           </span>
           <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-950/60 border border-sky-800/60 text-sky-300">
-            FOCUSED ZONE (SP-01 – SP-20)
+            FOCUSED ZONE (ISLAND 1)
           </span>
         </div>
         <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
@@ -142,10 +143,10 @@ export function UserHome() {
               </span>
             </div>
             <div className="text-3xl sm:text-4xl font-black font-mono text-white tracking-tight">
-              SP-07
+              {bayLabel("SP-07")}
             </div>
             <p className="text-xs text-sky-200/80 font-mono font-medium">
-              Your designated parking space is <strong>SP-07</strong> (Zone A · North Concourse · Level B2).
+              Your designated parking space is <strong>{bayLabel("SP-07")}</strong> (Zone A · North Concourse · Level B2).
             </p>
           </div>
         ) : isReservedUser && designatedSpaceId ? (
@@ -232,7 +233,7 @@ export function UserHome() {
             className="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold font-mono text-sm h-12 shadow-lg shadow-sky-950 gap-2"
           >
             <Navigation className="h-4 w-4" />
-            <span>START NAVIGATION TO SP-07</span>
+            <span>START NAVIGATION TO {bayLabel("SP-07")}</span>
           </Button>
         ) : isReservedUser && designatedSpaceId ? (
           <Button

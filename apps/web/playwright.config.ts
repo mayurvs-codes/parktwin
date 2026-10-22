@@ -2,6 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./e2e",
+  timeout: 60_000, // multi-page journeys compile pages on first visit in dev
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -13,9 +14,13 @@ export default defineConfig({
   ],
   outputDir: "../../docs/evidence/3d-voice-violation/e2e/test-results",
   use: {
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3001",
-    trace: "on-first-retry",
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+    trace: "on",
+    video: "on",
     screenshot: "on",
+    launchOptions: {
+      args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-webgl"],
+    },
   },
   projects: [
     {

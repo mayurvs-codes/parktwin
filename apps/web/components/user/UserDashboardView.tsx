@@ -25,7 +25,7 @@ import { useVoiceStore } from "@/store/useVoiceStore";
 import { getEnv } from "@/utils/env";
 import { useDigitalTwinSocket } from "@/hooks/useDigitalTwinSocket";
 import { DigitalTwinMap } from "./DigitalTwinMap";
-import { bayLabel } from "@/utils/bayLabel";
+import { bayLabel, relabelBaysInText } from "@/utils/bayLabel";
 import { VoiceBayPicker } from "@/components/user/VoiceBayPicker";
 import { directionsToBay } from "@/utils/violationVoice";
 import { simulateWrongBay } from "@/utils/wrongBaySimulation";
@@ -65,6 +65,8 @@ async function syncDemoViolationClock(targetSeconds: number): Promise<void> {
     /* backend unreachable: the local demo state still updates */
   }
 }
+
+const DEMO_PERSONA_VEHICLES = ["VEH-001", "VEH-002", "VEH-003"];
 
 /** Speaks turn-by-turn directions to the driver's own bay right away. */
 async function speakNavigationNow(fromBay: string, toBay: string): Promise<void> {
@@ -132,6 +134,14 @@ export function UserDashboardView() {
   const currentVoiceAnnouncement = useVoiceStore((s) => s.currentAnnouncement);
   const receiveAnnouncement = useVoiceStore((s) => s.receiveAnnouncement);
   const announcementLog = useVoiceStore((s) => s.announcementLog);
+  // Only show the active driver's announcements (a guest must not see User A's assignment).
+  const isForActiveDriver = (vehicleId?: string) =>
+    !vehicleId || !DEMO_PERSONA_VEHICLES.includes(vehicleId) || vehicleId === activeVehicleId;
+  const driverLog = announcementLog.filter((e) => isForActiveDriver(e.vehicle_id));
+  const driverAnnouncement =
+    currentVoiceAnnouncement && isForActiveDriver(currentVoiceAnnouncement.vehicle_id)
+      ? currentVoiceAnnouncement
+      : null;
 
   // Live timer tick hook
   const [, setTick] = useState(0);
@@ -433,7 +443,7 @@ export function UserDashboardView() {
                   simulateWrongBay();
                 }}
                 className="h-8 text-xs font-mono font-bold border-rose-500/40 bg-rose-950/20 text-rose-300 hover:bg-rose-900/40 hover:text-white px-2.5 flex items-center gap-1"
-                title="Simulate VEH-001 parking in unauthorized SP-11 (driver warned, 10m policy)"
+                title="Simulate the current driver parking in the wrong bay (instant spoken warning + directions)"
               >
                 <AlertTriangle className="h-3 w-3" />
                 <span className="hidden sm:inline">Simulate Wrong Space</span>
@@ -464,7 +474,7 @@ export function UserDashboardView() {
                 FACILITY DIGITAL TWIN
               </span>
               <span className="text-[11px] font-mono text-slate-400">
-                · Island 1 (SP-01 to SP-20)
+                · Island 1
               </span>
             </div>
 
@@ -526,9 +536,9 @@ export function UserDashboardView() {
                     </Badge>
                   )}
                 </div>
-                {currentVoiceAnnouncement ? (
+                {driverAnnouncement ? (
                   <div className="text-xs font-mono text-slate-200 bg-slate-950/60 p-2 rounded border border-slate-800">
-                    &ldquo;{currentVoiceAnnouncement.text}&rdquo;
+                    &ldquo;{relabelBaysInText(driverAnnouncement.text)}&rdquo;
                   </div>
                 ) : (
                   <div className="text-[11px] font-mono text-slate-400">
@@ -540,13 +550,13 @@ export function UserDashboardView() {
                 <div data-testid="announcement-log-panel" className="mt-2 space-y-1.5 border-t border-slate-800/80 pt-2">
                   <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider flex items-center justify-between">
                     <span>ANNOUNCEMENT LOG</span>
-                    <span className="text-[9px] text-slate-500">{announcementLog.length} events</span>
+                    <span className="text-[9px] text-slate-500">{driverLog.length} events</span>
                   </div>
-                  {announcementLog.length === 0 ? (
+                  {driverLog.length === 0 ? (
                     <div className="text-[10px] font-mono text-slate-500 italic">No announcements recorded.</div>
                   ) : (
                     <div className="space-y-1 max-h-36 overflow-y-auto pr-1">
-                      {announcementLog.slice().reverse().map((entry) => (
+                      {driverLog.slice().reverse().map((entry) => (
                         <div
                           key={entry.message_id}
                           data-testid="announcement-log-item"
@@ -582,11 +592,11 @@ export function UserDashboardView() {
                   {/* Core Required User Warning Notice */}
                   <div className="p-2.5 rounded-lg border border-amber-500/30 bg-amber-950/20 space-y-1">
                     <p className="text-xs font-bold font-mono text-amber-200">
-                      Vehicle is parked in the wrong space. Please move to {sharedViolation?.designatedSpaceId || "SP-07"}.
+                      Vehicle is parked in the wrong space. Please move to {bayLabel(sharedViolation?.designatedSpaceId || "SP-07")}.
                     </p>
                     <p className="text-[11px] text-slate-300 font-sans">
                       {isLongStay
-                        ? "Vehicle presence in unauthorized bay SP-11 has exceeded 10 minutes. Operational violation alert dispatched to Facility Management."
+                        ? `Vehicle presence in unauthorized bay ${bayLabel(sharedViolation?.actualSpaceId || "SP-11")} has exceeded 10 minutes. Operational violation alert dispatched to Facility Management.`
                         : "A 10-minute grace period applies before escalation to Admin Operational Alert. Please relocate your vehicle immediately."}
                     </p>
                   </div>
@@ -594,11 +604,11 @@ export function UserDashboardView() {
                   <div className="grid grid-cols-2 gap-2 text-center font-mono">
                     <div className="p-2 rounded bg-slate-950/80 border border-slate-800">
                       <span className="text-[10px] text-slate-400 uppercase block">Expected Space</span>
-                      <span className="text-sm font-bold text-sky-400">{sharedViolation?.designatedSpaceId || "SP-07"}</span>
+                      <span className="text-sm font-bold text-sky-400">{bayLabel(sharedViolation?.designatedSpaceId || "SP-07")}</span>
                     </div>
                     <div className="p-2 rounded bg-rose-950/80 border border-rose-800/80">
                       <span className="text-[10px] text-rose-300 uppercase block">Actual Space</span>
-                      <span className="text-sm font-bold text-rose-400">{sharedViolation?.actualSpaceId || "SP-11"}</span>
+                      <span className="text-sm font-bold text-rose-400">{bayLabel(sharedViolation?.actualSpaceId || "SP-11")}</span>
                     </div>
                   </div>
 
@@ -606,7 +616,7 @@ export function UserDashboardView() {
                   <div className="p-2.5 rounded-lg border border-rose-500/40 bg-slate-950/60 text-center space-y-0.5">
                     <div className="flex items-center justify-center gap-1.5 text-[9px] font-mono uppercase text-rose-400">
                       <Clock className="h-3 w-3" />
-                      <span>Dwell Duration in {sharedViolation?.actualSpaceId || "SP-11"}</span>
+                      <span>Dwell Duration in {bayLabel(sharedViolation?.actualSpaceId || "SP-11")}</span>
                     </div>
                     <div className="text-2xl font-black font-mono text-rose-300 tracking-wider">
                       {formatDuration(liveDurationSecs)}
@@ -683,7 +693,7 @@ export function UserDashboardView() {
                       className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold h-10 gap-2 shadow-lg shadow-emerald-950"
                     >
                       <CheckCircle2 className="h-4 w-4" />
-                      <span>MOVE TO {sharedViolation?.designatedSpaceId || "SP-07"} (FRESH TIMER)</span>
+                      <span>MOVE TO {bayLabel(sharedViolation?.designatedSpaceId || "SP-07")} (FRESH TIMER)</span>
                     </Button>
                     <div className="grid grid-cols-2 gap-1.5">
                       <Button
@@ -730,7 +740,7 @@ export function UserDashboardView() {
                   <div>
                     <span className="text-[10px] text-slate-400 uppercase font-mono block">DESTINATION</span>
                     <div className="text-3xl font-black font-mono text-white mt-0.5 tracking-tight">
-                      {assignedSpaceId || "SP-07"}
+                      {bayLabel(assignedSpaceId || "SP-07")}
                     </div>
                     <span className="text-xs text-slate-300 font-mono block mt-1">
                       Zone B · Level B2 · Aisle Guidance
@@ -822,7 +832,7 @@ export function UserDashboardView() {
                       <div>
                         <span className="text-[10px] text-slate-400 uppercase font-mono block">YOUR SPACE</span>
                         <div className="text-3xl font-black font-mono text-white mt-0.5 tracking-tight">
-                          {assignedSpaceId || "SP-07"}
+                          {bayLabel(assignedSpaceId || "SP-07")}
                         </div>
                         <span className="text-xs text-slate-300 font-mono block mt-0.5">
                           Zone B · Level B2 · {activeVehicleId}
@@ -867,7 +877,7 @@ export function UserDashboardView() {
                             <span>10-Minute Limit Exceeded</span>
                           </div>
                           <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
-                            Vehicle has exceeded standard parking threshold of 10 minutes in space {assignedSpaceId || "SP-07"}. Continuous occupancy verified in the same bay. Operational alert dispatched to facility management.
+                            Vehicle has exceeded standard parking threshold of 10 minutes in space {bayLabel(assignedSpaceId || "SP-07")}. Continuous occupancy verified in the same bay. Operational alert dispatched to facility management.
                           </p>
                         </div>
                       ) : isWarning ? (
@@ -1150,13 +1160,13 @@ export function UserDashboardView() {
                   <div>
                     <span className="text-[10px] text-slate-400 uppercase font-mono block">ASSIGNED BAY</span>
                     <div className="text-4xl font-black font-mono text-white mt-0.5 tracking-tight">
-                      SP-07
+                      {bayLabel("SP-07")}
                     </div>
                     <p className="text-xs text-slate-300 font-mono mt-1">
                       Zone B (Upper Island) · Level B2
                     </p>
                     <p className="text-xs text-sky-200/90 font-sans mt-2">
-                      Your designated parking space is <strong>SP-07</strong>. Guaranteed stall, no space searching required.
+                      Your designated parking space is <strong>{bayLabel("SP-07")}</strong>. Guaranteed stall, no space searching required.
                     </p>
                   </div>
 
@@ -1165,7 +1175,7 @@ export function UserDashboardView() {
                     className="w-full bg-sky-600 hover:bg-sky-500 text-white font-mono text-sm font-bold h-12 shadow-xl shadow-sky-950 gap-2"
                   >
                     <Navigation className="h-4 w-4" />
-                    <span>NAVIGATE TO SP-07</span>
+                    <span>NAVIGATE TO {bayLabel("SP-07")}</span>
                   </Button>
                 </div>
               ) : activePersona === "USER_B" && userBReservation ? (
