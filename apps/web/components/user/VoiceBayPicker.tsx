@@ -63,27 +63,81 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
     [availableIds, onPick]
   );
 
-  const startListening = () => {
+  const gotResultRef = useRef(false);
+
+  const describeError = (code?: string): string => {
+    switch (code) {
+      case "not-allowed":
+      case "service-not-allowed":
+        return "Microphone blocked. Click the lock icon in the address bar, allow the microphone, then try again.";
+      case "no-speech":
+        return "No speech heard. Tap the mic and say a bay, like \"D 6\".";
+      case "audio-capture":
+        return "No microphone found. Plug one in or choose another input, or type the bay.";
+      case "network":
+        return "Chrome's speech service could not be reached (needs internet). Type the bay instead.";
+      case "aborted":
+        return "Voice input stopped.";
+      default:
+        return `Voice input failed (${code ?? "unknown"}). Type the bay instead.`;
+    }
+  };
+
+  const startListening = async () => {
     const rec = createRecognition();
-    if (!rec) return;
+    if (!rec) {
+      setFeedback("This browser has no voice recognition. Use Chrome or Edge, or type the bay.");
+      return;
+    }
+
+    // Ask for the microphone explicitly so the permission prompt always appears.
+    try {
+      if (navigator.mediaDevices?.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach((t) => t.stop());
+      }
+    } catch (err) {
+      const name = (err as { name?: string })?.name;
+      setFeedback(describeError(name === "NotFoundError" ? "audio-capture" : "not-allowed"));
+      return;
+    }
+
     recRef.current = rec;
+    gotResultRef.current = false;
     rec.lang = "en-US";
-    rec.interimResults = false;
+    rec.interimResults = true;
     rec.maxAlternatives = 3;
     rec.onresult = (e) => {
-      const alternatives = Array.from(e.results[0] ?? []).map((a) => a.transcript);
+      const result = e.results[e.results.length - 1];
+      if (!result) return;
+      const alternatives = Array.from(result).map((a) => a.transcript);
+      const isFinal = (result as unknown as { isFinal?: boolean }).isFinal;
+      setHeard(alternatives[0] ?? "");
+      if (!isFinal) return;
+      gotResultRef.current = true;
       // Prefer the first alternative that parses to a bay.
       const best = alternatives.find((t) => parseSpokenBay(t, availableIds).kind !== "none") ?? alternatives[0] ?? "";
       handleTranscript(best);
     };
     rec.onerror = (e) => {
-      setFeedback(e.error === "not-allowed" ? "Microphone permission denied." : "Voice input failed. Try typing the bay.");
+      gotResultRef.current = true; // an error message is already shown
+      setFeedback(describeError(e.error));
       setListening(false);
     };
-    rec.onend = () => setListening(false);
-    setFeedback(null);
+    rec.onend = () => {
+      setListening(false);
+      if (!gotResultRef.current) setFeedback(describeError("no-speech"));
+    };
+    setFeedback("Listening… say a bay, like \"D 6\".");
+    setHeard("");
     setListening(true);
-    rec.start();
+    try {
+      rec.start();
+    } catch {
+      setListening(false);
+      setFeedback("Voice input could not start. Reload the page and try again.");
+    }
+    window.setTimeout(() => rec.stop(), 8000);
   };
 
   const stopListening = () => {
@@ -94,7 +148,7 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
   return (
     <div className="space-y-2 rounded-lg border border-slate-800 bg-slate-900/40 p-2.5" data-testid="voice-bay-picker">
       <div className="flex items-center gap-2">
-        {supported && (
+        {(
           <Button
             type="button"
             size="sm"
