@@ -27,6 +27,7 @@ import { getEnv } from "@/utils/env";
 import { useDigitalTwinSocket } from "@/hooks/useDigitalTwinSocket";
 import { DigitalTwinMap } from "./DigitalTwinMap";
 import { bayLabel } from "@/utils/bayLabel";
+import { VoiceBayPicker } from "@/components/user/VoiceBayPicker";
 
 /**
  * UserDashboardView:
@@ -144,6 +145,8 @@ export function UserDashboardView() {
     .map((id) => sharedSpaces[id])
     .filter((s): s is NonNullable<typeof s> => s?.status === "AVAILABLE");
   const availableCount = availableSpaces.length;
+  // Guests never choose: the first free bay is assigned to them.
+  const guestAssignedBay = availableSpaces[0] ?? null;
 
   // Check if User B has a confirmed reservation
   const userBReservation = Object.values(sharedSpaces).find(
@@ -273,6 +276,7 @@ export function UserDashboardView() {
   };
 
   const handleSlotClick = (slotId: string) => {
+    if (activePersona === "GUEST") return; // guests are assigned a bay, they do not pick one
     setSelectedSlotId(slotId);
   };
 
@@ -297,7 +301,7 @@ export function UserDashboardView() {
       ? (selectedSlotId || "SP-07")
       : activePersona === "USER_B"
       ? (userBReservation ? userBReservation.id : selectedSlotId)
-      : selectedSlotId;
+      : guestAssignedBay?.id ?? null;
 
   return (
     <div className="space-y-4 pb-12 max-w-7xl mx-auto font-sans">
@@ -1215,28 +1219,29 @@ export function UserDashboardView() {
                     </p>
                   </div>
 
-                  {/* Available Bay Selectors */}
+                  {/* Available Bay Selectors: every free bay, chosen by tap or voice */}
                   <div className="space-y-1.5">
                     <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
-                      Available Demo Bays:
+                      All Available Bays ({availableCount}):
                     </span>
-                    <div className="grid grid-cols-2 gap-1.5">
-                      {["SP-11", "SP-14", "SP-17", "SP-19"].map((bayId) => {
+                    <VoiceBayPicker
+                      availableIds={availableSpaces.map((s) => s.id)}
+                      onPick={(id) => setSelectedSlotId(id)}
+                    />
+                    <div className="grid grid-cols-3 gap-1.5 max-h-48 overflow-y-auto pr-1" data-testid="user-b-available-bays">
+                      {availableSpaces.map((bay) => {
+                        const bayId = bay.id;
                         const isSelected = selectedSlotId === bayId;
-                        const bay = sharedSpaces[bayId];
-                        const isAvail = bay?.status === "AVAILABLE";
                         return (
                           <button
                             key={bayId}
                             type="button"
-                            disabled={!isAvail}
+                            data-testid={`user-b-bay-${bayId}`}
                             onClick={() => setSelectedSlotId(bayId)}
                             className={`p-2 rounded-lg border text-left font-mono transition-all flex items-center justify-between ${
                               isSelected
                                 ? "border-amber-500 bg-amber-500/20 text-amber-200 ring-1 ring-amber-500"
-                                : isAvail
-                                ? "border-emerald-500/30 bg-emerald-950/20 text-emerald-300 hover:border-emerald-500 hover:bg-emerald-950/40"
-                                : "border-slate-800 bg-slate-900/40 text-slate-500 opacity-50 cursor-not-allowed"
+                                : "border-emerald-500/30 bg-emerald-950/20 text-emerald-300 hover:border-emerald-500 hover:bg-emerald-950/40"
                             }`}
                           >
                             <span className="text-xs font-bold">{bayLabel(bayId)}</span>
@@ -1286,61 +1291,42 @@ export function UserDashboardView() {
 
                   <div>
                     <div className="text-3xl font-black font-mono text-white mt-0.5 tracking-tight">
-                      {availableCount} spaces available
+                      Bay assigned
                     </div>
                     <p className="text-xs text-slate-300 font-sans mt-1">
-                      Unregistered visitor access. Select an available bay on the map to navigate.
+                      Visitor access. A bay is assigned to you automatically.
                     </p>
                   </div>
 
-                  {/* Available Bay Selectors */}
-                  <div className="space-y-1.5">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
-                      Available Bays:
-                    </span>
-                    <div className="grid grid-cols-2 gap-1.5">
-                      {["SP-11", "SP-14", "SP-17", "SP-19"].map((bayId) => {
-                        const isSelected = selectedSlotId === bayId;
-                        const bay = sharedSpaces[bayId];
-                        const isAvail = bay?.status === "AVAILABLE";
-                        return (
-                          <button
-                            key={bayId}
-                            type="button"
-                            disabled={!isAvail}
-                            onClick={() => setSelectedSlotId(bayId)}
-                            className={`p-2 rounded-lg border text-left font-mono transition-all flex items-center justify-between ${
-                              isSelected
-                                ? "border-emerald-500 bg-emerald-500/20 text-emerald-200 ring-1 ring-emerald-500"
-                                : isAvail
-                                ? "border-emerald-500/30 bg-emerald-950/20 text-emerald-300 hover:border-emerald-500 hover:bg-emerald-950/40"
-                                : "border-slate-800 bg-slate-900/40 text-slate-500 opacity-50 cursor-not-allowed"
-                            }`}
-                          >
-                            <span className="text-xs font-bold">{bayLabel(bayId)}</span>
-                            <span className="text-[10px]">{isSelected ? "●" : "Free"}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {selectedSlotId && sharedSpaces[selectedSlotId]?.status === "AVAILABLE" ? (
-                    <Button
-                      onClick={() => handleStartNav(selectedSlotId)}
-                      className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold h-11 gap-2 shadow-lg shadow-emerald-950"
-                    >
-                      <Navigation className="h-4 w-4" />
-                      <span>NAVIGATE TO {bayLabel(selectedSlotId)}</span>
-                    </Button>
+                  {/* Guests do not choose: the system assigns the bay */}
+                  {guestAssignedBay ? (
+                    <>
+                      <div className="rounded-xl border border-emerald-500/40 bg-emerald-950/20 p-3 space-y-1" data-testid="guest-assigned-bay">
+                        <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                          Your assigned bay
+                        </span>
+                        <div className="text-4xl font-black font-mono text-white tracking-tight">
+                          {bayLabel(guestAssignedBay.id)}
+                        </div>
+                        <p className="text-xs text-slate-300 font-mono">
+                          {guestAssignedBay.zone} · Level B2
+                        </p>
+                      </div>
+                      <Button
+                        onClick={() => {
+                          reserveSpace(guestAssignedBay.id, "GUEST");
+                          handleStartNav(guestAssignedBay.id);
+                        }}
+                        className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold h-11 gap-2 shadow-lg shadow-emerald-950"
+                      >
+                        <Navigation className="h-4 w-4" />
+                        <span>NAVIGATE TO {bayLabel(guestAssignedBay.id)}</span>
+                      </Button>
+                    </>
                   ) : (
-                    <Button
-                      onClick={() => setSelectedSlotId("SP-17")}
-                      className="w-full bg-sky-600 hover:bg-sky-500 text-white font-mono text-sm font-bold h-12 shadow-xl shadow-sky-950 gap-2"
-                    >
-                      <ParkingSquare className="h-4 w-4" />
-                      <span>SELECT AVAILABLE BAY (SP-17)</span>
-                    </Button>
+                    <p className="text-xs font-mono text-rose-300">
+                      No bay is free right now. Please wait at the gate.
+                    </p>
                   )}
                 </div>
               )}

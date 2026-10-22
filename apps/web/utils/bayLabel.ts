@@ -73,6 +73,14 @@ for (const [id, label] of Object.entries(LABEL_BY_ID)) {
   LABEL_BY_KEY["P" + id.slice(3)] = label;
 }
 
+const ID_BY_LABEL: Record<string, string> = {};
+for (const [id, label] of Object.entries(LABEL_BY_ID)) ID_BY_LABEL[label] = id;
+
+/** Inverse of bayLabel: "C7" -> "SP-07" (undefined when the label is unknown). */
+export function bayIdFromLabel(label: string): string | undefined {
+  return ID_BY_LABEL[label.trim().toUpperCase()];
+}
+
 /**
  * Human-facing bay label: one letter per row, consecutive numbers within the
  * row (e.g. "B3"). Internal ids (SP-03) and legacy aliases (P03) are mapped;

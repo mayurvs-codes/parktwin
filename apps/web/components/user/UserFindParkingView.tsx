@@ -13,6 +13,7 @@ import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useSharedDemoState } from "@/store/useSharedDemoState";
 import { useRouter } from "next/navigation";
 import { bayLabel } from "@/utils/bayLabel";
+import { VoiceBayPicker } from "@/components/user/VoiceBayPicker";
 
 export function UserFindParkingView() {
   const router = useRouter();
@@ -35,6 +36,8 @@ export function UserFindParkingView() {
   const defaultRec =
     availableSpaces.find((s) => s.id === "SP-14") ||
     availableSpaces[0];
+
+  const isGuest = activePersona === "GUEST";
 
   const handleSelectAndNavigate = (spaceId: string) => {
     // 1. Reserve in shared demo state (instantly synchronizes to Digital Twin & updates KPIs)
@@ -105,7 +108,7 @@ export function UserFindParkingView() {
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-widest text-sky-400">
                 <Sparkles className="h-4 w-4 text-sky-400" />
-                [ RECOMMENDED SPACE ]
+                {isGuest ? "[ ASSIGNED SPACE ]" : "[ RECOMMENDED SPACE ]"}
               </span>
               <Badge variant="outline" className="border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-mono text-xs">
                 NEAREST TO ENTRANCE
@@ -113,7 +116,7 @@ export function UserFindParkingView() {
             </div>
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mt-2">
               <CardTitle className="text-3xl sm:text-4xl font-black font-mono text-white">
-                {defaultRec.id}
+                {bayLabel(defaultRec.id)}
               </CardTitle>
               <CardDescription className="text-sm font-mono text-sky-300">
                 {defaultRec.zone} · Level B2
@@ -132,13 +135,14 @@ export function UserFindParkingView() {
               className="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold font-mono text-sm h-12 shadow-xl shadow-sky-950 gap-2"
             >
               <Navigation className="h-5 w-5" />
-              <span>SELECT & START NAVIGATION</span>
+              <span>{isGuest ? "START NAVIGATION" : "SELECT & START NAVIGATION"}</span>
             </Button>
           </CardContent>
         </Card>
       )}
 
-      {/* ── Available Parking Bays Across Zones ── */}
+      {/* ── Available Parking Bays Across Zones (registered drivers only; guests are assigned) ── */}
+      {!isGuest && (
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
@@ -149,6 +153,11 @@ export function UserFindParkingView() {
             Synchronized with Admin Twin
           </span>
         </div>
+
+        <VoiceBayPicker
+          availableIds={availableSpaces.map((sp) => sp.id)}
+          onPick={handleSelectAndNavigate}
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {availableSpaces.map((space) => {
@@ -191,6 +200,7 @@ export function UserFindParkingView() {
           })}
         </div>
       </div>
+      )}
     </div>
   );
 }
