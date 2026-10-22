@@ -4,6 +4,16 @@ import { create } from "zustand";
 import { crossTabSyncService } from "@/services/sync/crossTabSyncService";
 import { CANONICAL_60_SPACES } from "@/components/digital-twin/demoScenarioData";
 import { useUserPortalStore } from "./useUserPortalStore";
+import { getEnv } from "@/utils/env";
+import { useVoiceStore } from "./useVoiceStore";
+
+/** Clears backend demo state (violation episodes + voice log) so browser and backend reset together. */
+function resetBackendDemoState(): void {
+  if (typeof window === "undefined") return;
+  void fetch(`${getEnv().apiBase}/violations/test/reset`, { method: "POST" }).catch(() => {
+    /* backend unreachable: local reset still applies */
+  });
+}
 
 export type PersonaType = "USER_A" | "USER_B" | "GUEST";
 export type BayOperationalState = "AVAILABLE" | "OCCUPIED" | "RESERVED" | "DESIGNATED" | "VIOLATION";
@@ -41,6 +51,15 @@ export interface ViolationInfo {
   timestamp: number;
   adminAlertActive?: boolean;
   durationSeconds?: number;
+}
+
+/** Who parked where: defaults reproduce the original User A scenario (VEH-001 designated SP-07, parks in SP-11). */
+export interface ViolationScenarioOptions {
+  vehicleId?: string;
+  plate?: string;
+  designatedSpaceId?: string;
+  actualSpaceId?: string;
+  userName?: string;
 }
 
 export interface LongStayAlertInfo {
@@ -187,7 +206,7 @@ export interface SharedDemoState {
     color?: string
   ) => void;
   releaseSpace: (spaceId: string) => void;
-  triggerViolation: () => void;
+  triggerViolation: (opts?: ViolationScenarioOptions) => void;
   clearViolation: () => void;
   escalateViolationToAdminAlert: (durationSeconds?: number) => void;
   deescalateViolationAlert: () => void;
@@ -528,13 +547,14 @@ export const useSharedDemoState = create<SharedDemoState>((set, get) => {
       });
     },
 
-    triggerViolation: () => {
+    triggerViolation: (opts: ViolationScenarioOptions = {}) => {
       set((state) => {
-        // Vehicle VEH-001 (designated for SP-07) parks in SP-11
-        const actualSpaceId = "SP-11";
-        const designatedSpaceId = "SP-07";
-        const vehicleId = "VEH-001";
-        const plate = "KA04MN8049";
+        // Default: VEH-001 (designated for SP-07) parks in SP-11. User B and Guest pass their own bays.
+        const actualSpaceId = opts.actualSpaceId ?? "SP-11";
+        const designatedSpaceId = opts.designatedSpaceId ?? "SP-07";
+        const vehicleId = opts.vehicleId ?? "VEH-001";
+        const plate = opts.plate ?? "KA04MN8049";
+        const userName = opts.userName ?? "Registered User A";
 
         const target = state.spaces[actualSpaceId];
         if (!target) return state;
@@ -570,7 +590,7 @@ export const useSharedDemoState = create<SharedDemoState>((set, get) => {
           timeLabel: violationInfo.detectedAt,
           type: "PARKING_VIOLATION",
           spaceId: actualSpaceId,
-          user: "Registered User A",
+          user: userName,
           vehicleId,
           message: `PARKING VIOLATION: ${vehicleId} expected ${designatedSpaceId}, detected in ${actualSpaceId}`,
           severity: "CRITICAL",
@@ -646,7 +666,7 @@ export const useSharedDemoState = create<SharedDemoState>((set, get) => {
 
     clearViolation: () => {
       set((state) => {
-        const actualSpaceId = "SP-11";
+        const actualSpaceId = state.violation?.actualSpaceId ?? "SP-11";
         const target = state.spaces[actualSpaceId];
         const fallback = buildInitialSpaces()[actualSpaceId]!;
         const baseSpace = target || fallback;
@@ -841,6 +861,8 @@ export const useSharedDemoState = create<SharedDemoState>((set, get) => {
 
     resetAll: (options?: { syncUserPortal?: boolean }) => {
       const syncUserPortal = options?.syncUserPortal ?? true;
+      resetBackendDemoState();
+      useVoiceStore.getState().clearLog();
 
       // 1. Clear both storage keys
       if (typeof window !== "undefined") {
@@ -915,4 +937,12 @@ if (typeof window !== "undefined") {
   });
 
   (window as any).__useSharedDemoState = useSharedDemoState;
+}
+
+
+/** Persist + broadcast the current shared demo state (used after backend WebSocket updates). */
+export function persistSharedDemoState(): void {
+  const st = useSharedDemoState.getState();
+  saveStateToStorage(st);
+  crossTabSyncService.broadcastSharedDemo(extractSerializableState(st));
 }

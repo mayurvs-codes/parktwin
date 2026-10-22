@@ -15,4 +15,12 @@ describe("violation voice", () => {
       "Back out into the aisle, turn right, and drive about 12 metres. Bay C7 will be on your left."
     );
   });
+
+  it("keeps the side right when both bays are in the same row", () => {
+    // SP-14 -> SP-11, both in the lower row: heading left, the lower row is on the driver's left.
+    expect(directionsToBay("SP-14", "SP-11")).toContain("turn left");
+    expect(directionsToBay("SP-14", "SP-11")).toContain("on your left");
+    // SP-05 -> SP-02, both in the upper row: heading left, the upper row is on the driver's right.
+    expect(directionsToBay("SP-05", "SP-02")).toContain("on your right");
+  });
 });

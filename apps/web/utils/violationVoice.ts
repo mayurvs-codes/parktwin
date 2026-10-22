@@ -7,6 +7,9 @@ interface BayPos {
 }
 
 const PX_PER_METRE = 20; // floor-plan canvas scale
+// The aisle between Island 1's two bay rows (SP-01..SP-16), in metres on the same scale.
+const ISLAND_1_AISLE_Z = 473 / PX_PER_METRE;
+const isIsland1 = (id: string): boolean => /^SP-(0[1-9]|1[0-6])$/.test(id);
 
 const BAYS = facilityGeometry.bays as unknown as BayPos[];
 
@@ -32,7 +35,7 @@ export function directionsToBay(fromId: string, toId: string): string {
   const goingRight = to.x >= from.x;
   const turn = goingRight ? "right" : "left";
   // Travelling +x: the row nearer the top of the map is on the left; travelling -x it is on the right.
-  const northRow = to.z < from.z;
+  const northRow = isIsland1(toId) ? to.z < ISLAND_1_AISLE_Z : to.z < from.z;
   const side = northRow === goingRight ? "left" : "right";
   return `Back out into the aisle, turn ${turn}, and drive about ${metres} metres. Bay ${target} will be on your ${side}.`;
 }

@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Compass,
   ArrowRight,
-  ParkingSquare,
   AlertTriangle,
   RotateCcw,
   Navigation,
@@ -28,7 +27,8 @@ import { useDigitalTwinSocket } from "@/hooks/useDigitalTwinSocket";
 import { DigitalTwinMap } from "./DigitalTwinMap";
 import { bayLabel } from "@/utils/bayLabel";
 import { VoiceBayPicker } from "@/components/user/VoiceBayPicker";
-import { directionsToBay, wrongBayVoiceText } from "@/utils/violationVoice";
+import { directionsToBay } from "@/utils/violationVoice";
+import { simulateWrongBay } from "@/utils/wrongBaySimulation";
 
 /**
  * UserDashboardView:
@@ -64,22 +64,6 @@ async function syncDemoViolationClock(targetSeconds: number): Promise<void> {
   } catch {
     /* backend unreachable: the local demo state still updates */
   }
-}
-
-/** Speaks the wrong-bay warning and navigation to the designated bay immediately (well under a second). */
-async function speakWrongBayNow(actualBay: string, designatedBay: string): Promise<void> {
-  const voice = useVoiceStore.getState();
-  if (voice.status === "blocked") await voice.enableVoice(); // the click is the user gesture that unlocks speech
-  const stamp = Date.now();
-  await useVoiceStore.getState().receiveAnnouncement({
-    message_id: `VM-LOCAL-${stamp}`,
-    event_id: `EV-LOCAL-WRONGBAY-${stamp}`,
-    kind: "WRONG_BAY_WARNING",
-    text: wrongBayVoiceText(actualBay, designatedBay),
-    priority: 100,
-    vehicle_id: "VEH-001",
-    source: "local-demo",
-  });
 }
 
 /** Speaks turn-by-turn directions to the driver's own bay right away. */
@@ -135,7 +119,6 @@ export function UserDashboardView() {
   const sharedSpaces = useSharedDemoState((s) => s.spaces);
   const sharedViolation = useSharedDemoState((s) => s.violation);
   const longStayAlert = useSharedDemoState((s) => s.longStayAlert);
-  const triggerViolation = useSharedDemoState((s) => s.triggerViolation);
   const clearViolation = useSharedDemoState((s) => s.clearViolation);
   const reserveSpace = useSharedDemoState((s) => s.reserveSpace);
   const resetAll = useSharedDemoState((s) => s.resetAll);
@@ -447,17 +430,7 @@ export function UserDashboardView() {
                 size="sm"
                 variant="outline"
                 onClick={() => {
-                  triggerViolation();
-                  // Speak at once (no backend round trip): the warning plus directions to the driver's own bay.
-                  void speakWrongBayNow("SP-11", "SP-07");
-                  // Demo mode: drive the simulated vehicle into SP-11 through the backend detector,
-                  // which raises the wrong-bay episode and the spoken warning.
-                  void runDemoDrive({
-                    action: "enter",
-                    bay_id: "SP-11",
-                    assigned_bay: "SP-07",
-                    vehicle_id: "VEH-001",
-                  });
+                  simulateWrongBay();
                 }}
                 className="h-8 text-xs font-mono font-bold border-rose-500/40 bg-rose-950/20 text-rose-300 hover:bg-rose-900/40 hover:text-white px-2.5 flex items-center gap-1"
                 title="Simulate VEH-001 parking in unauthorized SP-11 (driver warned, 10m policy)"

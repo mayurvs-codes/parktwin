@@ -7,6 +7,7 @@ import { DEMO_VEHICLES, DEMO_VEHICLE_IDS } from "@/config/demoVehicles";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useSharedDemoState } from "@/store/useSharedDemoState";
 import { bayLabel } from "@/utils/bayLabel";
+import { simulateWrongBay } from "@/utils/wrongBaySimulation";
 
 /**
  * UserVehicleSwitcher:
@@ -21,7 +22,6 @@ export function UserVehicleSwitcher() {
   const activePersona = useSharedDemoState((s) => s.activePersona);
   const setActivePersona = useSharedDemoState((s) => s.setActivePersona);
   const sharedViolation = useSharedDemoState((s) => s.violation);
-  const triggerViolation = useSharedDemoState((s) => s.triggerViolation);
   const clearViolation = useSharedDemoState((s) => s.clearViolation);
   const resetAll = useSharedDemoState((s) => s.resetAll);
   const sharedSpaces = useSharedDemoState((s) => s.spaces);
@@ -167,12 +167,12 @@ export function UserVehicleSwitcher() {
               <Button
                 size="sm"
                 variant="outline"
-                onClick={triggerViolation}
+                onClick={() => { simulateWrongBay(); }}
                 className="h-7 text-[10px] font-mono font-bold border-rose-500/50 bg-rose-950/30 text-rose-300 hover:bg-rose-900/50 hover:text-white flex items-center gap-1 shadow-sm"
-                title="Simulate VEH-001 parking in unauthorized SP-11 (driver warned, 10m policy)"
+                title="Simulate the current driver parking in the wrong bay (spoken warning + directions)"
               >
                 <AlertTriangle className="h-3 w-3" />
-                <span>Simulate Wrong Space (SP-11)</span>
+                <span>Simulate Wrong Space</span>
               </Button>
             )}
             <Button
