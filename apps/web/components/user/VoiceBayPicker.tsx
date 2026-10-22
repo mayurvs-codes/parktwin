@@ -14,6 +14,7 @@ interface VoiceBayPickerProps {
 /* Minimal typing for the browser Web Speech recognition API. */
 interface RecognitionLike {
   lang: string;
+  continuous: boolean;
   interimResults: boolean;
   maxAlternatives: number;
   onresult: ((e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null;
@@ -64,6 +65,7 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
   );
 
   const gotResultRef = useRef(false);
+  const stoppedByUserRef = useRef(false);
 
   const describeError = (code?: string): string => {
     switch (code) {
@@ -102,32 +104,61 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
       return;
     }
 
-    recRef.current = rec;
     gotResultRef.current = false;
-    rec.lang = "en-US";
-    rec.interimResults = true;
-    rec.maxAlternatives = 3;
-    rec.onresult = (e) => {
-      const result = e.results[e.results.length - 1];
-      if (!result) return;
-      const alternatives = Array.from(result).map((a) => a.transcript);
-      const isFinal = (result as unknown as { isFinal?: boolean }).isFinal;
-      setHeard(alternatives[0] ?? "");
-      if (!isFinal) return;
-      gotResultRef.current = true;
-      // Prefer the first alternative that parses to a bay.
-      const best = alternatives.find((t) => parseSpokenBay(t, availableIds).kind !== "none") ?? alternatives[0] ?? "";
-      handleTranscript(best);
+    stoppedByUserRef.current = false;
+    const deadline = Date.now() + 15000; // keep listening up to 15s, restarting if the engine drops early
+
+    const begin = (r: RecognitionLike) => {
+      recRef.current = r;
+      r.lang = "en-US";
+      r.continuous = true;
+      r.interimResults = true;
+      r.maxAlternatives = 3;
+      r.onresult = (e) => {
+        const result = e.results[e.results.length - 1];
+        if (!result) return;
+        const alternatives = Array.from(result).map((a) => a.transcript);
+        const isFinal = (result as unknown as { isFinal?: boolean }).isFinal;
+        setHeard(alternatives[0] ?? "");
+        if (!isFinal) return;
+        const best = alternatives.find((t) => parseSpokenBay(t, availableIds).kind !== "none") ?? alternatives[0] ?? "";
+        const parsed = parseSpokenBay(best, availableIds);
+        // Keep listening if nothing bay-like was said yet.
+        if (parsed.kind === "none" && Date.now() < deadline) {
+          setFeedback(`Heard "${best}". Say a bay like "D 6".`);
+          return;
+        }
+        gotResultRef.current = true;
+        stoppedByUserRef.current = true;
+        r.stop();
+        handleTranscript(best);
+      };
+      r.onerror = (e) => {
+        if (e.error === "no-speech" || e.error === "aborted") return; // handled by onend
+        gotResultRef.current = true;
+        stoppedByUserRef.current = true;
+        setFeedback(describeError(e.error));
+        setListening(false);
+      };
+      r.onend = () => {
+        if (!stoppedByUserRef.current && !gotResultRef.current && Date.now() < deadline) {
+          const next = createRecognition();
+          if (next) {
+            try {
+              begin(next);
+              next.start();
+              return;
+            } catch {
+              /* fall through to stopped state */
+            }
+          }
+        }
+        setListening(false);
+        if (!gotResultRef.current && !stoppedByUserRef.current) setFeedback(describeError("no-speech"));
+      };
     };
-    rec.onerror = (e) => {
-      gotResultRef.current = true; // an error message is already shown
-      setFeedback(describeError(e.error));
-      setListening(false);
-    };
-    rec.onend = () => {
-      setListening(false);
-      if (!gotResultRef.current) setFeedback(describeError("no-speech"));
-    };
+
+    begin(rec);
     setFeedback("Listening… say a bay, like \"D 6\".");
     setHeard("");
     setListening(true);
@@ -137,10 +168,10 @@ export function VoiceBayPicker({ availableIds, onPick }: VoiceBayPickerProps) {
       setListening(false);
       setFeedback("Voice input could not start. Reload the page and try again.");
     }
-    window.setTimeout(() => rec.stop(), 8000);
   };
 
   const stopListening = () => {
+    stoppedByUserRef.current = true;
     recRef.current?.stop();
     setListening(false);
   };
