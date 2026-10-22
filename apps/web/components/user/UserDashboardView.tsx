@@ -28,6 +28,7 @@ import { useDigitalTwinSocket } from "@/hooks/useDigitalTwinSocket";
 import { DigitalTwinMap } from "./DigitalTwinMap";
 import { bayLabel } from "@/utils/bayLabel";
 import { VoiceBayPicker } from "@/components/user/VoiceBayPicker";
+import { directionsToBay, wrongBayVoiceText } from "@/utils/violationVoice";
 
 /**
  * UserDashboardView:
@@ -63,6 +64,38 @@ async function syncDemoViolationClock(targetSeconds: number): Promise<void> {
   } catch {
     /* backend unreachable: the local demo state still updates */
   }
+}
+
+/** Speaks the wrong-bay warning and navigation to the designated bay immediately (well under a second). */
+async function speakWrongBayNow(actualBay: string, designatedBay: string): Promise<void> {
+  const voice = useVoiceStore.getState();
+  if (voice.status === "blocked") await voice.enableVoice(); // the click is the user gesture that unlocks speech
+  const stamp = Date.now();
+  await useVoiceStore.getState().receiveAnnouncement({
+    message_id: `VM-LOCAL-${stamp}`,
+    event_id: `EV-LOCAL-WRONGBAY-${stamp}`,
+    kind: "WRONG_BAY_WARNING",
+    text: wrongBayVoiceText(actualBay, designatedBay),
+    priority: 100,
+    vehicle_id: "VEH-001",
+    source: "local-demo",
+  });
+}
+
+/** Speaks turn-by-turn directions to the driver's own bay right away. */
+async function speakNavigationNow(fromBay: string, toBay: string): Promise<void> {
+  const voice = useVoiceStore.getState();
+  if (voice.status === "blocked") await voice.enableVoice();
+  const stamp = Date.now();
+  await useVoiceStore.getState().receiveAnnouncement({
+    message_id: `VM-LOCAL-NAV-${stamp}`,
+    event_id: `EV-LOCAL-NAV-${stamp}`,
+    kind: "ROUTE_STEP",
+    text: `Navigating to bay ${bayLabel(toBay)}. ${directionsToBay(fromBay, toBay)}`,
+    priority: 60,
+    vehicle_id: "VEH-001",
+    source: "local-demo",
+  });
 }
 
 export function UserDashboardView() {
@@ -415,6 +448,8 @@ export function UserDashboardView() {
                 variant="outline"
                 onClick={() => {
                   triggerViolation();
+                  // Speak at once (no backend round trip): the warning plus directions to the driver's own bay.
+                  void speakWrongBayNow("SP-11", "SP-07");
                   // Demo mode: drive the simulated vehicle into SP-11 through the backend detector,
                   // which raises the wrong-bay episode and the spoken warning.
                   void runDemoDrive({
@@ -682,8 +717,10 @@ export function UserDashboardView() {
                         variant="outline"
                         onClick={() => {
                           const targetSpace = sharedViolation?.designatedSpaceId || "SP-07";
+                          const fromSpace = sharedViolation?.actualSpaceId || "SP-11";
                           clearViolation();
                           handleStartNav(targetSpace);
+                          void speakNavigationNow(fromSpace, targetSpace);
                         }}
                         className="h-8 text-[11px] font-mono border-slate-700 text-slate-300 hover:text-white"
                       >

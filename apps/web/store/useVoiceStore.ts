@@ -35,6 +35,8 @@ interface VoiceState {
   currentAnnouncement: VoiceMessagePayload | null;
   announcementLog: VoiceLogEntry[];
   seenEventIds: string[];
+  /** Until this time (ms) a backend wrong-bay warning is dropped: the local demo already spoke it. */
+  suppressBackendWrongBayUntil: number;
 
   // Actions
   enableVoice: () => Promise<boolean>;
@@ -61,6 +63,7 @@ export const useVoiceStore = create<VoiceState>()(
       currentAnnouncement: null,
       announcementLog: [],
       seenEventIds: [],
+      suppressBackendWrongBayUntil: 0,
 
       checkAvailability: (adapterOverride) => {
         const adapter = adapterOverride || defaultVoiceOutput;
@@ -111,6 +114,13 @@ export const useVoiceStore = create<VoiceState>()(
         // Check deduplication by event_id
         if (state.seenEventIds.includes(msg.event_id)) {
           return false;
+        }
+
+        if (msg.kind === "WRONG_BAY_WARNING" && msg.source !== "local-demo" && Date.now() < state.suppressBackendWrongBayUntil) {
+          return false;
+        }
+        if (msg.source === "local-demo" && msg.kind === "WRONG_BAY_WARNING") {
+          set({ suppressBackendWrongBayUntil: Date.now() + 15000 });
         }
 
         const newSeen = [...state.seenEventIds.slice(-99), msg.event_id];
