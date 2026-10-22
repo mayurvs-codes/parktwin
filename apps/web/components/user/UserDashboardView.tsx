@@ -226,6 +226,7 @@ export function UserDashboardView() {
         kind: "ASSIGNMENT",
         text: `Vehicle recognised. Your designated parking space is ${assignedSpaceId}. ${stepsText}`,
         priority: 50,
+        vehicle_id: activeVehicleId,
         source: "demo",
       });
     }
