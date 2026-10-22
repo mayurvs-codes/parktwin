@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { bayLabel } from "@/utils/bayLabel";
 
 export interface ZoneRouteGroup extends THREE.Group {
   curve: THREE.CatmullRomCurve3;
@@ -356,7 +357,7 @@ export function createZoneRoute3D(
     dctx.font = "bold 44px monospace";
     dctx.textAlign = "center";
     dctx.textBaseline = "middle";
-    dctx.fillText(`★ ${slotId}`, 160, 48);
+    dctx.fillText(`★ ${bayLabel(slotId)}`, 160, 48);
 
     dctx.fillStyle = "#bae6fd";
     dctx.font = "bold 22px monospace";

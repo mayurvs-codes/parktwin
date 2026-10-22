@@ -2,6 +2,7 @@
 
 import React from "react";
 import type { ParkingBay3DData } from "./types";
+import { bayLabel } from "@/utils/bayLabel";
 
 interface Minimap2DProps {
   bays: ParkingBay3DData[];
@@ -107,7 +108,7 @@ export function Minimap2D({
                 textAnchor="middle"
                 fontWeight="bold"
               >
-                {bay.id.replace("SP-", "")}
+                {bayLabel(bay.id)}
               </text>
             </g>
           );

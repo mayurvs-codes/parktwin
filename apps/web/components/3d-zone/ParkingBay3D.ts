@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import type { ParkingBayData } from "./types";
+import { bayLabel } from "@/utils/bayLabel";
 
 export interface ParkingBayMeshGroup extends THREE.Group {
   bayData: ParkingBayData;
@@ -115,7 +116,7 @@ export function createParkingBay3D(bay: ParkingBayData): ParkingBayMeshGroup {
   textCanvas.height = 128;
   const tctx = textCanvas.getContext("2d");
   const isRotated = Math.abs(bay.rotationY) > 0.1;
-  const stencilText = isUnverified ? `${bay.id} [?]` : bay.id;
+  const stencilText = isUnverified ? `${bayLabel(bay.id)} [?]` : bayLabel(bay.id);
 
   const renderStencil = (highlighted: boolean) => {
     if (!tctx) return;
@@ -246,7 +247,7 @@ export function createParkingBay3D(bay: ParkingBayData): ParkingBayMeshGroup {
     bctx.font = "bold 34px monospace";
     bctx.textAlign = "center";
     bctx.textBaseline = "middle";
-    bctx.fillText(`★ ${bay.id}`, 128, 48);
+    bctx.fillText(`★ ${bayLabel(bay.id)}`, 128, 48);
   }
   const badgeTex = new THREE.CanvasTexture(badgeCanvas);
   const badgeMat = new THREE.SpriteMaterial({

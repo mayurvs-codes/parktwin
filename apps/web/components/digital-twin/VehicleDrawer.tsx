@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useDigitalTwinStore } from "@/store/useDigitalTwinStore";
 import { fetchVehicleNavigation, fetchNavigationRoute } from "@/services/navigation";
 import type { RouteData, TwinVehicleState } from "@/types/digitalTwin";
+import { bayLabel } from "@/utils/bayLabel";
 
 export function VehicleDrawer() {
   const selectedVehicleId = useDigitalTwinStore((state) => state.selectedVehicleId);
@@ -165,7 +166,7 @@ export function VehicleDrawer() {
                     className="flex items-center gap-1 font-mono text-primary hover:underline"
                   >
                     <MapPin className="h-3 w-3" />
-                    Slot {assignedSlotId}
+                    Slot {bayLabel(assignedSlotId)}
                   </button>
                 ) : (
                   "En route / Exit"

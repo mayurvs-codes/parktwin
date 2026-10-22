@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { formatConfidence, formatDateTime, formatDuration } from "@/lib/format";
 import type { VehicleRowView } from "@/types/vehicles";
 import { VehicleStatusBadge } from "./VehicleStatusBadge";
+import { bayLabel } from "@/utils/bayLabel";
 
 export interface VehicleRowProps {
   view: VehicleRowView;
@@ -22,7 +23,7 @@ function VehicleRowComponent({ view, selected, onSelect }: VehicleRowProps) {
   const { vehicle, status, slotId, entryTime, exitTime, durationSeconds, confidence } = view;
   const plate = vehicle.license_plate ?? "—";
   const key = vehicle.id ?? plate;
-  const label = `Vehicle ${plate}, status ${status}${slotId ? `, slot ${slotId}` : ""}. Open details.`;
+  const label = `Vehicle ${plate}, status ${status}${slotId ? `, slot ${bayLabel(slotId)}` : ""}. Open details.`;
 
   return (
     <tr
@@ -49,7 +50,7 @@ function VehicleRowComponent({ view, selected, onSelect }: VehicleRowProps) {
         <VehicleStatusBadge status={status} />
       </td>
       <td className="hidden px-3 py-2 text-sm tabular-nums text-foreground sm:table-cell">
-        {slotId ?? "—"}
+        {slotId ? bayLabel(slotId) : "—"}
       </td>
       <td className="hidden px-3 py-2 text-sm text-muted-foreground lg:table-cell">
         {formatDateTime(entryTime)}

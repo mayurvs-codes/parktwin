@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { useDemoMovieStore } from "@/store/useDemoMovieStore";
+import { bayLabel } from "@/utils/bayLabel";
 
 export function VehiclesView() {
   const vehicles = useDemoMovieStore((s) => s.vehicles);
@@ -172,7 +173,7 @@ export function VehiclesView() {
                     <td className="px-4 py-3 text-muted-foreground">{veh.model}</td>
 
                     {/* Assigned Space */}
-                    <td className="px-4 py-3 font-bold text-primary">{veh.assignedSlot}</td>
+                    <td className="px-4 py-3 font-bold text-primary">{bayLabel(veh.assignedSlot)}</td>
 
                     {/* Status */}
                     <td className="px-4 py-3">
@@ -264,7 +265,7 @@ export function VehiclesView() {
             <div className="space-y-2.5 text-xs">
               <div className="flex justify-between py-1 border-b border-border/30">
                 <span className="text-muted-foreground">Assigned Parking Bay</span>
-                <span className="font-mono font-bold text-primary">{activeDialogVehicle.assignedSlot}</span>
+                <span className="font-mono font-bold text-primary">{bayLabel(activeDialogVehicle.assignedSlot)}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-border/30">
                 <span className="text-muted-foreground">Current State</span>

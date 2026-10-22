@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useDigitalTwinStore } from "@/store/useDigitalTwinStore";
 import type { CameraRole } from "@/types/digitalTwin";
+import { bayLabel } from "@/utils/bayLabel";
 
 function getRoleBadge(role: CameraRole) {
   switch (role) {
@@ -138,7 +139,7 @@ export function CameraDrawer() {
                     onClick={() => selectSlot(slotId)}
                   >
                     <MapPin className="h-2.5 w-2.5 mr-1 text-primary" />
-                    {slotId}
+                    {bayLabel(slotId)}
                   </Button>
                 ))}
               </div>

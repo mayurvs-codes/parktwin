@@ -19,6 +19,7 @@ import {
 } from "./demoScenarioData";
 import { ArchitecturalBlueprintLayers, CadCarSymbol } from "./ArchitecturalBlueprintLayers";
 import { useSharedDemoState, FOCUSED_ZONE_SPACE_IDS } from "@/store/useSharedDemoState";
+import { bayLabel } from "@/utils/bayLabel";
 
 /**
  * Architectural compound boundary framing exactly the 20 Focused Demo Zone spaces:
@@ -37,6 +38,9 @@ const FOCUSED_ZONE_PATH = `M 470 295
   L 464 301
   A 6 6 0 0 1 470 295
   Z`;
+
+/** Car symbol is 64 units long; scale it so a vehicle fills ~71% of the stall's long side. */
+const carScaleFor = (width: number, height: number): number => (0.71 * Math.max(width, height)) / 64;
 
 export interface FacilityMapProps {
   onSlotSelect?: (slotId: string) => void;
@@ -169,8 +173,9 @@ export function FacilityMap({
 
   return (
     <div className="relative w-full h-full min-h-[580px] rounded-xl border border-slate-800 bg-[#070b14] overflow-hidden select-none shadow-2xl flex flex-col">
-      {/* ─── Top Floating Controls Toolbar ──────────────────────────────────────── */}
-      <div className="absolute top-3 right-3 z-30 flex items-center gap-1.5">
+      {/* ─── Top bar (in flow, so it never covers the map) ───────────────────── */}
+      <div className="relative z-30 flex shrink-0 flex-wrap items-center gap-2 border-b border-slate-800/80 bg-[#070b14] px-3 py-2">
+      <div className="ml-auto flex items-center gap-1.5">
         {/* Layers Menu Trigger */}
         {!hideAdminControls && (
           <div className="relative">
@@ -289,31 +294,22 @@ export function FacilityMap({
 
       {/* Facility Header Badge (Hidden in driver view to avoid HUD overlap) */}
       {!hideAdminControls && (
-        <div className="absolute top-4 left-4 z-10 flex items-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900/90 px-3 py-1.5 backdrop-blur-md shadow-lg pointer-events-none">
-          <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="order-first flex items-center gap-2 whitespace-nowrap pointer-events-none">
+          <div className="h-2 w-2 rounded-full bg-emerald-400" />
           <span className="text-xs font-semibold text-slate-200">Carparking-01 B2</span>
-          <span className="text-[10px] font-mono text-slate-400 border-l border-slate-700 pl-2">
-            60 Operational Spaces · 16 Verified Cameras
+          <span className="hidden text-[10px] font-mono text-slate-400 border-l border-slate-700 pl-2 sm:inline">
+            60 bays
           </span>
         </div>
       )}
-
-      {/* Access Point Status Indicator */}
-      <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900/90 px-3 py-1.5 backdrop-blur-md shadow-lg pointer-events-none">
-        <div className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
-        <span className="text-xs font-medium text-slate-200">
-          ACCESS_POINT_B2
-        </span>
-        <span className="text-[10px] font-mono text-blue-400 border-l border-slate-700 pl-2">
-          Single Physical Gateway (Entry & Exit)
-        </span>
       </div>
 
       {/* ─── Main SVG Interactive Canvas ──────────────────────────────────────── */}
+      <div className="relative min-h-0 flex-1 overflow-hidden">
       <svg
         ref={svgRef}
         viewBox={FACILITY_SVG_GEOMETRY.viewBox}
-        className="w-full h-full cursor-grab active:cursor-grabbing transition-transform duration-75 flex-1"
+        className="h-full w-full cursor-grab active:cursor-grabbing transition-transform duration-75"
         style={{
           transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
           transformOrigin: "center center",
@@ -638,17 +634,6 @@ export function FacilityMap({
                 </text>
               </g>
 
-              {/* Row & Aisle Readability Annotations (Subtle architectural cues) */}
-              <text x="610" y="322" fill="#475569" fontSize="8" fontFamily="monospace" fontWeight="bold" letterSpacing="0.05em">
-                NORTH ROW · 8 STALLS (SP-01 – SP-08)
-              </text>
-              <text x="610" y="558" fill="#475569" fontSize="8" fontFamily="monospace" fontWeight="bold" letterSpacing="0.05em">
-                SOUTH ROW · 8 STALLS (SP-09 – SP-16)
-              </text>
-              <text x="480" y="322" fill="#475569" fontSize="8" fontFamily="monospace" fontWeight="bold" letterSpacing="0.05em">
-                WEST END · 4 STALLS (SP-17 – SP-20)
-              </text>
-
               {/* Live Focused Zone KPI Strip — beside title badge */}
               <g transform="translate(770, 264)">
                 <rect x="0" y="0" width="310" height="24" rx="4" fill="#040d1a" stroke="rgba(56,189,248,0.4)" strokeWidth="1" opacity="0.95" />
@@ -727,16 +712,22 @@ export function FacilityMap({
                   strokeColor = "#334155";
                   strokeWidth = 1.2;
                 } else {
-                  // Focused Available (SP-11, SP-14, SP-17, SP-19)
-                  fillColor = "rgba(16, 185, 129, 0.08)";
-                  strokeColor = "#10b981";
-                  strokeWidth = 1.6;
+                  // Free bay: bright green so empty spots stand out
+                  fillColor = "rgba(16, 185, 129, 0.30)";
+                  strokeColor = "#34d399";
+                  strokeWidth = 2.4;
                 }
               } else {
-                // Background stalls outside focused demo zone (SP-21 to SP-60)
-                fillColor = "#0b1220";
-                strokeColor = "#334155";
-                strokeWidth = 1.0;
+                // Background stalls outside the focused zone: free ones are highlighted green
+                if (!space.isOccupied) {
+                  fillColor = "rgba(16, 185, 129, 0.26)";
+                  strokeColor = "#34d399";
+                  strokeWidth = 2.0;
+                } else {
+                  fillColor = "#0b1220";
+                  strokeColor = "#334155";
+                  strokeWidth = 1.0;
+                }
               }
 
               if (isSelected) {
@@ -808,8 +799,8 @@ export function FacilityMap({
                     fill={fillColor}
                     stroke={strokeColor}
                     strokeWidth={strokeWidth}
-                    strokeDasharray={!isFocused ? "4 4" : undefined}
-                    opacity={!isFocused ? 0.65 : 1.0}
+                    strokeDasharray={!isFocused && space.isOccupied ? "4 4" : undefined}
+                    opacity={!isFocused && space.isOccupied ? 0.65 : 1.0}
                   />
 
                   {/* Space Identifier / Status Badge */}
@@ -859,39 +850,15 @@ export function FacilityMap({
                           {space.name}
                         </text>
                       </g>
-                    ) : (
-                      /* Compact Stall ID at stall head when occupied */
-                      <g transform={`translate(${space.x}, ${space.y - space.height / 2 + 9})`} pointerEvents="none">
-                        <text
-                          x="0"
-                          y="0"
-                          fill="#64748b"
-                          fontSize="7.5"
-                          fontFamily="monospace"
-                          fontWeight="bold"
-                          textAnchor="middle"
-                          opacity={0.8}
-                        >
-                          {space.name}
-                        </text>
-                      </g>
-                    )
-                  ) : (
-                    /* Background Space: quiet stall head ID */
-                    <g transform={`translate(${space.x}, ${space.y - space.height / 2 + 8})`} pointerEvents="none">
-                      <text
-                        x="0"
-                        y="0"
-                        fill="#475569"
-                        fontSize="6.5"
-                        fontFamily="monospace"
-                        textAnchor="middle"
-                        opacity={0.6}
-                      >
+                    ) : null
+                  ) : !space.isOccupied ? (
+                    <g transform={`translate(${space.x}, ${space.y})`} pointerEvents="none">
+                      <rect x="-14" y="-7" width="28" height="14" rx="3" fill="#022c22" stroke="#34d399" strokeWidth="1" />
+                      <text x="0" y="3" fill="#a7f3d0" fontSize="7.5" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
                         {space.name}
                       </text>
                     </g>
-                  )}
+                  ) : null}
                 </g>
               );
             })}
@@ -949,11 +916,12 @@ export function FacilityMap({
               const isViol = fSpace.status === "VIOLATION";
               const isSelected = selectedSlotId === spId || (isViol && selectedVehicleId === "VEH-001");
               const isHovered = hoveredSlotId === spId || hoveredVehicleId === (fSpace.vehicleId ?? "");
-              const vehColor = isViol ? "#ef4444" : (fSpace.color ?? "#10b981");
+              const vehColor = "#ef4444";
 
               return (
                 <g
                   key={`focused-car-${spId}`}
+                  data-testid={`twin-slot-${spId}`}
                   className="cursor-pointer transition-transform duration-75"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -992,14 +960,14 @@ export function FacilityMap({
                     const isHoriz = fSpace.width > fSpace.height;
                     const isNorthRow = spId <= "SP-08";
                     const carHeading = isHoriz ? -90 : isNorthRow ? 0 : 180;
-                    const badgeOffsetY = isHoriz ? -28 : isNorthRow ? -32 : 32;
+                    const badgeOffsetY = isHoriz ? -(fSpace.height / 2 + 12) : isNorthRow ? -(fSpace.height / 2 + 12) : fSpace.height / 2 + 12;
                     return (
                       <>
                         <CadCarSymbol
                           x={fSpace.x}
                           y={fSpace.y}
                           heading={carHeading}
-                          scale={0.76}
+                          scale={carScaleFor(fSpace.width, fSpace.height)}
                           color={vehColor}
                           isSelected={isSelected}
                         />
@@ -1039,19 +1007,21 @@ export function FacilityMap({
 
             {/* 2. Background Facility Vehicles (All 40 operational background stalls SP-21 to SP-60) */}
             {spaces
-              .filter((sp) => !(FOCUSED_ZONE_SPACE_IDS as readonly string[]).includes(sp.id))
-              .map((sp, idx) => {
+              .filter((sp) => !(FOCUSED_ZONE_SPACE_IDS as readonly string[]).includes(sp.id) && sp.isOccupied)
+              .map((sp) => {
                 const isSelected = selectedSlotId === sp.id;
                 const isHovered = hoveredSlotId === sp.id;
-                const vehColor = idx % 2 === 0 ? "#10b981" : "#ef4444";
+                const vehColor = "#ef4444";
                 // Island 1 South row (SP-22..29) faces South (180 deg), others face North (0 deg)
-                const isSouthFacing = sp.y > 450 && sp.y < 600;
-                const heading = isSouthFacing ? 180 : 0;
-                const badgeOffsetY = isSouthFacing ? 32 : -32;
+                const isHorizontalBay = sp.width > sp.height;
+                const isSouthFacing = !isHorizontalBay && sp.y > 754;
+                const heading = isHorizontalBay ? 90 : isSouthFacing ? 0 : 180;
+                const badgeOffsetY = isSouthFacing ? sp.height / 2 + 12 : -(sp.height / 2 + 12);
 
                 return (
                   <g
                     key={`bg-car-${sp.id}`}
+                    data-testid={`twin-slot-${sp.id}`}
                     className="cursor-pointer transition-transform duration-75"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -1066,7 +1036,7 @@ export function FacilityMap({
                       x={sp.x}
                       y={sp.y}
                       heading={heading}
-                      scale={0.76}
+                      scale={carScaleFor(sp.width, sp.height)}
                       color={vehColor}
                       isSelected={isSelected}
                     />
@@ -1092,7 +1062,7 @@ export function FacilityMap({
                           fontWeight="bold"
                           textAnchor="middle"
                         >
-                          {sp.id}
+                          {bayLabel(sp.id)}
                         </text>
                       </g>
                     )}
@@ -1110,12 +1080,7 @@ export function FacilityMap({
               .map((veh) => {
                 const [vx, vy] = veh.currentPosition!;
                 const isSelected = veh.id === selectedVehicleId;
-                const vehColor =
-                  veh.color === "#ef4444" ||
-                  veh.color === "#dc2626" ||
-                  veh.color.includes("red")
-                    ? "#ef4444"
-                    : "#10b981";
+                const vehColor = "#ef4444";
 
                 return (
                   <g
@@ -1300,24 +1265,30 @@ export function FacilityMap({
         {/* ─── Driver Overlay Children (RouteLayer, VehicleMarker, DestinationMarker) ── */}
         {children}
       </svg>
+      </div>
 
-      {/* ─── Bottom-Right Live Quick Legend Bar ──────────────────────────── */}
-      <div className="absolute bottom-3 right-3 z-10 hidden sm:flex items-center gap-3 rounded-lg border border-slate-700/80 bg-slate-900/90 px-3 py-1.5 backdrop-blur-md shadow-lg pointer-events-none text-[11px] font-mono">
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.8)]" />
-          <span className="text-slate-300">Available</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-slate-400" />
-          <span className="text-slate-300">Occupied</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(245,158,11,0.8)]" />
-          <span className="text-slate-300">Reserved</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.8)]" />
-          <span className="text-slate-300">Selected</span>
+      {/* ─── Bottom legend bar (in flow) ─────────────────────────────────────── */}
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-slate-800/80 bg-[#070b14] px-3 py-2 text-[11px] font-mono">
+        <span className="text-slate-400">
+          <span className="text-sky-400">ACCESS_POINT_B2</span> · single gateway (entry &amp; exit)
+        </span>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-sm bg-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.9)]" />
+            <span className="text-emerald-300 font-semibold">Free</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-sm bg-red-500" />
+            <span className="text-slate-300">Occupied</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-sm bg-amber-400" />
+            <span className="text-slate-300">Reserved</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-sm bg-sky-400" />
+            <span className="text-slate-300">Selected</span>
+          </div>
         </div>
       </div>
     </div>

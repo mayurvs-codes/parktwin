@@ -24,6 +24,7 @@ import { createParkingBay3D, type ParkingBayMeshGroup } from "./ParkingBay3D";
 import { createZoneEnvironment } from "./Environment3D";
 import { setupZoneCamera, type ZoneCameraManager } from "./ZoneCamera";
 import { createZoneRoute3D, type ZoneRouteGroup } from "./ZoneRoute3D";
+import { bayLabel } from "@/utils/bayLabel";
 
 // ── 20 Parking Spaces: Exactly 12 Occupied + 8 Available ──
 const PARKING_LOT_BAYS: ParkingBayData[] = [
@@ -585,11 +586,11 @@ export function ParkingZone3D() {
             {isNavigating && selectedSlotId ? (
               <Badge variant="outline" className="border-sky-400 bg-sky-500/25 text-sky-200 font-mono text-[11px] px-2.5 py-0.5 animate-pulse flex items-center gap-1.5 shadow-lg shadow-sky-500/20">
                 <Navigation className="h-3 w-3 text-sky-400" />
-                <span>NAVIGATING ({selectedSlotId})</span>
+                <span>NAVIGATING ({bayLabel(selectedSlotId)})</span>
               </Badge>
             ) : selectedSlotId ? (
               <Badge variant="outline" className="border-sky-500/40 bg-sky-500/15 text-sky-300 font-mono text-[11px] px-2 py-0.5 animate-pulse">
-                ★ 1 SELECTED ({selectedSlotId})
+                ★ 1 SELECTED ({bayLabel(selectedSlotId)})
               </Badge>
             ) : null}
           </div>

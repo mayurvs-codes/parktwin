@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useCctvEvidenceModalStore } from "@/store/useCctvEvidenceModalStore";
+import { bayLabel } from "@/utils/bayLabel";
 
 export function UserSessionView() {
   const router = useRouter();
@@ -171,7 +172,7 @@ export function UserSessionView() {
             <div className="rounded-xl border border-slate-800 bg-slate-950/80 p-3 text-center">
               <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">SPACE</span>
               <span className="text-base font-bold font-mono text-white mt-1 block">
-                {lastCompleted?.spaceId || assignedSpaceId || "SP-07"}
+                {bayLabel(lastCompleted?.spaceId || assignedSpaceId || "SP-07")}
               </span>
             </div>
 
@@ -200,7 +201,7 @@ export function UserSessionView() {
           {/* Status Note: Space is now available */}
           <div className="rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-3 text-xs font-mono text-emerald-300 max-w-md mx-auto space-y-1">
             <div>
-              ✓ Space <strong>{lastCompleted?.spaceId || assignedSpaceId || "SP-07"}</strong> has transitioned from <strong>OCCUPIED</strong> &rarr; <strong>AVAILABLE</strong> in the shared facility twin.
+              ✓ Space <strong>{bayLabel(lastCompleted?.spaceId || assignedSpaceId || "SP-07")}</strong> has transitioned from <strong>OCCUPIED</strong> &rarr; <strong>AVAILABLE</strong> in the shared facility twin.
             </div>
             <div className="text-[11px] text-amber-300/90 pt-1 border-t border-emerald-500/20">
               CCTV Notice: Exit finalized via APP_DECISION. Physical vehicle egress not recorded in CAM-03 clip.

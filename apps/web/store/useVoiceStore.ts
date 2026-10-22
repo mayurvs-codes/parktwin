@@ -8,6 +8,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { defaultVoiceOutput, type VoiceMessagePayload, type VoiceOutput } from "../services/voice/VoiceOutput";
+import { relabelBaysInText } from "@/utils/bayLabel";
 
 export type VoiceStatus = "enabled" | "blocked" | "unavailable" | "muted";
 
@@ -116,22 +117,17 @@ export const useVoiceStore = create<VoiceState>()(
         const isAvailable = adapter.isAvailable();
         const canSpeak = isAvailable && state.enabled && state.status === "enabled";
 
-        let delivered = false;
-        if (canSpeak) {
-          delivered = await adapter.speak(msg, { volume: state.volume, rate: state.rate });
-        }
-
         const logEntry: VoiceLogEntry = {
           message_id: msg.message_id,
           event_id: msg.event_id,
           kind: msg.kind,
-          text: msg.text,
+          text: relabelBaysInText(msg.text),
           priority: msg.priority,
           vehicle_id: msg.vehicle_id,
           source: msg.source || "live",
           timestamp: msg.ts || new Date().toISOString(),
-          delivered,
-          visualFallback: !delivered,
+          delivered: canSpeak,
+          visualFallback: !canSpeak,
         };
 
         set({
@@ -141,7 +137,11 @@ export const useVoiceStore = create<VoiceState>()(
           status: !isAvailable ? "unavailable" : !state.isUnlocked ? "blocked" : state.status,
         });
 
-        return delivered;
+        if (canSpeak) {
+          void adapter.speak(msg, { volume: state.volume, rate: state.rate });
+        }
+
+        return canSpeak;
       },
 
       cancelAnnouncement: (messageId, adapterOverride) => {

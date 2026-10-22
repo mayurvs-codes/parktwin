@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { useDemoMovieStore } from "@/store/useDemoMovieStore";
 import { ParkingLegend } from "./ParkingLegend";
+import { bayLabel } from "@/utils/bayLabel";
 
 export function LiveParkingView() {
   const spaces = useDemoMovieStore((s) => s.spaces);
@@ -243,7 +244,7 @@ export function LiveParkingView() {
                         {veh.isTypeA ? "Type A (Tracked)" : "Type B (Static)"}
                       </td>
                       <td className="px-4 py-3 font-bold text-primary">
-                        {veh.assignedSlot}
+                        {bayLabel(veh.assignedSlot)}
                       </td>
                       <td className="px-4 py-3">
                         <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getEnv } from "@/utils/env";
 import { formatClock } from "@/lib/format";
+import { bayLabel } from "@/utils/bayLabel";
 
 export interface ParkingEventItem {
   event_id: string;
@@ -160,7 +161,7 @@ export function NotificationFeed({ open, onClose, onEventReceived }: Notificatio
                     </div>
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1 text-muted-foreground">
                       {camera && <span>Camera: <strong className="text-foreground font-medium">{camera}</strong></span>}
-                      {slotId && <span>Slot: <strong className="text-foreground font-medium">{slotId}</strong></span>}
+                      {slotId && <span>Slot: <strong className="text-foreground font-medium">{bayLabel(slotId)}</strong></span>}
                       {plate && <span>Plate: <strong className="text-foreground font-medium">{plate}</strong></span>}
                     </div>
                   </div>

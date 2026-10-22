@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { DEMO_VEHICLES, DEMO_VEHICLE_IDS } from "@/config/demoVehicles";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useSharedDemoState } from "@/store/useSharedDemoState";
+import { bayLabel } from "@/utils/bayLabel";
 
 /**
  * UserVehicleSwitcher:
@@ -238,12 +239,12 @@ export function UserVehicleSwitcher() {
                 {isParked ? (
                   <span className="text-[10px] font-mono font-semibold text-emerald-400 flex items-center gap-1">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Parked ({targetSlot})
+                    Parked ({bayLabel(targetSlot)})
                   </span>
                 ) : hasRes ? (
                   <span className="text-[10px] font-mono text-emerald-300 flex items-center gap-1">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    Res: {targetSlot}
+                    Res: {bayLabel(targetSlot)}
                   </span>
                 ) : (
                   <span className="text-[10px] font-mono text-sky-400 flex items-center gap-1">

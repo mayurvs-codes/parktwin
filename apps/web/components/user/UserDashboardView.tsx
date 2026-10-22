@@ -5,12 +5,10 @@ import Link from "next/link";
 import {
   Compass,
   ArrowRight,
-  ShieldCheck,
   ParkingSquare,
   AlertTriangle,
   RotateCcw,
   Navigation,
-  ChevronDown,
   CheckCircle2,
   ArrowUp,
   CornerUpLeft,
@@ -21,12 +19,14 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useSharedDemoState, FOCUSED_ZONE_SPACE_IDS } from "@/store/useSharedDemoState";
 import { useVoiceStore } from "@/store/useVoiceStore";
+import { getEnv } from "@/utils/env";
 import { useDigitalTwinSocket } from "@/hooks/useDigitalTwinSocket";
 import { DigitalTwinMap } from "./DigitalTwinMap";
+import { bayLabel } from "@/utils/bayLabel";
 
 /**
  * UserDashboardView:
@@ -38,6 +38,32 @@ import { DigitalTwinMap } from "./DigitalTwinMap";
  *    - Right (~30%): Compact Driver Action Panel (Current Status, Destination, Next Action CTA)
  * 3. Collapsible Diagnostics Section (Preserves Provenance Audit for test demarcation)
  */
+/** Demo-mode helper: sends a SIMULATED vehicle path through the backend pipeline (source="demo"). */
+async function runDemoDrive(body: Record<string, string>): Promise<void> {
+  try {
+    await fetch(`${getEnv().apiBase}/violations/demo/drive`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ track_id: "9001", ...body }),
+    });
+  } catch {
+    /* backend unreachable: the local demo state still updates */
+  }
+}
+
+/** Demo-mode helper: moves the backend wrong-bay episode clock to the given dwell time (env-gated hook). */
+async function syncDemoViolationClock(targetSeconds: number): Promise<void> {
+  try {
+    await fetch(`${getEnv().apiBase}/violations/test/advance-time`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ target_duration_seconds: targetSeconds }),
+    });
+  } catch {
+    /* backend unreachable: the local demo state still updates */
+  }
+}
+
 export function UserDashboardView() {
   useDigitalTwinSocket();
 
@@ -155,17 +181,10 @@ export function UserDashboardView() {
 
   // Trigger spoken voice guidance on key driver events
   useEffect(() => {
-    if (isViolation && sharedViolation) {
-      const designated = sharedViolation.designatedSpaceId || "SP-07";
-      receiveAnnouncement({
-        message_id: `VM-WARN-${sharedViolation.vehicleId}-${sharedViolation.actualSpaceId}`,
-        event_id: `EV-WARN-${sharedViolation.vehicleId}-${sharedViolation.actualSpaceId}`,
-        kind: "WRONG_BAY_WARNING",
-        text: `Warning! This is not your designated parking space. Please move to space ${designated}.`,
-        priority: 100,
-        source: "demo",
-      });
-    } else if (
+    // The wrong-bay warning is spoken from the backend (VOICE_ANNOUNCEMENT over WebSocket);
+    // only the local journey's assignment guidance is generated here.
+    if (
+      !isViolation &&
       assignedSpaceId &&
       (journeyStep === "SPACE_ASSIGNED" || journeyStep === "NAVIGATING_TO_SPACE")
     ) {
@@ -376,7 +395,12 @@ export function UserDashboardView() {
               <Button
                 size="sm"
                 variant="destructive"
-                onClick={clearViolation}
+                onClick={() => {
+                  const actualBay = sharedViolation?.actualSpaceId || "SP-11";
+                  clearViolation();
+                  // Demo mode: drive the simulated vehicle out of the bay so the backend resolves it too.
+                  void runDemoDrive({ action: "leave", bay_id: actualBay, vehicle_id: sharedViolation?.vehicleId || "VEH-001" });
+                }}
                 className="h-8 text-xs font-mono font-bold bg-rose-600 hover:bg-rose-500 text-white px-2.5"
               >
                 Clear Violation
@@ -385,7 +409,17 @@ export function UserDashboardView() {
               <Button
                 size="sm"
                 variant="outline"
-                onClick={triggerViolation}
+                onClick={() => {
+                  triggerViolation();
+                  // Demo mode: drive the simulated vehicle into SP-11 through the backend detector,
+                  // which raises the wrong-bay episode and the spoken warning.
+                  void runDemoDrive({
+                    action: "enter",
+                    bay_id: "SP-11",
+                    assigned_bay: "SP-07",
+                    vehicle_id: "VEH-001",
+                  });
+                }}
                 className="h-8 text-xs font-mono font-bold border-rose-500/40 bg-rose-950/20 text-rose-300 hover:bg-rose-900/40 hover:text-white px-2.5 flex items-center gap-1"
                 title="Simulate VEH-001 parking in unauthorized SP-11 (driver warned, 10m policy)"
               >
@@ -422,12 +456,6 @@ export function UserDashboardView() {
               </span>
             </div>
 
-            <Link href="/user/navigation">
-              <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs font-mono text-sky-400 hover:text-sky-300 px-2">
-                <span>Full GPS View</span>
-                <ArrowRight className="h-3 w-3" />
-              </Button>
-            </Link>
           </div>
 
           {/* Hero Digital Twin Container */}
@@ -472,9 +500,17 @@ export function UserDashboardView() {
                       <VolumeX className="h-3 w-3 mr-1" />
                       Enable Voice
                     </Button>
-                  ) : (
+                  ) : voiceStatus === "unavailable" ? (
+                    <Badge variant="outline" className="text-[9px] font-mono border-slate-500/40 text-slate-300 bg-slate-900/60">
+                      VOICE UNAVAILABLE · TEXT ONLY
+                    </Badge>
+                  ) : voiceStatus === "enabled" ? (
                     <Badge variant="outline" className="text-[9px] font-mono border-emerald-500/40 text-emerald-300 bg-emerald-950/40">
                       VOICE ACTIVE
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline" className="text-[9px] font-mono border-slate-500/40 text-slate-300 bg-slate-900/60">
+                      VOICE MUTED
                     </Badge>
                   )}
                 </div>
@@ -571,14 +607,14 @@ export function UserDashboardView() {
                   {/* Demo Controls for Violation Duration */}
                   <div className="p-2 rounded-lg border border-slate-800 bg-slate-900/60 space-y-1">
                     <div className="flex items-center justify-between text-[9px] font-mono text-slate-400">
-                      <span>DURATION TIME CONTROLS</span>
+                      <span>DEMO TIME ACCELERATION</span>
                       <span>Policy: 10 min</span>
                     </div>
                     <div className="grid grid-cols-4 gap-1">
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => advanceSessionTime(300 - liveDurationSecs)}
+                        onClick={() => { advanceSessionTime(300 - liveDurationSecs); void syncDemoViolationClock(300); }}
                         className="h-6 text-[9px] font-mono border-slate-700 text-slate-300 hover:text-white px-1"
                         title="Advance dwell time to 5 minutes (Normal)"
                       >
@@ -587,7 +623,7 @@ export function UserDashboardView() {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => advanceSessionTime(480 - liveDurationSecs)}
+                        onClick={() => { advanceSessionTime(480 - liveDurationSecs); void syncDemoViolationClock(480); }}
                         className="h-6 text-[9px] font-mono border-amber-500/40 text-amber-300 hover:bg-amber-500/10 px-1"
                         title="Advance dwell time to 8 minutes (Warning)"
                       >
@@ -596,7 +632,7 @@ export function UserDashboardView() {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => advanceSessionTime(600 - liveDurationSecs)}
+                        onClick={() => { advanceSessionTime(600 - liveDurationSecs); void syncDemoViolationClock(601); }}
                         className="h-6 text-[9px] font-mono border-rose-500/40 text-rose-300 hover:bg-rose-500/10 px-1"
                         title="Advance dwell time to 10 minutes (Escalate to Admin)"
                       >
@@ -605,7 +641,7 @@ export function UserDashboardView() {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => advanceSessionTime(-liveDurationSecs)}
+                        onClick={() => { advanceSessionTime(-liveDurationSecs); void syncDemoViolationClock(0); }}
                         className="h-6 text-[9px] font-mono border-slate-700 text-slate-400 hover:text-white px-1"
                         title="Reset dwell duration to 00:00:00"
                       >
@@ -616,8 +652,17 @@ export function UserDashboardView() {
 
                   <div className="space-y-1.5 pt-1">
                     <Button
-                      onClick={() => {
+                      onClick={async () => {
                         const targetSpace = sharedViolation?.designatedSpaceId || "SP-07";
+                        // Demo mode: drive the simulated vehicle out of the wrong bay and into its
+                        // designated bay through the backend detector (resolves the episode there).
+                        await runDemoDrive({
+                          action: "relocate",
+                          from_bay: sharedViolation?.actualSpaceId || "SP-11",
+                          bay_id: targetSpace,
+                          assigned_bay: targetSpace,
+                          vehicle_id: sharedViolation?.vehicleId || "VEH-001",
+                        });
                         const ok = relocateVehicle(targetSpace);
                         if (!ok) {
                           clearViolation();
@@ -883,7 +928,7 @@ export function UserDashboardView() {
                               }}
                               className="w-full h-7 text-[10px] font-mono font-bold bg-sky-600/20 text-sky-300 border border-sky-500/40 hover:bg-sky-600/30"
                             >
-                              Move Vehicle to {selectedSlotId} (Fresh Timer)
+                              Move Vehicle to {bayLabel(selectedSlotId)} (Fresh Timer)
                             </Button>
                           )}
                           <Button
@@ -1194,7 +1239,7 @@ export function UserDashboardView() {
                                 : "border-slate-800 bg-slate-900/40 text-slate-500 opacity-50 cursor-not-allowed"
                             }`}
                           >
-                            <span className="text-xs font-bold">{bayId}</span>
+                            <span className="text-xs font-bold">{bayLabel(bayId)}</span>
                             <span className="text-[10px]">{isSelected ? "●" : "Free"}</span>
                           </button>
                         );
@@ -1206,7 +1251,7 @@ export function UserDashboardView() {
                   <div className="p-3 rounded-xl border border-amber-500/40 bg-amber-950/20 space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-mono font-bold text-white">
-                        {selectedSlotId ? `Bay ${selectedSlotId}` : "No Bay Selected"}
+                        {selectedSlotId ? `Bay ${bayLabel(selectedSlotId)}` : "No Bay Selected"}
                       </span>
                       <Badge variant="outline" className={`text-[9px] ${selectedSlotId ? "border-emerald-500/40 text-emerald-400" : "border-slate-700 text-slate-400"}`}>
                         {selectedSlotId ? "AVAILABLE" : "SELECT BAY"}
@@ -1222,7 +1267,7 @@ export function UserDashboardView() {
                       }}
                       className="w-full bg-amber-600 hover:bg-amber-500 text-white font-mono text-xs font-bold h-11 gap-2 shadow-lg shadow-amber-950 disabled:opacity-50"
                     >
-                      <span>{selectedSlotId ? `RESERVE SPACE (${selectedSlotId})` : "SELECT A BAY TO RESERVE"}</span>
+                      <span>{selectedSlotId ? `RESERVE SPACE (${bayLabel(selectedSlotId)})` : "SELECT A BAY TO RESERVE"}</span>
                     </Button>
                   </div>
                 </div>
@@ -1272,7 +1317,7 @@ export function UserDashboardView() {
                                 : "border-slate-800 bg-slate-900/40 text-slate-500 opacity-50 cursor-not-allowed"
                             }`}
                           >
-                            <span className="text-xs font-bold">{bayId}</span>
+                            <span className="text-xs font-bold">{bayLabel(bayId)}</span>
                             <span className="text-[10px]">{isSelected ? "●" : "Free"}</span>
                           </button>
                         );
@@ -1286,7 +1331,7 @@ export function UserDashboardView() {
                       className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold h-11 gap-2 shadow-lg shadow-emerald-950"
                     >
                       <Navigation className="h-4 w-4" />
-                      <span>NAVIGATE TO {selectedSlotId}</span>
+                      <span>NAVIGATE TO {bayLabel(selectedSlotId)}</span>
                     </Button>
                   ) : (
                     <Button
@@ -1303,198 +1348,6 @@ export function UserDashboardView() {
           </Card>
         </div>
       </div>
-
-      {/* ── 3. OPTIONAL DIAGNOSTICS & PROVENANCE SECTION (Preserves Test Demarcations) ── */}
-      <details className="group rounded-2xl border border-slate-800/80 bg-slate-900/40 backdrop-blur-md overflow-hidden">
-        <summary className="cursor-pointer p-4 text-xs font-mono font-bold text-slate-400 hover:text-white flex items-center justify-between select-none list-none">
-          <span className="flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-sky-400" />
-            <span>TECHNICAL AUDIT & PHYSICAL EVIDENCE PROVENANCE</span>
-          </span>
-          <span className="text-[11px] text-slate-500 flex items-center gap-1">
-            <span>[ DIAGNOSTICS ]</span>
-            <ChevronDown className="h-3.5 w-3.5 group-open:rotate-180 transition-transform" />
-          </span>
-        </summary>
-
-        <div className="p-4 pt-2 border-t border-slate-800/80" data-testid="vehicle-journey-provenance">
-          <CardHeader className="p-0 pb-3">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <CardTitle className="text-sm font-bold font-mono text-white">
-                  VEHICLE JOURNEY: APPLICATION VS PHYSICAL EVIDENCE
-                </CardTitle>
-                <CardDescription className="text-xs text-slate-400 font-mono">
-                  Authoritative distinction between software lifecycle transitions and CCTV sensors.
-                </CardDescription>
-              </div>
-
-              <div className="flex flex-col items-start sm:items-end gap-1">
-                <span className="text-[10px] font-mono text-slate-400 uppercase">EVIDENCE COVERAGE:</span>
-                <Badge
-                  variant="outline"
-                  className={`font-mono text-[11px] font-bold px-3 py-0.5 ${
-                    activeVehicleId === "VEH-001"
-                      ? "border-amber-500/40 bg-amber-500/10 text-amber-300"
-                      : "border-slate-700 bg-slate-800/40 text-slate-300"
-                  }`}
-                >
-                  ● {activeVehicleId === "VEH-001" ? "PARTIALLY EVIDENCE-BACKED" : "APPLICATION-ONLY"}
-                </Badge>
-              </div>
-            </div>
-          </CardHeader>
-
-          <CardContent className="p-0 pt-2 space-y-4 font-mono text-xs">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {/* Column 1: APPLICATION JOURNEY */}
-              <div className="rounded-xl border border-purple-500/30 bg-purple-950/20 p-4 space-y-3">
-                <div className="flex items-center justify-between pb-2 border-b border-purple-500/30">
-                  <span className="text-xs font-bold text-purple-300 uppercase tracking-wider">
-                    APPLICATION JOURNEY (SOFTWARE)
-                  </span>
-                  <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-purple-500/40 text-purple-300">
-                    APPLICATION STATE
-                  </Badge>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block uppercase">1. GATEWAY ENTRY</span>
-                      <span className="text-white font-bold text-xs">Registered at ACCESS_POINT_B2</span>
-                      <span className="text-[10px] text-slate-400 block">Session initiated in memory store</span>
-                    </div>
-                    <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-purple-500/30 text-purple-300">
-                      APPLICATION STATE
-                    </Badge>
-                  </div>
-
-                  <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block uppercase">2. NAVIGATION ROUTING</span>
-                      <span className="text-white font-bold text-xs">A* Guidance to {assignedSpaceId || "Bay"}</span>
-                      <span className="text-[10px] text-slate-400 block">Waypoint trajectory calculation</span>
-                    </div>
-                    <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-purple-500/30 text-purple-300">
-                      APPLICATION STATE
-                    </Badge>
-                  </div>
-
-                  <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block uppercase">3. BAY OCCUPANCY</span>
-                      <span className="text-white font-bold text-xs">
-                        {journeyStep === "PARKED" || journeyStep === "PARKING_SESSION"
-                          ? `Parked in ${assignedSpaceId || "Bay"}`
-                          : `Target Bay: ${assignedSpaceId || "Bay"}`}
-                      </span>
-                      <span className="text-[10px] text-slate-400 block">
-                        Occupancy flag toggled via arrival event
-                      </span>
-                    </div>
-                    <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-purple-500/30 text-purple-300">
-                      APPLICATION STATE
-                    </Badge>
-                  </div>
-
-                  <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block uppercase">4. FACILITY EXIT</span>
-                      <span className="text-white font-bold text-xs">
-                        {journeyStep === "SESSION_COMPLETE"
-                          ? "Exit Recorded (APP_DECISION)"
-                          : "Pending Exit Request"}
-                      </span>
-                      <span className="text-[10px] text-slate-400 block">
-                        Bay freed and returned to available in twin
-                      </span>
-                    </div>
-                    <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-purple-500/30 text-purple-300">
-                      APP_DECISION
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-
-              {/* Column 2: PHYSICAL EVIDENCE */}
-              <div className="rounded-xl border border-sky-500/30 bg-sky-950/20 p-4 space-y-3">
-                <div className="flex items-center justify-between pb-2 border-b border-sky-500/30">
-                  <span className="text-xs font-bold text-sky-300 uppercase tracking-wider">
-                    PHYSICAL EVIDENCE (SENSORS)
-                  </span>
-                  <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-sky-500/40 text-sky-300">
-                    DVR / ANPR
-                  </Badge>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block uppercase">1. ENTRANCE CCTV (CAM-01)</span>
-                      <span className="text-emerald-400 font-bold text-xs block">
-                        {activeVehicleId === "VEH-001" ? "KA05ML7220 physically observed at gate" : "CAM-01 Footage"}
-                      </span>
-                      <span className="text-[10px] text-slate-400 block">
-                        {activeVehicleId === "VEH-001" ? "Identity linkage: UNVERIFIED" : "No vehicle linkage in clip"}
-                      </span>
-                    </div>
-                    <Badge
-                      variant="outline"
-                      className={`text-[9px] px-1.5 py-0 ${
-                        activeVehicleId === "VEH-001"
-                          ? "border-emerald-500/30 text-emerald-300"
-                          : "border-slate-700 text-slate-400"
-                      }`}
-                    >
-                      {activeVehicleId === "VEH-001" ? "OBSERVED / UNVERIFIED" : "APPLICATION-ONLY"}
-                    </Badge>
-                  </div>
-
-                  <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block uppercase">2. PARKING MANEUVER (CAM-02)</span>
-                      <span className="text-rose-400 font-bold text-xs block">NOT OBSERVED IN CCTV</span>
-                      <span className="text-[10px] text-slate-400 block">
-                        CAM-02 shows stationary parked vehicles only. No parking maneuver recorded.
-                      </span>
-                    </div>
-                    <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-rose-500/30 text-rose-300">
-                      NOT OBSERVED
-                    </Badge>
-                  </div>
-
-                  <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block uppercase">3. PHYSICAL EXIT (CAM-03)</span>
-                      <span className="text-rose-400 font-bold text-xs block">NOT OBSERVED IN CCTV</span>
-                      <span className="text-[10px] text-slate-400 block">
-                        CAM-03 shows stationary exit barrier. Vehicle egress not recorded.
-                      </span>
-                    </div>
-                    <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-rose-500/30 text-rose-300">
-                      NOT OBSERVED
-                    </Badge>
-                  </div>
-
-                  <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block uppercase">4. COMPLETE LIFECYCLE PROOF</span>
-                      <span className="text-amber-400 font-bold text-xs block">NOT AVAILABLE IN DATASET</span>
-                      <span className="text-[10px] text-slate-400 block">
-                        Supplied clips are ~15s and do not record full journey end-to-end.
-                      </span>
-                    </div>
-                    <Badge variant="outline" className="text-[9px] px-1.5 py-0 border-amber-500/30 text-amber-300">
-                      AUDIT FACT
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </div>
-      </details>
     </div>
   );
 }

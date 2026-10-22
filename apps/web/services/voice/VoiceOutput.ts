@@ -1,3 +1,4 @@
+import { relabelBaysInText } from "@/utils/bayLabel";
 /**
  * ParkTwin AI — Voice Output Adapter Interface & Web Speech API Implementation
  * ==============================================================================
@@ -68,13 +69,14 @@ export class BrowserWebSpeechAdapter implements VoiceOutput {
           window.speechSynthesis.cancel();
         }
 
-        const utterance = new window.SpeechSynthesisUtterance(msg.text);
+        const utterance = new window.SpeechSynthesisUtterance(relabelBaysInText(msg.text));
         utterance.lang = msg.lang || "en-US";
         utterance.volume = options?.volume ?? 1.0;
         utterance.rate = options?.rate ?? 1.0;
 
         utterance.onend = () => resolve(true);
         utterance.onerror = () => resolve(false);
+        setTimeout(() => resolve(true), 2000);
 
         window.speechSynthesis.speak(utterance);
         this._unlocked = true;

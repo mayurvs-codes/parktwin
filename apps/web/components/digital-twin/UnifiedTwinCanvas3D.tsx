@@ -20,6 +20,7 @@ import { useSharedDemoState } from "@/store/useSharedDemoState";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useDigitalTwinStore } from "@/store/useDigitalTwinStore";
 import { CANONICAL_BAYS } from "./facilityGeometry";
+import { bayLabel } from "@/utils/bayLabel";
 
 export interface UnifiedTwinCanvas3DProps {
   onSlotSelect?: (slotId: string) => void;
@@ -370,7 +371,7 @@ export function UnifiedTwinCanvas3D({ onSlotSelect, highlightSlotId }: UnifiedTw
         </Badge>
         {selectedSlotId && (
           <Badge className="bg-sky-600/90 text-white font-mono text-xs border-sky-400/50 backdrop-blur shadow">
-            Selected: {selectedSlotId}
+            Selected: {bayLabel(selectedSlotId)}
           </Badge>
         )}
       </div>

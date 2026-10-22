@@ -9,6 +9,7 @@ import { SLOT_3D_POSITIONS } from "./twinConfig";
 import { TwinHeatmap3DOverlay } from "./TwinHeatmap";
 import { TwinSlot3DMesh } from "./TwinSlot3DMesh";
 import { TwinVehicle3DMesh } from "./TwinVehicle3DMesh";
+import { bayLabel } from "@/utils/bayLabel";
 
 export interface TwinCanvas3DProps {
   utilizationMap?: Record<string, number>;
@@ -157,7 +158,7 @@ export default function TwinCanvas3D({ utilizationMap }: TwinCanvas3DProps) {
         {selectedSlotId && selectedPos && selectedState && (
           <DreiHtml position={[selectedPos.x, 1.2, selectedPos.z]} center>
             <div className="pointer-events-none min-w-[140px] rounded-lg border border-border bg-card/95 p-2.5 text-center text-xs shadow-xl backdrop-blur">
-              <p className="font-bold text-foreground text-sm">Slot {selectedSlotId}</p>
+              <p className="font-bold text-foreground text-sm">Slot {bayLabel(selectedSlotId)}</p>
               <p className="font-medium text-primary mt-0.5">
                 {selectedState.license_plate || "No Vehicle"}
               </p>

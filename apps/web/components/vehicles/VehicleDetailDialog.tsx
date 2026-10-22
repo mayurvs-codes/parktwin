@@ -14,6 +14,7 @@ import { JourneyTimeline } from "@/components/digital-twin/JourneyTimeline";
 import { Camera, Navigation } from "lucide-react";
 import { VehicleHistory } from "./VehicleHistory";
 import { VehicleStatusBadge } from "./VehicleStatusBadge";
+import { bayLabel } from "@/utils/bayLabel";
 
 export interface VehicleDetailDialogProps {
   view: VehicleRowView | null;
@@ -132,7 +133,7 @@ export function VehicleDetailDialog({ view, open, onOpenChange }: VehicleDetailD
             <h3 className="mb-2 text-sm font-semibold text-foreground">Current session</h3>
             {view.session ? (
               <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                <Field label="Slot" value={view.slotId ?? "—"} />
+                <Field label="Slot" value={view.slotId ? bayLabel(view.slotId) : "—"} />
                 <Field label="Entry" value={formatDateTime(view.entryTime)} />
                 <Field label="Exit" value={formatDateTime(view.exitTime)} />
                 <Field label="Duration" value={formatDuration(view.durationSeconds)} />

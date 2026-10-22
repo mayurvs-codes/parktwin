@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useDemoMovieStore } from "@/store/useDemoMovieStore";
+import { bayLabel } from "@/utils/bayLabel";
 
 export function RecentActivityPanel() {
   const events = useDemoMovieStore((s) => s.events);
@@ -54,7 +55,7 @@ export function RecentActivityPanel() {
                       {ev.message}
                     </p>
                     <p className="text-[10px] font-mono text-muted-foreground">
-                      {ev.plate} · {ev.slotId} · {ev.camera}
+                      {ev.plate} · {bayLabel(ev.slotId)} · {ev.camera}
                     </p>
                   </div>
                   <time className="text-[10px] font-mono text-muted-foreground whitespace-nowrap">

@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Info,
   Activity,
   X,
   Video,
-  ShieldCheck,
-  CheckCircle2,
   AlertTriangle,
   Clock,
 } from "lucide-react";
@@ -19,6 +17,7 @@ import { useCctvEvidenceModalStore } from "@/store/useCctvEvidenceModalStore";
 import type { CctvCameraId } from "@/components/evidence/CctvEvidenceViewer";
 import { isSlotReserved } from "./demoScenarioData";
 import { useSharedDemoState } from "@/store/useSharedDemoState";
+import { bayLabel } from "@/utils/bayLabel";
 
 function getAlertContext(spaceId: string, vehicleId?: string | null): string {
   if (spaceId === "SP-07" || vehicleId === "VEH-001") {
@@ -31,8 +30,6 @@ function getAlertContext(spaceId: string, vehicleId?: string | null): string {
 }
 
 export function TwinIntelligenceRail() {
-  const [timelineMode, setTimelineMode] = useState<"ALL" | "APPLICATION" | "EVIDENCE">("ALL");
-
   // Shared End-to-End Demo Store (Authoritative for Focused Zone SP-01 to SP-20)
   const sharedDemoSpaces = useSharedDemoState((s) => s.spaces);
   const sharedSelectedSpaceId = useSharedDemoState((s) => s.selectedSpaceId);
@@ -45,7 +42,6 @@ export function TwinIntelligenceRail() {
   const spaces = useDemoMovieStore((s) => s.spaces);
   const vehicles = useDemoMovieStore((s) => s.vehicles);
   const cameras = useDemoMovieStore((s) => s.cameras);
-  const events = useDemoMovieStore((s) => s.events);
   const selectedVehicleId = useDemoMovieStore((s) => s.selectedVehicleId);
   const rawSelectedSlotId = useDemoMovieStore((s) => s.selectedSlotId);
   const selectedSlotId = rawSelectedSlotId || sharedSelectedSpaceId;
@@ -86,7 +82,7 @@ export function TwinIntelligenceRail() {
   return (
     <div className="space-y-3.5 select-none text-xs font-mono">
       {/* ── Section 6: Real Operations Dashboard Operational Alerts ── */}
-      {(longStayAlert?.active || (sharedViolation?.active && sharedViolation?.adminAlertActive)) && (
+      {(longStayAlert?.active || (sharedViolation?.active && (sharedViolation?.adminAlertActive || (sharedViolation?.durationSeconds ?? 0) >= 480))) && (
         <Card className="border-red-500/60 bg-red-950/40 shadow-2xl backdrop-blur-md" data-testid="admin-operational-alerts">
           <CardHeader className="pb-2 border-b border-red-500/30">
             <div className="flex items-center justify-between">
@@ -119,7 +115,7 @@ export function TwinIntelligenceRail() {
                   </div>
                   <div className="flex justify-between border-b border-amber-500/20 pb-0.5">
                     <span className="text-muted-foreground">Space:</span>
-                    <strong className="text-amber-300 font-mono">{longStayAlert.spaceId}</strong>
+                    <strong className="text-amber-300 font-mono">{bayLabel(longStayAlert.spaceId)}</strong>
                   </div>
                   <div className="flex justify-between border-b border-amber-500/20 pb-0.5">
                     <span className="text-muted-foreground">Duration:</span>
@@ -133,9 +129,22 @@ export function TwinIntelligenceRail() {
               </div>
             )}
 
+            {/* 1b. 8-MINUTE STAGE: grace period ending (driver warned, admin alert not yet raised) */}
+            {sharedViolation?.active && !sharedViolation?.adminAlertActive && (sharedViolation?.durationSeconds ?? 0) >= 480 && (
+              <div data-testid="duration-warning-alert" className="rounded-lg border border-amber-500/60 bg-amber-950/50 p-2.5 space-y-1">
+                <div className="flex items-center gap-1.5 text-amber-300 font-bold text-xs">
+                  <Clock className="h-3.5 w-3.5 text-amber-400 animate-pulse" />
+                  GRACE PERIOD ENDING (8:00+)
+                </div>
+                <div className="text-[11px] text-amber-100/90 font-mono">
+                  {sharedViolation.vehicleId} in {sharedViolation.actualSpaceId} (expected {sharedViolation.designatedSpaceId}) · escalates to admin at 10:00
+                </div>
+              </div>
+            )}
+
             {/* 2. PARKING VIOLATION ALERT */}
             {sharedViolation?.active && sharedViolation?.adminAlertActive && (
-              <div className="rounded-lg border border-red-500/60 bg-red-950/60 p-2.5 space-y-2">
+              <div data-testid="operational-violation-alert" className="rounded-lg border border-red-500/60 bg-red-950/60 p-2.5 space-y-2">
                 <div className="flex items-center justify-between text-red-300 font-bold text-xs">
                   <span className="flex items-center gap-1.5">
                     <AlertTriangle className="h-3.5 w-3.5 text-red-400 animate-pulse" />
@@ -248,7 +257,7 @@ export function TwinIntelligenceRail() {
                 <div className="rounded-lg bg-slate-900/60 border border-border/40 p-2">
                   <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Assigned Space</div>
                   <div className="font-mono font-bold text-sm text-sky-400 mt-0.5">
-                    {selectedVehicle.assignedSlot || "None"}
+                    {selectedVehicle.assignedSlot ? bayLabel(selectedVehicle.assignedSlot) : "None"}
                   </div>
                 </div>
                 <div className="rounded-lg bg-slate-900/60 border border-border/40 p-2">
@@ -274,27 +283,6 @@ export function TwinIntelligenceRail() {
                   </div>
                 )}
               </div>
-
-              {/* PROVENANCE DISCLOSURE */}
-              {(selectedVehicle.id === "VEH-001" || selectedVehicle.plate === "KA04MN8049") && (
-                <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-2.5 text-xs font-mono space-y-1.5 mt-2">
-                  <div className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">
-                    PROVENANCE DISCLOSURE
-                  </div>
-                  <div className="text-muted-foreground text-[11px]">
-                    <span className="text-foreground font-semibold">ANPR BENCHMARK:</span> KA04MN8049 (Independent benchmark · Track #6)
-                  </div>
-                  <div className="text-muted-foreground text-[11px]">
-                    <span className="text-foreground font-semibold">CAM-01 CCTV OBSERVATION:</span> KA05ML7220 (Visually observed, OCR unverified)
-                  </div>
-                  <div className="text-amber-300 font-bold text-[10px] pt-0.5 border-t border-amber-500/20">
-                    IDENTITY LINKAGE: UNVERIFIED
-                  </div>
-                  <div className="text-amber-400/90 text-[9px] font-semibold text-center pt-0.5">
-                    ANPR BENCHMARK ≠ PHYSICAL CCTV IDENTITY
-                  </div>
-                </div>
-              )}
 
               {/* ACTIONS */}
               {(selectedVehicle.plate === "KA04MN8049" || selectedVehicle.id === "VEH-001") && (
@@ -582,27 +570,6 @@ export function TwinIntelligenceRail() {
                 </div>
               </div>
 
-              {/* PROVENANCE DISCLOSURE */}
-              {(selectedSlot.currentVehicleId === "VEH-001" || selectedSlot.currentPlate === "KA04MN8049" || selectedSlot.id === "SP-24" || selectedSlot.id === "P24" || selectedSlot.name === "P24") && selectedSlot.isOccupied && (
-                <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-2.5 text-xs font-mono space-y-1.5 my-1.5">
-                  <div className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">
-                    PROVENANCE DISCLOSURE
-                  </div>
-                  <div className="text-muted-foreground text-[11px]">
-                    <span className="text-foreground font-semibold">ANPR BENCHMARK:</span> KA04MN8049 (Independent benchmark)
-                  </div>
-                  <div className="text-muted-foreground text-[11px]">
-                    <span className="text-foreground font-semibold">CAM-01 CCTV OBSERVATION:</span> KA05ML7220 (Visually observed, OCR unverified)
-                  </div>
-                  <div className="text-amber-300 font-bold text-[10px] pt-0.5 border-t border-amber-500/20">
-                    IDENTITY LINKAGE: UNVERIFIED
-                  </div>
-                  <div className="text-amber-400/90 text-[9px] font-semibold text-center pt-0.5">
-                    ANPR BENCHMARK ≠ PHYSICAL CCTV IDENTITY
-                  </div>
-                </div>
-              )}
-
               {/* ACTIONS */}
               {selectedSlot.coveringCamera === "CAM-02" && (
                 <Button
@@ -676,7 +643,7 @@ export function TwinIntelligenceRail() {
                   className="w-full mt-2 text-xs font-mono font-bold bg-sky-600 hover:bg-sky-500 text-white gap-1.5 shadow-sm"
                 >
                   <Video className="h-3.5 w-3.5" />
-                  <span>View Live CCTV Footage ({selectedCamera.id})</span>
+                  <span>View recorded footage ({selectedCamera.id})</span>
                 </Button>
               )}
             </div>
@@ -778,40 +745,6 @@ export function TwinIntelligenceRail() {
                 </div>
               </div>
 
-              {/* Engine Subsystems Health Indicators */}
-              <div className="rounded-lg bg-slate-900/50 border border-border/40 p-2.5 space-y-2">
-                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                  <span>Engine Subsystems</span>
-                  <span className="text-emerald-400 flex items-center gap-1 font-semibold text-[9px]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    HEALTHY
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 gap-1.5 pt-0.5">
-                  <div className="flex items-center justify-between text-[11px] text-slate-300">
-                    <span className="flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" />
-                      Vision Pipeline
-                    </span>
-                    <span className="font-semibold text-emerald-400 text-[10px]">ONLINE</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[11px] text-slate-300">
-                    <span className="flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" />
-                      ANPR Inference
-                    </span>
-                    <span className="font-semibold text-emerald-400 text-[10px]">ONLINE</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[11px] text-slate-300">
-                    <span className="flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" />
-                      Deterministic Event Bus
-                    </span>
-                    <span className="font-semibold text-emerald-400 text-[10px]">ONLINE</span>
-                  </div>
-                </div>
-              </div>
-
               <div className="pt-1 text-center text-muted-foreground text-[10px] border-t border-border/30">
                 Click any bay, vehicle, or camera on the map to inspect live telemetry.
               </div>
@@ -820,266 +753,40 @@ export function TwinIntelligenceRail() {
         </CardContent>
       </Card>
 
-      {/* ── Evidence Coverage Summary Card ── */}
-      <Card className="border-border/70 bg-card/70 backdrop-blur-md shadow-xl" data-testid="evidence-coverage-card">
-        <CardHeader className="pb-2 border-b border-border/40">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-amber-400" />
-              <span>Evidence Coverage Summary</span>
-            </CardTitle>
-            <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold">
-              PARTIALLY EVIDENCE-BACKED
-            </span>
-          </div>
-        </CardHeader>
-        <CardContent className="pt-3 space-y-2 text-xs font-mono">
-          <div className="flex items-center justify-between py-1 border-b border-border/30">
-            <span className="text-muted-foreground">CCTV Sources</span>
-            <span className="font-semibold text-foreground">3 (CAM-01, CAM-02, CAM-03)</span>
-          </div>
-          <div className="flex items-center justify-between py-1 border-b border-border/30">
-            <span className="text-muted-foreground">ANPR Benchmark Sources</span>
-            <span className="font-semibold text-sky-400">1 (test_video.mp4 · Track #6)</span>
-          </div>
-          <div className="flex items-center justify-between py-1 border-b border-border/30">
-            <span className="text-muted-foreground">Entry Observations</span>
-            <span className="font-semibold text-emerald-400">AVAILABLE / PARTIAL</span>
-          </div>
-          <div className="flex items-center justify-between py-1 border-b border-border/30">
-            <span className="text-muted-foreground">Parking Maneuver Evidence</span>
-            <span className="font-semibold text-rose-400">NOT AVAILABLE (NOT PROVEN)</span>
-          </div>
-          <div className="flex items-center justify-between py-1 border-b border-border/30">
-            <span className="text-muted-foreground">Physical Exit Evidence</span>
-            <span className="font-semibold text-rose-400">NOT AVAILABLE (NOT OBSERVED)</span>
-          </div>
-          <div className="flex items-center justify-between py-1 border-b border-border/30">
-            <span className="text-muted-foreground">Cross-Camera Identity</span>
-            <span className="font-semibold text-amber-400">UNVERIFIED</span>
-          </div>
-          <div className="flex items-center justify-between pt-1">
-            <span className="text-muted-foreground">Complete Lifecycle Proof</span>
-            <span className="font-bold text-rose-400">NOT AVAILABLE</span>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* ── Activity & Provenance Timeline ── */}
+      {/* ── Recent events (violations, long stays, resets) ── */}
       <Card className="border-border/70 bg-card/70 backdrop-blur-md shadow-xl" data-testid="twin-activity-feed">
-        <CardHeader className="pb-2 border-b border-border/40 space-y-2">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Activity className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Timeline: Evidence vs Application</span>
-            </CardTitle>
-            <button
-              onClick={() => useCctvEvidenceModalStore.getState().openModal({ camera: "CAM-01" })}
-              className="text-[10px] font-mono text-sky-400 hover:text-sky-300 flex items-center gap-1 border border-sky-500/30 px-2 py-0.5 rounded bg-sky-500/10 transition-colors"
-              title="Open CCTV Evidence Player"
-            >
-              <Video className="h-3 w-3" />
-              <span>CCTV EVIDENCE</span>
-            </button>
-          </div>
-
-          {/* Timeline Filter Toggle */}
-          <div className="flex items-center gap-1">
-            <Button
-              size="sm"
-              variant={timelineMode === "ALL" ? "secondary" : "ghost"}
-              onClick={() => setTimelineMode("ALL")}
-              className={`h-6 text-[10px] font-mono px-2 ${
-                timelineMode === "ALL" ? "bg-slate-800 text-white font-bold" : "text-muted-foreground"
-              }`}
-            >
-              ALL
-            </Button>
-            <Button
-              size="sm"
-              variant={timelineMode === "EVIDENCE" ? "secondary" : "ghost"}
-              onClick={() => setTimelineMode("EVIDENCE")}
-              className={`h-6 text-[10px] font-mono px-2 ${
-                timelineMode === "EVIDENCE"
-                  ? "bg-sky-500/20 text-sky-300 border border-sky-500/40 font-bold"
-                  : "text-muted-foreground"
-              }`}
-            >
-              EVIDENCE TIMELINE
-            </Button>
-            <Button
-              size="sm"
-              variant={timelineMode === "APPLICATION" ? "secondary" : "ghost"}
-              onClick={() => setTimelineMode("APPLICATION")}
-              className={`h-6 text-[10px] font-mono px-2 ${
-                timelineMode === "APPLICATION"
-                  ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold"
-                  : "text-muted-foreground"
-              }`}
-            >
-              APPLICATION TIMELINE
-            </Button>
-          </div>
+        <CardHeader className="pb-2 border-b border-border/40">
+          <CardTitle className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+            <Activity className="h-3.5 w-3.5 text-emerald-400" />
+            <span>Recent events</span>
+          </CardTitle>
         </CardHeader>
-
-        <CardContent className="pt-3 max-h-56 overflow-y-auto space-y-2 text-xs font-mono scrollbar-thin">
-          {/* Evidence Timeline Entries */}
-          {(timelineMode === "ALL" || timelineMode === "EVIDENCE") && (
-            <div className="space-y-1.5 mb-2">
-              <div className="text-[10px] font-bold text-sky-400 uppercase tracking-wider pb-1 border-b border-sky-500/20 flex items-center justify-between">
-                <span>● EVIDENCE TIMELINE (CCTV / SENSORS)</span>
-                <span className="text-[9px] text-muted-foreground font-normal">Ground Truth</span>
-              </div>
-              <div className="p-2 rounded border border-emerald-500/30 bg-emerald-950/20 space-y-1">
-                <div className="flex items-center justify-between text-[10px]">
-                  <span className="text-emerald-400 font-bold">CAM-01 (B2 Gate)</span>
-                  <Badge variant="outline" className="text-[9px] px-1 py-0 border-emerald-500/40 text-emerald-300">
-                    OBSERVED
-                  </Badge>
+        <CardContent className="pt-3 space-y-1.5 max-h-56 overflow-y-auto">
+          {sharedActivityEvents.length === 0 ? (
+            <p className="py-2 text-center text-muted-foreground text-[11px]">No events yet.</p>
+          ) : (
+            sharedActivityEvents.slice(0, 8).map((evt) => (
+              <div
+                key={evt.id}
+                className={`p-2 rounded border space-y-0.5 ${
+                  evt.type === "PARKING_VIOLATION"
+                    ? "border-red-500/50 bg-red-950/30"
+                    : evt.type === "LONG_STAY_ALERT"
+                    ? "border-amber-500/50 bg-amber-950/30"
+                    : "border-slate-800 bg-slate-900/50"
+                }`}
+              >
+                <div className="flex items-center justify-between text-[10px] font-semibold text-slate-300">
+                  <span>
+                    {bayLabel(evt.spaceId)} {evt.vehicleId ? `· ${evt.vehicleId}` : ""}
+                  </span>
+                  <span className="text-muted-foreground font-normal">{evt.timeLabel}</span>
                 </div>
-                <p className="text-[11px] text-foreground leading-snug">
-                  Vehicle entrance observed. Plate visually legible: KA05ML7220. Barrier arm lift verified.
-                </p>
+                <p className="text-[11px] text-foreground leading-snug">{evt.message}</p>
               </div>
-
-              <div className="p-2 rounded border border-sky-500/30 bg-sky-950/20 space-y-1">
-                <div className="flex items-center justify-between text-[10px]">
-                  <span className="text-sky-400 font-bold">Track #6 (PaddleOCR)</span>
-                  <Badge variant="outline" className="text-[9px] px-1 py-0 border-sky-500/40 text-sky-300">
-                    INFERRED
-                  </Badge>
-                </div>
-                <p className="text-[11px] text-foreground leading-snug">
-                  ANPR benchmark detected KA04MN8049 (98% conf, test_video.mp4). Identity linkage: UNVERIFIED.
-                </p>
-              </div>
-
-              <div className="p-2 rounded border border-amber-500/30 bg-amber-950/20 space-y-1">
-                <div className="flex items-center justify-between text-[10px]">
-                  <span className="text-amber-400 font-bold">CAM-02 (Bay Cluster)</span>
-                  <Badge variant="outline" className="text-[9px] px-1 py-0 border-rose-500/40 text-rose-300">
-                    NOT OBSERVED
-                  </Badge>
-                </div>
-                <p className="text-[11px] text-foreground leading-snug">
-                  Stationary dwell observed for KA05ND1565 & KA03NY0035. Parking maneuver: NOT OBSERVED IN CCTV.
-                </p>
-              </div>
-
-              <div className="p-2 rounded border border-rose-500/30 bg-rose-950/20 space-y-1">
-                <div className="flex items-center justify-between text-[10px]">
-                  <span className="text-rose-400 font-bold">CAM-03 (Exit Ramp)</span>
-                  <Badge variant="outline" className="text-[9px] px-1 py-0 border-rose-500/40 text-rose-300">
-                    NOT OBSERVED
-                  </Badge>
-                </div>
-                <p className="text-[11px] text-foreground leading-snug">
-                  Exit infrastructure verified. Vehicle egress: NOT OBSERVED IN SOURCE CLIP (roadway clear).
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Application Timeline Entries */}
-          {(timelineMode === "ALL" || timelineMode === "APPLICATION") && (
-            <div className="space-y-1.5">
-              <div className="text-[10px] font-bold text-purple-400 uppercase tracking-wider pb-1 border-b border-purple-500/20 flex items-center justify-between">
-                <span>● APPLICATION TIMELINE (DEMO & EVENTS)</span>
-                <span className="text-[9px] text-muted-foreground font-normal">State Machine</span>
-              </div>
-
-              {/* Authoritative Shared Demo Events (Violations, Reservations, Resets, Long-Stay Alerts) */}
-              {sharedActivityEvents.map((evt) => (
-                <div
-                  key={evt.id}
-                  className={`p-2 rounded border space-y-1 ${
-                    evt.type === "PARKING_VIOLATION"
-                      ? "border-red-500/50 bg-red-950/30 shadow-sm"
-                      : evt.type === "LONG_STAY_ALERT"
-                      ? "border-amber-500/50 bg-amber-950/30 shadow-sm"
-                      : evt.type === "SPACE_RESERVED"
-                      ? "border-amber-500/30 bg-amber-950/20"
-                      : evt.type === "DESIGNATED_ACCESS"
-                      ? "border-sky-500/30 bg-sky-950/20"
-                      : "border-slate-800 bg-slate-900/50"
-                  }`}
-                >
-                  <div className="flex items-center justify-between text-[10px]">
-                    <span
-                      className={`font-semibold ${
-                        evt.type === "PARKING_VIOLATION"
-                          ? "text-red-400 flex items-center gap-1 font-bold"
-                          : evt.type === "LONG_STAY_ALERT"
-                          ? "text-amber-400 flex items-center gap-1 font-bold"
-                          : evt.type === "SPACE_RESERVED"
-                          ? "text-amber-300"
-                          : evt.type === "DESIGNATED_ACCESS"
-                          ? "text-sky-300"
-                          : "text-slate-300"
-                      }`}
-                    >
-                      {evt.type === "PARKING_VIOLATION" && <AlertTriangle className="h-3 w-3 text-red-400 animate-pulse" />}
-                      {evt.type === "LONG_STAY_ALERT" && <Clock className="h-3 w-3 text-amber-400 animate-pulse" />}
-                      {evt.spaceId} {evt.vehicleId ? `· ${evt.vehicleId}` : ""}
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-muted-foreground">{evt.timeLabel}</span>
-                      <Badge
-                        variant={evt.type === "PARKING_VIOLATION" ? "destructive" : "outline"}
-                        className={`text-[8px] px-1 py-0 uppercase ${
-                          evt.type === "LONG_STAY_ALERT"
-                            ? "border-amber-500/50 text-amber-300 bg-amber-500/10 font-bold"
-                            : evt.type === "SPACE_RESERVED"
-                            ? "border-amber-500/40 text-amber-300"
-                            : evt.type === "DESIGNATED_ACCESS"
-                            ? "border-sky-500/40 text-sky-300"
-                            : ""
-                        }`}
-                      >
-                        {evt.type.replace(/_/g, " ")}
-                      </Badge>
-                    </div>
-                  </div>
-                  <p className="text-[11px] text-foreground leading-snug">{evt.message}</p>
-                </div>
-              ))}
-
-              {events.length === 0 && sharedActivityEvents.length === 0 ? (
-                <p className="py-2 text-center text-muted-foreground text-[11px]">
-                  Start the project movie to stream live application state transitions.
-                </p>
-              ) : (
-                events.map((evt) => (
-                  <div
-                    key={evt.id}
-                    className="p-2 rounded border border-purple-500/20 bg-purple-950/10 space-y-1"
-                  >
-                    <div className="flex items-center justify-between text-[10px]">
-                      <span className="text-purple-300 font-semibold">{evt.plate}</span>
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-muted-foreground">{evt.timeLabel}</span>
-                        <Badge variant="outline" className="text-[8px] px-1 py-0 border-purple-500/30 text-purple-300">
-                          {evt.eventType === "VEHICLE_EXITED" ? "APP_DECISION" : "APPLICATION STATE"}
-                        </Badge>
-                      </div>
-                    </div>
-                    <p className="text-[11px] text-foreground leading-snug">{evt.message}</p>
-                  </div>
-                ))
-              )}
-            </div>
+            ))
           )}
         </CardContent>
-
-        {/* Evidence Coverage Summary Ribbon */}
-        <div className="p-2.5 border-t border-border/40 text-[10px] font-mono text-muted-foreground flex flex-col sm:flex-row sm:items-center justify-between gap-1 bg-card/80">
-          <span className="text-amber-400 font-bold uppercase tracking-wider">
-            ● EVIDENCE COVERAGE SUMMARY:
-          </span>
-          <span className="text-slate-300">
-            Entry: PARTIAL | Maneuver: NOT PROVEN | Exit: NOT OBSERVED
-          </span>
-        </div>
       </Card>
     </div>
   );

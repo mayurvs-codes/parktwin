@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { useUserPortalStore } from "@/store/useUserPortalStore";
 import { useSharedDemoState } from "@/store/useSharedDemoState";
 import { useRouter } from "next/navigation";
+import { bayLabel } from "@/utils/bayLabel";
 
 export function UserFindParkingView() {
   const router = useRouter();
@@ -165,7 +166,7 @@ export function UserFindParkingView() {
                 <CardHeader className="p-4 pb-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-black font-mono text-white">
-                      {space.id}
+                      {bayLabel(space.id)}
                     </span>
                     <Badge variant="outline" className="text-[10px] font-mono border-emerald-500/30 text-emerald-400 bg-emerald-500/10">
                       FREE
