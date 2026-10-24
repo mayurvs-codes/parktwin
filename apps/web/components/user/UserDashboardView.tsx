@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import {
+import { Phone,
   Compass,
   ArrowRight,
   AlertTriangle,
@@ -29,6 +29,8 @@ import { bayLabel, relabelBaysInText } from "@/utils/bayLabel";
 import { VoiceBayPicker } from "@/components/user/VoiceBayPicker";
 import { directionsToBay } from "@/utils/violationVoice";
 import { simulateWrongBay } from "@/utils/wrongBaySimulation";
+import { assignmentVoiceText } from "@/utils/driverName";
+import { useDriverCallStore } from "@/store/useDriverCallStore";
 
 /**
  * UserDashboardView:
@@ -137,6 +139,7 @@ export function UserDashboardView() {
   // Only show the active driver's announcements (a guest must not see User A's assignment).
   const isForActiveDriver = (vehicleId?: string) =>
     !vehicleId || !DEMO_PERSONA_VEHICLES.includes(vehicleId) || vehicleId === activeVehicleId;
+  const driverCall = useDriverCallStore((s) => s.call);
   const driverLog = announcementLog.filter((e) => isForActiveDriver(e.vehicle_id));
   const driverAnnouncement =
     currentVoiceAnnouncement && isForActiveDriver(currentVoiceAnnouncement.vehicle_id)
@@ -200,7 +203,7 @@ export function UserDashboardView() {
       longStayAlert?.spaceId === currentObservedBay &&
       longStayAlert?.vehicleId === activeVehicleId
     ) ||
-    Boolean(sharedViolation?.adminAlertActive) ||
+    Boolean(sharedViolation?.adminAlertActive && !sharedViolation?.notMoved) ||
     (sharedViolation?.durationSeconds != null && sharedViolation.durationSeconds >= 600) ||
     (liveDurationSecs >= 600 && isStillInSameSpace);
   const isWarning =
@@ -217,14 +220,11 @@ export function UserDashboardView() {
       assignedSpaceId &&
       (journeyStep === "SPACE_ASSIGNED" || journeyStep === "NAVIGATING_TO_SPACE")
     ) {
-      const stepsText = currentRoute?.steps?.length
-        ? "Follow the driving aisle along the upper island to your bay."
-        : "Follow the driving aisle to your bay.";
       receiveAnnouncement({
         message_id: `VM-ASSIGN-${activeVehicleId}-${assignedSpaceId}`,
         event_id: `EV-ASSIGN-${activeVehicleId}-${assignedSpaceId}`,
         kind: "ASSIGNMENT",
-        text: `Vehicle recognised. Your designated parking space is ${assignedSpaceId}. ${stepsText}`,
+        text: assignmentVoiceText(activeVehicleId, assignedSpaceId),
         priority: 50,
         vehicle_id: activeVehicleId,
         source: "demo",
@@ -332,6 +332,25 @@ export function UserDashboardView() {
 
   return (
     <div className="space-y-4 pb-12 max-w-7xl mx-auto font-sans">
+      {/* ── Incoming call: spoken wrong-bay warning (2 s after parking) ── */}
+      {driverCall && driverCall.vehicleId === activeVehicleId && (
+        <div
+          data-testid="driver-call-banner"
+          role="alert"
+          className="rounded-xl border border-emerald-500/60 bg-emerald-950/60 p-3.5 flex items-start gap-3 shadow-lg animate-pulse"
+        >
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300">
+            <Phone className="h-4 w-4" />
+          </div>
+          <div className="space-y-0.5">
+            <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-300">
+              Incoming call · {driverCall.from}
+            </div>
+            <p className="text-xs font-mono text-slate-100">{relabelBaysInText(driverCall.text)}</p>
+          </div>
+        </div>
+      )}
+
       {/* ── Slot Conflict Alert (if any) ── */}
       {conflictError && (
         <div className="rounded-xl border border-rose-500/50 bg-rose-950/40 p-3.5 flex items-center justify-between text-xs font-mono text-rose-300 shadow-lg">
@@ -596,7 +615,9 @@ export function UserDashboardView() {
                       Vehicle is parked in the wrong space. Please move to {bayLabel(sharedViolation?.designatedSpaceId || "SP-07")}.
                     </p>
                     <p className="text-[11px] text-slate-300 font-sans">
-                      {isLongStay
+                      {sharedViolation?.notMoved
+                        ? "You did not move after the warning. The admin has been notified. Please move to your own bay now."
+                        : isLongStay
                         ? `Vehicle presence in unauthorized bay ${bayLabel(sharedViolation?.actualSpaceId || "SP-11")} has exceeded 10 minutes. Operational violation alert dispatched to Facility Management.`
                         : "A 10-minute grace period applies before escalation to Admin Operational Alert. Please relocate your vehicle immediately."}
                     </p>

@@ -50,6 +50,8 @@ export interface ViolationInfo {
   detectedAt: string;
   timestamp: number;
   adminAlertActive?: boolean;
+  /** Admin was notified because the driver did not move after the warning call (demo timeline), not the 10-minute rule. */
+  notMoved?: boolean;
   durationSeconds?: number;
 }
 
@@ -208,7 +210,7 @@ export interface SharedDemoState {
   releaseSpace: (spaceId: string) => void;
   triggerViolation: (opts?: ViolationScenarioOptions) => void;
   clearViolation: () => void;
-  escalateViolationToAdminAlert: (durationSeconds?: number) => void;
+  escalateViolationToAdminAlert: (durationSeconds?: number, reason?: "not_moved") => void;
   deescalateViolationAlert: () => void;
   triggerLongStayAlert: (info: LongStayAlertInfo) => void;
   clearLongStayAlert: (spaceId?: string) => void;
@@ -699,7 +701,7 @@ export const useSharedDemoState = create<SharedDemoState>((set, get) => {
       });
     },
 
-    escalateViolationToAdminAlert: (durationSeconds: number = 600) => {
+    escalateViolationToAdminAlert: (durationSeconds: number = 600, reason?: "not_moved") => {
       set((state) => {
         if (!state.violation || !state.violation.active) return state;
         if (state.violation.adminAlertActive) return state;
@@ -711,8 +713,12 @@ export const useSharedDemoState = create<SharedDemoState>((set, get) => {
         const updatedViolation: ViolationInfo = {
           ...state.violation,
           adminAlertActive: true,
+          notMoved: reason === "not_moved",
           durationSeconds,
-          message: `OPERATIONAL ALERT: Vehicle ${vehicleId} unauthorized in bay ${actualSpaceId} (Expected: ${designatedSpaceId}) exceeded 10m threshold. Action required.`,
+          message:
+            reason === "not_moved"
+              ? `ADMIN NOTIFICATION: Vehicle ${vehicleId} has not moved from bay ${actualSpaceId} after the warning (Expected: ${designatedSpaceId}). Action required.`
+              : `OPERATIONAL ALERT: Vehicle ${vehicleId} unauthorized in bay ${actualSpaceId} (Expected: ${designatedSpaceId}) exceeded 10m threshold. Action required.`,
         };
 
         const target = state.spaces[actualSpaceId];
@@ -722,7 +728,10 @@ export const useSharedDemoState = create<SharedDemoState>((set, get) => {
               ...target,
               status: "VIOLATION",
               isViolation: true,
-              violationReason: `UNRESOLVED VIOLATION: In ${actualSpaceId} for ${Math.floor(durationSeconds / 60)}m+. Expected: ${designatedSpaceId}.`,
+              violationReason:
+                reason === "not_moved"
+                  ? `Driver warned but has not moved from ${actualSpaceId}. Expected: ${designatedSpaceId}.`
+                  : `UNRESOLVED VIOLATION: In ${actualSpaceId} for ${Math.floor(durationSeconds / 60)}m+. Expected: ${designatedSpaceId}.`,
             }
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           : ({} as any);
@@ -735,7 +744,10 @@ export const useSharedDemoState = create<SharedDemoState>((set, get) => {
           spaceId: actualSpaceId,
           user: "Registered User A",
           vehicleId,
-          message: `PARKING VIOLATION: ${vehicleId} expected ${designatedSpaceId}, actual ${actualSpaceId}. Duration ${Math.floor(durationSeconds / 60)}+ min. STATUS: ACTION REQUIRED`,
+          message:
+            reason === "not_moved"
+              ? `NOT MOVED: ${vehicleId} is still in ${actualSpaceId} after the warning call (expected ${designatedSpaceId}). Admin notified.`
+              : `PARKING VIOLATION: ${vehicleId} expected ${designatedSpaceId}, actual ${actualSpaceId}. Duration ${Math.floor(durationSeconds / 60)}+ min. STATUS: ACTION REQUIRED`,
           severity: "CRITICAL",
         };
 

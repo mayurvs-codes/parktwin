@@ -48,6 +48,8 @@ interface VoiceState {
   cancelAnnouncement: (messageId?: string, adapterOverride?: VoiceOutput) => void;
   testVoice: (adapterOverride?: VoiceOutput) => Promise<void>;
   clearLog: () => void;
+  /** Drop backend wrong-bay warnings for a while: the local demo speaks its own timed call instead. */
+  suppressBackendWrongBay: (ms: number) => void;
   checkAvailability: (adapterOverride?: VoiceOutput) => void;
 }
 
@@ -176,6 +178,8 @@ export const useVoiceStore = create<VoiceState>()(
       },
 
       clearLog: () => set({ announcementLog: [], seenEventIds: [] }),
+
+      suppressBackendWrongBay: (ms) => set({ suppressBackendWrongBayUntil: Date.now() + ms }),
     }),
     {
       name: "parktwin-voice-settings",

@@ -19,6 +19,7 @@ const UserShell = dynamic(
   }
 );
 import { CctvEvidenceModal } from "@/components/evidence/CctvEvidenceModal";
+import { AdminViolationBanner } from "@/components/layout/AdminViolationBanner";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -59,6 +60,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           onToggleCollapse={() => setCollapsed((value) => !value)}
           onOpenMobile={() => setMobileOpen(true)}
         />
+        <AdminViolationBanner />
         {/* Keyboard / screen-reader shortcut to bypass the navigation. */}
         <a
           href="#main-content"
@@ -66,7 +68,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        {pathname === "/digital-twin" ? (
+        {pathname === "/digital-twin" || pathname === "/digital-twin-3d" ? (
           <main id="main-content" className="flex-1 overflow-hidden p-0 flex flex-col">
             {children}
           </main>

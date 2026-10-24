@@ -8,8 +8,11 @@ test.describe("B21 — Separate 3D digital twin page", () => {
 
     // Reached from the admin sidebar like any other page.
     await page.goto("/dashboard");
-    await page.getByRole("link", { name: "3D Twin" }).first().click();
-    await expect(page).toHaveURL(/\/digital-twin-3d$/);
+    // A click made before the dev server hydrates the page can be swallowed, so retry until it navigates.
+    await expect(async () => {
+      await page.getByRole("link", { name: "3D Twin" }).first().click();
+      await expect(page).toHaveURL(/\/digital-twin-3d$/, { timeout: 4000 });
+    }).toPass({ timeout: 40_000 });
 
     const canvas = page.locator("canvas").first();
     await expect(canvas).toBeVisible({ timeout: 60_000 });

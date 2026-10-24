@@ -26,7 +26,7 @@ test.describe("ParkTwin — 3D Twin, Voice Assistant & Wrong-Bay Violation E2E S
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
     await expect(logPanel).toBeVisible();
     await expect(logPanel).toContainText("C7");
-    await expect(logPanel).toContainText("driving aisle");
+    await expect(logPanel).toContainText("Verification successful. Welcome User A. Your place is C7.");
 
     // Verify no wrong bay warning or violation alert is active
     await expect(page.locator("text=Wrong Space Warning")).not.toBeVisible();

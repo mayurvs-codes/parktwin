@@ -1194,7 +1194,8 @@ export const useUserPortalStore = create<UserPortalStoreState>((set, get) => {
           }
         } else {
           // Less than 10 minutes: ensure no operational alert is active
-          if (sharedState.violation?.adminAlertActive) {
+          // The 5 s "not moved" admin notification is not the 10-minute alert: leave it in place.
+          if (sharedState.violation?.adminAlertActive && !sharedState.violation?.notMoved) {
             sharedState.deescalateViolationAlert();
           }
           if (sharedState.longStayAlert?.spaceId === activeSession.spaceId) {

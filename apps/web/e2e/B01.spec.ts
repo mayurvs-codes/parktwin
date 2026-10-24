@@ -34,14 +34,15 @@ test.describe("B01 — Vehicle recognised -> assignment", () => {
     const logPanel = page.locator("[data-testid='announcement-log-panel']");
     await expect(logPanel).toBeVisible({ timeout: 10000 });
     await expect(logPanel).toContainText("C7");
-    await expect(logPanel).toContainText("driving aisle");
+    await expect(logPanel).toContainText("Verification successful. Welcome User A. Your place is C7.");
+    await expect(logPanel).not.toContainText("driving aisle"); // no extra talk
     await ctx.takeScreenshot("assignment_announcement_received");
 
     await page.waitForFunction(() => (window as any).__spokenUtterances?.some((u: any) => u.text.includes("C7")), { timeout: 5000 }).catch(() => {});
     const spoken = await getSpokenUtterances(page);
     const spokenAssignment = spoken.find((u) => u.text.includes("C7"));
     expect(spokenAssignment).toBeDefined();
-    expect(spokenAssignment!.text).toContain("Vehicle recognised. Your designated parking space is C7.");
+    expect(spokenAssignment!.text).toBe("Verification successful. Welcome User A. Your place is C7.");
 
     // Backend state assertion: /violations/announcements matches UI text
     const logRes = await page.request.get(`${BACKEND_URL}/violations/announcements`);

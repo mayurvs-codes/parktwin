@@ -27,6 +27,10 @@ from .models import VoiceMessage, VoiceMessageKind
 logger = logging.getLogger("voice_service")
 
 
+# Display names spoken in the welcome message for the demo drivers (User A, User B, Guest).
+DRIVER_NAMES = {"VEH-001": "User A", "VEH-002": "User B", "VEH-003": "Guest"}
+
+
 class VoiceService:
     """Manages generation, deduplication, and lifecycle of driver voice announcements."""
 
@@ -87,11 +91,15 @@ class VoiceService:
         vehicle_id: str,
         assigned_bay: str,
         route_directions: Optional[List[str]] = None,
+        driver_name: Optional[str] = None,
         source: str = "live",
     ) -> Optional[VoiceMessage]:
         """
-        Create announcement when a vehicle is confirmed and assigned a parking bay.
-        Combines assignment confirmation with condensed route navigation directions.
+        Create the announcement when a vehicle is verified and assigned a parking bay.
+
+        Deliberately one short sentence group with no route talk:
+        "Verification successful. Welcome <name>. Your place is <bay>."
+        `route_directions` is accepted for caller compatibility but is not spoken.
         """
         try:
             if self._is_duplicate(event_id):
@@ -100,12 +108,8 @@ class VoiceService:
             if self._is_on_cooldown(vehicle_id, VoiceMessageKind.ASSIGNMENT.value):
                 return None
 
-            base_text = f"Vehicle recognised. Your designated parking space is {assigned_bay}."
-            condensed = self.condense_directions(route_directions)
-            if condensed:
-                full_text = f"{base_text} {condensed}"
-            else:
-                full_text = base_text
+            name = driver_name or DRIVER_NAMES.get(vehicle_id) or "driver"
+            full_text = f"Verification successful. Welcome {name}. Your place is {assigned_bay}."
 
             msg = VoiceMessage(
                 event_id=event_id,

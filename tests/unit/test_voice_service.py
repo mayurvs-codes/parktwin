@@ -38,10 +38,10 @@ def test_assignment_message_built_from_real_assignment_and_route(voice):
         source="test",
     )
     assert msg is not None
-    assert "Your designated parking space is SP-07" in msg.text
-    assert "Follow the driving aisle" in msg.text
-    assert "North Junction" in msg.text
-    assert "Upper West Junction" in msg.text
+    # One short line, no route talk: verification, welcome by name, the place.
+    assert msg.text == "Verification successful. Welcome User A. Your place is SP-07."
+    assert "Follow" not in msg.text
+    assert "Junction" not in msg.text
     assert msg.priority == 50
     assert msg.kind == VoiceMessageKind.ASSIGNMENT.value
 
@@ -139,10 +139,10 @@ def test_failure_case_messages(voice):
 
 def test_voice_exception_never_raises(voice, monkeypatch):
     """Simulate internal exception in message building; service catches and returns None."""
-    def bad_condense(*args):
+    def bad_dispatch(*args, **kwargs):
         raise RuntimeError("Speech synthesis fault")
 
-    monkeypatch.setattr(voice, "condense_directions", bad_condense)
+    monkeypatch.setattr(voice, "_record_and_dispatch", bad_dispatch)
     res = voice.build_assignment_message(
         event_id="EV-ERR-1",
         vehicle_id="VEH-ERR",

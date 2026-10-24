@@ -148,7 +148,7 @@ export function TwinIntelligenceRail() {
                 <div className="flex items-center justify-between text-red-300 font-bold text-xs">
                   <span className="flex items-center gap-1.5">
                     <AlertTriangle className="h-3.5 w-3.5 text-red-400 animate-pulse" />
-                    PARKING VIOLATION
+                    {sharedViolation.notMoved ? "VEHICLE NOT MOVED" : "PARKING VIOLATION"}
                   </span>
                   <Badge variant="destructive" className="text-[9px]">
                     ACTION REQUIRED
@@ -170,7 +170,9 @@ export function TwinIntelligenceRail() {
                   <div className="flex justify-between border-b border-red-500/20 pb-0.5">
                     <span className="text-muted-foreground">Duration:</span>
                     <strong className="text-amber-300 font-mono">
-                      {sharedViolation.durationSeconds ? `${Math.floor(sharedViolation.durationSeconds / 60)}:00+` : "10:00+"}
+                      {sharedViolation.notMoved
+                        ? "Not moved since warning"
+                        : sharedViolation.durationSeconds ? `${Math.floor(sharedViolation.durationSeconds / 60)}:00+` : "10:00+"}
                     </strong>
                   </div>
                   <div className="flex justify-between">
